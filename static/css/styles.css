@@ -10118,7 +10118,7 @@ body {
 }
 
 #mainNav {
-  min-height: 3.5rem;
+  max-height: 3.5rem;
   background-color: #fff;
 }
 #mainNav .navbar-toggler {
@@ -10137,7 +10137,7 @@ body {
 }
 #mainNav .navbar-nav .nav-item:hover {
   color: fade(#fff, 80%);
-  outline: none;
+  outline: white;
   background-color: transparent;
 }
 #mainNav .navbar-nav .nav-item:active, #mainNav .navbar-nav .nav-item:focus {
@@ -10149,7 +10149,7 @@ body {
     padding-top: 0;
     padding-bottom: 0;
     border-bottom: none;
-    background-color: transparent;
+    background-color: white;
     transition: background-color 0.3s ease-in-out;
   }
   #mainNav .navbar-brand {
@@ -10207,7 +10207,7 @@ body {
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url("../assets/img/bg-masthead.jpg");
+  background: url("/media/assets/img/pexels-kaboompics-com-5929.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
