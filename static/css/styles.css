@@ -165,7 +165,7 @@ a {
   background-color: transparent;
 }
 a:hover {
-  color: #409691;
+  color: #548b87;
   text-decoration: underline;
 }
 
@@ -554,22 +554,22 @@ pre code {
 }
 
 @media (min-width: 576px) {
-  .container-sm, .container {
+  .container-sm {
     max-width: 540px;
   }
 }
 @media (min-width: 768px) {
-  .container-md, .container-sm, .container {
+  .container-md, .container-sm {
     max-width: 720px;
   }
 }
 @media (min-width: 992px) {
-  .container-lg, .container-md, .container-sm, .container {
+  .container-lg, .container-md, .container-sm {
     max-width: 960px;
   }
 }
 @media (min-width: 1200px) {
-  .container-xl, .container-lg, .container-md, .container-sm, .container {
+  .container-xl, .container-lg, .container-md, .container-sm {
     max-width: 1140px;
   }
 }
@@ -3985,7 +3985,7 @@ input[type=button].btn-block {
 }
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #409691;
+  color: #548b87;
   background-color: #fff;
   border-color: #dee2e6 #dee2e6 #fff;
 }
@@ -4000,7 +4000,7 @@ input[type=button].btn-block {
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #409691;
+  color: #548b87;
   background-color: #64a19d;
 }
 
@@ -4030,7 +4030,7 @@ input[type=button].btn-block {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
 }
 .navbar .container,
 .navbar .container-fluid,
@@ -4051,10 +4051,11 @@ input[type=button].btn-block {
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
-  color: #426765;
+  color: #303F3F;
 }
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
+  color: #426765 !important;
 }
 
 .navbar-nav {
@@ -4084,6 +4085,7 @@ input[type=button].btn-block {
   flex-grow: 1;
   align-items: center;
   background-color: white;
+  padding-left: 1rem;
 }
 
 .navbar-toggler {
@@ -4316,16 +4318,17 @@ input[type=button].btn-block {
 }
 
 .navbar-light .navbar-brand {
-  color: #426765;
+  color: #303F3F;
 }
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-  color: #409691;
-}
-.navbar-light .navbar-nav .nav-link {
   color: #426765;
 }
+.navbar-light .navbar-nav .nav-link {
+  color: #303F3F;
+  font-weight: bold;
+}
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
-  color: #409691;
+  color: #426765;
 }
 .navbar-light .navbar-nav .nav-link.disabled {
   color: rgba(0, 0, 0, 0.3);
@@ -4350,20 +4353,20 @@ input[type=button].btn-block {
   color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-text a:hover, .navbar-light .navbar-text a:focus {
-  color: #409691;
+  color: #548b87;
 }
 
 .navbar-dark .navbar-brand {
-  color: #426765;
+  color: #303F3F;
 }
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
-  color: #409691;
-}
-.navbar-dark .navbar-nav .nav-link {
   color: #426765;
 }
+.navbar-dark .navbar-nav .nav-link {
+  color: #303F3F;
+}
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-  color: #409691;
+  color: #548b87;
 }
 .navbar-dark .navbar-nav .nav-link.disabled {
   color: rgba(255, 255, 255, 0.25);
@@ -4372,7 +4375,7 @@ input[type=button].btn-block {
 .navbar-dark .navbar-nav .active > .nav-link,
 .navbar-dark .navbar-nav .nav-link.show,
 .navbar-dark .navbar-nav .nav-link.active {
-  color: #426765;
+  color: #303F3F;
 }
 .navbar-dark .navbar-toggler {
   color: rgba(255, 255, 255, 0.5);
@@ -4388,7 +4391,7 @@ input[type=button].btn-block {
   color: #fff;
 }
 .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
-  color: #409691;
+  color: #548b87;
 }
 
 .card {
@@ -10127,6 +10130,7 @@ body {
 #mainNav .navbar-toggler {
   font-size: 80%;
   padding: 0.75rem;
+  margin-right: 1rem;
   color: #64a19d;
   border: 1px solid #64a19d;
 }
@@ -10134,9 +10138,10 @@ body {
   outline: none;
 }
 #mainNav .navbar-brand {
-  color: #426765;
+  color: #303F3F;
   font-weight: 700;
   padding: 0.9rem 0;
+  padding-left: 1rem;
 }
 #mainNav .navbar-nav .nav-item:hover {
   color: fade(#fff, 80%);
@@ -10157,24 +10162,24 @@ body {
   }
   #mainNav .navbar-brand {
     padding: 0.5rem 0;
-    color: #426765;
+    padding-left: 1rem;
   }
   #mainNav .nav-link {
     transition: none;
     padding: 2rem 1.5rem;
-    color: #426765;
+    color: #303F3F;
   }
   #mainNav .nav-link:hover {
-    color: #409691;
+    color: #548b87;
   }
   #mainNav .nav-link:active {
-    color: #409691;
+    color: #548b87;
   }
   #mainNav.navbar-shrink {
     background-color: #fff;
   }
   #mainNav.navbar-shrink .navbar-brand {
-    color: #426765;
+    color: #303F3F;
   }
   #mainNav.navbar-shrink .nav-link {
     color: #000000;
@@ -10182,13 +10187,13 @@ body {
     border-bottom: 0.25rem solid transparent;
   }
   #mainNav.navbar-shrink .nav-link:hover {
-    color: #409691;
+    color: #548b87;
   }
   #mainNav.navbar-shrink .nav-link:active {
-    color: #409691;
+    color: #548b87;
   }
   #mainNav.navbar-shrink .nav-link.active {
-    color: #409691;
+    color: #548b87;
     outline: none;
     border-bottom: 0.25rem solid #64a19d;
   }
@@ -10214,52 +10219,31 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .masthead h1 {
-  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 2.5rem;
-  line-height: 2.5rem;
-  letter-spacing: 0.8rem;
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-          background-clip: text;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size:  calc(30px + (80 - 30) * ((100vw - 300px) / 1620));
+  letter-spacing: 0.8vw;
+  color: #303F3F;
+  font-weight: bold;
 }
 .masthead h2 {
-  max-width: 20rem;
   font-size: 1rem;
+  font-weight: bold;
 }
 .masthead .container {
-    background-color: #FFFEFE;
     height: 50vh;
     padding-top: 5vh 0;
-    opacity: 0.7;
     color: #303F3F;
 }
 
-.opaque {
-    opacity: 1;
-    z-index: 1;
-}
-
-@media (min-width: 768px) {
-  .masthead h1 {
-    font-size: 4rem;
-    line-height: 4rem;
-  }
-}
 @media (min-width: 992px) {
   .masthead {
     height: 100vh;
   }
-  .masthead h1 {
-    font-size: 6.5rem;
-    line-height: 6.5rem;
-    letter-spacing: 0.8rem;
-  }
   .masthead h2 {
-    max-width: 30rem;
+    max-width: 50vw;
     font-size: 1.25rem;
   }
 }
@@ -10349,7 +10333,7 @@ body {
   color: rgba(255, 255, 255, 0.3);
 }
 .contact-section .social a:hover {
-  color: #409691;
+  color: #548b87;
 }
 .contact-section .social a:active {
   color: #fff;
@@ -10359,18 +10343,29 @@ body {
   padding: 5rem 0;
 }
 
-@media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
+/* overrules */
 
+.masthead-button {
+    max-height: 20vh;
+    padding: 2vh 2vw;
+    background-color: #426765;
+}
+
+.opaque-70 {
+    background-color: rgba(255, 255, 255, 0.7)
+}
+
+.flex-margin-b {
+    margin-bottom: 3.5vh;
+}
+
+@media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .masthead {
         padding: 25vh 0;
     }
-
 }
-
 @media screen and (orientation: landscape){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
-
     .masthead {
         padding: 35vh 0 15vh;
     }
-
 }
