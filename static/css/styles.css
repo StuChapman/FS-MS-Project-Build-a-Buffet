@@ -10353,19 +10353,6 @@ body {
     background-color: #426765;
 }
 
-.opaque-70 {
-    background-color: rgba(255, 255, 255, 0.7)
-}
-
-.flex-margin-b {
-    margin-bottom: 3.5vh;
-}
-
-.text-xs {
-    font-size: 12px;
-    line-height: 16px;
-}
-
 .basket {
     border: 1px solid #303F3F;
     border-radius: 5px;
@@ -10402,6 +10389,33 @@ body {
     height: 30px;
     padding: 0;
     margin: 2.5px 0 0 -5px;
+}
+
+/* general styling */
+
+.opaque-70 {
+    background-color: rgba(255, 255, 255, 0.7)
+}
+
+.image-80 {
+    opacity: 0.8;
+}
+
+.flex-margin-b {
+    margin-bottom: 3.5vh;
+}
+
+.text-xs {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.text-blue {
+    color: #426765;
+}
+
+.bg-blue {
+  background-color: #426765;
 }
 
 .align-vertically { /* credit to https://webdevblog.com/css-vertical-align/ */

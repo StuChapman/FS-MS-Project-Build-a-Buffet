@@ -76,9 +76,25 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'home' %}">home</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">menus</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">account</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">customer service</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link js-scroll-trigger" href="#" id="all-menus-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                menus
+                            </a>
+                            <div class="dropdown-menu border-0" aria-labelledby="all-menus-link">
+                                <a href="" class="dropdown-item">sandwiches</a>
+                                <a href="" class="dropdown-item">salads</a>
+                                <a href="" class="dropdown-item">dips</a>
+                                <a href="" class="dropdown-item">meat</a>
+                                <a href="" class="dropdown-item">cheeses</a>
+                                <a href="" class="dropdown-item">fish</a>
+                                <a href="" class="dropdown-item">pasta</a>
+                                <a href="" class="dropdown-item">pastries</a>
+                                <a href="" class="dropdown-item">fruit</a>
+                                <a href="" class="dropdown-item">hot food</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#account">account</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#service">customer service</a></li>
                     </ul>
                 </div>
             </div>
