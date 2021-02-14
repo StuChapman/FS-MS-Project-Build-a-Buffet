@@ -4047,7 +4047,6 @@ input[type=button].btn-block {
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
-  margin-right: 1rem;
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
@@ -10371,18 +10370,38 @@ body {
     border: 1px solid #303F3F;
     border-radius: 5px;
     padding: 2.5px !important;
-    margin: 2.5px !important;
 }
 
 .bartholemew-menu {
     border: 1px solid #303F3F;
     border-radius: 5px;
     padding: 0 0.5rem !important;
-    margin: 0 2rem 0 1rem;
+    margin: 2.5px 0 2.5px 1rem;
 }
 
 .bartholemew-menu:hover {
     opacity: 0.7;
+}
+
+.search-input {
+    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    color: #303F3F;
+    border: 1px solid #303F3F;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+}
+
+.search-button {
+    border: 1px solid #303F3F;
+    border-radius: 5px;
+    background-color: #426765;
+    color: white;
+    width: 40px;
+    height: 30px;
+    padding: 0;
+    margin: 2.5px 0 0 -5px;
 }
 
 .align-vertically { /* credit to https://webdevblog.com/css-vertical-align/ */
@@ -10395,9 +10414,27 @@ body {
     .masthead {
         padding: 25vh 0;
     }
+    .basket, .bartholemew-menu, .search-input {
+        margin: 2.5px 0 2.5px 0.5rem;
+    }
+    #mainNav .navbar-toggler {
+        margin-right: 0.5rem;
+    }
+    .navbar-brand-vis {
+        display: none;
+    }
 }
 @media screen and (orientation: landscape){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .masthead {
         padding: 35vh 0 15vh;
+    }
+    .basket, .bartholemew-menu, .search-input {
+        margin: 2.5px 0 2.5px 1rem;
+    }
+    #mainNav .navbar-toggler {
+        margin-right: 1rem;
+    }
+    .navbar-brand-vis {
+        display: block;
     }
 }

@@ -47,18 +47,38 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">BUILD-A-BUFFET</a>
+                <a class="navbar-brand js-scroll-trigger navbar-brand-vis" href="#page-top">BUILD-A-BUFFET</a>
+                <div>
+                    <ul class="navbar-nav ml-auto align-vertically">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger bartholemew-menu" href=""><img src="media/assets/img/bartholemew-sml.jpg" alt="bartholemew" height="36"></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="navbar-nav ml-auto align-vertically">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger text-center text-xs basket" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i><br><span class=" text-xs">£0.00</span></a></li>
+                    </ul>
+                </div>
+                <div class="mr-auto">
+                    <form method="GET" action="">
+                        <div class="input-group">
+                            <input class="search-input" type="text" name="q" placeholder="Search...">
+                            <div class="input-group-append">
+                                <button class="search-button text-center" type="submit">
+                                        <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto align-vertically">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'home' %}">home</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">menus</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">account</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">customer service</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger bartholemew-menu" href="#signup"><img src="media/assets/img/bartholemew-sml.jpg" alt="bartholemew" height="36"></a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger text-center text-xs basket" href="#signup"><i class="fa fa-shopping-basket" aria-hidden="true"></i><br><span class=" text-xs">£0.00</span></a></li>
                     </ul>
                 </div>
             </div>
