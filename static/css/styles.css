@@ -165,7 +165,7 @@ a {
   background-color: transparent;
 }
 a:hover {
-  color: #548b87;
+  color: #71B7B2;
   text-decoration: underline;
 }
 
@@ -2463,12 +2463,12 @@ fieldset:disabled a.btn {
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #548b87;
+  background-color: #639692;
   border-color: #4f837f;
 }
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #548b87;
+  background-color: #639692;
   border-color: #4f837f;
   box-shadow: 0 0 0 0.2rem rgba(123, 175, 172, 0.5);
 }
@@ -3985,7 +3985,7 @@ input[type=button].btn-block {
 }
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #548b87;
+  color: #71B7B2;
   background-color: #fff;
   border-color: #dee2e6 #dee2e6 #fff;
 }
@@ -4000,7 +4000,7 @@ input[type=button].btn-block {
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #548b87;
+  color: #71B7B2;
   background-color: #64a19d;
 }
 
@@ -4055,7 +4055,7 @@ input[type=button].btn-block {
 }
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
-  color: #426765 !important;
+  color: #71B7B2 !important;
 }
 
 .navbar-nav {
@@ -4321,7 +4321,7 @@ input[type=button].btn-block {
   color: #303F3F;
 }
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-  color: #426765;
+  color: #71B7B2;
 }
 .navbar-light .navbar-nav .nav-link {
   color: #303F3F;
@@ -4353,20 +4353,20 @@ input[type=button].btn-block {
   color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-text a:hover, .navbar-light .navbar-text a:focus {
-  color: #548b87;
+  color: #71B7B2;
 }
 
 .navbar-dark .navbar-brand {
   color: #303F3F;
 }
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
-  color: #426765;
+  color: #71B7B2;
 }
 .navbar-dark .navbar-nav .nav-link {
   color: #303F3F;
 }
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-  color: #548b87;
+  color: #71B7B2;
 }
 .navbar-dark .navbar-nav .nav-link.disabled {
   color: rgba(255, 255, 255, 0.25);
@@ -4391,7 +4391,7 @@ input[type=button].btn-block {
   color: #fff;
 }
 .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
-  color: #548b87;
+  color: #71B7B2;
 }
 
 .card {
@@ -10166,14 +10166,17 @@ body {
   }
   #mainNav .nav-link {
     transition: none;
-    padding: 2rem 1.5rem;
+    padding-top: auto;
+    padding-bottom: 0.5rem;
+    padding-left:  1.5rem;
+    padding-right:  1.5rem;
     color: #303F3F;
   }
   #mainNav .nav-link:hover {
-    color: #548b87;
+    color: #71B7B2;
   }
   #mainNav .nav-link:active {
-    color: #548b87;
+    color: #71B7B2;
   }
   #mainNav.navbar-shrink {
     background-color: #fff;
@@ -10187,13 +10190,13 @@ body {
     border-bottom: 0.25rem solid transparent;
   }
   #mainNav.navbar-shrink .nav-link:hover {
-    color: #548b87;
+    color: #71B7B2;
   }
   #mainNav.navbar-shrink .nav-link:active {
-    color: #548b87;
+    color: #71B7B2;
   }
   #mainNav.navbar-shrink .nav-link.active {
-    color: #548b87;
+    color: #71B7B2;
     outline: none;
     border-bottom: 0.25rem solid #64a19d;
   }
@@ -10333,7 +10336,7 @@ body {
   color: rgba(255, 255, 255, 0.3);
 }
 .contact-section .social a:hover {
-  color: #548b87;
+  color: #71B7B2;
 }
 .contact-section .social a:active {
   color: #fff;
@@ -10343,7 +10346,7 @@ body {
   padding: 5rem 0;
 }
 
-/* overrules */
+/* overrules and additions */
 
 .masthead-button {
     max-height: 20vh;
@@ -10357,6 +10360,35 @@ body {
 
 .flex-margin-b {
     margin-bottom: 3.5vh;
+}
+
+.text-xs {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.basket {
+    border: 1px solid #303F3F;
+    border-radius: 5px;
+    padding: 2.5px !important;
+    margin: 2.5px !important;
+}
+
+.bartholemew-menu {
+    border: 1px solid #303F3F;
+    border-radius: 5px;
+    padding: 0 0.5rem !important;
+    margin: 0 2rem 0 1rem;
+}
+
+.bartholemew-menu:hover {
+    opacity: 0.7;
+}
+
+.align-vertically { /* credit to https://webdevblog.com/css-vertical-align/ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
