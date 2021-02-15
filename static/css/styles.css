@@ -553,6 +553,11 @@ pre code {
   margin-left: auto;
 }
 
+@media (min-width: 306px) {
+  .search-input {
+    width: 100px !important;
+  }
+}
 @media (min-width: 576px) {
   .container-sm {
     max-width: 540px;
@@ -3217,7 +3222,7 @@ input[type=button].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color: #303F3F;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
@@ -10130,8 +10135,8 @@ body {
   font-size: 80%;
   padding: 0.75rem;
   margin-right: 1rem;
-  color: #64a19d;
-  border: 1px solid #64a19d;
+  color: #303F3F;
+  border: 1px solid #303F3F;
 }
 #mainNav .navbar-toggler:focus {
   outline: none;
@@ -10224,11 +10229,10 @@ body {
   opacity: 0.8;
 }
 .masthead h1 {
-  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size:  calc(30px + (80 - 30) * ((100vw - 300px) / 1620));
+  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size:  calc(28px + (80 - 28) * ((100vw - 300px) / 1620));
   letter-spacing: 0.8vw;
   color: #303F3F;
-  font-weight: bold;
 }
 .masthead h2 {
   font-size: 1rem;
@@ -10376,7 +10380,7 @@ body {
     color: #303F3F;
     border: 1px solid #303F3F;
     border-radius: 5px;
-    width: 100px;
+    width: 80px;
     height: 30px;
 }
 
