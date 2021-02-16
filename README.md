@@ -34,8 +34,6 @@ Navigation should be intuitive and errors handled gracefully.
 10.	… want to be able to arrange delivery to a location in the UK of my choosing.
 11.	… want to be able to create a user page, where my personal information and order history is stored.
 12.	… want the site to be secure and my personal and payment information kept safe.
-13.	… want to be able to make online purchases of products and services.
-14.	… want to be able to arrange delivery to a location in the UK of my choosing.
 
 I designed the site around the following views:
 

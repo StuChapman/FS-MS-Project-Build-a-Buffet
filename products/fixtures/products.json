@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "products.product", "fields": {"sku": "sand001", "name": "Avocado and Humous", "description": "Slices of fresh avocado and smooth humous", "price": 5.99, "category": 1}}]

@@ -50,7 +50,7 @@
                 <a class="navbar-brand js-scroll-trigger navbar-brand-vis" href="#page-top">BUILD-A-BUFFET</a>
                 <div>
                     <ul class="navbar-nav ml-auto align-vertically">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger bartholemew-menu" href=""><img src="media/assets/img/bartholemew-sml.jpg" alt="bartholemew" height="36"></a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger bartholemew-menu" href=""><img src="/media/assets/img/bartholemew-sml.jpg" alt="bartholemew" height="36"></a></li>
                     </ul>
                 </div>
                 <div>
@@ -81,16 +81,16 @@
                                 menus
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="all-menus-link">
-                                <a href="{% url 'products_sandwiches' %}" class="dropdown-item">sandwiches</a>
-                                <a href="" class="dropdown-item">salads</a>
-                                <a href="" class="dropdown-item">dips</a>
-                                <a href="" class="dropdown-item">meat</a>
-                                <a href="" class="dropdown-item">cheeses</a>
-                                <a href="" class="dropdown-item">fish</a>
-                                <a href="" class="dropdown-item">pasta</a>
-                                <a href="" class="dropdown-item">pastries</a>
-                                <a href="" class="dropdown-item">fruit</a>
-                                <a href="" class="dropdown-item">hot food</a>
+                                <a href="{% url 'products' %}?category=sandwiches" class="dropdown-item">sandwiches</a>
+                                <a href="{% url 'products' %}?category=salads" class="dropdown-item">salads</a>
+                                <a href="{% url 'products' %}?category=dips" class="dropdown-item">dips</a>
+                                <a href="{% url 'products' %}?category=meat" class="dropdown-item">meat</a>
+                                <a href="{% url 'products' %}?category=cheeses" class="dropdown-item">cheeses</a>
+                                <a href="{% url 'products' %}?category=fish" class="dropdown-item">fish</a>
+                                <a href="{% url 'products' %}?category=pasta" class="dropdown-item">pasta</a>
+                                <a href="{% url 'products' %}?category=pastries" class="dropdown-item">pastries</a>
+                                <a href="{% url 'products' %}?category=fruit" class="dropdown-item">fruit</a>
+                                <a href="{% url 'products' %}?category=hot food" class="dropdown-item">hot food</a>
                             </div>
                         </li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#account">account</a></li>
