@@ -9,6 +9,7 @@ def products(request):
     """ A view to show products """
 
     products = Product.objects.all()
+    print(products)
 
     if request.GET:
         if 'category' in request.GET:
@@ -19,6 +20,5 @@ def products(request):
             'products': products,
             'category': category,
         }
-    print(category)
-    print(products)
+
     return render(request, 'products/products.html', context)
