@@ -13,11 +13,12 @@ def products(request):
     if request.GET:
         if 'category' in request.GET:
             category = request.GET['category']
-            products = products.filter(category__name__in=category)
+            products = products.filter(category__name=category)
 
     context = {
             'products': products,
             'category': category,
         }
-
+    print(category)
+    print(products)
     return render(request, 'products/products.html', context)
