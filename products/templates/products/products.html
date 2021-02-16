@@ -16,7 +16,9 @@
             <div class="mx-auto text-center">
                 <h1 class="mx-auto text-uppercase flex-margin-b">{{ category }}</h1>
                 {% for product in products %}
-                    <h2 class="mx-auto flex-margin-b">{{ category }}: {{ product.description }}</h2>
+                    {% if product.range == "luxury" %}
+                        <h2 class="mx-auto flex-margin-b">{{ product.name }}</h2>
+                    {% endif %}
                 {% endfor %}
                 <a class="masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="#about">Get Started</a>
             </div>
