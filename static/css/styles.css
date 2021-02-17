@@ -10357,6 +10357,14 @@ body {
     background-color: #426765;
 }
 
+.product-selected, .product-unselected {
+    text-align: center;
+}
+
+.product-unselected {
+    opacity: 0.5;
+}
+
 .basket {
     border: 1px solid #303F3F;
     border-radius: 5px;
@@ -10393,6 +10401,18 @@ body {
     height: 30px;
     padding: 0;
     margin: 2.5px 0 0 -5px;
+}
+
+.projects-section .product-text {
+  padding: 0.5rem 0.5rem;
+  font-size: 90%;
+}
+
+.product-text h1 {
+  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size:  calc(28px + (80 - 28) * ((100vw - 300px) / 1620));
+  letter-spacing: 0.8vw;
+  color: #303F3F;
 }
 
 /* general styling */
@@ -10441,6 +10461,9 @@ body {
     .navbar-brand-vis {
         display: none;
     }
+    .product-selected, .product-unselected {
+        width: 25vw;
+    }
 }
 @media screen and (orientation: landscape){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .masthead {
@@ -10454,5 +10477,23 @@ body {
     }
     .navbar-brand-vis {
         display: block;
+    }
+    .product-selected, .product-unselected {
+        width: 20vw;
+    }
+    .projects-section .product-text {
+        padding: 0.5rem 2.5rem;
+    }
+    .projects-section .product-text hr {
+        border-color: #64a19d;
+        border-width: 0.25rem;
+        width: 30%;
+        padding: 0.5rem 3rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .product-selected, .product-unselected {
+        width: 12.5vw;
     }
 }

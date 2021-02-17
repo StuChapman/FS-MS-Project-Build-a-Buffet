@@ -10,50 +10,40 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Masthead-->
-    <header class="masthead">
-        <div class="container d-flex align-items-center opaque-70">
-            <div class="mx-auto text-center">
-                <h1 class="mx-auto text-uppercase flex-margin-b">{{ category }}</h1>
-                {% for product in products %}
-                    {% if product.range == "luxury" %}
-                        <h2 class="mx-auto flex-margin-b">{{ product.name }}</h2>
-                    {% endif %}
-                {% endfor %}
-                <a class="masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="#about">Get Started</a>
-            </div>
-        </div>
-    </header>
     <!-- Produce-->
     <section class="projects-section bg-light" id="projects">
         <div class="container">
             <!-- Produce One Row-->
             <div class="row justify-content-center no-gutters">
-                <div class="col-lg-6"><img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" /></div>
-                <div class="col-lg-6">
+                <div class="col-xl-6"><img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" /></div>
+                <div class="col-xl-6">
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h4 class="text-blue">Hot and cold</h4>
-                                <p class="mb-0 text-blue">Delivered, ready to eat in Ziplok<sup>TM</sup> microwaveable bags, to keep your food fresh and delicious. Simply remove the packaging and serve, or for hot food, heat in the microwave for 30 seconds before serving.</p>
-                                <hr class="d-none d-lg-block mb-0 ml-0" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Produce Two Row-->
-            <div class="row justify-content-center no-gutters">
-                <div class="col-lg-6"><img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5944.jpg" alt="chips-n-dips" /></div>
-                <div class="col-lg-6 order-lg-first">
-                    <div class="text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-right">
-                                <h4 class="text-blue">Options for all diets</h4>
-                                <p class="mb-0 text-blue">A full choice of vegetarian and vegan options, both hot and cold, with allergy advice* provided across the full range of allergens.
-                                    <br>
-                                    * although every care is taken in our production process, we cannot guarantee allergen free.</p>
-                                <hr class="d-none d-lg-block mb-0 mr-0" />
+                            <div class="product-text w-100 my-auto text-center text-xl-left">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="#about">Standard</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="#about">Premium</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category={{ category }}; range=luxury">Luxury</a>
+                                    </div>
+                                </div>
+                                <h1 class="mx-auto text-uppercase flex-margin-b text-blue">{{ category }}</h1>
+                                {% for product in products %}
+                                    {% if range %}
+                                        {% if product.range == range %}
+                                            <h2 class="mx-auto flex-margin-b text-blue">{{ product.name }}</h2>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if product.range == "standard" %}
+                                            <h2 class="mx-auto flex-margin-b text-blue">{{ product.name }}</h2>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <hr class="d-none d-xl-block mb-0 ml-0" />
                             </div>
                         </div>
                     </div>
