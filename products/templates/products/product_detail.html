@@ -17,7 +17,7 @@
             <div class="row justify-content-center no-gutters">
                 <div class="col-xl-12">
                     {% if category %}
-                        <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">{{ category }}</h1>
+                        <div class="product-text-one mx-auto text-uppercase text-center flex-margin-b"><a class="text-blue" href="{% url 'products' %}?category={{ category }}">{{ category }}</a></div>
                     {% else %}
                         <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Error</h1>
                     {% endif %}
@@ -38,37 +38,38 @@
                                     <div class="product-text-header mx-auto flex-margin-b text-blue">{{ product.name }}</div>
                                     <div class="product-text-two mx-auto flex-margin-b text-blue">{{ product.description }}</div>
                                 {% endfor %}
+                                <div class="text-blue text-xs mb-2">Choose from the options below...</div>
                                 <div class="row">
                                     <div class="col-4">
                                         {% if selected == "selected-one" %}
                                             {% for option in options %}
-                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-one">{{ option.option1 }}</a>
+                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-one">{{ option.option1 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
-                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-one">{{ option.option1 }}</a>
+                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-one">{{ option.option1 }}</a>
                                             {% endfor %}
                                         {% endif %}
                                     </div>
                                     <div class="col-4">
                                         {% if selected == "selected-two" %}
                                             {% for option in options %}
-                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-two">{{ option.option2 }}</a>
+                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-two">{{ option.option2 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
-                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-two">{{ option.option2 }}</a>
+                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-two">{{ option.option2 }}</a>
                                             {% endfor %}
                                         {% endif %}
                                     </div>
                                     <div class="col-4">
                                         {% if selected == "selected-three" %}
                                             {% for option in options %}
-                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-three">{{ option.option3 }}</a>
+                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-three">{{ option.option3 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
-                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-three">{{ option.option3 }}</a>
+                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-three">{{ option.option3 }}</a>
                                             {% endfor %}
                                         {% endif %}
                                     </div>
