@@ -23,7 +23,9 @@
                     {% endif %}
                 </div>
                 <div class="col-xl-6">
-                    <img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" /></div>
+                    {% for image in image %}
+                        <img class="img-fluid image-80" src="{{ image.image }}" alt="{{ category }} image" /></div>
+                    {% endfor %}
                 <div class="col-xl-6">
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
