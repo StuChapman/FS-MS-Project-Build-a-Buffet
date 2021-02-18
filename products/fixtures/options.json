@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "products.options", "fields": {"name": "sandwiches", "option1": "white", "option2": "brown", "option3": "wholemeal"}}]

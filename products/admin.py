@@ -20,3 +20,12 @@ class CategoryAdmin(admin.ModelAdmin):
         'friendly_name',
         'name',
     )
+
+
+class OptionsAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'option1',
+        'option2',
+        'option3',
+    )

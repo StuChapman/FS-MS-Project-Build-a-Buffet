@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <!-- Produce-->
+    <section class="projects-section bg-light" id="projects">
+        <div class="container">
+            <!-- Produce One Row-->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-xl-12">
+                    {% if category %}
+                        <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">{{ category }}</h1>
+                    {% else %}
+                        <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Error</h1>
+                    {% endif %}
+                </div>
+                <div class="col-xl-6">
+                    {% if category %}
+                        {% for image in image %}
+                            <img class="img-fluid image-80" src="{{ image.image }}" alt="{{ category }} image" /></div>
+                        {% endfor %}
+                    {% else %}
+                        <img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" /></div>
+                    {% endif %}
+                <div class="col-xl-6">
+                    <div class="text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="product-container w-100 mt-0 text-center text-xl-left">
+                                {% for product in products %}
+                                    <div class="product-text-header mx-auto flex-margin-b text-blue">{{ product.name }}</div>
+                                    <div class="product-text-two mx-auto flex-margin-b text-blue">{{ product.description }}</div>
+                                {% endfor %}
+                                <div class="row">
+                                    <div class="col-4">
+                                        {% if selected == "selected-one" %}
+                                            {% for option in options %}
+                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-one">{{ option.option1 }}</a>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for option in options %}
+                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-one">{{ option.option1 }}</a>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-4">
+                                        {% if selected == "selected-two" %}
+                                            {% for option in options %}
+                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-two">{{ option.option2 }}</a>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for option in options %}
+                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-two">{{ option.option2 }}</a>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-4">
+                                        {% if selected == "selected-three" %}
+                                            {% for option in options %}
+                                                <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-three">{{ option.option3 }}</a>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for option in options %}
+                                                <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-three">{{ option.option3 }}</a>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <hr class="d-none d-xl-block mb-0 ml-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% include 'products/includes/contact.html' %}
+{% endblock %}

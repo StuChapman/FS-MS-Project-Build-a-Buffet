@@ -28,3 +28,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Options(models.Model):
+    name = models.CharField(max_length=254)
+    option1 = models.TextField()
+    option2 = models.TextField()
+    option3 = models.TextField()
+
+    def __str__(self):
+        return self.name

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 
-from .models import Product, Category
+from .models import Product, Category, Options
 
 # Create your views here.
 
@@ -9,7 +9,6 @@ def products(request):
     """ A view to show and filter products """
 
     categories = Category.objects.all()
-
     products = Product.objects.all()
 
     if request.GET:
@@ -33,3 +32,34 @@ def products(request):
         }
 
     return render(request, 'products/products.html', context)
+
+
+def product_detail(request):
+    """ A view to show product options """
+
+    categories = Category.objects.all()
+    products = Product.objects.all()
+    options = Options.objects.all()
+
+    if request.GET:
+        if 'category_product' in request.GET:
+            category_product = request.GET['category_product']
+            print(category_product)
+            category_product_list = category_product.split(',')
+            category = category_product_list[0]
+            product = category_product_list[1]
+            selected = category_product_list[2]
+            products = products.filter(name=product)
+            image = categories.filter(name=category)
+            options = options.filter(name=category)
+
+    context = {
+            'products': products,
+            'category': category,
+            'product': product,
+            'selected': selected,
+            'image': image,
+            'options': options,
+        }
+
+    return render(request, 'products/product_detail.html', context)
