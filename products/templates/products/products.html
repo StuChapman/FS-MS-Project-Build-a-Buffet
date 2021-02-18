@@ -15,35 +15,50 @@
         <div class="container">
             <!-- Produce One Row-->
             <div class="row justify-content-center no-gutters">
-                <div class="col-xl-6"><img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" /></div>
+                <div class="col-xl-12">
+                    {% if category %}
+                        <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">{{ category }}</h1>
+                    {% else %}
+                        <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Error</h1>
+                    {% endif %}
+                </div>
+                <div class="col-xl-6">
+                    <img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" /></div>
                 <div class="col-xl-6">
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
-                            <div class="product-text w-100 my-auto text-center text-xl-left">
+                            <div class="product-container w-100 mt-0 text-center text-xl-left">
                                 <div class="row">
                                     <div class="col-4">
-                                        <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},standard">Standard</a>
+                                        {% if range == "standard" %}
+                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},standard">Standard</a>
+                                        {% else %}
+                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},standard">Standard</a>
+                                        {% endif %}
                                     </div>
                                     <div class="col-4">
-                                        <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="#about">Premium</a>
+                                        {% if range == "premium" %}
+                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},premium">Premium</a>
+                                        {% else %}
+                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},premium">Premium</a>
+                                        {% endif %}
                                     </div>
                                     <div class="col-4">
-                                        <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},luxury">Luxury</a>
+                                        {% if range == "luxury" %}
+                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},luxury">Luxury</a>
+                                        {% else %}
+                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},luxury">Luxury</a>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                {% if category %}
-                                    <h1 class="mx-auto text-uppercase flex-margin-b text-blue">{{ category }}</h1>
-                                {% else %}
-                                    <h1 class="mx-auto text-uppercase flex-margin-b text-blue">Error</h1>
-                                {% endif %}
                                 {% for product in products %}
                                     {% if range %}
                                         {% if product.range == range %}
-                                            <h2 class="mx-auto flex-margin-b text-blue">{{ product.name }}</h2>
+                                            <h2 class="product-text-two mx-auto flex-margin-b text-blue">{{ product.name }}</h2>
                                         {% endif %}
                                     {% else %}
                                         {% if product.range == "standard" %}
-                                            <h2 class="mx-auto flex-margin-b text-blue">{{ product.name }}</h2>
+                                            <h2 class="product-text-two mx-auto flex-margin-b text-blue">{{ product.name }}</h2>
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}

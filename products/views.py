@@ -14,10 +14,12 @@ def products(request):
         if 'category' in request.GET:
             category = request.GET['category']
             products = products.filter(category__name=category)
+            range = "standard"
 
     context = {
             'products': products,
             'category': category,
+            'range': range,
         }
 
     return render(request, 'products/products.html', context)
