@@ -29,12 +29,15 @@ def filter_products(request):
     products = Product.objects.all()
 
     if request.GET:
-        if 'category' in request.GET:
-            category = request.GET['category']
-            products = products.filter(category__name=category)
-        if 'range' in request.GET:
-            range = request.GET['range']
-    print(range)
+        if 'category_range' in request.GET:
+            category_range = request.GET['category_range']
+            print(category_range)
+            category_range_list = category_range.split(',')
+            category = category_range_list[0]
+            print(category)
+            range = category_range_list[1]
+            print(range)
+
     context = {
             'products': products,
             'category': category,

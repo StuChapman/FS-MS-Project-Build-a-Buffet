@@ -22,16 +22,20 @@
                             <div class="product-text w-100 my-auto text-center text-xl-left">
                                 <div class="row">
                                     <div class="col-4">
-                                        <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="#about">Standard</a>
+                                        <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},standard">Standard</a>
                                     </div>
                                     <div class="col-4">
                                         <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="#about">Premium</a>
                                     </div>
                                     <div class="col-4">
-                                        <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category={{ category }}; range=luxury">Luxury</a>
+                                        <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},luxury">Luxury</a>
                                     </div>
                                 </div>
-                                <h1 class="mx-auto text-uppercase flex-margin-b text-blue">{{ category }}</h1>
+                                {% if category %}
+                                    <h1 class="mx-auto text-uppercase flex-margin-b text-blue">{{ category }}</h1>
+                                {% else %}
+                                    <h1 class="mx-auto text-uppercase flex-margin-b text-blue">Error</h1>
+                                {% endif %}
                                 {% for product in products %}
                                     {% if range %}
                                         {% if product.range == range %}

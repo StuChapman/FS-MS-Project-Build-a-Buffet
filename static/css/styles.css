@@ -10359,6 +10359,7 @@ body {
 
 .product-selected, .product-unselected {
     text-align: center;
+    font-size: calc(8px + (18 - 8) * ((100vw - 300px) / 1620));
 }
 
 .product-unselected {
@@ -10413,6 +10414,9 @@ body {
   font-size:  calc(28px + (80 - 28) * ((100vw - 300px) / 1620));
   letter-spacing: 0.8vw;
   color: #303F3F;
+}
+.product-text h2 {
+  font-size: calc(14px + (28 - 14) * ((100vw - 300px) / 1620));
 }
 
 /* general styling */

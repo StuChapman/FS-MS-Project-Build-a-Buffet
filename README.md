@@ -218,6 +218,7 @@ I deployed to Github Pages by the following steps:
     from [css-tricks](https://www.css-tricks.com/books/fundamental-css-tactics/scale-typography-screen-size/) and 
     [made by Mike](www.madebymike.com.au/writing/fluid-type-calc-examples/)
 2.	The method for aligning text vertically is from [webdevblog](www.webdevblog.com/css-vertical-align/) 
+3.  The method to adjust styling based on landscape or portrait orientation is from [stackoverflow](https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree)
 
 ### Media
 
