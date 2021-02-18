@@ -33,23 +33,23 @@
                                 <div class="row">
                                     <div class="col-4">
                                         {% if range == "standard" %}
-                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},standard">Standard</a>
+                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'products' %}?category_range={{ category }},standard">Standard</a>
                                         {% else %}
-                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},standard">Standard</a>
+                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'products' %}?category_range={{ category }},standard">Standard</a>
                                         {% endif %}
                                     </div>
                                     <div class="col-4">
                                         {% if range == "premium" %}
-                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},premium">Premium</a>
+                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'products' %}?category_range={{ category }},premium">Premium</a>
                                         {% else %}
-                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},premium">Premium</a>
+                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'products' %}?category_range={{ category }},premium">Premium</a>
                                         {% endif %}
                                     </div>
                                     <div class="col-4">
                                         {% if range == "luxury" %}
-                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},luxury">Luxury</a>
+                                            <a class="product-selected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'products' %}?category_range={{ category }},luxury">Luxury</a>
                                         {% else %}
-                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'filter_products' %}?category_range={{ category }},luxury">Luxury</a>
+                                            <a class="product-unselected masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'products' %}?category_range={{ category }},luxury">Luxury</a>
                                         {% endif %}
                                     </div>
                                 </div>
