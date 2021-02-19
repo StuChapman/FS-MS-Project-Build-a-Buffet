@@ -10426,7 +10426,22 @@ body {
     background-color: #639692;
 }
 
+.price-button {
+    max-height: 20vh;
+    padding: 2vh 0.5vw;
+    background-color: white;
+    color: #303F3F;
+}
+
 /* general styling */
+
+.bold {
+    font-weight: bold;
+}
+
+.border-solid {
+    border: 1px solid #303F3F;
+}
 
 .opaque-70 {
     background-color: rgba(255, 255, 255, 0.7)
@@ -10434,6 +10449,10 @@ body {
 
 .image-80 {
     opacity: 0.8;
+}
+
+.image-70 {
+    opacity: 0.7;
 }
 
 .text-blue {
@@ -10450,12 +10469,9 @@ body {
     justify-content: center;
 }
 
-.price-button {
-    max-height: 20vh;
-    padding: 2vh 0.5vw;
-    background-color: white;
-    color: #303F3F;
-    border: 1px solid #303F3F;
+.text-xs-nav {
+    font-size: 12px;
+    line-height: 16px;
 }
 
 @media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
@@ -10477,11 +10493,14 @@ body {
     .product-container {
         margin-top: 1rem !important;
     }
+    .product-text-header {
+        font-size: calc(22px + (80 - 22) * ((100vw - 300px) / 1620));
+    }
     .product-text-two {
         font-size: calc(14px + (62 - 14) * ((100vw - 300px) / 1620));
     }
-    .product-text-header {
-        font-size: calc(22px + (80 - 22) * ((100vw - 300px) / 1620));
+    .product-text-three {
+        font-size: calc(14px + (38 - 14) * ((100vw - 300px) / 1620));
     }
     .flex-margin-b {
         margin-bottom: 3.5vh;

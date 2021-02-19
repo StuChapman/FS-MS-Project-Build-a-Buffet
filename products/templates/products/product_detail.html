@@ -81,19 +81,19 @@
                                     <div class="col-4 flex-margin-t">
                                         {% for product in products %}
                                             <div class="text-blue text-xs">per serving</div>
-                                            <div id="serving-price"  class="price-button js-scroll-trigger flex-margin-b"><b>£{{ product.price }}</b></div>
+                                            <div id="serving-price"  class="price-button border-solid js-scroll-trigger flex-margin-b bold">£{{ product.price }}</div>
                                         {% endfor %}
                                     </div>
                                     <div class="col-4 flex-margin-t">
                                         {% for product in products %}
                                             <div class="text-blue text-xs">Total price</div>
-                                            <div id="total-price" class="price-button js-scroll-trigger flex-margin-b"><b>£{{ product.price }}</b></div>
+                                            <div id="total-price" class="price-button border-solid js-scroll-trigger flex-margin-b bold">£{{ product.price }}</div>
                                         {% endfor %}
                                     </div>
                                     <div class="col-4 flex-margin-t">
                                         {% for product in products %}
                                             <div class="text-blue text-xs">Add to</div>
-                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" href="">
+                                            <a class="product-selected border-solid masthead-button btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'basket' %}?product_options={{ category }},{{ product }},{{ selected}}">
                                                     <i class="fa fa-shopping-basket" aria-hidden="true"></i> basket</a>
                                         {% endfor %}
                                     </div>
@@ -102,7 +102,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
             <hr class="d-none d-xl-block mb-0 ml-0">
         </div>
     </section>
@@ -123,6 +122,7 @@
         var multiplier = this.value;
         var discount = 1 - ((multiplier * 2) / 100);
         var totalPrice = (servingPrice * multiplier * discount).toFixed(2)
+        console.log(servingPrice)
         output.innerHTML = multiplier;
         $('#total-price').text("£" + totalPrice);
         }
