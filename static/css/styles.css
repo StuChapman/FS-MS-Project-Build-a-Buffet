@@ -2418,7 +2418,7 @@ textarea.form-control {
   }
 }
 
-.btn {
+.btn, .price-button {
   display: inline-block;
   font-weight: 400;
   color: #212529;
@@ -10205,7 +10205,7 @@ body {
   }
 }
 
-.btn {
+.btn, .price-button {
   box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
   padding: 1.25rem 2rem;
   font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -10419,8 +10419,11 @@ body {
   color: #303F3F;
 }
 
-.product-selected, .product-unselected {
+.product-selected, .product-unselected, .price-button {
     width: 100%;
+}
+.product-selected:hover, .product-unselected:hover {
+    background-color: #639692;
 }
 
 /* general styling */
@@ -10452,6 +10455,14 @@ body {
     justify-content: center;
 }
 
+.price-button {
+    max-height: 20vh;
+    padding: 2vh 0.5vw;
+    background-color: white;
+    color: #303F3F;
+    border: 1px solid #303F3F;
+}
+
 @media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .masthead {
         padding: 25vh 0;
@@ -10465,7 +10476,7 @@ body {
     .navbar-brand-vis {
         display: none;
     }
-    .product-selected, .product-unselected {
+    .product-selected, .product-unselected, .price-button {
         font-size: calc(8px + (42 - 8) * ((100vw - 300px) / 1620));
     }
     .product-container {
@@ -10479,6 +10490,9 @@ body {
     }
     .flex-margin-b {
         margin-bottom: 3.5vh;
+    }
+    .flex-margin-t {
+        margin-top: 3.5vh;
     }
 }
 @media screen and (orientation: landscape){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
@@ -10494,7 +10508,7 @@ body {
     .navbar-brand-vis {
         display: block;
     }
-    .product-selected, .product-unselected {
+    .product-selected, .product-unselected, .price-button {
         font-size: calc(8px + (20 - 8) * ((100vw - 300px) / 1620));
     }
     .projects-section .product-container hr {
@@ -10511,6 +10525,9 @@ body {
     }
     .flex-margin-b {
         margin-bottom: 1.5vh;
+    }
+    .flex-margin-t {
+        margin-top: 1.5vh;
     }
 }
 
