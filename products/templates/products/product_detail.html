@@ -80,7 +80,14 @@
                                     </div>
                                     <div class="col-4 flex-margin-t">
                                         {% for product in products %}
-                                            <div class="price-button js-scroll-trigger flex-margin-b">Price: £{{ product.price }}</div>
+                                            <div class="text-blue text-xs">per serving</div>
+                                            <div id="serving-price"  class="price-button js-scroll-trigger flex-margin-b">£{{ product.price }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-4 flex-margin-t">
+                                        {% for product in products %}
+                                            <div class="text-blue text-xs">Total price</div>
+                                            <div id="total-price" class="price-button js-scroll-trigger flex-margin-b">£{{ product.price }}</div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -100,11 +107,16 @@
 
         var slider = document.getElementById("myRange");
         var output = document.getElementById("demo");
+        var servingPrice = document.getElementById("serving-price").innerHTML.substring(1);
+        console.log(servingPrice)
         output.innerHTML = slider.value; // Display the default slider value
 
         // Update the current slider value (each time you drag the slider handle)
         slider.oninput = function() {
-        output.innerHTML = this.value;
+        var multiplier = this.value;
+        var totalPrice = (servingPrice * multiplier).toFixed(2)
+        output.innerHTML = multiplier;
+        $('#total-price').text("£" + totalPrice);
         }
     </script>
 {{ block.super }}
