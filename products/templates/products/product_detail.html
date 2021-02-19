@@ -91,11 +91,16 @@
                                         {% endfor %}
                                     </div>
                                     <div class="col-4 flex-margin-t">
-                                        {% for product in products %}
-                                            <div class="text-blue text-xs">Add to</div>
-                                            <a class="product-selected border-solid masthead-button btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'basket' %}?product_options={{ category }},{{ product }},{{ selected}}">
-                                                    <i class="fa fa-shopping-basket" aria-hidden="true"></i> basket</a>
-                                        {% endfor %}
+                                        <div class="text-blue text-xs">Add to</div>
+                                        <form action="{% url 'basket' %}?product_options={{ category }},{{ product }},{{ selected }}" method="post">
+                                            {% csrf_token %}
+                                            <div>
+                                                <input type="text" name="servings" id="servings" class="hidden" value="1">
+                                                <button type="submit" class="product-selected border-solid masthead-button btn btn-primary js-scroll-trigger flex-margin-b">
+                                                    <i class="fa fa-shopping-basket" aria-hidden="true"></i> basket
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -113,8 +118,8 @@
 
         var slider = document.getElementById("myRange");
         var output = document.getElementById("demo");
+        var servings = document.getElementById("servings");
         var servingPrice = document.getElementById("serving-price").innerHTML.substring(1);
-        console.log(servingPrice)
         output.innerHTML = slider.value; // Display the default slider value
 
         // Update the current slider value (each time you drag the slider handle)
@@ -122,8 +127,8 @@
         var multiplier = this.value;
         var discount = 1 - ((multiplier * 2) / 100);
         var totalPrice = (servingPrice * multiplier * discount).toFixed(2)
-        console.log(servingPrice)
         output.innerHTML = multiplier;
+        servings.value = multiplier;
         $('#total-price').text("£" + totalPrice);
         }
     </script>

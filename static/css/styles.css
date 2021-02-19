@@ -10361,12 +10361,15 @@ body {
     background-color: #426765;
 }
 
-.product-selected, .product-unselected {
+.product-selected, .product-unselected, .delete-button {
     text-align: center;
 }
-
 .product-unselected {
     opacity: 0.5;
+}
+.delete-button {
+    background-color: #EA7276 !important;
+    height: 100%;
 }
 
 .basket {
@@ -10419,13 +10422,15 @@ body {
   color: #303F3F;
 }
 
-.product-selected, .product-unselected, .price-button {
+.product-selected, .product-unselected, .price-button, .delete-button {
     width: 100%;
 }
 .product-selected:hover, .product-unselected:hover {
     background-color: #639692;
 }
-
+.delete-button:hover {
+    background-color: green;
+}
 .price-button {
     max-height: 20vh;
     padding: 2vh 0.5vw;
@@ -10434,6 +10439,10 @@ body {
 }
 
 /* general styling */
+
+.hidden {
+    display: none;
+}
 
 .bold {
     font-weight: bold;
@@ -10487,7 +10496,7 @@ body {
     .navbar-brand-vis {
         display: none;
     }
-    .product-selected, .product-unselected, .price-button {
+    .product-selected, .product-unselected, .price-button, .delete-button {
         font-size: calc(8px + (42 - 8) * ((100vw - 300px) / 1620));
     }
     .product-container {
@@ -10525,7 +10534,7 @@ body {
     .navbar-brand-vis {
         display: block;
     }
-    .product-selected, .product-unselected, .price-button {
+    .product-selected, .product-unselected, .price-button, .delete-button {
         font-size: calc(8px + (20 - 8) * ((100vw - 300px) / 1620));
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;

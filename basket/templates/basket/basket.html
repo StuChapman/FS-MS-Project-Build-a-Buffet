@@ -26,13 +26,13 @@
                             <div class="product-container w-100 mt-0 text-center text-xl-left">
                                 <div class="product-text-three mx-auto flex-margin-b text-blue">The items below have been added to your basket...</div>
                                 {% for product in products %}
-                                    <div class="product-text-two mx-auto mb-2 text-blue">{{ category.title }}: {{ product.name }}</div>
+                                    <div class="product-text-two mx-auto mb-2 text-blue bold">{{ category.title }}: {{ product.name }}</div>
                                     <div class="product-text-three mx-auto mb-2 text-blue">{{ product.description }}</div>
                                 {% endfor %}
                                 <div class="text-blue product-text-three mb-2">With this option ...</div>
                                 {% if selected == "selected-one" %}
                                     {% for option in options %}
-                                        <div class="text-blue product-text-two mb-2">{{ option.option1.title }}</div>
+                                        <div class="text-blue product-text-two mb-2 bold">{{ option.option1.title }}</div>
                                     {% endfor %}
                                 {% endif %}
                                 {% if selected == "selected-two" %}
@@ -46,25 +46,23 @@
                                     {% endfor %}
                                 {% endif %}
                                 <div class="text-blue text-xs mb-2">Number of servings ...</div>
+                                <div id="servings" class="text-blue product-text-two mb-2 bold">{{ servings }}</div>
                                 <div class="row">
-                                    <div class="col-4 flex-margin-t">
+                                    <div class="col-4 my-auto">
                                         {% for product in products %}
                                             <div class="text-blue text-xs">per serving</div>
-                                            <div id="serving-price"  class="price-button border-solid js-scroll-trigger flex-margin-b"><b>£{{ product.price }}</b></div>
+                                            <div id="serving-price" class="product-text-two mt-1">£{{ product.price }}</div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-4 flex-margin-t">
+                                    <div class="col-4 my-auto">
                                         {% for product in products %}
                                             <div class="text-blue text-xs">Total price</div>
-                                            <div id="total-price" class="price-button border-solid js-scroll-trigger flex-margin-b"><b>£{{ product.price }}</b></div>
+                                            <div id="total-price" class="product-text-header bold">£{{ product.price }}</div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-4 flex-margin-t">
-                                        {% for product in products %}
-                                            <div class="text-blue text-xs">Add to</div>
-                                            <a class="product-selected border-solid masthead-button btn btn-primary js-scroll-trigger flex-margin-b" href="">
-                                                    <i class="fa fa-shopping-basket" aria-hidden="true"></i> basket</a>
-                                        {% endfor %}
+                                    <div class="col-4 my-auto py-auto">
+                                        <a class="delete-button border-solid masthead-button btn btn-primary js-scroll-trigger" href="">
+                                                <i class="fas fa-trash-alt" aria-hidden="true"></i> delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -79,22 +77,14 @@
 
 {% block postloadjs %}
     <script type="text/javascript">
-        // Credit: https://www.w3schools.com/howto/howto_js_rangeslider.asp
 
-        var slider = document.getElementById("myRange");
-        var output = document.getElementById("demo");
         var servingPrice = document.getElementById("serving-price").innerHTML.substring(1);
-        console.log(servingPrice)
-        output.innerHTML = slider.value; // Display the default slider value
+        var servings = document.getElementById("servings").innerHTML;
+        var discount = 1 - ((servings * 2) / 100);
+        var totalPrice = (servingPrice * servings * discount).toFixed(2)
 
-        // Update the current slider value (each time you drag the slider handle)
-        slider.oninput = function() {
-        var multiplier = this.value;
-        var discount = 1 - ((multiplier * 2) / 100);
-        var totalPrice = (servingPrice * multiplier * discount).toFixed(2)
-        output.innerHTML = multiplier;
         $('#total-price').text("£" + totalPrice);
-        }
+
     </script>
 {{ block.super }}
 {% include 'products/includes/contact.html' %}

@@ -18,7 +18,6 @@ def products(request):
     if request.GET:
         if 'category' in request.GET:
             category = request.GET['category']
-            print('category')
             products = products.filter(category__name=category)
             range = "standard"
             image = categories.filter(name=category)
