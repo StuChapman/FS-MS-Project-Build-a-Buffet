@@ -11,7 +11,7 @@
 
 {% block content %}
     <!-- Produce-->
-    <section class="projects-section bg-light" id="products">
+    <section class="products-section bg-light" id="products">
         <div class="container">
             <!-- Produce One Row-->
             <div class="row justify-content-center no-gutters">
@@ -81,22 +81,29 @@
                                     <div class="col-4 flex-margin-t">
                                         {% for product in products %}
                                             <div class="text-blue text-xs">per serving</div>
-                                            <div id="serving-price"  class="price-button js-scroll-trigger flex-margin-b">£{{ product.price }}</div>
+                                            <div id="serving-price"  class="price-button js-scroll-trigger flex-margin-b"><b>£{{ product.price }}</b></div>
                                         {% endfor %}
                                     </div>
                                     <div class="col-4 flex-margin-t">
                                         {% for product in products %}
                                             <div class="text-blue text-xs">Total price</div>
-                                            <div id="total-price" class="price-button js-scroll-trigger flex-margin-b">£{{ product.price }}</div>
+                                            <div id="total-price" class="price-button js-scroll-trigger flex-margin-b"><b>£{{ product.price }}</b></div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-4 flex-margin-t">
+                                        {% for product in products %}
+                                            <div class="text-blue text-xs">Add to</div>
+                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" href="">
+                                                    <i class="fa fa-shopping-basket" aria-hidden="true"></i> basket</a>
                                         {% endfor %}
                                     </div>
                                 </div>
-                                <hr class="d-none d-xl-block mb-0 ml-0">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <hr class="d-none d-xl-block mb-0 ml-0">
         </div>
     </section>
 {% endblock %}

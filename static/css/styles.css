@@ -10261,27 +10261,27 @@ body {
   margin-bottom: 5rem;
 }
 
-.projects-section {
+.projects-section, .products-section {
   padding: 5rem 0;
 }
-.projects-section .featured-text {
+.projects-section .featured-text, .products-section .featured-text {
   padding: 2rem;
 }
 @media (min-width: 992px) {
-  .projects-section .featured-text {
+  .projects-section .featured-text, .products-section .featured-text {
     padding: 0 0 0 2rem;
     border-left: 0.5rem solid #64a19d;
   }
 }
-.projects-section .project-text {
+.projects-section .project-text, .products-section .product-text {
   padding: 3rem;
   font-size: 90%;
 }
 @media (min-width: 992px) {
-  .projects-section .project-text {
+  .projects-section .project-text, .products-section .product-text {
     padding: 5rem;
   }
-  .projects-section .project-text hr {
+  .projects-section .project-text hr, .products-section .product-text hr {
     border-color: #64a19d;
     border-width: 0.25rem;
     width: 30%;
@@ -10407,7 +10407,7 @@ body {
     margin: 2.5px 0 0 -5px;
 }
 
-.projects-section .product-container {
+.projects-section .product-container, .products-section .product-container {
   padding: 0.5rem 0.5rem;
   font-size: 90%;
 }
@@ -10511,7 +10511,7 @@ body {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
     }
-    .projects-section .product-container hr {
+    .projects-section .project-container hr, .products-section .product-container {
         border-color: #64a19d;
         border-width: 0.25rem;
         width: 30%;
@@ -10535,7 +10535,7 @@ body {
 }
 
 @media (min-width: 1199px) {
-    .projects-section .product-container {
+    .products-section .product-container {
         padding: 0rem 2.5rem;
     }
 }

@@ -8,12 +8,17 @@ from .models import Product, Category, Options
 def products(request):
     """ A view to show and filter products """
 
+    category = ""
+    range = ""
+    image = ""
+
     categories = Category.objects.all()
     products = Product.objects.all()
 
     if request.GET:
         if 'category' in request.GET:
             category = request.GET['category']
+            print('category')
             products = products.filter(category__name=category)
             range = "standard"
             image = categories.filter(name=category)
@@ -37,6 +42,12 @@ def products(request):
 def product_detail(request):
     """ A view to show product options """
 
+    category = ""
+    image = ""
+    selected = ""
+    image = ""
+    options = ""
+
     categories = Category.objects.all()
     products = Product.objects.all()
     options = Options.objects.all()
@@ -44,7 +55,6 @@ def product_detail(request):
     if request.GET:
         if 'category_product' in request.GET:
             category_product = request.GET['category_product']
-            print(category_product)
             category_product_list = category_product.split(',')
             category = category_product_list[0]
             product = category_product_list[1]
