@@ -11,7 +11,7 @@
 
 {% block content %}
     <!-- Produce-->
-    <section class="projects-section bg-light" id="projects">
+    <section class="projects-section bg-light" id="products">
         <div class="container">
             <!-- Produce One Row-->
             <div class="row justify-content-center no-gutters">
@@ -114,7 +114,8 @@
         // Update the current slider value (each time you drag the slider handle)
         slider.oninput = function() {
         var multiplier = this.value;
-        var totalPrice = (servingPrice * multiplier).toFixed(2)
+        var discount = 1 - ((multiplier * 2) / 100);
+        var totalPrice = (servingPrice * multiplier * discount).toFixed(2)
         output.innerHTML = multiplier;
         $('#total-price').text("£" + totalPrice);
         }
