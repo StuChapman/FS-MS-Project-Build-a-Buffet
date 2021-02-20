@@ -221,6 +221,7 @@ I deployed to Github Pages by the following steps:
 3.  The method to adjust styling based on landscape or portrait orientation is from [stackoverflow](https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree)
 4.  The slider is from [w3schools](https://www.w3schools.com/howto/howto_js_rangeslider.asp)
 5.  Creating a cookie in javascript is from [w3schools](https://www.w3schools.com/js/js_cookies.asp)
+6.  Passing context fro Django to Javascript is from [stackoverflow](https://stackoverflow.com/questions/8683922/how-can-i-pass-my-context-variables-to-a-javascript-file-in-django)
 
 ### Media
 

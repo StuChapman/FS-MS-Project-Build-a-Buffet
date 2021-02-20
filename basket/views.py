@@ -6,6 +6,7 @@ from products.models import Product, Category, Options
 
 import requests
 import uuid
+import datetime
 
 # Create your views here.
 
@@ -13,31 +14,26 @@ import uuid
 def basket(request):
     """ A view to show the current basket """
 
-    """ check for a basket cookie """
     cookie_key = settings.COOKIE_KEY
+
+    """ check for a basket cookie """
     try:
-        value = request.COOKIES[settings.COOKIE_KEY]
+        value = request.COOKIES[cookie_key]
         print(value)
     except KeyError:
         print('Cookie Not Found')
         cookie_value = str(uuid.uuid4())
-        request.COOKIES[cookie_key] = cookie_value
-        try:
-            response = HttpResponse('/basket.html')
-            response.set_cookie(cookie_key, cookie_value, expires=7)
-        except KeyError:
-            print('Cookie Not Set')
+        response = HttpResponse("hello")
+        set_cookie(response, cookie_key, cookie_value)
     try:
-        value = request.COOKIES[cookie_key]
-        print('Found Cookie')
+        value = request.COOKIES['cookie_key']
+        print(value)
     except KeyError:
-        print('Cant find Cookie')
+        print('Cookie Not Created')
 
     category = ""
     selected = ""
-    options = ""
 
-    categories = Category.objects.all()
     products = Product.objects.all()
     options = Options.objects.all()
 
@@ -62,6 +58,25 @@ def basket(request):
             'selected': selected,
             'options': options,
             'servings': servings,
+            'cookie_key': cookie_key,
         }
 
     return render(request, 'basket/basket.html', context)
+
+
+# Credit: https://stackoverflow.com/questions/1622793/django-cookies-how-can-i-set-them
+def set_cookie(response, key, value, days_expire=7):
+    if days_expire is None:
+        max_age = 365 * 24 * 60 * 60  # one year
+    else:
+        max_age = days_expire * 24 * 60 * 60
+    expires = datetime.datetime.strftime(
+        datetime.datetime.utcnow() + datetime.timedelta(seconds=max_age),
+        "%a, %d-%b-%Y %H:%M:%S GMT",
+    )
+    response.set_cookie(
+        key,
+        value,
+        max_age=max_age,
+        expires=expires,
+    )
