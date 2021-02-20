@@ -18,7 +18,7 @@ def basket(request):
     try:
         value = request.COOKIES[settings.COOKIE_KEY]
         print(value)
-    except:
+    except KeyError:
         print('Cookie Not Found')
         cookie_value = str(uuid.uuid4())
         request.COOKIES[cookie_key] = cookie_value

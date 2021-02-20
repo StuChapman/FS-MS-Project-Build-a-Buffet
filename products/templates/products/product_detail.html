@@ -125,7 +125,11 @@
         // Update the current slider value (each time you drag the slider handle)
         slider.oninput = function() {
         var multiplier = this.value;
-        var discount = 1 - ((multiplier * 2) / 100);
+        if (multiplier == 1) {
+            var discount = 1
+        } else {
+            var discount = 1 - ((multiplier * 2) / 100);
+        }
         var totalPrice = (servingPrice * multiplier * discount).toFixed(2)
         output.innerHTML = multiplier;
         servings.value = multiplier;
