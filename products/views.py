@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.conf import settings
 
 from .models import Product, Category, Options
 
@@ -8,8 +7,6 @@ from .models import Product, Category, Options
 
 def products(request):
     """ A view to show and filter products """
-
-    cookie_key = settings.COOKIE_KEY
 
     category = ""
     range = ""
@@ -36,7 +33,6 @@ def products(request):
             'category': category,
             'range': range,
             'image': image,
-            'cookie_key': cookie_key,
         }
 
     return render(request, 'products/products.html', context)
