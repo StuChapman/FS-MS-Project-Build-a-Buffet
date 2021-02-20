@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+    <body onload="createCookie()"></body>
     <!-- Produce-->
     <section class="products-section bg-light" id="products">
         <div class="container">
@@ -29,7 +30,7 @@
                                     <div class="product-text-two mx-auto mb-2 text-blue bold">{{ category.title }}: {{ product.name }}</div>
                                     <div class="product-text-three mx-auto mb-2 text-blue">{{ product.description }}</div>
                                 {% endfor %}
-                                <div class="text-blue product-text-three mb-2">With this option ...</div>
+                                <div class="text-blue text-xs mb-2">With this option ...</div>
                                 {% if selected == "selected-one" %}
                                     {% for option in options %}
                                         <div class="text-blue product-text-two mb-2 bold">{{ option.option1.title }}</div>
@@ -76,6 +77,36 @@
 {% endblock %}
 
 {% block postloadjs %}
+    <script>
+    function setCookie(cname,cvalue,exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function createCookie() {
+        var cookieValue = (Math.random()*100000000.toFixed(8);
+        setCookie("bartb%031k52t09x4isk#", cookieValue, 365);
+        }
+    </script>
+
     <script type="text/javascript">
 
         var servingPrice = document.getElementById("serving-price").innerHTML.substring(1);

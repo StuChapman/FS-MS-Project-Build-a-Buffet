@@ -20,6 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+# Cookie Key to store basket info
+COOKIE_KEY = 'bartb%031k52t09x4isk#'
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'vz_9==eaf1y)f0xi^fcvxn!^0(79ei4$*3zn1jlz7ray6#(0-r'
 
