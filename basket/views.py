@@ -1,12 +1,8 @@
 from django.shortcuts import render
 from django.conf import settings
-from django.http import HttpResponse
 
 from products.models import Product, Category, Options
-
-import requests
-import uuid
-import datetime
+from basket.models import Basket
 
 # Create your views here.
 
@@ -18,18 +14,10 @@ def basket(request):
 
     """ check for a basket cookie """
     try:
-        value = request.COOKIES[cookie_key]
-        print(value)
+        cookie = request.COOKIES[cookie_key]
+        print(cookie)
     except KeyError:
         print('Cookie Not Found')
-        cookie_value = str(uuid.uuid4())
-        response = HttpResponse("hello")
-        set_cookie(response, cookie_key, cookie_value)
-    try:
-        value = request.COOKIES['cookie_key']
-        print(value)
-    except KeyError:
-        print('Cookie Not Created')
 
     category = ""
     selected = ""
@@ -52,6 +40,14 @@ def basket(request):
             selected = product_options_list[2]
             products = products.filter(name=product)
             options = options.filter(category__in=categories)
+            # Credit: https://stackoverflow.com/questions/23868958/django-insert-row-into-database
+            basket = Basket(cookie=cookie,
+                            category=category,
+                            name=product,
+                            price='0.00',
+                            servings=servings,
+                            option=selected)
+            basket.save()
 
     context = {
             'products': products,
@@ -60,25 +56,6 @@ def basket(request):
             'selected': selected,
             'options': options,
             'servings': servings,
-            'cookie_key': cookie_key,
         }
 
     return render(request, 'basket/basket.html', context)
-
-
-# Credit: https://stackoverflow.com/questions/1622793/django-cookies-how-can-i-set-them
-def set_cookie(response, key, value, days_expire=7):
-    if days_expire is None:
-        max_age = 365 * 24 * 60 * 60  # one year
-    else:
-        max_age = days_expire * 24 * 60 * 60
-    expires = datetime.datetime.strftime(
-        datetime.datetime.utcnow() + datetime.timedelta(seconds=max_age),
-        "%a, %d-%b-%Y %H:%M:%S GMT",
-    )
-    response.set_cookie(
-        key,
-        value,
-        max_age=max_age,
-        expires=expires,
-    )

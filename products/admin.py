@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category
+from .models import Product, Category, Options
 
 # Register your models here.
 
@@ -24,8 +24,13 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class OptionsAdmin(admin.ModelAdmin):
     list_display = (
-        'name',
+        'category',
         'option1',
         'option2',
         'option3',
     )
+
+
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Options, OptionsAdmin)
