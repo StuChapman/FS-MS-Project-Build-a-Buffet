@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 from products.models import Product, Category, Options
 from basket.models import Basket
@@ -41,13 +42,27 @@ def basket(request):
             products = products.filter(name=product)
             options = options.filter(category__in=categories)
             # Credit: https://stackoverflow.com/questions/23868958/django-insert-row-into-database
-            basket = Basket(cookie=cookie,
-                            category=category,
-                            name=product,
-                            price='0.00',
-                            servings=servings,
-                            option=selected)
-            basket.save()
+            try:
+                existing_basket = Basket.objects.get(cookie=cookie,
+                                                     category=category,
+                                                     name=product,
+                                                     option=selected)
+                existing_servings = existing_basket.servings
+                updated_servings = existing_servings + int(servings)
+                updated_basket = Basket(cookie=cookie,
+                                        category=category,
+                                        name=product,
+                                        servings=updated_servings,
+                                        option=selected)
+                updated_basket.save()
+                existing_basket.delete()
+            except ObjectDoesNotExist: # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
+                basket = Basket(cookie=cookie,
+                                category=category,
+                                name=product,
+                                servings=servings,
+                                option=selected)
+                basket.save()
 
     context = {
             'products': products,

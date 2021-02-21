@@ -223,6 +223,7 @@ I deployed to Github Pages by the following steps:
 5.  Creating a cookie in javascript is from [w3schools](https://www.w3schools.com/js/js_cookies.asp)
 6.  Passing context fro Django to Javascript is from [stackoverflow](https://stackoverflow.com/questions/8683922/how-can-i-pass-my-context-variables-to-a-javascript-file-in-django)
 7.  Inserting a row into a database with Django is from [stackoverflow](https://stackoverflow.com/questions/23868958/django-insert-row-into-database)
+8.  ObjectDoesNotExist: is from [stackoverflow](https://stackoverflow.com/questions/12572741/get-single-record-from-database-django)
 
 ### Media
 

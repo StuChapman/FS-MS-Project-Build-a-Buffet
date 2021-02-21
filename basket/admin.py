@@ -9,7 +9,6 @@ class BasketAdmin(admin.ModelAdmin):
         'cookie',
         'category',
         'name',
-        'price',
         'servings',
         'option',
     )
