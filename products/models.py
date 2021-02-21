@@ -31,7 +31,8 @@ class Product(models.Model):
 
 
 class Options(models.Model):
-    name = models.CharField(max_length=254)
+    category = models.ForeignKey('Category', null=True, blank=True,
+                                 on_delete=models.SET_NULL)
     option1 = models.TextField()
     option2 = models.TextField()
     option3 = models.TextField()

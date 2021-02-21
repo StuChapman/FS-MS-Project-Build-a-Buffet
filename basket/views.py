@@ -33,7 +33,9 @@ def basket(request):
 
     category = ""
     selected = ""
+    options = ""
 
+    categories = Category.objects.all()
     products = Product.objects.all()
     options = Options.objects.all()
 
@@ -49,7 +51,7 @@ def basket(request):
             product = product_options_list[1]
             selected = product_options_list[2]
             products = products.filter(name=product)
-            options = options.filter(name=category)
+            options = options.filter(category__in=categories)
 
     context = {
             'products': products,

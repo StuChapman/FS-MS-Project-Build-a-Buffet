@@ -60,7 +60,7 @@ def product_detail(request):
             selected = category_product_list[2]
             products = products.filter(name=product)
             image = categories.filter(name=category)
-            options = options.filter(name=category)
+            options = options.filter(category__in=categories)
 
     context = {
             'products': products,
