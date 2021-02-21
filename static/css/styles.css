@@ -10546,7 +10546,7 @@ body {
         padding: 0.5rem 3rem;
     }
     .product-text-two {
-        font-size: calc(14px + (32 - 14) * ((100vw - 300px) / 1620));
+        font-size: calc(14px + (24 - 14) * ((100vw - 300px) / 1620));
     }
     .product-text-header {
         font-size: calc(22px + (38 - 22) * ((100vw - 300px) / 1620));

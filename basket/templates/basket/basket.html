@@ -67,42 +67,54 @@
                                 <div class="product-text-three mx-auto flex-margin-b text-blue">The items below have been added to your basket...</div>
                                     {% for basket in baskets %}
                                         <div class="product-text-two mx-auto mb-2 text-blue bold">{{ basket.category.title }}: {{ basket.name }}</div>
-                                        <div class="product-text-three mx-auto mb-2 text-blue">'description here'</div>
-                                        <div class="text-blue text-xs mb-2">With this option ...</div>
-                                        {% if basket.selected == "selected-one" %}
-                                            {% for option in options %}
-                                                <div class="text-blue product-text-two mb-2 bold">{{ option.option1.title }}</div>
-                                            {% endfor %}
-                                        {% endif %}
-                                        {% if basket.selected == "selected-two" %}
-                                            {% for option in options %}
-                                                <div class="text-blue product-text-two mb-2">{{ option.option2.title }}</div>
-                                            {% endfor %}
-                                        {% endif %}
-                                        {% if basket.selected == "selected-three" %}
-                                            {% for option in options %}
-                                                <div class="text-blue product-text-two mb-2">{{ option.option3.title }}</div>
-                                            {% endfor %}
-                                        {% endif %}
-                                        <div class="text-blue text-xs mb-2">Number of servings ...</div>
-                                        <div id="servings" class="text-blue product-text-two mb-2 bold">{{ servings }}</div>
+                                        {% for product in products %}
+                                            {% if product.name == basket.name %}
+                                                <div class="product-text-three mx-auto mb-2 text-blue">{{ product.description }}</div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <div class="text-blue text-xs mb-2">With this option ...
+                                            {% if basket.option == "selected-one" %}
+                                                {% for option in options %}
+                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option1.title }}</span>
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% if basket.option == "selected-two" %}
+                                                {% for option in options %}
+                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option2.title }}</span>
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% if basket.option == "selected-three" %}
+                                                {% for option in options %}
+                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option3.title }}</span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="text-blue text-xs mb-4">Number of servings ...
+                                            <span id="servings" class="text-blue product-text-two mb-2 bold">{{ basket.servings }}</span>
+                                        </div>
                                         <div class="row">
                                             <div class="col-4 my-auto">
                                                 {% for product in products %}
-                                                    <div class="text-blue text-xs">per serving</div>
-                                                    <div id="serving-price" class="product-text-two mt-1">£{{ product.price }}</div>
+                                                    {% if product.name == basket.name %}
+                                                        <div class="text-blue text-xs">per serving</div>
+                                                        <div id="serving-price" class="product-text-two mt-1">£{{ product.price }}</div>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </div>
                                             <div class="col-4 my-auto">
                                                 {% for product in products %}
-                                                    <div class="text-blue text-xs">Total price</div>
-                                                    <div id="total-price" class="product-text-header bold">£{{ product.price }}</div>
+                                                    {% if product.name == basket.name %}
+                                                        <div class="text-blue text-xs">Total price</div>
+                                                        <div id="total-price" class="product-text-header bold">£{{ product.price }}</div>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </div>
                                             <div class="col-4 my-auto py-auto">
                                                 <a class="delete-button border-solid masthead-button btn btn-primary js-scroll-trigger" href="">
-                                                        <i class="fas fa-trash-alt" aria-hidden="true"></i> delete</a>
+                                                        <i class="fas fa-trash-alt" aria-hidden="true"></i> remove</a>
                                             </div>
+                                        </div>
+                                        <hr>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -110,8 +122,6 @@
                     </div>
                 </div>
             </div>
-            <hr class="d-none d-xl-block mb-0 ml-0">
-        </div>
     </section>
 {% endblock %}
 

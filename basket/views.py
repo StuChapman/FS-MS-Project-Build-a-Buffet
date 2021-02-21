@@ -70,6 +70,7 @@ def basket(request):
     context = {
             'products': products,
             'options': options,
+            'selected': selected,
             'baskets': baskets,
         }
 
