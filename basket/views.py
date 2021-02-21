@@ -16,9 +16,9 @@ def basket(request):
     """ check for a basket cookie """
     try:
         cookie = request.COOKIES[cookie_key]
-        print(cookie)
     except KeyError:
-        print('Cookie Not Found')
+        basket_session(request)
+        return
 
     category = ""
     selected = ""
@@ -56,21 +56,32 @@ def basket(request):
                                         option=selected)
                 updated_basket.save()
                 existing_basket.delete()
-            except ObjectDoesNotExist: # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
+            except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
                 basket = Basket(cookie=cookie,
                                 category=category,
                                 name=product,
                                 servings=servings,
                                 option=selected)
                 basket.save()
+            baskets = Basket.objects.filter(cookie=cookie)
+    else:
+        baskets = Basket.objects.filter(cookie=cookie)
 
     context = {
             'products': products,
-            'category': category,
-            'product': product,
-            'selected': selected,
             'options': options,
-            'servings': servings,
+            'baskets': baskets,
         }
 
     return render(request, 'basket/basket.html', context)
+
+
+def basket_session(request):
+    """ A view to write the basket to session if no cookie found """
+
+    if request.GET:
+        if 'product_options' in request.GET:
+            product_options = request.GET['product_options']
+            print(product_options)
+
+    return render(request, 'basket/basket.html')
