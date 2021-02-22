@@ -226,6 +226,7 @@ I deployed to Github Pages by the following steps:
 8.  ObjectDoesNotExist: is from [stackoverflow](https://stackoverflow.com/questions/12572741/get-single-record-from-database-django)
 9.  Get a single objects value is from [http://morozov.ca](http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html)
 10. Using aggregate and dict is from [stackoverflow.com](https://stackoverflow.com/questions/42132091/using-aggregation-api-django)
+11. Django model.AutoField is from [www.fullstackpython.com](https://www.fullstackpython.com/django-db-models-autofield-examples.html)
 
 ### Media
 

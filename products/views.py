@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 from .models import Product, Category, Options
+from basket.models import Basket
 
 # Create your views here.
 
@@ -42,7 +43,7 @@ def product_detail(request):
     """ A view to show product options """
 
     category = ""
-    image = ""
+    products = ""
     selected = ""
     image = ""
     options = ""
@@ -69,6 +70,47 @@ def product_detail(request):
             'selected': selected,
             'image': image,
             'options': options,            
+        }
+
+    return render(request, 'products/product_detail.html', context)
+
+
+def edit_product(request):
+    """ A view to edit basket items """
+
+    category = ""
+    products = ""
+    selected = ""
+    image = ""
+    options = ""
+    servings = ""
+    edit = "edit"
+
+    categories = Category.objects.all()
+    products = Product.objects.all()
+    options = Options.objects.all()
+    basket = Basket.objects.all()
+
+    if request.GET:
+        if 'item_number' in request.GET:
+            item_number = request.GET['item_number']
+            category = basket.get(item_number=item_number).category
+            selected = basket.get(item_number=item_number).option
+            product = basket.get(item_number=item_number).name
+            products = products.filter(name=product)
+            image = categories.filter(name=category)
+            options = options.filter(category__in=categories)
+            servings = basket.get(item_number=item_number).servings
+
+    context = {
+            'products': products,
+            'category': category,
+            'product': product,
+            'selected': selected,
+            'image': image,
+            'options': options,
+            'servings': servings,
+            'edit': edit,
         }
 
     return render(request, 'products/product_detail.html', context)

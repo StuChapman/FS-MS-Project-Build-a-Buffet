@@ -18,7 +18,6 @@ def basket(request):
     try:
         cookie = request.COOKIES[cookie_key]
     except KeyError:
-        basket_session(request)
         return render(request, 'basket/basket.html')
 
     category = ""
@@ -47,6 +46,7 @@ def basket(request):
             category = product_options_list[0]
             product = product_options_list[1]
             selected = product_options_list[2]
+            add_or_edit = product_options_list[3]
             this_product = products.filter(name=product)
             options = options.filter(category__in=categories)
             # Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html
@@ -58,20 +58,38 @@ def basket(request):
                                                      name=product,
                                                      option=selected)
                 existing_servings = existing_basket.servings
-                updated_servings = existing_servings + int(servings)
-                if float(updated_servings) == 1:
-                    updated_discount = 1
-                else:
-                    updated_discount = 1 - ((float(updated_servings) * 2) / 100)
-                total_price = float(price) * float(updated_servings) * float(updated_discount)
-                updated_basket = Basket(cookie=cookie,
-                                        category=category,
-                                        name=product,
-                                        servings=updated_servings,
-                                        option=selected,
-                                        total_price=total_price)
-                updated_basket.save()
-                existing_basket.delete()
+                print(add_or_edit)
+                if add_or_edit == 'add':
+                    print('adding')
+                    updated_servings = existing_servings + int(servings)
+                    if float(updated_servings) == 1:
+                        updated_discount = 1
+                    else:
+                        updated_discount = 1 - ((float(updated_servings) * 2) / 100)
+                    total_price = float(price) * float(updated_servings) * float(updated_discount)
+                    updated_basket = Basket(cookie=cookie,
+                                            category=category,
+                                            name=product,
+                                            servings=updated_servings,
+                                            option=selected,
+                                            total_price=total_price)
+                    updated_basket.save()
+                    existing_basket.delete()
+                if add_or_edit == 'edit':
+                    print('editing')
+                    if float(updated_servings) == 1:
+                        updated_discount = 1
+                    else:
+                        updated_discount = 1 - ((float(updated_servings) * 2) / 100)
+                    total_price = float(price) * float(updated_servings) * float(updated_discount)
+                    updated_basket = Basket(cookie=cookie,
+                                            category=category,
+                                            name=product,
+                                            servings=servings,
+                                            option=selected,
+                                            total_price=total_price)
+                    updated_basket.save()
+                    existing_basket.delete()
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
                 total_price = float(price) * float(servings) * float(discount)
                 basket = Basket(cookie=cookie,
@@ -98,14 +116,3 @@ def basket(request):
         }
 
     return render(request, 'basket/basket.html', context)
-
-
-def basket_session(request):
-    """ A view to write the basket to session if no cookie found """
-
-    if request.GET:
-        if 'product_options' in request.GET:
-            product_options = request.GET['product_options']
-            print(product_options)
-
-    return render(request, 'basket/basket.html')
