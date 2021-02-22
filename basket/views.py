@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
@@ -17,9 +17,9 @@ def basket(request):
     """ check for a basket cookie """
     try:
         cookie = request.COOKIES[cookie_key]
-    except ObjectDoesNotExist:
+    except KeyError:
         basket_session(request)
-        return
+        return render(request, 'basket/basket.html')
 
     category = ""
     selected = ""

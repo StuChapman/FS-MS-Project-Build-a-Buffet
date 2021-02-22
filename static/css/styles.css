@@ -10361,7 +10361,7 @@ body {
     background-color: #426765;
 }
 
-.product-selected, .product-unselected, .delete-button {
+.product-selected, .product-unselected, .delete-button, .edit-button {
     text-align: center;
 }
 .product-unselected {
@@ -10369,7 +10369,11 @@ body {
 }
 .delete-button {
     background-color: #EA7276 !important;
-    height: 100%;
+    height: 50%;
+}
+.edit-button {
+    background-color: #9DBA83 !important;
+    height: 50%;
 }
 
 .basket {
@@ -10422,13 +10426,13 @@ body {
   color: #303F3F;
 }
 
-.product-selected, .product-unselected, .price-button, .delete-button {
+.product-selected, .product-unselected, .price-button, .delete-button, .edit-button {
     width: 100%;
 }
 .product-selected:hover, .product-unselected:hover {
     background-color: #639692;
 }
-.delete-button:hover {
+.delete-button:hover, .edit-button:hover {
     background-color: green;
 }
 .price-button {
@@ -10437,6 +10441,10 @@ body {
     background-color: white;
     color: #303F3F;
 }
+    .delete-button, .edit-button {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
 
 /* general styling */
 
@@ -10496,7 +10504,7 @@ body {
     .navbar-brand-vis {
         display: none;
     }
-    .product-selected, .product-unselected, .price-button, .delete-button {
+    .product-selected, .product-unselected, .price-button, .delete-button, .edit-button {
         font-size: calc(8px + (42 - 8) * ((100vw - 300px) / 1620));
     }
     .product-container {
@@ -10534,10 +10542,13 @@ body {
     .navbar-brand-vis {
         display: block;
     }
-    .product-selected, .product-unselected, .price-button, .delete-button {
+    .product-selected, .product-unselected, .price-button {
         font-size: calc(8px + (20 - 8) * ((100vw - 300px) / 1620));
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
+    }
+    .delete-button, .edit-button {
+        font-size: calc(8px + (20 - 8) * ((100vw - 300px) / 1620));
     }
     .projects-section .project-container hr, .products-section .product-container {
         border-color: #64a19d;

@@ -16,9 +16,15 @@ def index(request):
     """ check for a basket cookie """
     try:
         cookie = request.COOKIES[cookie_key]
-    except ObjectDoesNotExist:
+    except KeyError:
         basket_total = ""
-        return
+
+        context = {
+                'cookie_key': cookie_key,
+                'basket_total': basket_total
+            }
+
+        return render(request, 'home/index.html', context)
 
     # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
     basket_total = Basket.objects.filter(cookie=cookie).aggregate(Sum('total_price'))
