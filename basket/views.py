@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Sum
 
 from products.models import Product, Category, Options
 from basket.models import Basket
@@ -16,13 +17,16 @@ def basket(request):
     """ check for a basket cookie """
     try:
         cookie = request.COOKIES[cookie_key]
-    except KeyError:
+    except ObjectDoesNotExist:
         basket_session(request)
         return
 
     category = ""
     selected = ""
     options = ""
+    this_product = ""
+    baskets = ""
+    basket_total = ""
 
     categories = Category.objects.all()
     products = Product.objects.all()
@@ -31,6 +35,10 @@ def basket(request):
     if request.POST:
         if 'servings' in request.POST:
             servings = request.POST["servings"]
+            if float(servings) == 1:
+                discount = 1
+            else:
+                discount = 1 - ((float(servings) * 2) / 100)
 
     if request.GET:
         if 'product_options' in request.GET:
@@ -39,8 +47,7 @@ def basket(request):
             category = product_options_list[0]
             product = product_options_list[1]
             selected = product_options_list[2]
-            all_products = products
-            products = products.filter(name=product)
+            this_product = products.filter(name=product)
             options = options.filter(category__in=categories)
             # Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html
             price = products.get(name=product).price
@@ -52,7 +59,11 @@ def basket(request):
                                                      option=selected)
                 existing_servings = existing_basket.servings
                 updated_servings = existing_servings + int(servings)
-                total_price = float(price) * float(updated_servings)
+                if float(updated_servings) == 1:
+                    updated_discount = 1
+                else:
+                    updated_discount = 1 - ((float(updated_servings) * 2) / 100)
+                total_price = float(price) * float(updated_servings) * float(updated_discount)
                 updated_basket = Basket(cookie=cookie,
                                         category=category,
                                         name=product,
@@ -62,7 +73,7 @@ def basket(request):
                 updated_basket.save()
                 existing_basket.delete()
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
-                total_price = float(price) * float(servings)
+                total_price = float(price) * float(servings) * float(discount)
                 basket = Basket(cookie=cookie,
                                 category=category,
                                 name=product,
@@ -74,12 +85,16 @@ def basket(request):
     else:
         baskets = Basket.objects.filter(cookie=cookie)
 
+    # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
+    basket_total = Basket.objects.filter(cookie=cookie).aggregate(Sum('total_price'))
+
     context = {
-            'all_products': all_products,
             'products': products,
+            'this_product': this_product,
             'options': options,
             'selected': selected,
             'baskets': baskets,
+            'basket_total': basket_total
         }
 
     return render(request, 'basket/basket.html', context)

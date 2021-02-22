@@ -67,7 +67,7 @@
                                 <div class="product-text-three mx-auto flex-margin-b text-blue">The items below have been added to your basket...</div>
                                     {% for basket in baskets %}
                                         <div class="product-text-two mx-auto mb-2 text-blue bold">{{ basket.category.title }}: {{ basket.name }}</div>
-                                        {% for product in products %}
+                                        {% for product in this_product %}
                                             {% if product.name == basket.name %}
                                                 <div class="product-text-three mx-auto mb-2 text-blue">{{ product.description }}</div>
                                             {% endif %}
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-4 my-auto">
-                                                {% for product in all_products %}
+                                                {% for product in products %}
                                                     {% if product.name == basket.name %}
                                                         <div class="text-blue text-xs">per serving</div>
                                                         <div class="product-text-two mt-1">£{{ product.price }}</div>
@@ -112,6 +112,10 @@
                                         </div>
                                         <hr>
                                     {% endfor %}
+                                    <div class="col-12 col-lg-4 my-auto">
+                                        <div class="product-text-two mx-auto mb-2 text-blue bold">Basket Total</div>
+                                        <div class="product-text-header bold">£{{ basket_total.total_price__sum|floatformat:"2" }}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -122,16 +126,4 @@
 {% endblock %}
 
 {% block postloadjs %}
-    <script type="text/javascript">
-        var servingPrice = document.getElementById("serving-price").innerHTML.substring(1);
-        var multiplier = document.getElementById("servings").innerHTML;
-        if (multiplier == 1) {
-            var discount = 1;
-        } else {
-            var discount = 1 - ((multiplier * 2) / 100);
-        }
-        var totalPrice = (servingPrice * multiplier * discount).toFixed(2);
-
-        $('#total-price').text("£" + totalPrice);
-    </script>
 {% endblock %}
