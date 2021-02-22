@@ -39,6 +39,7 @@ def basket(request):
             category = product_options_list[0]
             product = product_options_list[1]
             selected = product_options_list[2]
+            all_products = products
             products = products.filter(name=product)
             options = options.filter(category__in=categories)
             # Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html
@@ -74,6 +75,7 @@ def basket(request):
         baskets = Basket.objects.filter(cookie=cookie)
 
     context = {
+            'all_products': all_products,
             'products': products,
             'options': options,
             'selected': selected,

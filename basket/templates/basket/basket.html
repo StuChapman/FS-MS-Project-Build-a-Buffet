@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-4 my-auto">
-                                                {% for product in products %}
+                                                {% for product in all_products %}
                                                     {% if product.name == basket.name %}
                                                         <div class="text-blue text-xs">per serving</div>
                                                         <div class="product-text-two mt-1">£{{ product.price }}</div>
