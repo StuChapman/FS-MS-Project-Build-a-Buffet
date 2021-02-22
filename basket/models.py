@@ -9,6 +9,7 @@ class Basket(models.Model):
     name = models.CharField(max_length=254)
     servings = models.DecimalField(max_digits=2, decimal_places=0)
     option = models.CharField(max_length=254)
+    total_price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return self.name

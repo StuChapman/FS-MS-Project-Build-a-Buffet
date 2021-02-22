@@ -41,6 +41,8 @@ def basket(request):
             selected = product_options_list[2]
             products = products.filter(name=product)
             options = options.filter(category__in=categories)
+            # Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html
+            price = products.get(name=product).price
             # Credit: https://stackoverflow.com/questions/23868958/django-insert-row-into-database
             try:
                 existing_basket = Basket.objects.get(cookie=cookie,
@@ -49,19 +51,23 @@ def basket(request):
                                                      option=selected)
                 existing_servings = existing_basket.servings
                 updated_servings = existing_servings + int(servings)
+                total_price = float(price) * float(updated_servings)
                 updated_basket = Basket(cookie=cookie,
                                         category=category,
                                         name=product,
                                         servings=updated_servings,
-                                        option=selected)
+                                        option=selected,
+                                        total_price=total_price)
                 updated_basket.save()
                 existing_basket.delete()
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
+                total_price = float(price) * float(servings)
                 basket = Basket(cookie=cookie,
                                 category=category,
                                 name=product,
                                 servings=servings,
-                                option=selected)
+                                option=selected,
+                                total_price=total_price)
                 basket.save()
             baskets = Basket.objects.filter(cookie=cookie)
     else:
