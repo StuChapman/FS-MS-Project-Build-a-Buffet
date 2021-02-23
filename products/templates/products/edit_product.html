@@ -53,13 +53,13 @@
                                         {% if selected == "selected-one" %}
                                             {% for option in options %}
                                                 <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-one">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-one,{{ item_number }},{{ servings }}">
                                                     {{ option.option1 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
                                                 <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-one">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-one,{{ item_number }},{{ servings }}">
                                                     {{ option.option1 }}</a>
                                             {% endfor %}
                                         {% endif %}
@@ -68,13 +68,13 @@
                                         {% if selected == "selected-two" %}
                                             {% for option in options %}
                                                 <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-two">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-two,{{ item_number }},{{ servings }}">
                                                     {{ option.option2 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
                                                 <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-two">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-two,{{ item_number }},{{ servings }}">
                                                     {{ option.option2 }}</a>
                                             {% endfor %}
                                         {% endif %}
@@ -83,13 +83,13 @@
                                         {% if selected == "selected-three" %}
                                             {% for option in options %}
                                                 <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-three">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-three,{{ item_number }},{{ servings }}">
                                                     {{ option.option3 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
                                                 <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?category_product={{ category }},{{ product }},selected-three">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-three,{{ item_number }},{{ servings }}">
                                                     {{ option.option3 }}</a>
                                             {% endfor %}
                                         {% endif %}
@@ -125,12 +125,12 @@
                                     </div>
                                     <div class="col-4 flex-margin-t">
                                         <div class="text-blue text-xs">
-                                            Add to
+                                            Update
                                         </div>
-                                        <form action="{% url 'basket' %}?product_add={{ category }},{{ product }},{{ selected }}" method="post">
+                                        <form action="{% url 'basket' %}?product_edit={{ category }},{{ product }},{{ selected }},{{ item_number }}" method="post">
                                             {% csrf_token %}
                                             <div>
-                                                <input type="text" name="servings" id="servings" class="hidden" value="1">
+                                                <input type="text" name="servings" id="servings" class="hidden" value="{{ servings }}">
                                                 <button type="submit" class="product-selected border-solid masthead-button btn btn-primary js-scroll-trigger flex-margin-b">
                                                     <i class="fa fa-shopping-basket" aria-hidden="true"></i> basket
                                                 </button>

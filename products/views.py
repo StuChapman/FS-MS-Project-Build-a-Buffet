@@ -47,6 +47,7 @@ def product_detail(request):
     selected = ""
     image = ""
     options = ""
+    item_number = ""
 
     categories = Category.objects.all()
     products = Product.objects.all()
@@ -63,16 +64,41 @@ def product_detail(request):
             image = categories.filter(name=category)
             options = options.filter(category__in=categories)
 
-    context = {
-            'products': products,
-            'category': category,
-            'product': product,
-            'selected': selected,
-            'image': image,
-            'options': options,            
-        }
+            context = {
+                    'products': products,
+                    'category': category,
+                    'product': product,
+                    'selected': selected,
+                    'image': image,
+                    'options': options,            
+                }
 
-    return render(request, 'products/product_detail.html', context)
+            return render(request, 'products/product_detail.html', context)
+
+        if 'product_edit' in request.GET:
+            product_edit = request.GET['product_edit']
+            product_edit_list = product_edit.split(',')
+            category = product_edit_list[0]
+            product = product_edit_list[1]
+            selected = product_edit_list[2]
+            item_number = product_edit_list[3]
+            servings = product_edit_list[4]
+            products = products.filter(name=product)
+            image = categories.filter(name=category)
+            options = options.filter(category__in=categories)
+
+            context = {
+                    'products': products,
+                    'category': category,
+                    'product': product,
+                    'selected': selected,
+                    'image': image,
+                    'options': options,
+                    'servings': servings,
+                    'item_number': item_number
+                }
+
+            return render(request, 'products/edit_product.html', context)
 
 
 def edit_product(request):
@@ -114,4 +140,4 @@ def edit_product(request):
             'item_number': item_number,
         }
 
-    return render(request, 'products/product_detail.html', context)
+    return render(request, 'products/edit_product.html', context)

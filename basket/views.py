@@ -27,6 +27,7 @@ def basket(request):
     this_product = ""
     baskets = ""
     basket_total = ""
+    servings = ""
 
     """ fetch the datasets from the models """
     categories = Category.objects.all()
@@ -117,7 +118,16 @@ def basket(request):
                 product = existing_basket.name
                 category = existing_basket.category
                 price = products.get(name=product).price
-                total_price = total_price = float(price) * float(servings) * float(discount)
+                if servings == "":
+                    servings = existing_basket.servings
+                    """ generate the discount variable """
+                    if float(servings) == 1:
+                        discount = 1
+                    else:
+                        discount = 1 - ((float(servings) * 2) / 100)
+                    total_price = total_price = float(price) * float(servings) * float(discount)
+                else:
+                    total_price = total_price = float(price) * float(servings) * float(discount)
 
                 """ filter the datasets on the variables from product_add """
                 this_product = products.filter(name=product)
@@ -126,7 +136,6 @@ def basket(request):
 
                 """ save the updated basket and delete the existing """
                 updated_basket = Basket(cookie=cookie,
-                                        item_number=item_number,
                                         category=category,
                                         name=product,
                                         servings=servings,
@@ -134,6 +143,7 @@ def basket(request):
                                         total_price=total_price)
                 updated_basket.save()
                 existing_basket.delete()
+                baskets = Basket.objects.filter(cookie=cookie)
 
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
                 baskets = Basket.objects.filter(cookie=cookie)
