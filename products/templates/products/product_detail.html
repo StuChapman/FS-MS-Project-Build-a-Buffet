@@ -128,7 +128,7 @@
                                             <div class="text-blue text-xs">
                                                 Update
                                             </div>
-                                            <form action="{% url 'basket' %}?product_edit={{ item_number }},{{ selected }}" method="post">
+                                            <form action="{% url 'basket' %}?product_edit={{ category }},{{ product }},{{ selected }},{{ item_number }}" method="post">
                                                 {% csrf_token %}
                                                 <div>
                                                     <input type="text" name="servings" id="servings" class="hidden" value="{{ servings }}">
@@ -170,7 +170,7 @@
         var slider = document.getElementById("myRange");
         var output = document.getElementById("demo");
         var servings = document.getElementById("servings");
-        var servingPrice = document.getElementById("serving-price").innerHTML.substring(1);
+        var servingPrice = document.getElementById("serving-price").innerHTML.trim().substr(1, 4);
         output.innerHTML = slider.value; // Display the default slider value
 
         // Update the current slider value (each time you drag the slider handle)

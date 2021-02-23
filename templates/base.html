@@ -60,7 +60,7 @@
                 </div>
                 <div>
                     <ul class="navbar-nav ml-auto align-vertically">
-                        {% if basket_total %}
+                        {% if basket_total != "" %}
                             <li class="nav-item"><a class="nav-link js-scroll-trigger text-center text-xs-nav basket" href="{% url 'basket' %}"><i class="fa fa-shopping-basket" aria-hidden="true"></i><br><span class=" text-xs-nav">£{{ basket_total.total_price__sum|floatformat:"2" }}</span></a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link js-scroll-trigger text-center text-xs-nav basket" href="{% url 'basket' %}"><i class="fa fa-shopping-basket" aria-hidden="true"></i><br><span class=" text-xs-nav">£0.00</span></a></li>

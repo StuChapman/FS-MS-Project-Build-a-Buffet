@@ -108,15 +108,25 @@ def basket(request):
 
             """ split the product_add variable into its components """
             product_edit_list = product_edit.split(',')
-            item_number = product_edit_list[0]
-            updated_selected = product_edit_list[1]
+            updated_selected = product_edit_list[2]
+            item_number = product_edit_list[3]
 
             """ check for existing basket(s) with the current cookie value """
             try:
                 existing_basket = Basket.objects.get(item_number=item_number)
+                product = existing_basket.name
+                category = existing_basket.category
+                price = products.get(name=product).price
+                total_price = total_price = float(price) * float(servings) * float(discount)
+
+                """ filter the datasets on the variables from product_add """
+                this_product = products.filter(name=product)
+                options = options.filter(category__in=categories)
+                """ Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html """
 
                 """ save the updated basket and delete the existing """
                 updated_basket = Basket(cookie=cookie,
+                                        item_number=item_number,
                                         category=category,
                                         name=product,
                                         servings=servings,
@@ -126,17 +136,7 @@ def basket(request):
                 existing_basket.delete()
 
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
-
-                """ if there is no existing basket, create a new one """
-                total_price = float(price) * float(servings) * float(discount)
-                basket = Basket(cookie=cookie,
-                                category=category,
-                                name=product,
-                                servings=servings,
-                                option=selected,
-                                total_price=total_price)
-                basket.save()
-            baskets = Basket.objects.filter(cookie=cookie)
+                baskets = Basket.objects.filter(cookie=cookie)
     else:
         baskets = Basket.objects.filter(cookie=cookie)
 
