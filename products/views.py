@@ -111,6 +111,7 @@ def edit_product(request):
             'options': options,
             'servings': servings,
             'edit': edit,
+            'item_number': item_number,
         }
 
     return render(request, 'products/product_detail.html', context)

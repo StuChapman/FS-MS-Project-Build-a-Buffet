@@ -37,24 +37,25 @@ def basket(request):
     if request.POST:
         if 'servings' in request.POST:
             servings = request.POST["servings"]
+            """ generate the discount variable """
             if float(servings) == 1:
                 discount = 1
             else:
                 discount = 1 - ((float(servings) * 2) / 100)
 
-    """ check for a product_options variable from the template """
     if request.GET:
-        if 'product_options' in request.GET:
-            product_options = request.GET['product_options']
 
-            """ split the product_options variable into its components """
-            product_options_list = product_options.split(',')
-            category = product_options_list[0]
-            product = product_options_list[1]
-            selected = product_options_list[2]
-            add_or_edit = product_options_list[3]
+        """ check for a product_add variable from the template """
+        if 'product_add' in request.GET:
+            product_add = request.GET['product_add']
 
-            """ filter the datasets on the variables from product_options """
+            """ split the product_add variable into its components """
+            product_add_list = product_add.split(',')
+            category = product_add_list[0]
+            product = product_add_list[1]
+            selected = product_add_list[2]
+
+            """ filter the datasets on the variables from product_add """
             this_product = products.filter(name=product)
             options = options.filter(category__in=categories)
             """ Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html """
@@ -68,49 +69,61 @@ def basket(request):
                                                      option=selected)
                 existing_servings = existing_basket.servings
 
-                """ check the add_or_edit variable for 'add' """
-                if add_or_edit == 'add':
-                    print('adding')
+                """ add the new servings variable to the existing """
+                updated_servings = existing_servings + int(servings)
 
-                    """ if add_or_edit is 'add' add the new servings variable to the existing """
-                    updated_servings = existing_servings + int(servings)
+                """ generate the discount variable """
+                if float(updated_servings) == 1:
+                    updated_discount = 1
+                else:
+                    updated_discount = 1 - ((float(updated_servings) * 2) / 100)
+                total_price = float(price) * float(updated_servings) * float(updated_discount)
 
-                    """ generate the discount variable """
-                    if float(updated_servings) == 1:
-                        updated_discount = 1
-                    else:
-                        updated_discount = 1 - ((float(updated_servings) * 2) / 100)
-                    total_price = float(price) * float(updated_servings) * float(updated_discount)
+                """ save the updated basket and delete the existing """
+                updated_basket = Basket(cookie=cookie,
+                                        category=category,
+                                        name=product,
+                                        servings=updated_servings,
+                                        option=selected,
+                                        total_price=total_price)
+                updated_basket.save()
+                existing_basket.delete()
 
-                    """ save the updated basket and delete the existing """
-                    updated_basket = Basket(cookie=cookie,
-                                            category=category,
-                                            name=product,
-                                            servings=updated_servings,
-                                            option=selected,
-                                            total_price=total_price)
-                    updated_basket.save()
-                    existing_basket.delete()
+            except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
 
-                """ check the add_or_edit variable for 'edit' """
-                if add_or_edit == 'edit':
+                """ if there is no existing basket, create a new one """
+                total_price = float(price) * float(servings) * float(discount)
+                basket = Basket(cookie=cookie,
+                                category=category,
+                                name=product,
+                                servings=servings,
+                                option=selected,
+                                total_price=total_price)
+                basket.save()
+            baskets = Basket.objects.filter(cookie=cookie)
 
-                    """ generate the discount variable """
-                    if float(updated_servings) == 1:
-                        updated_discount = 1
-                    else:
-                        updated_discount = 1 - ((float(updated_servings) * 2) / 100)
-                    total_price = float(price) * float(updated_servings) * float(updated_discount)
+        """ check for a product_edit variable from the template """
+        if 'product_edit' in request.GET:
+            product_edit = request.GET['product_edit']
 
-                    """ save the updated basket and delete the existing """
-                    updated_basket = Basket(cookie=cookie,
-                                            category=category,
-                                            name=product,
-                                            servings=servings,
-                                            option=selected,
-                                            total_price=total_price)
-                    updated_basket.save()
-                    existing_basket.delete()
+            """ split the product_add variable into its components """
+            product_edit_list = product_edit.split(',')
+            item_number = product_edit_list[0]
+            updated_selected = product_edit_list[1]
+
+            """ check for existing basket(s) with the current cookie value """
+            try:
+                existing_basket = Basket.objects.get(item_number=item_number)
+
+                """ save the updated basket and delete the existing """
+                updated_basket = Basket(cookie=cookie,
+                                        category=category,
+                                        name=product,
+                                        servings=servings,
+                                        option=updated_selected,
+                                        total_price=total_price)
+                updated_basket.save()
+                existing_basket.delete()
 
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
 

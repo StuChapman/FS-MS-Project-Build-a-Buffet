@@ -128,7 +128,7 @@
                                             <div class="text-blue text-xs">
                                                 Update
                                             </div>
-                                            <form action="{% url 'basket' %}?product_options={{ category }},{{ product }},{{ selected }},'edit'" method="post">
+                                            <form action="{% url 'basket' %}?product_edit={{ item_number }},{{ selected }}" method="post">
                                                 {% csrf_token %}
                                                 <div>
                                                     <input type="text" name="servings" id="servings" class="hidden" value="{{ servings }}">
@@ -141,7 +141,7 @@
                                             <div class="text-blue text-xs">
                                                 Add to
                                             </div>
-                                            <form action="{% url 'basket' %}?product_options={{ category }},{{ product }},{{ selected }},'add'" method="post">
+                                            <form action="{% url 'basket' %}?product_add={{ category }},{{ product }},{{ selected }}" method="post">
                                                 {% csrf_token %}
                                                 <div>
                                                     <input type="text" name="servings" id="servings" class="hidden" value="1">
