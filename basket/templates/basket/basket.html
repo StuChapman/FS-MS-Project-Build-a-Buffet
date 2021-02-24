@@ -64,10 +64,14 @@
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="product-container w-100 mt-0 text-center text-xl-left">
-                                <div class="product-text-three mx-auto flex-margin-b text-blue">The items below have been added to your basket...</div>
+                                {% if basket_total != "" %}
+                                    <div class="product-text-three mx-auto flex-margin-b text-blue">The items below have been added to your basket...</div>
+                                {% else %}
+                                    <div class="product-text-three mx-auto flex-margin-b text-blue">No items have been added to your basket...</div>
+                                {% endif %}
                                     {% for basket in baskets %}
                                         <div class="product-text-two mx-auto mb-2 text-blue bold">{{ basket.category.title }}: {{ basket.name }}</div>
-                                        {% for product in this_product %}
+                                        {% for product in products %}
                                             {% if product.name == basket.name %}
                                                 <div class="product-text-three mx-auto mb-2 text-blue">{{ product.description }}</div>
                                             {% endif %}
@@ -109,7 +113,8 @@
                                                 <a class="edit-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
                                                     href="{% url 'edit_product' %}?item_number={{ basket.item_number }}">{{ product.name }}
                                                     <i class="fas fa-edit" aria-hidden="true"></i> edit</a>
-                                                <a class="delete-button border-solid masthead-button btn btn-primary js-scroll-trigger" href="">
+                                                <a class="delete-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
+                                                    href="{% url 'delete_basket_item' %}?delete_item={{ basket.item_number }}">
                                                     <i class="fas fa-trash-alt" aria-hidden="true"></i> remove</a>
                                             </div>
                                         </div>
@@ -117,7 +122,11 @@
                                     {% endfor %}
                                     <div class="col-12 col-lg-4 my-auto">
                                         <div class="product-text-two mx-auto mb-2 text-blue bold">Basket Total</div>
-                                        <div class="product-text-header bold">£{{ basket_total.total_price__sum|floatformat:"2" }}</div>
+                                        {% if basket_total != "" %}
+                                            <div class="product-text-header bold">£{{ basket_total.total_price__sum|floatformat:"2" }}</div>
+                                        {% else %}
+                                            <div class="product-text-header bold">£0.00</div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

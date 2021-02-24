@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.conf import settings
+from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
 
@@ -147,7 +146,47 @@ def basket(request):
             'options': options,
             'selected': selected,
             'baskets': baskets,
-            'basket_total': basket_total
+            'basket_total': basket_total,
+        }
+
+    return render(request, 'basket/basket.html', context)
+
+
+def delete_basket_item(request):
+    """ A view to delete an item from the current basket """
+
+    """ check for a basket cookie """
+    context_items = basket_context(request)
+    basket_total = context_items['basket_total']
+    cookie = context_items['cookie']
+
+    products = Product.objects.all()
+    options = Options.objects.all()
+    baskets = Basket.objects.all()
+
+    if request.GET:
+        """ check for a delete_item variable from the template """
+        if 'delete_item' in request.GET:
+            item_number = request.GET['delete_item']
+            this_item = baskets.get(item_number=item_number)
+            product = this_item.name
+            category = this_item.category
+            this_item.delete()
+
+    baskets = Basket.objects.filter(cookie=cookie)
+    baskets = baskets.order_by('-item_number')
+
+    basket_total = Basket.objects.filter(cookie=cookie).aggregate(Sum('total_price'))
+    if basket_total['total_price__sum'] is None:
+        basket_total = ""
+
+    context = {
+            'category': category,
+            'product': product,
+            'products': products,
+            'options': options,
+            'baskets': baskets,
+            'basket_total': basket_total,
         }
 
     return render(request, 'basket/basket.html', context)
