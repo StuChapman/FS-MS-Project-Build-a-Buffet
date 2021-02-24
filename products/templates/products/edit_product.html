@@ -97,7 +97,7 @@
                                     <div class="col-12 mt-3 slidecontainer">
                                         <div class="text-blue text-xs mb-2">Select number of servings ...</div>
                                         {% if servings %}
-                                            <input type="range" min="1" max="10" value="{{ servings }}" class="slider" id="myRange">
+                                            <input type="range" min="1" max="{{ servings_plusten }}" value="{{ servings }}" class="slider" id="myRange">
                                         {% else %}
                                             <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
                                         {% endif %}
@@ -119,7 +119,7 @@
                                                 Total price
                                             </div>
                                             <div id="total-price" class="price-button border-solid js-scroll-trigger flex-margin-b bold">
-                                                £{{ product.price }}
+                                                £{{ total_price }}
                                             </div>
                                         {% endfor %}
                                     </div>
@@ -161,12 +161,7 @@
         // Update the current slider value (each time you drag the slider handle)
         slider.oninput = function() {
         var multiplier = this.value;
-        if (multiplier == 1) {
-            var discount = 1
-        } else {
-            var discount = 1 - ((multiplier * 2) / 100);
-        }
-        var totalPrice = (servingPrice * multiplier * discount).toFixed(2)
+        var totalPrice = (servingPrice * multiplier).toFixed(2)
         output.innerHTML = multiplier;
         servings.value = multiplier;
         $('#total-price').text("£" + totalPrice);

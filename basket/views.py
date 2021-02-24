@@ -38,11 +38,6 @@ def basket(request):
     if request.POST:
         if 'servings' in request.POST:
             servings = request.POST["servings"]
-            """ generate the discount variable """
-            if float(servings) == 1:
-                discount = 1
-            else:
-                discount = 1 - ((float(servings) * 2) / 100)
 
     if request.GET:
 
@@ -73,12 +68,7 @@ def basket(request):
                 """ add the new servings variable to the existing """
                 updated_servings = existing_servings + int(servings)
 
-                """ generate the discount variable """
-                if float(updated_servings) == 1:
-                    updated_discount = 1
-                else:
-                    updated_discount = 1 - ((float(updated_servings) * 2) / 100)
-                total_price = float(price) * float(updated_servings) * float(updated_discount)
+                total_price = float(price) * float(updated_servings)
 
                 """ save the updated basket and delete the existing """
                 updated_basket = Basket(cookie=cookie,
@@ -93,7 +83,7 @@ def basket(request):
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
 
                 """ if there is no existing basket, create a new one """
-                total_price = float(price) * float(servings) * float(discount)
+                total_price = float(price) * float(servings)
                 basket = Basket(cookie=cookie,
                                 category=category,
                                 name=product,
@@ -102,6 +92,7 @@ def basket(request):
                                 total_price=total_price)
                 basket.save()
             baskets = Basket.objects.filter(cookie=cookie)
+            baskets = baskets.order_by('-item_number')
 
         """ check for a product_edit variable from the template """
         if 'product_edit' in request.GET:
@@ -120,14 +111,9 @@ def basket(request):
                 price = products.get(name=product).price
                 if servings == "":
                     servings = existing_basket.servings
-                    """ generate the discount variable """
-                    if float(servings) == 1:
-                        discount = 1
-                    else:
-                        discount = 1 - ((float(servings) * 2) / 100)
-                    total_price = total_price = float(price) * float(servings) * float(discount)
+                    total_price = total_price = float(price) * float(servings)
                 else:
-                    total_price = total_price = float(price) * float(servings) * float(discount)
+                    total_price = total_price = float(price) * float(servings)
 
                 """ filter the datasets on the variables from product_add """
                 this_product = products.filter(name=product)
