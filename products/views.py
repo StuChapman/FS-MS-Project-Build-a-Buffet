@@ -2,12 +2,17 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 from .models import Product, Category, Options
 from basket.models import Basket
+from basket.contexts import basket_context
 
 # Create your views here.
 
 
 def products(request):
     """ A view to show and filter products """
+
+    """ check for a basket cookie """
+    context_items = basket_context(request)
+    basket_total = context_items['basket_total']
 
     category = ""
     range = ""
@@ -34,6 +39,7 @@ def products(request):
             'category': category,
             'range': range,
             'image': image,
+            'basket_total': basket_total
         }
 
     return render(request, 'products/products.html', context)
@@ -42,12 +48,15 @@ def products(request):
 def product_detail(request):
     """ A view to show product options """
 
+    """ check for a basket cookie """
+    context_items = basket_context(request)
+    basket_total = context_items['basket_total']
+
     category = ""
     products = ""
     selected = ""
     image = ""
     options = ""
-    item_number = ""
 
     categories = Category.objects.all()
     products = Product.objects.all()
@@ -70,7 +79,8 @@ def product_detail(request):
                     'product': product,
                     'selected': selected,
                     'image': image,
-                    'options': options,            
+                    'options': options,
+                    'basket_total': basket_total
                 }
 
     return render(request, 'products/product_detail.html', context)
@@ -78,6 +88,10 @@ def product_detail(request):
 
 def edit_product(request):
     """ A view to edit basket items """
+
+    """ check for a basket cookie """
+    context_items = basket_context(request)
+    basket_total = context_items['basket_total']
 
     category = ""
     products = ""
@@ -125,6 +139,7 @@ def edit_product(request):
             'item_number': item_number,
             'servings_plusten': servings_plusten,
             'edit': edit,
+            'basket_total': basket_total
         }
 
     return render(request, 'products/edit_product.html', context)

@@ -5,6 +5,7 @@ from django.db.models import Sum
 
 from products.models import Product, Category, Options
 from basket.models import Basket
+from basket.contexts import basket_context
 
 # Create your views here.
 
@@ -12,13 +13,9 @@ from basket.models import Basket
 def basket(request):
     """ A view to show the current basket """
 
-    cookie_key = settings.COOKIE_KEY
-
     """ check for a basket cookie """
-    try:
-        cookie = request.COOKIES[cookie_key]
-    except KeyError:
-        return render(request, 'basket/basket.html')
+    context_items = basket_context(request)
+    cookie = context_items['cookie']
 
     """ set all the variables to blank """
     category = ""
