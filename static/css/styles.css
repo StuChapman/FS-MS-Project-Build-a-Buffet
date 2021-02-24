@@ -10368,7 +10368,6 @@ body {
     opacity: 0.5;
 }
 .delete-button, .edit-button  {
-    background-color: #EA7276 !important;
     height: 50%;
     width: 75% !important;
     margin: 2px 0;
@@ -10580,5 +10579,10 @@ body {
 @media (min-width: 1199px) {
     .products-section .product-container {
         padding: 0rem 2.5rem;
+    }
+}
+@media (max-width: 443px) {
+    .delete-button, .edit-button  {
+        width: 100% !important;
     }
 }
