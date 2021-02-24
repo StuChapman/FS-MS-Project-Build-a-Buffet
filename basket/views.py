@@ -144,11 +144,16 @@ def basket(request):
                 updated_basket.save()
                 existing_basket.delete()
                 baskets = Basket.objects.filter(cookie=cookie)
+                # Credit: https://stackoverflow.com/questions/8786175/django-order-by-on-queryset-objects
+                # Credit: https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending
+                baskets = baskets.order_by('-item_number')
 
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
                 baskets = Basket.objects.filter(cookie=cookie)
+                baskets = baskets.order_by('-item_number')
     else:
         baskets = Basket.objects.filter(cookie=cookie)
+        baskets = baskets.order_by('-item_number')
 
     # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
     basket_total = Basket.objects.filter(cookie=cookie).aggregate(Sum('total_price'))

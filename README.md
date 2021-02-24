@@ -227,6 +227,7 @@ I deployed to Github Pages by the following steps:
 9.  Get a single objects value is from [http://morozov.ca](http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html)
 10. Using aggregate and dict is from [stackoverflow.com](https://stackoverflow.com/questions/42132091/using-aggregation-api-django)
 11. Django model.AutoField is from [www.fullstackpython.com](https://www.fullstackpython.com/django-db-models-autofield-examples.html)
+12. Order by ascending and descending is from [stackoverflow.com](https://stackoverflow.com/questions/8786175/django-order-by-on-queryset-objects) and [stackoverflow.com](https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending)
 
 ### Media
 
