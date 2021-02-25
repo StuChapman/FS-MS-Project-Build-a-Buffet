@@ -10512,7 +10512,7 @@ body {
         display: none;
     }
     .product-selected, .product-unselected, .price-button, .delete-button, .edit-button, .checkout-button {
-        font-size: calc(8px + (42 - 8) * ((100vw - 300px) / 1620));
+        font-size: calc(7px + (42 - 7) * ((100vw - 300px) / 1620));
     }
     .product-container {
         margin-top: 1rem !important;
@@ -10590,7 +10590,6 @@ body {
         width: 100% !important;
     }
     .checkout-button {
-        padding-top: 0.75rem !important;
-        padding-bottom: 0.75rem !important;
+        padding: 0.75rem 0 !important;
     }
 }

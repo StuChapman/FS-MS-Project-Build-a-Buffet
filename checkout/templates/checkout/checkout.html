@@ -16,89 +16,166 @@
             <!-- Produce One Row-->
             <div class="row justify-content-center no-gutters">
                 <div class="col-xl-12">
-                    <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Basket</h1>
+                    <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Checkout</h1>
                 </div>
-                <div class="col-xl-6">
-                    <img class="img-fluid image-70" src="/media/assets/img/pexels-armand-m-3043328.jpg" alt="shopping basket" /></div>
-                <div class="col-xl-6">
+                <div class="col-12 col-lg-6 order-lg-last">
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="product-container w-100 mt-0 text-center text-xl-left">
-                                {% if basket_total.total_price__sum != None %}
-                                    <div class="product-text-three mx-auto flex-margin-b text-blue">The items below have been added to your basket...</div>
+                                {% if basket_total %}
+                                    <div class="product-text-three mx-auto flex-margin-b text-blue">
+                                        The items below have been added to your basket...
+                                    </div>
                                 {% else %}
-                                    <div class="product-text-three mx-auto flex-margin-b text-blue">Your basket is empty.</div>
+                                    <div class="product-text-three mx-auto flex-margin-b text-blue">
+                                        Your basket is empty.
+                                    </div>
                                 {% endif %}
                                     {% for basket in baskets %}
-                                        <div class="product-text-two mx-auto mb-2 text-blue bold">{{ basket.category.title }}: {{ basket.name }}</div>
+                                        <div class="product-text-two mx-auto mb-2 text-blue bold">
+                                            {{ basket.category.title }}: {{ basket.name }}
+                                        </div>
                                         {% for product in products %}
                                             {% if product.name == basket.name %}
-                                                <div class="product-text-three mx-auto mb-2 text-blue">{{ product.description }}</div>
+                                                <div class="product-text-three mx-auto mb-2 text-blue">
+                                                    {{ product.description }}
+                                                </div>
                                             {% endif %}
                                         {% endfor %}
                                         <div class="text-blue text-xs mb-2">With this option ...
                                             {% if basket.option == "selected-one" %}
                                                 {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option1.title }}</span>
+                                                    <span class="text-blue product-text-two mb-2 bold">
+                                                        {{ option.option1.title }}
+                                                    </span>
                                                 {% endfor %}
                                             {% endif %}
                                             {% if basket.option == "selected-two" %}
                                                 {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option2.title }}</span>
+                                                    <span class="text-blue product-text-two mb-2 bold">
+                                                        {{ option.option2.title }}
+                                                    </span>
                                                 {% endfor %}
                                             {% endif %}
                                             {% if basket.option == "selected-three" %}
                                                 {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option3.title }}</span>
+                                                    <span class="text-blue product-text-two mb-2 bold">
+                                                        {{ option.option3.title }}
+                                                    </span>
                                                 {% endfor %}
                                             {% endif %}
                                         </div>
                                         <div class="text-blue text-xs mb-4">Number of servings ...
-                                            <span id="servings" class="text-blue product-text-two mb-2 bold">{{ basket.servings }}</span>
+                                            <span id="servings" class="text-blue product-text-two mb-2 bold">
+                                                {{ basket.servings }}
+                                            </span>
                                         </div>
                                         <div class="row">
-                                            <div class="col-4 my-auto">
+                                            <div class="col-6 my-auto">
                                                 {% for product in products %}
                                                     {% if product.name == basket.name %}
-                                                        <div class="text-blue text-xs">per serving</div>
-                                                        <div class="product-text-two mt-1">£{{ product.price }}</div>
+                                                        <div class="text-blue text-xs">
+                                                            per serving
+                                                        </div>
+                                                        <div class="product-text-two mt-1">
+                                                            £{{ product.price }}
+                                                        </div>
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
-                                            <div class="col-4 my-auto">
-                                                <div class="text-blue text-xs">Total price</div>
-                                                <div class="product-text-header bold">£{{ basket.total_price }}</div>
-                                            </div>
-                                            <div class="col-4 my-auto py-auto">
-                                                <a class="edit-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
-                                                    href="{% url 'edit_product' %}?item_number={{ basket.item_number }}">{{ product.name }}
-                                                    <i class="fas fa-edit" aria-hidden="true"></i> edit</a>
-                                                <a class="delete-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
-                                                    href="{% url 'delete_basket_item' %}?delete_item={{ basket.item_number }}">
-                                                    <i class="fas fa-trash-alt" aria-hidden="true"></i> remove</a>
+                                            <div class="col-6 my-auto">
+                                                <div class="text-blue text-xs">
+                                                    Total price
+                                                </div>
+                                                <div class="product-text-header bold">
+                                                    £{{ basket.total_price }}
+                                                </div>
                                             </div>
                                         </div>
                                         <hr>
                                     {% endfor %}
-                                    <div class="col-12 col-lg-4 my-auto">
-                                        <div class="product-text-two mx-auto mb-2 text-blue bold">Basket Total</div>
+                                    <div class="col-12 col-lg-4 my-auto pl-0">
+                                        <div class="product-text-two mx-auto mb-2 text-blue bold">
+                                            Basket Total
+                                        </div>
                                         {% if basket_total.total_price__sum != None %}
-                                            <div class="product-text-header bold">£{{ basket_total.total_price__sum|floatformat:"2" }}</div>
+                                            <div class="product-text-header bold">
+                                                £{{ basket_total.total_price__sum|floatformat:"2" }}
+                                            </div>
                                         {% else %}
-                                            <div class="product-text-header bold">£0.00</div>
+                                            <div class="product-text-header bold">
+                                                £0.00
+                                            </div>
                                         {% endif %}
-                                    <div class="col-12 col-lg-4 my-auto">
-                                        <a class="edit-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
-                                            href="{% url 'checkout' %}?item_number={{ basket.cookie }}">
-                                            <i class="fa fa-shopping-basket" aria-hidden="true"></i> edit</a>
                                     </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-12 col-lg-6">
+                    <p class="text-muted">Please fill out the form below to complete your order</p>
+                    <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                        {% csrf_token %}
+                        <fieldset class="rounded px-3 mb-5">
+                            <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
+                            {{ order_form.full_name }}
+                            {{ order_form.email }}
+                        </fieldset>
+                        <fieldset class="rounded px-3 mb-5">
+                            <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
+                            {{ order_form.phone_number }}
+                            {{ order_form.street_address1 }}
+                            {{ order_form.street_address2 }}
+                            {{ order_form.town_or_city }}
+                            {{ order_form.county }}
+                            {{ order_form.postcode }}
+                            {{ order_form.country }}
+                            <div class="form-check form-check-inline float-right mr-0">
+                                {% if user.is_authenticated %}
+                                    <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                                    <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                                {% else %}
+                                    <label class="form-check-label" for="id-save-info">
+                                        <a class="text-info" href="">Create an account</a> or 
+                                        <a class="text-info" href="">login</a> to save this information
+                                    </label>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                        <fieldset class="px-3">
+                            <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                            <!-- A Stripe card element will go here -->
+                            <div class="mb-3" id="card-element"></div>
+                            <!-- Used to display form errors -->
+                            <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                            <!-- Pass the client secret to the view so we can get the payment intent id -->
+                            <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                        </fieldset>
+
+                        <div class="submit-button text-right mt-5 mb-2">                    
+                            <a href="{% url 'basket' %}" class="btn btn-outline-black rounded-0">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="font-weight-bold">Adjust Bag</span>
+                            </a>
+                            <button id="submit-button" class="btn btn-black rounded-0">
+                                <span class="font-weight-bold">Complete Order</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </button>
+                            <p class="small text-danger my-0">
+                                <span class="icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </span>
+                                <span>Your card will be charged <strong>${{ basket_total.total_price__sum|floatformat:"2" }}</strong></span>
+                            </p>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
     </section>
 {% endblock %}
 
