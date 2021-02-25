@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block preloadjs %}
-{% endblock %}
-
 {% block page_header %}
     <div class="container header-container">
         <div class="row">
@@ -30,7 +27,7 @@
                                 {% if basket_total.total_price__sum != None %}
                                     <div class="product-text-three mx-auto flex-margin-b text-blue">The items below have been added to your basket...</div>
                                 {% else %}
-                                    <div class="product-text-three mx-auto flex-margin-b text-blue">No items have been added to your basket...</div>
+                                    <div class="product-text-three mx-auto flex-margin-b text-blue">Your basket is empty.</div>
                                 {% endif %}
                                     {% for basket in baskets %}
                                         <div class="product-text-two mx-auto mb-2 text-blue bold">{{ basket.category.title }}: {{ basket.name }}</div>
