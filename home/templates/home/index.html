@@ -100,7 +100,7 @@
 {% block postloadjs %}
     <script>
         var basketCookie = '{{ cookie_key }}'; // Credit: https://stackoverflow.com/questions/8683922/how-can-i-pass-my-context-variables-to-a-javascript-file-in-django
-
+        console.log(basketCookie)
          // Credit: https://www.w3schools.com/js/js_cookies.asp
         function setCookie(cname,cvalue,exdays) {
             var d = new Date();

@@ -15,6 +15,7 @@ def basket(request):
     """ check for a basket cookie """
     context_items = basket_context(request)
     cookie = context_items['cookie']
+    cookie_key = context_items['cookie_key']
 
     """ set all the variables to blank """
     category = ""
@@ -146,6 +147,7 @@ def basket(request):
             'options': options,
             'selected': selected,
             'baskets': baskets,
+            'cookie_key': cookie_key,
             'basket_total': basket_total,
         }
 
@@ -186,6 +188,7 @@ def delete_basket_item(request):
             'products': products,
             'options': options,
             'baskets': baskets,
+            'cookie_key': cookie_key,
             'basket_total': basket_total,
         }
 

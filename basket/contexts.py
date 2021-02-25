@@ -16,9 +16,11 @@ def basket_context(request):
             basket_total = ""
     except KeyError:
         basket_total = ""
+        cookie = 1
 
     context = {
             'cookie': cookie,
+            'cookie_key': cookie_key,
             'basket_total': basket_total
         }
 
