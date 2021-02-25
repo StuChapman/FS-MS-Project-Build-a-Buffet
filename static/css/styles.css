@@ -10444,10 +10444,14 @@ body {
     background-color: white;
     color: #303F3F;
 }
-    .delete-button, .edit-button, .checkout-button {
-        padding-top: 0.5rem !important;
-        padding-bottom: 0.5rem !important;
-    }
+.delete-button, .edit-button {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+.checkout-button {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
 
 /* general styling */
 
@@ -10584,5 +10588,9 @@ body {
 @media (max-width: 443px) {
     .delete-button, .edit-button, .checkout-button  {
         width: 100% !important;
+    }
+    .checkout-button {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
     }
 }
