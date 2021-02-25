@@ -71,7 +71,7 @@
                                             </div>
                                             <div class="col-4 my-auto py-auto">
                                                 <a class="edit-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
-                                                    href="{% url 'edit_product' %}?item_number={{ basket.item_number }}">
+                                                    href="{% url 'edit_product' %}?item_number={{ basket.item_number }}">{{ product.name }}
                                                     <i class="fas fa-edit" aria-hidden="true"></i> edit</a>
                                                 <a class="delete-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
                                                     href="{% url 'delete_basket_item' %}?delete_item={{ basket.item_number }}">
@@ -80,22 +80,18 @@
                                         </div>
                                         <hr>
                                     {% endfor %}
-                                    <div class="row">
-                                        <div class="col-4 my-auto">
-                                            <div class="product-text-two mx-auto mb-2 text-blue bold">Basket Total</div>
-                                            {% if basket_total.total_price__sum != None %}
-                                                <div class="product-text-header bold">£{{ basket_total.total_price__sum|floatformat:"2" }}</div>
-                                            {% else %}
-                                                <div class="product-text-header bold">£0.00</div>
-                                            {% endif %}
-                                        </div>
-                                        <div class="col-4 my-auto">
-                                        </div>
-                                        <div class="col-4 my-auto">
-                                            <a class="checkout-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
-                                                href="">
-                                                <i class="fa fa-shopping-basket" aria-hidden="true"></i> checkout</a>
-                                        </div>
+                                    <div class="col-12 col-lg-4 my-auto">
+                                        <div class="product-text-two mx-auto mb-2 text-blue bold">Basket Total</div>
+                                        {% if basket_total.total_price__sum != None %}
+                                            <div class="product-text-header bold">£{{ basket_total.total_price__sum|floatformat:"2" }}</div>
+                                        {% else %}
+                                            <div class="product-text-header bold">£0.00</div>
+                                        {% endif %}
+                                    <div class="col-12 col-lg-4 my-auto">
+                                        <a class="edit-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
+                                            href="{% url 'checkout' %}?item_number={{ basket.cookie }}">
+                                            <i class="fa fa-shopping-basket" aria-hidden="true"></i> edit</a>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

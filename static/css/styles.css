@@ -10361,15 +10361,15 @@ body {
     background-color: #426765;
 }
 
-.product-selected, .product-unselected, .delete-button, .edit-button {
+.product-selected, .product-unselected, .delete-button, .edit-button, .checkout-button {
     text-align: center;
 }
 .product-unselected {
     opacity: 0.5;
 }
-.delete-button, .edit-button  {
+.delete-button, .edit-button, .checkout-button  {
     height: 50%;
-    width: 75% !important;
+    width: 90% !important;
     margin: 2px 0;
 }
 .delete-button {
@@ -10429,14 +10429,14 @@ body {
   color: #303F3F;
 }
 
-.product-selected, .product-unselected, .price-button, .delete-button, .edit-button {
+.product-selected, .product-unselected, .price-button, .delete-button, .edit-button, .checkout-button {
     width: 100%;
 }
 .product-selected:hover, .product-unselected:hover {
     background-color: #639692;
 }
-.delete-button:hover, .edit-button:hover {
-    background-color: green;
+.delete-button:hover, .edit-button:hover, .checkout-button:hover {
+    opacity: 0.7;
 }
 .price-button {
     max-height: 20vh;
@@ -10444,7 +10444,7 @@ body {
     background-color: white;
     color: #303F3F;
 }
-    .delete-button, .edit-button {
+    .delete-button, .edit-button, .checkout-button {
         padding-top: 0.5rem !important;
         padding-bottom: 0.5rem !important;
     }
@@ -10507,7 +10507,7 @@ body {
     .navbar-brand-vis {
         display: none;
     }
-    .product-selected, .product-unselected, .price-button, .delete-button, .edit-button {
+    .product-selected, .product-unselected, .price-button, .delete-button, .edit-button, .checkout-button {
         font-size: calc(8px + (42 - 8) * ((100vw - 300px) / 1620));
     }
     .product-container {
@@ -10550,7 +10550,7 @@ body {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
     }
-    .delete-button, .edit-button {
+    .delete-button, .edit-button, .checkout-button {
         font-size: calc(8px + (20 - 8) * ((100vw - 300px) / 1620));
     }
     .projects-section .project-container hr, .products-section .product-container {
@@ -10582,7 +10582,7 @@ body {
     }
 }
 @media (max-width: 443px) {
-    .delete-button, .edit-button  {
+    .delete-button, .edit-button, .checkout-button  {
         width: 100% !important;
     }
 }
