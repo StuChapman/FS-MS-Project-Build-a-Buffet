@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-12 mt-3 slidecontainer">
                                         <div class="text-blue text-xs mb-2">Select number of servings ...</div>
-                                        {% if servings %}
+                                        {% if servings_plusten %}
                                             <input type="range" min="1" max="{{ servings_plusten }}" value="{{ servings }}" class="slider" id="myRange">
                                         {% else %}
                                             <input type="range" min="1" max="10" value="1" class="slider" id="myRange">

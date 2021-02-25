@@ -97,6 +97,7 @@ def product_detail(request):
             selected = product_edit_list[2]
             item_number = product_edit_list[3]
             servings = product_edit_list[4]
+            servings_plusten = float(servings) + 10
             products = products.filter(name=product)
             image = categories.filter(name=category)
             options = options.filter(category__in=categories)
@@ -110,6 +111,7 @@ def product_detail(request):
                     'options': options,
                     'servings': servings,
                     'item_number': item_number,
+                    'servings_plusten': servings_plusten,
                     'cookie_key': cookie_key,
                     'basket_total': basket_total,
                 }
@@ -158,7 +160,6 @@ def edit_product(request):
             total_price = float(servings) * float(price)
             # Credit: https://tutorialdeep.com/knowhow/limit-float-to-two-decimal-places-python/
             total_price = format(float(total_price), '.2f')
-            print(total_price)
 
     context = {
             'products': products,

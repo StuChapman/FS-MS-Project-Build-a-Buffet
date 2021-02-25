@@ -12,7 +12,7 @@ class Basket(models.Model):
                                    primary_key=True)
     category = models.CharField(max_length=254)
     name = models.CharField(max_length=254)
-    servings = models.DecimalField(max_digits=2, decimal_places=0)
+    servings = models.DecimalField(max_digits=3, decimal_places=0)
     option = models.CharField(max_length=254)
     total_price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
 
