@@ -13,6 +13,7 @@ def products(request):
     """ check for a basket cookie """
     context_items = basket_context(request)
     basket_total = context_items['basket_total']
+    cookie_key = context_items['cookie_key']
 
     category = ""
     range = ""
@@ -39,6 +40,7 @@ def products(request):
             'category': category,
             'range': range,
             'image': image,
+            'cookie_key': cookie_key,
             'basket_total': basket_total
         }
 
@@ -51,6 +53,7 @@ def product_detail(request):
     """ check for a basket cookie """
     context_items = basket_context(request)
     basket_total = context_items['basket_total']
+    cookie_key = context_items['cookie_key']
 
     category = ""
     products = ""
@@ -80,6 +83,7 @@ def product_detail(request):
                     'selected': selected,
                     'image': image,
                     'options': options,
+                    'cookie_key': cookie_key,
                     'basket_total': basket_total,
                 }
 
@@ -106,6 +110,7 @@ def product_detail(request):
                     'options': options,
                     'servings': servings,
                     'item_number': item_number,
+                    'cookie_key': cookie_key,
                     'basket_total': basket_total,
                 }
 
@@ -119,6 +124,7 @@ def edit_product(request):
     """ check for a basket cookie """
     context_items = basket_context(request)
     basket_total = context_items['basket_total']
+    cookie_key = context_items['cookie_key']
 
     category = ""
     products = ""
@@ -166,6 +172,7 @@ def edit_product(request):
             'item_number': item_number,
             'servings_plusten': servings_plusten,
             'edit': edit,
+            'cookie_key': cookie_key,
             'basket_total': basket_total,
         }
 

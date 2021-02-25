@@ -44,11 +44,47 @@
     {% endblock %}
 
     {% block preloadjs %}
+    <script>
+        var basketCookie = '{{ cookie_key }}'; // Credit: https://stackoverflow.com/questions/8683922/how-can-i-pass-my-context-variables-to-a-javascript-file-in-django
+        console.log(basketCookie)
+         // Credit: https://www.w3schools.com/js/js_cookies.asp
+        function setCookie(cname,cvalue,exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function createCookie() {
+            var existing = getCookie(basketCookie);
+            if (existing != "" && existing != null) {
+                return;
+            } else {
+                var cookieValue = (Math.random()*100000000).toFixed(0);
+                setCookie(basketCookie, cookieValue, 365);
+            }
+        }
+    </script>
     {% endblock %}
 
     <title>Build-a-Buffet{% block extra_title %}{% endblock %}</title>
   </head>
-  <body id="page-top">
+  <body id="page-top" onload="createCookie()">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
@@ -60,7 +96,7 @@
                 </div>
                 <div>
                     <ul class="navbar-nav ml-auto align-vertically">
-                        {% if basket_total != "" %}
+                        {% if basket_total.total_price__sum != None %}
                             <li class="nav-item"><a class="nav-link js-scroll-trigger text-center text-xs-nav basket" href="{% url 'basket' %}"><i class="fa fa-shopping-basket" aria-hidden="true"></i><br><span class=" text-xs-nav">£{{ basket_total.total_price__sum|floatformat:"2" }}</span></a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link js-scroll-trigger text-center text-xs-nav basket" href="{% url 'basket' %}"><i class="fa fa-shopping-basket" aria-hidden="true"></i><br><span class=" text-xs-nav">£0.00</span></a></li>

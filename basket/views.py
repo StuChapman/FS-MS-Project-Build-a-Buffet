@@ -161,6 +161,7 @@ def delete_basket_item(request):
     context_items = basket_context(request)
     basket_total = context_items['basket_total']
     cookie = context_items['cookie']
+    cookie_key = context_items['cookie_key']
 
     products = Product.objects.all()
     options = Options.objects.all()
