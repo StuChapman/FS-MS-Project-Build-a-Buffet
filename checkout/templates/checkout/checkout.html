@@ -22,7 +22,7 @@
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="product-container w-100 mt-0 text-center text-xl-left">
-                                {% if basket_total %}
+                                {% if basket_total.total_price__sum != None  %}
                                     <div class="product-text-three mx-auto flex-margin-b text-blue">
                                         The items below have been added to your basket...
                                     </div>
@@ -87,7 +87,7 @@
                                                 <div class="text-blue text-xs">
                                                     Total price
                                                 </div>
-                                                <div class="product-text-header bold">
+                                                <div class="product-text-two bold">
                                                     £{{ basket.total_price }}
                                                 </div>
                                             </div>
@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <p class="text-muted">Please fill out the form below to complete your order</p>
+                    <p class="text-muted text-center">Please fill out the form below to complete your order</p>
                     <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                         {% csrf_token %}
                         <fieldset class="rounded px-3 mb-5">
@@ -136,8 +136,8 @@
                                     <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
                                 {% else %}
                                     <label class="form-check-label" for="id-save-info">
-                                        <a class="text-info" href="">Create an account</a> or 
-                                        <a class="text-info" href="">login</a> to save this information
+                                        <a class="text-blue" href="">Create an account</a> or 
+                                        <a class="text-blue" href="">login</a> to save this information
                                     </label>
                                 {% endif %}
                             </div>
@@ -153,11 +153,13 @@
                         </fieldset>
 
                         <div class="submit-button text-right mt-5 mb-2">                    
-                            <a href="{% url 'basket' %}" class="btn btn-outline-black rounded-0">
+                            <a href="{% url 'basket' %}" class="btn bg-blue text-white rounded-0">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
-                                <span class="font-weight-bold">Return to Basket</span>
+                                <span class="font-weight-bold">Return to Basket
+                                    <i class="fa fa-shopping-basket"></i>
+                                </span>
                             </a>
                             <button id="submit-button" class="btn btn-black rounded-0">
                                 <span class="font-weight-bold">Complete Order</span>

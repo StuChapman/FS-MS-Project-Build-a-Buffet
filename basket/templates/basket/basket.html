@@ -92,9 +92,11 @@
                                         <div class="col-4 my-auto">
                                         </div>
                                         <div class="col-4 my-auto">
-                                            <a class="checkout-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
-                                                href="{% url 'checkout' %}?basket_number={{ cookie }}">
-                                                <i class="fa fa-shopping-basket" aria-hidden="true"></i> checkout</a>
+                                            {% if basket_total.total_price__sum != None  %}
+                                                <a class="checkout-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
+                                                    href="{% url 'checkout' %}?basket_number={{ cookie }}">
+                                                    <i class="fa fa-shopping-basket" aria-hidden="true"></i> checkout</a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
