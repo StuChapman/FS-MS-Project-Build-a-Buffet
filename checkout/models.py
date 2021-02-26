@@ -32,6 +32,10 @@ class Order(models.Model):
 
 
 class Order_items(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Order_items'
+
     cookie = models.DecimalField(max_digits=8, decimal_places=0)
     item_number = models.DecimalField(max_digits=9999, decimal_places=0)
     category = models.CharField(max_length=254)

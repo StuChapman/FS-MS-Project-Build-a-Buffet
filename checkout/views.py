@@ -15,6 +15,7 @@ def checkout(request):
 
     """ check for a basket cookie """
     context_items = basket_context(request)
+    cookie = context_items['cookie']
     basket_total = context_items['basket_total']
     cookie_key = context_items['cookie_key']
 
@@ -33,6 +34,7 @@ def checkout(request):
             baskets = baskets.order_by('-item_number')
 
     context = {
+            'cookie': cookie,
             'cookie_key': cookie_key,
             'basket_total': basket_total,
             'baskets': baskets,
@@ -64,12 +66,15 @@ def create_order(request):
     options = Options.objects.all()
 
     """ check for the basket items from checkout """
-    if request.GET:
-        if 'basket_number' in request.GET:
-            basket_number = request.GET['basket_number']
-            baskets = basket.filter(cookie=basket_number)
-            baskets = baskets.order_by('-item_number')
-
+    if request.POST:
+        print('POST')
+        form_data = {
+            'basket_number': request.POST['basket_number'],
+        }
+        print(basket_number)
+        if 'basket_number' in request.POST:
+            cookie = request.POST['basket_number']
+            print(cookie)
 
     context = {
             'cookie_key': cookie_key,
