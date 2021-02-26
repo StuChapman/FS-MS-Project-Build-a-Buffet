@@ -11,6 +11,8 @@ from .forms import OrderForm
 def checkout(request):
     """ A view to return the checkout page """
 
+    order_form = OrderForm()
+
     """ check for a basket cookie """
     context_items = basket_context(request)
     basket_total = context_items['basket_total']
@@ -37,6 +39,7 @@ def checkout(request):
             'products': products,
             'categories': categories,
             'options': options,
+            'order_form': order_form,
         }
 
     return render(request, 'checkout/checkout.html', context)
