@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order
+from .models import Order, Order_items
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -10,11 +10,12 @@ class OrderAdmin(admin.ModelAdmin):
                     #    , 'original_bag',
                     #    'stripe_pid')
 
-    fields = ('order_number', 'user_profile', 'date', 'full_name',
+    fields = ('order_number', 'date', 'full_name',
               'email', 'phone_number', 'country',
               'postcode', 'town_or_city', 'street_address1',
               'street_address2', 'county', 'delivery_cost',
               'order_total', 'grand_total')
+            #  'user_profile',
             #   , 'original_bag',
             #   'stripe_pid')
 
@@ -25,4 +26,16 @@ class OrderAdmin(admin.ModelAdmin):
     ordering = ('-date',)
 
 
+class Order_itemsAdmin(admin.ModelAdmin):
+    list_display = (
+        'cookie',
+        'item_number',
+        'category',
+        'name',
+        'servings',
+        'option',
+    )
+
+
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Order_items, Order_itemsAdmin)
