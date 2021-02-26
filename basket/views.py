@@ -148,6 +148,7 @@ def basket(request):
             'selected': selected,
             'baskets': baskets,
             'cookie_key': cookie_key,
+            'cookie': cookie,
             'basket_total': basket_total,
         }
 
@@ -190,6 +191,7 @@ def delete_basket_item(request):
             'options': options,
             'baskets': baskets,
             'cookie_key': cookie_key,
+            'cookie': cookie,
             'basket_total': basket_total,
         }
 
