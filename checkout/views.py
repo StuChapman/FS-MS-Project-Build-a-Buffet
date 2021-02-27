@@ -50,8 +50,6 @@ def checkout(request):
 def create_order(request):
     """ A view to return the checkout page """
 
-    order_form = OrderForm()
-
     """ check for a basket cookie """
     context_items = basket_context(request)
     basket_total = context_items['basket_total']
@@ -67,11 +65,26 @@ def create_order(request):
 
     """ check for the basket items from checkout """
     if request.POST:
-        print('POST')
         form_data = {
-            'basket_number': request.POST['basket_number'],
+            'order_number': request.POST['basket_number'],
+            'full_name': request.POST['full_name'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone_number'],
+            'country': request.POST['country'],
+            'postcode': request.POST['postcode'],
+            'town_or_city': request.POST['town_or_city'],
+            'street_address1': request.POST['street_address1'],
+            'street_address2': request.POST['street_address2'],
+            'county': request.POST['county'],
         }
-        print(basket_number)
+
+        order_form = OrderForm(form_data)
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            order_number = request.POST.get('basket_number')
+            order.order_number = order_number
+            order.save()
+
         if 'basket_number' in request.POST:
             cookie = request.POST['basket_number']
             print(cookie)
@@ -86,4 +99,4 @@ def create_order(request):
             'order_form': order_form,
         }
 
-    return render(request, 'checkout/checkout.html', context)
+    return render(request, 'home/index.html', context)
