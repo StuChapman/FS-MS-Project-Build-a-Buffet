@@ -9,6 +9,7 @@ from django_countries.fields import CountryField
 
 class Order(models.Model):
     order_number = models.CharField(max_length=32, null=False, editable=False)
+    cookie = models.CharField(max_length=32, null=False, editable=False)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
@@ -36,6 +37,7 @@ class Order_items(models.Model):
     class Meta:
         verbose_name_plural = 'Order_items'
 
+    order_number = models.CharField(max_length=32, null=False, editable=False)
     cookie = models.DecimalField(max_digits=8, decimal_places=0)
     item_number = models.DecimalField(max_digits=9999, decimal_places=0)
     category = models.CharField(max_length=254)

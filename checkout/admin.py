@@ -28,6 +28,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 class Order_itemsAdmin(admin.ModelAdmin):
     list_display = (
+        'order_number',
         'cookie',
         'item_number',
         'category',

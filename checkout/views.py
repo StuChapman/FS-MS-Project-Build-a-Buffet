@@ -1,7 +1,10 @@
 from django.shortcuts import render
 
+import uuid
+
 from products.models import Product, Category, Options
 from basket.models import Basket
+from checkout.models import Order_items
 from basket.contexts import basket_context
 from .forms import OrderForm
 
@@ -59,14 +62,13 @@ def create_order(request):
 
     """ fetch the datasets from the models """
     basket = Basket.objects.all()
-    categories = Category.objects.all()
-    products = Product.objects.all()
-    options = Options.objects.all()
+    order_items = Order_items.objects.all()
 
-    """ check for the basket items from checkout """
+    """ check for the customer info from checkout """
     if request.POST:
         form_data = {
             'order_number': request.POST['basket_number'],
+            'cookie': request.POST['basket_number'],
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
@@ -78,25 +80,47 @@ def create_order(request):
             'county': request.POST['county'],
         }
 
+        """ create a unique order number """
+        order_number = uuid.uuid4().hex[:10]
+
+        """ populate the order form """
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            order_number = request.POST.get('basket_number')
             order.order_number = order_number
+            cookie = request.POST.get('basket_number')
+            order.cookie = cookie
+            order_total = request.POST.get('total_price')
+            order.order_total = order_total
             order.save()
 
-        if 'basket_number' in request.POST:
-            cookie = request.POST['basket_number']
-            print(cookie)
+        """ fetch the basket items to save into order_items """
+        baskets = Basket.objects.filter(cookie=cookie)
+        for basket in baskets:
+            cookie = basket.cookie
+            item_number = basket.item_number
+            category = basket.category
+            name = basket.name
+            servings = basket.servings
+            option = basket.option
+            total_price = basket.total_price
+
+            """ save the basket items into order_items """
+            order_basket = Order_items(cookie=cookie,
+                                       order_number=order_number,
+                                       item_number=item_number,
+                                       category=category,
+                                       name=name,
+                                       servings=servings,
+                                       option=option,
+                                       total_price=total_price)
+            order_basket.save()
+            basket.delete()
+            basket_total = ""
 
     context = {
             'cookie_key': cookie_key,
             'basket_total': basket_total,
-            'baskets': baskets,
-            'products': products,
-            'categories': categories,
-            'options': options,
-            'order_form': order_form,
         }
 
     return render(request, 'home/index.html', context)
