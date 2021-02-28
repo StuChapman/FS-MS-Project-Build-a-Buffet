@@ -8,6 +8,7 @@ from django_countries.fields import CountryField
 
 
 class Order(models.Model):
+    customer_number = models.CharField(max_length=32, null=False, editable=False)
     order_number = models.CharField(max_length=32, null=False, editable=False)
     cookie = models.CharField(max_length=32, null=False, editable=False)
     full_name = models.CharField(max_length=50, null=False, blank=False)
