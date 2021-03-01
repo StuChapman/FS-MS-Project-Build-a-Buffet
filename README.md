@@ -229,6 +229,7 @@ I deployed to Github Pages by the following steps:
 11. Django model.AutoField is from [www.fullstackpython.com](https://www.fullstackpython.com/django-db-models-autofield-examples.html)
 12. Order by ascending and descending is from [stackoverflow.com](https://stackoverflow.com/questions/8786175/django-order-by-on-queryset-objects) and [stackoverflow.com](https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending)
 13. Limit number to 2 decimals is from [tutorialdeep.com](https://tutorialdeep.com/knowhow/limit-float-to-two-decimal-places-python/)
+14. Getting the current user is from [stackoverflow.com](https://stackoverflow.com/questions/12615154/how-to-get-the-currently-logged-in-users-user-id-in-django)
 
 #### Code Institute
 

@@ -21,7 +21,7 @@ def basket_context(request):
     context = {
             'cookie': cookie,
             'cookie_key': cookie_key,
-            'basket_total': basket_total
+            'basket_total': basket_total,
         }
 
     return context

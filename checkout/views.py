@@ -6,6 +6,7 @@ from products.models import Product, Category, Options
 from basket.models import Basket
 from checkout.models import Order_items
 from basket.contexts import basket_context
+from profiles.models import UserProfile
 from .forms import OrderForm
 
 # Create your views here.
@@ -14,7 +15,25 @@ from .forms import OrderForm
 def checkout(request):
     """ A view to return the checkout page """
 
-    order_form = OrderForm()
+    # Attempt to prefill the form with any info the user maintains in their profile
+    if request.user.is_authenticated:
+        try:
+            profile = UserProfile.objects.get(user=request.user)
+            order_form = OrderForm(initial={
+                'full_name': profile.user.get_full_name(),
+                'email': profile.user.email,
+                'phone_number': profile.default_phone_number,
+                'country': profile.default_country,
+                'postcode': profile.default_postcode,
+                'town_or_city': profile.default_town_or_city,
+                'street_address1': profile.default_street_address1,
+                'street_address2': profile.default_street_address2,
+                'county': profile.default_county,
+            })
+        except UserProfile.DoesNotExist:
+            order_form = OrderForm()
+    else:
+        order_form = OrderForm()
 
     """ check for a basket cookie """
     context_items = basket_context(request)
@@ -67,8 +86,6 @@ def create_order(request):
     """ check for the customer info from checkout """
     if request.POST:
         form_data = {
-            'order_number': request.POST['basket_number'],
-            'cookie': request.POST['basket_number'],
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
@@ -92,6 +109,8 @@ def create_order(request):
             order.cookie = cookie
             order_total = request.POST.get('total_price')
             order.order_total = order_total
+            customer_number = request.user
+            order.customer_number = customer_number
             order.save()
 
         """ fetch the basket items to save into order_items """

@@ -152,6 +152,7 @@
                             <input type="hidden" value="{{ client_secret }}" name="client_secret">
                             <input type="hidden" value="{{ basket_total.total_price__sum|floatformat:'2' }}" name="total_price">
                             <input type="hidden" value="{{ cookie }}" name="basket_number">
+                            <input type="hidden" value="{{ request.user }}" name="current_user">
                         </fieldset>
 
                         <div class="submit-button text-right mt-5 mb-2">                    
