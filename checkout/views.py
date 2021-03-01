@@ -109,8 +109,8 @@ def create_order(request):
             order.cookie = cookie
             order_total = request.POST.get('total_price')
             order.order_total = order_total
-            customer_number = request.user
-            order.customer_number = customer_number
+            customer_name = request.user
+            order.customer_name = customer_name
             order.save()
 
         """ fetch the basket items to save into order_items """

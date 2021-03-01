@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserProfileForm
 
-from checkout.models import Order
+from checkout.models import Order, Order_items
 
 
 @login_required
@@ -22,12 +22,16 @@ def profile(request):
             messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
-    #orders = profile.orders.all()
+    orders = Order.objects.filter(customer_name=profile)
+    # Credit: https://stackoverflow.com/questions/5123839/fastest-way-to-get-the-first-object-from-a-queryset-in-django
+    order_number = Order.objects.filter(customer_name=profile)[:1].get().order_number
+    items = Order_items.objects.filter(order_number=order_number)
 
     template = 'profiles/profile.html'
     context = {
         'form': form,
-        #'orders': orders,
+        'orders': orders,
+        'items': items,
         'on_profile_page': True
     }
 
@@ -35,7 +39,8 @@ def profile(request):
 
 
 def order_history(request, order_number):
-    order = get_object_or_404(Order, order_number=order_number)
+    profile = get_object_or_404(UserProfile, user=request.user)
+    order = get_object_or_404(Order, customer_name=profile)
 
     messages.info(request, (
         f'This is a past confirmation for order number {order_number}. '

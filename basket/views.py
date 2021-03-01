@@ -115,7 +115,7 @@ def basket(request):
                 """ filter the datasets on the variables from product_add """
                 this_product = products.filter(name=product)
                 options = options.filter(category__in=categories)
-                """ Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html """
+                # Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html
 
                 """ save the updated basket and delete the existing """
                 updated_basket = Basket(cookie=cookie,
@@ -180,6 +180,7 @@ def delete_basket_item(request):
     baskets = Basket.objects.filter(cookie=cookie)
     baskets = baskets.order_by('-item_number')
 
+    # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
     basket_total = Basket.objects.filter(cookie=cookie).aggregate(Sum('total_price'))
     if basket_total['total_price__sum'] is None:
         basket_total = ""

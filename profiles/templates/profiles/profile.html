@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-4">
                 <p class="text-muted">Default Delivery Information</p>
                 <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                     {% csrf_token %}
@@ -33,7 +33,7 @@
                     <button class="btn btn-black rounded-0 text-uppercase float-right">Update Information</button>
                 </form>
             </div>
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-8">
                 <p class="text-muted">Order History</p>
                 <div class="order-history table-responsive">
                     <table class="table table-sm table-borderless">
@@ -51,22 +51,21 @@
                                     <td>
                                         <a href="{% url 'order_history' order.order_number %}"
                                         title="{{ order.order_number }}">
-                                            {{ order.order_number|truncatechars:6 }}
+                                            {{ order.order_number|truncatechars:10 }}
                                         </a>
                                     </td>
-                                    <td>{{ order.date }}</td>
+                                    <!-- Credit: https://ourcodeworld.com/articles/read/555/how-to-format-datetime-objects-in-the-view-and-template-in-django -->
+                                    <td class="small">{{ order.date|date:'Y-m-d' }}</td>
                                     <td>
                                         <ul class="list-unstyled">
-                                            {% for item in order.lineitems.all %}
+                                            {% for item in items %}
                                                 <li class="small">
-                                                    {% if item.product.has_sizes %}
-                                                        Size {{ item.product.size|upper }}
-                                                    {% endif %}{{ item.product.name }} x{{ item.quantity }}
+                                                    {{ item.category.title }}: {{ item.name }}, {{ item.option }} x {{ item.servings }}
                                                 </li>
                                             {% endfor %}
                                         </ul>
                                     </td>
-                                    <td>${{ order.grand_total }}</td>
+                                    <td>£{{ order.grand_total }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -231,6 +231,9 @@ I deployed to Github Pages by the following steps:
 13. Limit number to 2 decimals is from [tutorialdeep.com](https://tutorialdeep.com/knowhow/limit-float-to-two-decimal-places-python/)
 14. Getting the current user is from [stackoverflow.com](https://stackoverflow.com/questions/12615154/how-to-get-the-currently-logged-in-users-user-id-in-django)
 15. Using an hr to mimic a br is from [stackoverflow.com](https://stackoverflow.com/questions/1409649/how-to-change-the-height-of-a-br)
+16. Formatting date is from [ourcodeworld.com](https://ourcodeworld.com/articles/read/555/how-to-format-datetime-objects-in-the-view-and-template-in-django)
+17. Getting the first row from a queryset is from [stackoverflow.com](https://stackoverflow.com/questions/5123839/fastest-way-to-get-the-first-object-from-a-queryset-in-django)
+18. Combining two or more querysets is from [stackoverflow.com](https://stackoverflow.com/questions/431628/how-to-combine-two-or-more-querysets-in-a-django-view)
 
 #### Code Institute
 
