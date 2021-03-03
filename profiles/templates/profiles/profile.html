@@ -2,10 +2,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
-{% endblock %}
-
 {% block page_header %}
     <div class="container header-container">
         <div class="row">
@@ -15,64 +11,68 @@
 {% endblock %}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="logo-font mb-4">My Profile</h2>
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-lg-4">
-                <p class="text-muted">Default Delivery Information</p>
-                <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <button class="btn btn-black rounded-0 text-uppercase float-right">Update Information</button>
-                </form>
-            </div>
-            <div class="col-12 col-lg-8">
-                <p class="text-muted">Order History</p>
-                <div class="order-history table-responsive">
-                    <table class="table table-sm table-borderless">
-                        <thead>
-                            <tr>
-                                <th>Order Number</th>
-                                <th>Date</th>
-                                <th>Items</th>
-                                <th>Order Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for order in orders %}
-                                <tr>
-                                    <td>
-                                        <a href="{% url 'order_history' order.order_number %}"
-                                        title="{{ order.order_number }}">
-                                            {{ order.order_number|truncatechars:10 }}
-                                        </a>
-                                    </td>
-                                    <!-- Credit: https://ourcodeworld.com/articles/read/555/how-to-format-datetime-objects-in-the-view-and-template-in-django -->
-                                    <td class="small">{{ order.date|date:'Y-m-d' }}</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            {% for item in items %}
-                                                <li class="small">
-                                                    {{ item.category.title }}: {{ item.name }}, {{ item.option }} x {{ item.servings }}
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </td>
-                                    <td>£{{ order.grand_total }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+    <!-- Profile -->
+    <section class="products-section bg-light" id="products">
+        <div class="container">
+                <!-- Basket One Row-->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-xl-12">
+                    <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">My Profile</h1>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        <p class="text-muted">Default Delivery Information</p>
+                        <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-black rounded-0 text-uppercase float-right">Update Information</button>
+                        </form>
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <p class="text-muted">Order History</p>
+                        <div class="order-history table-responsive">
+                            <table class="table table-sm table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>Order Number</th>
+                                        <th>Date</th>
+                                        <th>Items</th>
+                                        <th>Order Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'order_history' order.order_number %}"
+                                                title="{{ order.order_number }}">
+                                                    {{ order.order_number|truncatechars:10 }}
+                                                </a>
+                                            </td>
+                                            <!-- Credit: https://ourcodeworld.com/articles/read/555/how-to-format-datetime-objects-in-the-view-and-template-in-django -->
+                                            <td class="small">{{ order.date|date:'Y-m-d' }}</td>
+                                            <td>
+                                                <ul class="list-unstyled">
+                                                    {% for item in items %}
+                                                        {% if item.order_number == order.order_number %}
+                                                            <li class="small">
+                                                                <b>{{ item.category.title }}:</b> {{ item.name }}, {{ item.option }} <b>Qty: {{ item.servings }}</b>
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td>£{{ order.grand_total }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 {% endblock %}
 
 {% block postloadjs %}

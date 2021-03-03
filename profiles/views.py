@@ -23,11 +23,16 @@ def profile(request):
     else:
         form = UserProfileForm(instance=profile)
     orders = Order.objects.filter(customer_name=profile)
-    # Credit: https://stackoverflow.com/questions/5123839/fastest-way-to-get-the-first-object-from-a-queryset-in-django
-    order_number = Order.objects.filter(customer_name=profile)[:1].get().order_number
-    items = Order_items.objects.filter(order_number=order_number)
+    items = Order_items.objects.none()
+    x = -1
+    print(orders)
+    for order in orders:
+        x = x + 1
+        # Credit: https://stackoverflow.com/questions/5123839/fastest-way-to-get-the-first-object-from-a-queryset-in-django
+        order_number = Order.objects.filter(customer_name=profile)[x].order_number
+        order_items = Order_items.objects.filter(order_number=order_number)
+        items = items | order_items
 
-    template = 'profiles/profile.html'
     context = {
         'form': form,
         'orders': orders,
@@ -35,7 +40,7 @@ def profile(request):
         'on_profile_page': True
     }
 
-    return render(request, template, context)
+    return render(request, 'profiles/profile.html', context)
 
 
 def order_history(request, order_number):
@@ -47,10 +52,9 @@ def order_history(request, order_number):
         'A confirmation email was sent on the order date.'
     ))
 
-    template = 'checkout/checkout_success.html'
     context = {
         'order': order,
         'from_profile': True,
     }
 
-    return render(request, template, context)
+    return render(request, 'checkout/checkout_success.html', context)
