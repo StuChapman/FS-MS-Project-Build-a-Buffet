@@ -6,6 +6,7 @@ from .models import UserProfile
 from .forms import UserProfileForm
 
 from checkout.models import Order, Order_items
+from products.models import Options
 
 
 @login_required
@@ -22,6 +23,8 @@ def profile(request):
             messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
+    
+    options = Options.objects.all()
     orders = Order.objects.filter(customer_name=profile)
     items = Order_items.objects.none()
     x = -1
@@ -32,11 +35,12 @@ def profile(request):
         order_number = Order.objects.filter(customer_name=profile)[x].order_number
         order_items = Order_items.objects.filter(order_number=order_number)
         items = items | order_items
-
+    orders = orders.order_by('-date')
     context = {
         'form': form,
         'orders': orders,
         'items': items,
+        'options': options,
         'on_profile_page': True
     }
 
