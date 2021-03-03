@@ -23,12 +23,12 @@ def profile(request):
             messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
-    
+
     options = Options.objects.all()
     orders = Order.objects.filter(customer_name=profile)
     items = Order_items.objects.none()
+
     x = -1
-    print(orders)
     for order in orders:
         x = x + 1
         # Credit: https://stackoverflow.com/questions/5123839/fastest-way-to-get-the-first-object-from-a-queryset-in-django
@@ -36,6 +36,7 @@ def profile(request):
         order_items = Order_items.objects.filter(order_number=order_number)
         items = items | order_items
     orders = orders.order_by('-date')
+
     context = {
         'form': form,
         'orders': orders,
