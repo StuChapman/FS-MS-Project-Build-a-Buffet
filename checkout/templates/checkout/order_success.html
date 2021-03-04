@@ -30,79 +30,86 @@
                                     The items below have been ordered ...
                                 </div>
                                 <br>
-                                    {% for item in order_items %}
-                                        <div class="product-text-two mx-auto mb-2 text-blue bold">
-                                            {{ item.category.title }}: {{ item.name }}
-                                        </div>
-                                        {% for product in products %}
-                                            {% if product.name == item.name %}
-                                                <div class="product-text-three mx-auto mb-2 text-blue">
-                                                    {{ product.description }}
-                                                </div>
-                                            {% endif %}
-                                        {% endfor %}
-                                        <div class="text-blue text-xs mb-2">With the option:
-                                            {% if item.option == "selected-one" %}
-                                                {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">
-                                                        {{ option.option1.title }}
-                                                    </span>
-                                                {% endfor %}
-                                            {% endif %}
-                                            {% if item.option == "selected-two" %}
-                                                {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">
-                                                        {{ option.option2.title }}
-                                                    </span>
-                                                {% endfor %}
-                                            {% endif %}
-                                            {% if item.option == "selected-three" %}
-                                                {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">
-                                                        {{ option.option3.title }}
-                                                    </span>
-                                                {% endfor %}
-                                            {% endif %}
-                                        </div>
-                                        <div class="text-blue text-xs mb-4">Number of servings:
-                                            <span id="servings" class="text-blue product-text-two mb-2 bold">
-                                                {{ item.servings }}
-                                            </span>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6 my-auto">
-                                                {% for product in products %}
-                                                    {% if product.name == item.name %}
-                                                        <div class="text-blue text-xs">
-                                                            per serving
-                                                        </div>
-                                                        <div class="product-text-two mt-1">
-                                                            £{{ product.price }}
-                                                        </div>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                            <div class="col-6 my-auto">
-                                                <div class="text-blue text-xs">
-                                                    Total price
-                                                </div>
-                                                <div class="product-text-two bold">
-                                                    £{{ item.total_price }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    {% endfor %}
-                                    <div class="col-12 col-lg-4 my-auto pl-0">
-                                        <div class="product-text-two mx-auto mb-2 text-blue bold">
-                                            Order Total
-                                        </div>
-                                        {% for order in orders %}
-                                            <div class="product-text-header bold">
-                                                £{{ order.order_total|floatformat:"2" }}
-                                            </div>
-                                        {% endfor %}
+                                {% for item in order_items %}
+                                    <div class="product-text-two mx-auto mb-2 text-blue bold">
+                                        {{ item.category.title }}: {{ item.name }}
                                     </div>
+                                    {% for product in products %}
+                                        {% if product.name == item.name %}
+                                            <div class="product-text-three mx-auto mb-2 text-blue">
+                                                {{ product.description }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div class="text-blue text-xs mb-2">With the option:
+                                        {% if item.option == "selected-one" %}
+                                            {% for option in options %}
+                                                <span class="text-blue product-text-two mb-2 bold">
+                                                    {{ option.option1.title }}
+                                                </span>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if item.option == "selected-two" %}
+                                            {% for option in options %}
+                                                <span class="text-blue product-text-two mb-2 bold">
+                                                    {{ option.option2.title }}
+                                                </span>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if item.option == "selected-three" %}
+                                            {% for option in options %}
+                                                <span class="text-blue product-text-two mb-2 bold">
+                                                    {{ option.option3.title }}
+                                                </span>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="text-blue text-xs mb-4">Number of servings:
+                                        <span id="servings" class="text-blue product-text-two mb-2 bold">
+                                            {{ item.servings }}
+                                        </span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 my-auto">
+                                            {% for product in products %}
+                                                {% if product.name == item.name %}
+                                                    <div class="text-blue text-xs">
+                                                        per serving
+                                                    </div>
+                                                    <div class="product-text-two mt-1">
+                                                        £{{ product.price }}
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-6 my-auto">
+                                            <div class="text-blue text-xs">
+                                                Total price
+                                            </div>
+                                            <div class="product-text-two bold">
+                                                £{{ item.total_price }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div class="col-12 col-lg-4 my-auto pl-0">
+                                    <div class="product-text-two mx-auto mb-2 text-blue bold">
+                                        Order Total
+                                    </div>
+                                    {% for order in orders %}
+                                        <div class="product-text-header bold">
+                                            £{{ order.order_total|floatformat:"2" }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    {% if request.user.is_authenticated %}
+                                        <a class="checkout-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
+                                            href="{% url 'profile' %}">
+                                            <i class="fas fa-chevron-left" aria-hidden="true"></i> back to profile</a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
