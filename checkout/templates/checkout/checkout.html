@@ -10,10 +10,10 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Produce-->
+    <!-- Checkout -->
     <section class="products-section bg-light" id="products">
         <div class="container">
-            <!-- Produce One Row-->
+            <!-- Checkout One Row-->
             <div class="row justify-content-center no-gutters">
                 <div class="col-xl-12">
                     <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Checkout</h1>
@@ -42,7 +42,7 @@
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
-                                        <div class="text-blue text-xs mb-2">With this option ...
+                                        <div class="text-blue text-xs mb-2">With the option:
                                             {% if basket.option == "selected-one" %}
                                                 {% for option in options %}
                                                     <span class="text-blue product-text-two mb-2 bold">
@@ -65,7 +65,7 @@
                                                 {% endfor %}
                                             {% endif %}
                                         </div>
-                                        <div class="text-blue text-xs mb-4">Number of servings ...
+                                        <div class="text-blue text-xs mb-4">Number of servings:
                                             <span id="servings" class="text-blue product-text-two mb-2 bold">
                                                 {{ basket.servings }}
                                             </span>

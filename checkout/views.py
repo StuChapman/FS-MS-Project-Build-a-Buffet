@@ -142,4 +142,4 @@ def create_order(request):
             'basket_total': basket_total,
         }
 
-    return render(request, 'home/index.html', context)
+    return render(request, 'checkout/checkout_success.html', context)
