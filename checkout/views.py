@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 
 import uuid
 
 from products.models import Product, Category, Options
 from basket.models import Basket
-from checkout.models import Order_items
+from checkout.models import Order, Order_items
 from basket.contexts import basket_context
 from profiles.models import UserProfile
 from .forms import OrderForm
@@ -135,11 +135,26 @@ def create_order(request):
                                        total_price=total_price)
             order_basket.save()
             basket.delete()
-            basket_total = ""
+
+    return redirect(reverse('order_success', args=[order.order_number]))
+
+
+def order_success(request, order_number):
+    """
+    Handle successful checkouts
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+    orders = Order.objects.filter(order_number=order_number)
+    order_items = Order_items.objects.filter(order_number=order_number)
+    products = Product.objects.all()
+    options = Options.objects.all()
 
     context = {
-            'cookie_key': cookie_key,
-            'basket_total': basket_total,
-        }
+        'order': order,
+        'order_items': order_items,
+        'orders': orders,
+        'products': products,
+        'options': options,
+    }
 
-    return render(request, 'checkout/checkout_success.html', context)
+    return render(request, 'checkout/order_success.html', context)

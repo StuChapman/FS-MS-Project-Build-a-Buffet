@@ -22,9 +22,14 @@
                     <div class="text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="product-container w-100 mt-0 text-center text-xl-left">
+                                <div class="product-text-two mx-auto flex-margin-b text-blue bold">
+                                    Order Number: {{ order.order_number }}
+                                </div>
+                                <hr>
                                 <div class="product-text-three mx-auto flex-margin-b text-blue">
                                     The items below have been ordered ...
                                 </div>
+                                <br>
                                     {% for item in order_items %}
                                         <div class="product-text-two mx-auto mb-2 text-blue bold">
                                             {{ item.category.title }}: {{ item.name }}
@@ -82,7 +87,7 @@
                                                     Total price
                                                 </div>
                                                 <div class="product-text-two bold">
-                                                    £{{ basket.total_price }}
+                                                    £{{ item.total_price }}
                                                 </div>
                                             </div>
                                         </div>
@@ -92,15 +97,11 @@
                                         <div class="product-text-two mx-auto mb-2 text-blue bold">
                                             Order Total
                                         </div>
-                                        {% if basket_total.total_price__sum != None %}
+                                        {% for order in orders %}
                                             <div class="product-text-header bold">
-                                                £{{ basket_total.total_price__sum|floatformat:"2" }}
+                                                £{{ order.order_total|floatformat:"2" }}
                                             </div>
-                                        {% else %}
-                                            <div class="product-text-header bold">
-                                                £0.00
-                                            </div>
-                                        {% endif %}
+                                        {% endfor %}
                                     </div>
                             </div>
                         </div>
