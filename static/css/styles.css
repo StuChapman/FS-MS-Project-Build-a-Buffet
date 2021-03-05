@@ -10479,13 +10479,14 @@ body {
 .opaque-70 {
     background-color: rgba(255, 255, 255, 0.7)
 }
-
 .image-80 {
     opacity: 0.8;
 }
-
 .image-70 {
     opacity: 0.7;
+}
+.width-50 {
+    width: 50% !important;
 }
 
 .text-blue {
