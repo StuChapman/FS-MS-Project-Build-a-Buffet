@@ -10520,6 +10520,9 @@ body {
 .user-text { /* https://stackoverflow.com/questions/1409649/how-to-change-the-height-of-a-br */
     font-size: 10px;
 }
+.signup label {
+    display: none;
+}
 
 @media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .masthead {
@@ -10548,6 +10551,9 @@ body {
     }
     .product-text-three {
         font-size: calc(14px + (38 - 14) * ((100vw - 300px) / 1620));
+    }
+    .signup-text {
+        font-size: calc(12px + (38 - 12) * ((100vw - 300px) / 1620));
     }
     .flex-margin-b {
         margin-bottom: 3.5vh;
