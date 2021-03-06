@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import Product, Category, Options
 from basket.models import Basket
 from basket.contexts import basket_context
+from .forms import ProductAdminForm
 
 # Create your views here.
 
@@ -183,16 +184,19 @@ def edit_product(request):
 def product_admin(request):
     """ A view to manage products, categories and options """
 
-    categories = Category.objects.all()
-    products = Product.objects.all()
-    options = Options.objects.all()
+    product_query = get_object_or_404(Product, name='Cheese')
+
 
     if request.GET:
         if 'dataset' in request.GET:
             dataset = request.GET['dataset']
+            form = ProductAdminForm(instance=product_query)
+        else:
+            form = ProductAdminForm(instance=product_query)
 
     context = {
             'dataset': dataset,
+            'form': form,
         }
 
     return render(request, 'products/product_admin.html', context)
