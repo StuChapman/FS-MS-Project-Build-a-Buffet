@@ -77,9 +77,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <form action="{% url 'product_admin' %}?dataset=products" method="POST">
+                                        <form action="{% url 'product_admin' %}?dataset=products" method="GET">
                                         {% csrf_token %}
-                                            <input class="product-search-input text-blue text-xs" type="text" name="product_search" id="product_search" value=" search for {{ dataset }}...">
+                                            <input class="product-search-input text-blue text-xs" type="text" name="product_search" id="product_search" placeholder=" search for {{ dataset }}...">
                                             <button class="search-button text-center" type="submit">
                                                     <i class="fas fa-search"></i>
                                             </button>

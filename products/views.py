@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from .models import Product, Category, Options
 from basket.models import Basket
@@ -185,18 +187,52 @@ def product_admin(request):
     """ A view to manage products, categories and options """
 
     product_query = get_object_or_404(Product, name='Cheese')
-
+    products = Product.objects.all()
 
     if request.GET:
-        if 'dataset' in request.GET:
-            dataset = request.GET['dataset']
+        if 'product_search' in request.GET:
+            query = request.GET['product_search']
+            if not query:
+                return redirect(reverse('profile'))
+
+            queries = Q(name__icontains=query) | Q(description__icontains=query)
+            product_query = products.filter(queries).first()
             form = ProductAdminForm(instance=product_query)
         else:
             form = ProductAdminForm(instance=product_query)
+        if 'dataset' in request.GET:
+            dataset = request.GET['dataset']
 
     context = {
-            'dataset': dataset,
             'form': form,
         }
 
     return render(request, 'products/product_admin.html', context)
+
+
+@login_required
+def update_product(request, product_name):
+    """ update a product on the menu """
+    if not request.user.is_superuser:
+        # messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    product = get_object_or_404(Product, name=product_name)
+    if request.method == 'POST':
+        form = ProductAdminForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            # messages.success(request, 'Successfully updated product!')
+            return redirect(reverse('product_detail', args=[product.id]))
+        # else:
+            # messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+    else:
+        form = ProductAdminForm(instance=product)
+        # messages.info(request, f'You are editing {product.name}')
+
+    context = {
+        'form': form,
+        'product': product,
+    }
+
+    return render(request, 'home/index.html', context)

@@ -106,7 +106,7 @@
                 <div class="ml-2 mr-auto">
                     <form action="{% url 'product_admin' %}?dataset=product" method="post">
                     {% csrf_token %}
-                        <input class="search-input text-blue text-xs" type="text" name="product_search" id="product_search" value=" search ...">
+                        <input class="search-input text-blue text-xs" type="text" name="product_search" id="product_search" placeholder=" search ...">
                         <button class="search-button text-center" type="submit">
                                 <i class="fas fa-search"></i>
                         </button>
