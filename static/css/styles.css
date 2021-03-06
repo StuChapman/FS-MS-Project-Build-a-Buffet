@@ -10404,8 +10404,17 @@ body {
     border-radius: 5px;
     width: 80px;
     height: 30px;
+    vertical-align: middle;
 }
-
+.product-search-input {
+    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    color: #303F3F;
+    border: 1px solid #303F3F;
+    border-radius: 5px;
+    height: 30px;
+    vertical-align: middle;
+}
 .search-button {
     border: 1px solid #303F3F;
     border-radius: 5px;
@@ -10414,7 +10423,8 @@ body {
     width: 40px;
     height: 30px;
     padding: 0;
-    margin: 2.5px 0 0 -5px;
+    margin: 0 0 0 -15px;
+    vertical-align: middle;
 }
 
 .projects-section .product-container, .products-section .product-container {
@@ -10531,7 +10541,7 @@ body {
     .masthead {
         padding: 25vh 0;
     }
-    .basket, .bartholemew-menu, .search-input {
+    .basket, .bartholemew-menu {
         margin: 2.5px 0 2.5px 0.5rem;
     }
     #mainNav .navbar-toggler {
@@ -10572,7 +10582,7 @@ body {
     .masthead {
         padding: 35vh 0 15vh;
     }
-    .basket, .bartholemew-menu, .search-input {
+    .basket, .bartholemew-menu {
         margin: 2.5px 0 2.5px 1rem;
     }
     #mainNav .navbar-toggler {

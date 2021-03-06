@@ -178,3 +178,21 @@ def edit_product(request):
         }
 
     return render(request, 'products/edit_product.html', context)
+
+
+def product_admin(request):
+    """ A view to manage products, categories and options """
+
+    categories = Category.objects.all()
+    products = Product.objects.all()
+    options = Options.objects.all()
+
+    if request.GET:
+        if 'dataset' in request.GET:
+            dataset = request.GET['dataset']
+
+    context = {
+            'dataset': dataset,
+        }
+
+    return render(request, 'products/product_admin.html', context)

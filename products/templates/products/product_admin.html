@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <!-- Produce-->
+    <section class="products-section bg-light" id="products">
+        <div class="container">
+            <!-- Produce One Row-->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-xl-12">
+                    <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Product Admin</h1>
+                </div>
+                <div class="col-xl-6">
+                    {% if dataset == "categories" and searchset %}
+                        {% for image in image %}
+                            <img class="img-fluid image-80" src="{{ image.image }}" alt="{{ categories }} image" />
+                        {% endfor %}
+                    {% else %}
+                        <img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" />
+                    {% endif %}
+                </div>
+                <div class="col-xl-6">
+                    <div class="text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="product-container w-100 mt-0 text-center text-xl-left">
+                                <div class="text-blue text-xs mb-2">
+                                    Choose from the options below to edit/add ...
+                                </div>
+                                <div class="row">
+                                    {% if dataset == "products" %}
+                                        <div class="col-4">
+                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                                href="{% url 'product_admin' %}?dataset=products">
+                                                Products</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-4">
+                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                                href="{% url 'product_admin' %}?dataset=products">
+                                                Products</a>
+                                        </div>
+                                    {% endif %}
+                                    {% if dataset == "options" %}
+                                        <div class="col-4">
+                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                                href="{% url 'product_admin' %}?dataset=options">
+                                                Options</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-4">
+                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                                href="{% url 'product_admin' %}?dataset=options">
+                                                Options</a>
+                                        </div>
+                                    {% endif %}
+                                    {% if dataset == "categories" %}
+                                        <div class="col-4">
+                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                                href="{% url 'product_admin' %}?dataset=categories">
+                                                Categories</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-4">
+                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                                href="{% url 'product_admin' %}?dataset=categories">
+                                                categories</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form action="{% url 'product_admin' %}?dataset=products" method="post">
+                                        {% csrf_token %}
+                                            <input class="product-search-input text-blue text-xs" type="text" name="product_search" id="product_search" value=" search for {{ dataset }}...">
+                                            <button class="search-button text-center" type="submit">
+                                                    <i class="fas fa-search"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="col-4">
+                                        <button type="submit" class="edit-button border-solid masthead-button btn btn-primary js-scroll-trigger flex-margin-b">
+                                            <i class="far fa-edit"></i> update
+                                        </button>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <hr class="d-none d-xl-block mb-0 ml-0">
+            </div>
+        </div>
+    </section>
+
+{{ block.super }}
+{% include 'products/includes/contact.html' %}
+{% endblock %}

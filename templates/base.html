@@ -103,16 +103,13 @@
                         {% endif %}
                     </ul>
                 </div>
-                <div class="mr-auto">
-                    <form method="GET" action="">
-                        <div class="input-group">
-                            <input class="search-input" type="text" name="q" placeholder="Search...">
-                            <div class="input-group-append">
-                                <button class="search-button text-center" type="submit">
-                                        <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
+                <div class="ml-2 mr-auto">
+                    <form action="{% url 'product_admin' %}?dataset=product" method="post">
+                    {% csrf_token %}
+                        <input class="search-input text-blue text-xs" type="text" name="product_search" id="product_search" value=" search ...">
+                        <button class="search-button text-center" type="submit">
+                                <i class="fas fa-search"></i>
+                        </button>
                     </form>
                 </div>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,7 +149,7 @@
                             <div class="dropdown-menu border-0" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
-                                    <a href="" class="dropdown-item">product management</a>
+                                    <a href="{% url 'product_admin' %}?dataset=products" class="dropdown-item">product admin</a>
                                 {% endif %}
                                     <a href="{% url 'profile' %}" class="dropdown-item">my profile</a>
                                     <a href="{% url 'account_logout' %}" class="dropdown-item">logout</a>
