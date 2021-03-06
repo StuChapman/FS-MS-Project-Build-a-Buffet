@@ -10523,9 +10523,8 @@ body {
 .signup label, #div_id_login label, #div_id_password label {
     display: none;
 }
-#div_id_remember label {
-    margin-top: auto;
-    margin-bottom: auto;
+#div_id_remember label, #div_id_remember input {
+    vertical-align: middle;
 }
 
 @media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */

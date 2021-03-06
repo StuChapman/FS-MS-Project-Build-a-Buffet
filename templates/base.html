@@ -46,7 +46,7 @@
     {% block preloadjs %}
     <script>
         var basketCookie = '{{ cookie_key }}'; // Credit: https://stackoverflow.com/questions/8683922/how-can-i-pass-my-context-variables-to-a-javascript-file-in-django
-        console.log(basketCookie)
+
          // Credit: https://www.w3schools.com/js/js_cookies.asp
         function setCookie(cname,cvalue,exdays) {
             var d = new Date();
@@ -147,9 +147,7 @@
                                     ({{ request.user }})</span> <!-- Credit: https://stackoverflow.com/questions/12615154/how-to-get-the-currently-logged-in-users-user-id-in-django -->
                                 </a>
                             {% else %}
-                                <a class="nav-link js-scroll-trigger" href="#" id="account-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    account
-                                </a>
+                                <a class="nav-link" href="{% url 'account_login' %}">login</a>
                             {% endif %}
                             <div class="dropdown-menu border-0" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
@@ -165,7 +163,7 @@
                             </div>
                         </li>
                         <li class="nav-item my-auto"><a class="nav-link js-scroll-trigger" href="#service">customer service</a></li>
-                        <li class="nav-item d-lg-none"><a class="nav-link js-scroll-trigger" href="#basket">basket</a></li>
+                        <li class="nav-item d-lg-none"><a class="nav-link js-scroll-trigger" href="{% url 'basket' %}">basket</a></li>
                         <li class="nav-item d-lg-none"><a class="nav-link js-scroll-trigger" href="#bot">BUILD-A-BUFFET</a></li>
                     </ul>
                 </div>
