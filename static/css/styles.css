@@ -10425,6 +10425,8 @@ body {
     padding: 0;
     margin: 0 0 0 -15px;
     vertical-align: middle;
+    z-index: 9999;
+    position: absolute; 
 }
 
 .projects-section .product-container, .products-section .product-container {
@@ -10633,5 +10635,15 @@ body {
     }
     .checkout-button {
         padding: 0.75rem 0 !important;
+    }
+}
+@media (max-width: 990px) {
+    .product-search-container {
+        width: 80%;
+    }
+}
+@media (min-width: 991px) {
+    .product-search-container {
+        width: 80%;
     }
 }

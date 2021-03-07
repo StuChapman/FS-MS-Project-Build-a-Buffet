@@ -76,23 +76,40 @@
                                     {% endif %}
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <form action="{% url 'product_admin' %}?dataset=products" method="GET">
-                                        {% csrf_token %}
-                                            <input class="product-search-input text-blue text-xs" type="text" name="product_search" id="product_search" placeholder=" search for {{ dataset }}...">
-                                            <button class="search-button text-center" type="submit">
-                                                    <i class="fas fa-search"></i>
-                                            </button>
-                                        </form>
+                                    <div class="col-12 col-lg-4 mb-3 mt-1 justify-content-center p-0">
+                                        <div class="product-search-container mx-auto">
+                                            <form action="{% url 'product_admin' %}?dataset=products" method="GET">
+                                            {% csrf_token %}
+                                                <input class="product-search-input text-blue text-xs" type="text" name="product_search" id="product_search" placeholder=" search for {{ dataset }}...">
+                                                <button class="search-button text-center" type="submit">
+                                                        <i class="fas fa-search"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="col-6">
-                                        {% if product_query_length != 0 %}
-                                             <input class="product-search-input text-blue text-xs float-right" type="text" name="product_query_length" id="product_query_length" 
-                                             value=" record 1 of: {{ product_query_length }}">
-                                        {% else %}
-                                             <input class="product-search-input text-blue text-xs float-right" type="text" name="no_product_query_length" id="no_product_query_length" 
-                                             value=" no records found">
-                                        {% endif %}
+                                    <div class="col-lg-4 d-none d-lg-block"></div>
+                                    <div class="col-12 col-lg-4 justify-content-center p-0">
+                                        <div class="product-search-container mx-auto">
+                                            <div class="d-inline">
+                                                <button class="search-button text-center" type="submit">
+                                                        <i class="fas fa-backward"></i>
+                                                </button>
+                                            </div>
+                                            <div class="d-inline">
+                                                {% if product_query_length != 0 %}
+                                                    <input class="product-search-input text-blue text-xs text-center" type="text" name="product_query_length" id="product_query_length" 
+                                                    value=" record 1 of: {{ product_query_length }}">
+                                                {% else %}
+                                                    <input class="product-search-input text-blue text-xs text-center" type="text" name="no_product_query_length" id="no_product_query_length" 
+                                                    value=" no records found">
+                                                {% endif %}
+                                            </div>
+                                            <div class="d-inline">
+                                                <button class="search-button text-center ml-n4" type="submit">
+                                                        <i class="fas fa-forward"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
