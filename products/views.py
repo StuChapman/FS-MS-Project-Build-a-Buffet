@@ -186,7 +186,8 @@ def edit_product(request):
 def product_admin(request):
     """ A view to manage products, categories and options """
 
-    product_query = get_object_or_404(Product, name='Cheese')
+    product_query = Product.objects.all().first()
+    product_query_length = Product.objects.all().count()
     products = Product.objects.all()
 
     if request.GET:
@@ -197,6 +198,8 @@ def product_admin(request):
 
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             product_query = products.filter(queries).first()
+            product_query_length = products.filter(queries).count()
+            print(product_query_length)
             form = ProductAdminForm(instance=product_query)
         else:
             form = ProductAdminForm(instance=product_query)
@@ -205,6 +208,7 @@ def product_admin(request):
 
     context = {
             'form': form,
+            'product_query_length': product_query_length
         }
 
     return render(request, 'products/product_admin.html', context)
