@@ -23,7 +23,7 @@ class Product(models.Model):
                                  on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True)
     name = models.CharField(max_length=254)
-    description = models.TextField()
+    description = models.CharField(max_length=254)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     range = models.CharField(max_length=254, null=True)
 
@@ -38,9 +38,9 @@ class Options(models.Model):
 
     category = models.ForeignKey('Category', null=True, blank=True,
                                  on_delete=models.SET_NULL)
-    option1 = models.TextField()
-    option2 = models.TextField()
-    option3 = models.TextField()
+    option1 = models.CharField(max_length=24)
+    option2 = models.CharField(max_length=24)
+    option3 = models.CharField(max_length=24)
 
     def __str__(self):
         return self.category

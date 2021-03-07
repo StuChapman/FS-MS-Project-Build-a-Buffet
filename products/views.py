@@ -215,30 +215,35 @@ def product_admin(request):
             query = request.GET['product_search']
             if not query:
                 return redirect(reverse('profile'))
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
 
             """ get information from request """
             if 'dataset' in request.GET:
                 dataset = request.GET['dataset']
+
                 """ determine dataset to return """
                 if dataset == 'products':
+                    queries = Q(name__icontains=query) | Q(description__icontains=query)
                     products = Product.objects.all()
                     return_query = products.filter(queries).first()
                     return_query_length = products.filter(queries).count()
+                    form = ProductAdminForm(instance=return_query)
                 elif dataset == 'options':
+                    queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
                     options = Options.objects.all()
                     return_query = options.filter(queries).first()
                     return_query_length = options.filter(queries).count()
+                    form = OptionsAdminForm(instance=return_query)
                 elif dataset == 'categories':
+                    queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
                     categories = Category.objects.all()
                     return_query = categories.filter(queries).first()
                     return_query_length = categories.filter(queries).count()
+                    form = CategoryAdminForm(instance=return_query)
 
-                    form = ProductAdminForm(instance=return_query)
-        else:
-            """ default to products in case of error """
-            return_query = Product.objects.all().first()
-            form = ProductAdminForm(instance=return_query)
+    else:
+        """ default to products in case of error """
+        return_query = Category.objects.all().first()
+        form = CategoryAdminForm(instance=return_query)
 
     context = {
             'form': form,

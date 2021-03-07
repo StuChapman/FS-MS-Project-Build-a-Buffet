@@ -6,7 +6,7 @@ from .models import Product, Options, Category
 class ProductAdminForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ('sku',)
+        exclude = ('pk',)
 
     def __init__(self, *args, **kwargs):
         """
@@ -27,7 +27,7 @@ class ProductAdminForm(forms.ModelForm):
 class OptionsAdminForm(forms.ModelForm):
     class Meta:
         model = Options
-        exclude = ('category',)
+        exclude = ('pk',)
 
     def __init__(self, *args, **kwargs):
         """
@@ -46,7 +46,7 @@ class OptionsAdminForm(forms.ModelForm):
 class CategoryAdminForm(forms.ModelForm):
     class Meta:
         model = Category
-        exclude = ('friendly_name',)
+        exclude = ('category',)
 
     def __init__(self, *args, **kwargs):
         """

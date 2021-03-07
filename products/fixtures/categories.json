@@ -1,4 +1,4 @@
-[{"pk": 1, "model": "products.category", "fields": {"name": "sandwiches", "friendly_name": "Sandwiches", "image": "/media/assets/img/pexels-suzy-hazelwood-1209029.jpg"}}, 
+[{"pk": 1, "model": "products.category", "fields": {"name": "sandwiches", "friendly_name": "Sandwiches", "image": "/assets/img/pexels-suzy-hazelwood-1209029.jpg"}}, 
     {"pk": 2, "model": "products.category", "fields": {"name": "salads", "friendly_name": "Salads"}}, 
     {"pk": 3, "model": "products.category", "fields": {"name": "dips", "friendly_name": "Dips"}}, 
     {"pk": 4, "model": "products.category", "fields": {"name": "meat", "friendly_name": "Meat"}}, 
