@@ -34,61 +34,63 @@
                                 <div class="text-blue text-xs mb-2">
                                     Choose from the options below to edit/add ...
                                 </div>
-                                <div class="row">
+                                <div class="row mb-2">
                                     {% if dataset == "products" %}
                                         <div class="col-4">
-                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger" 
                                                 href="{% url 'product_admin' %}?dataset=products">
                                                 Products</a>
                                         </div>
                                     {% else %}
                                         <div class="col-4">
-                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger" 
                                                 href="{% url 'product_admin' %}?dataset=products">
                                                 Products</a>
                                         </div>
                                     {% endif %}
                                     {% if dataset == "options" %}
                                         <div class="col-4">
-                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger" 
                                                 href="{% url 'product_admin' %}?dataset=options">
                                                 Options</a>
                                         </div>
                                     {% else %}
                                         <div class="col-4">
-                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger" 
                                                 href="{% url 'product_admin' %}?dataset=options">
                                                 Options</a>
                                         </div>
                                     {% endif %}
                                     {% if dataset == "categories" %}
                                         <div class="col-4">
-                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                            <a class="product-selected masthead-button btn btn-primary js-scroll-trigger" 
                                                 href="{% url 'product_admin' %}?dataset=categories">
                                                 Categories</a>
                                         </div>
                                     {% else %}
                                         <div class="col-4">
-                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
+                                            <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger" 
                                                 href="{% url 'product_admin' %}?dataset=categories">
                                                 categories</a>
                                         </div>
                                     {% endif %}
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 col-lg-4 mb-3 mt-1 justify-content-center p-0">
+                                    <div class="col-12 col-lg-5 justify-content-center p-0 ml-lg-n2 pl-xl-4">
                                         <div class="product-search-container mx-auto">
-                                            <form action="{% url 'product_admin' %}?dataset=products" method="GET">
-                                            {% csrf_token %}
-                                                <input class="product-search-input text-blue text-xs" type="text" name="product_search" id="product_search" placeholder=" search for {{ dataset }}...">
-                                                <button class="search-button text-center" type="submit">
-                                                        <i class="fas fa-search"></i>
-                                                </button>
-                                            </form>
+                                            <div class="d-inline">
+                                                <form class="ml-n4 ml-lg-0" action="{% url 'product_admin' %}?dataset=products" method="GET">
+                                                {% csrf_token %}
+                                                    <input class="product-search-input text-blue text-xs" type="text" name="product_search" id="product_search" placeholder=" search for {{ dataset }}...">
+                                                    <button class="search-button text-center" type="submit">
+                                                            <i class="fas fa-search"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 d-none d-lg-block"></div>
-                                    <div class="col-12 col-lg-4 justify-content-center p-0">
+                                    <div class="d-none d-lg-inline col-lg-2"></div>
+                                    <div class="col-12 col-lg-5 justify-content-center p-0">
                                         <div class="product-search-container mx-auto">
                                             <div class="d-inline">
                                                 <button class="search-button text-center" type="submit">

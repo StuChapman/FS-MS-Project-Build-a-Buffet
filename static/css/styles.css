@@ -10539,6 +10539,10 @@ body {
     vertical-align: middle;
 }
 
+.product-search-container {
+    margin-top: 1rem;
+}
+
 @media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .masthead {
         padding: 25vh 0;
@@ -10577,7 +10581,7 @@ body {
         margin-top: 3.5vh;
     }
     .text-xs {
-        font-size: calc(12px + (42 - 12) * ((100vw - 300px) / 1620));
+        font-size: calc(12px + (28 - 12) * ((100vw - 300px) / 1620));
     }
 }
 @media screen and (orientation: landscape){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
@@ -10643,7 +10647,7 @@ body {
     }
 }
 @media (min-width: 991px) {
-    .product-search-container {
-        width: 80%;
+    .product-search-input {
+        width:90%;
     }
 }
