@@ -5,7 +5,7 @@ from django.db.models import Q
 from .models import Product, Category, Options
 from basket.models import Basket
 from basket.contexts import basket_context
-from .forms import ProductAdminForm
+from .forms import ProductAdminForm, OptionsAdminForm, CategoryAdminForm
 
 # Create your views here.
 
@@ -186,29 +186,64 @@ def edit_product(request):
 def product_admin(request):
     """ A view to manage products, categories and options """
 
-    product_query = Product.objects.all().first()
-    product_query_length = Product.objects.all().count()
-    products = Product.objects.all()
+    """ reset all variables to handle errors """
+    form = ""
+    dataset = ""
+    return_query_length = ""
 
+    """ get information from form and/or request """
     if request.GET:
+        """ get information from request """
+        if 'dataset' in request.GET:
+            dataset = request.GET['dataset']
+            """ determine dataset to return """
+            if dataset == 'products':
+                return_query = Product.objects.all().first()
+                return_query_length = Product.objects.all().count()
+                form = ProductAdminForm(instance=return_query)
+            elif dataset == 'options':
+                return_query = Options.objects.all().first()
+                return_query_length = Options.objects.all().count()
+                form = OptionsAdminForm(instance=return_query)
+            elif dataset == 'categories':
+                return_query = Category.objects.all().first()
+                return_query_length = Category.objects.all().count()
+                form = CategoryAdminForm(instance=return_query)
+
+        """ get information from search form """
         if 'product_search' in request.GET:
             query = request.GET['product_search']
             if not query:
                 return redirect(reverse('profile'))
-
             queries = Q(name__icontains=query) | Q(description__icontains=query)
-            product_query = products.filter(queries).first()
-            product_query_length = products.filter(queries).count()
-            print(product_query_length)
-            form = ProductAdminForm(instance=product_query)
+
+            """ get information from request """
+            if 'dataset' in request.GET:
+                dataset = request.GET['dataset']
+                """ determine dataset to return """
+                if dataset == 'products':
+                    products = Product.objects.all()
+                    return_query = products.filter(queries).first()
+                    return_query_length = products.filter(queries).count()
+                elif dataset == 'options':
+                    options = Options.objects.all()
+                    return_query = options.filter(queries).first()
+                    return_query_length = options.filter(queries).count()
+                elif dataset == 'categories':
+                    categories = Category.objects.all()
+                    return_query = categories.filter(queries).first()
+                    return_query_length = categories.filter(queries).count()
+
+                    form = ProductAdminForm(instance=return_query)
         else:
-            form = ProductAdminForm(instance=product_query)
-        if 'dataset' in request.GET:
-            dataset = request.GET['dataset']
+            """ default to products in case of error """
+            return_query = Product.objects.all().first()
+            form = ProductAdminForm(instance=return_query)
 
     context = {
             'form': form,
-            'product_query_length': product_query_length
+            'dataset': dataset,
+            'return_query_length': return_query_length
         }
 
     return render(request, 'products/product_admin.html', context)

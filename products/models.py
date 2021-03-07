@@ -43,4 +43,4 @@ class Options(models.Model):
     option3 = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.category
