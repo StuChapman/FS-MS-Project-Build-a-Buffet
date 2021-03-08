@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                    <form class="mt-3" action="{% url 'update_product' form.name.value %}" method="POST" id="product-update-form">
+                                    <form class="mt-3" action="{% url 'update_product' form.sku.value %}" method="POST" id="product-update-form">
                                         {% csrf_token %}
                                         {{ form|crispy }}
                                         <button class="border-solid masthead-button btn btn-primary js-scroll-trigger float-right">Update</button>

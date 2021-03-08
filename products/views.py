@@ -222,7 +222,7 @@ def product_admin(request):
 
                 """ determine dataset to return """
                 if dataset == 'products':
-                    queries = Q(name__icontains=query) | Q(description__icontains=query)
+                    queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(sku__icontains=query)
                     products = Product.objects.all()
                     return_query = products.filter(queries).first()
                     return_query_length = products.filter(queries).count()
@@ -260,15 +260,22 @@ def update_product(request, form_id):
     if not request.user.is_superuser:
         # messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-
-
-
-    product = get_object_or_404(Product, name=form_id)
+    
     if request.method == 'POST':
-        form = ProductAdminForm(request.POST, request.FILES, instance=product)
+        if form_id[0:3] == 'pro':
+            product = get_object_or_404(Product, sku=form_id)
+            form = ProductAdminForm(request.POST, request.FILES, instance=product)
+            product_search = form_id
+        if form_id[0:3] == 'opt':
+            option = get_object_or_404(Options, sku=form_id)
+            form = ProductAdminForm(request.POST, request.FILES, instance=option)
+        if form_id[0:3] == 'cat':
+            category = get_object_or_404(Category, sku=form_id)
+            form = ProductAdminForm(request.POST, request.FILES, instance=category)
         if form.is_valid():
             form.save()
             # messages.success(request, 'Successfully updated product!')
+            product_search = form_id
             return render(request, 'home/index.html')
         # else:
             # messages.error(request, 'Failed to update product. Please ensure the form is valid.')
