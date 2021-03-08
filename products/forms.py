@@ -14,6 +14,8 @@ class ProductAdminForm(forms.ModelForm):
         labels and set autofocus on first field
         """
         super().__init__(*args, **kwargs)
+        # Credit: https://stackoverflow.com/questions/41271979/read-only-field-in-django-form
+        self.fields['sku'].widget.attrs['readonly'] = True
         placeholders = {
             'default_category': 'category',
             'default_sku': 'sku',

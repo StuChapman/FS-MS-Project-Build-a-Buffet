@@ -255,19 +255,21 @@ def product_admin(request):
 
 
 @login_required
-def update_product(request, product_name):
+def update_product(request, form_id):
     """ update a product on the menu """
     if not request.user.is_superuser:
         # messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
-    product = get_object_or_404(Product, name=product_name)
+
+
+    product = get_object_or_404(Product, name=form_id)
     if request.method == 'POST':
         form = ProductAdminForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
             # messages.success(request, 'Successfully updated product!')
-            return redirect(reverse('product_detail', args=[product.id]))
+            return render(request, 'home/index.html')
         # else:
             # messages.error(request, 'Failed to update product. Please ensure the form is valid.')
     else:
