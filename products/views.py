@@ -222,7 +222,7 @@ def product_admin(request):
 
                 """ determine dataset to return """
                 if dataset == 'products':
-                    queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(sku__icontains=query)
+                    queries = Q(name__icontains=query) | Q(description__icontains=query)
                     products = Product.objects.all()
                     return_query = products.filter(queries).first()
                     return_query_length = products.filter(queries).count()
@@ -260,23 +260,21 @@ def update_product(request, form_id):
     if not request.user.is_superuser:
         # messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     if request.method == 'POST':
         if form_id[0:3] == 'pro':
-            product = get_object_or_404(Product, sku=form_id)
+            product = get_object_or_404(Product, id_no=form_id)
             form = ProductAdminForm(request.POST, request.FILES, instance=product)
-            product_search = form_id
         if form_id[0:3] == 'opt':
-            option = get_object_or_404(Options, sku=form_id)
-            form = ProductAdminForm(request.POST, request.FILES, instance=option)
+            option = get_object_or_404(Options, id_no=form_id)
+            form = OptionsAdminForm(request.POST, request.FILES, instance=option)
         if form_id[0:3] == 'cat':
-            category = get_object_or_404(Category, sku=form_id)
-            form = ProductAdminForm(request.POST, request.FILES, instance=category)
+            category = get_object_or_404(Category, id_no=form_id)
+            form = CategoryAdminForm(request.POST, request.FILES, instance=category)
         if form.is_valid():
             form.save()
             # messages.success(request, 'Successfully updated product!')
-            product_search = form_id
-            return render(request, 'home/index.html')
+            return redirect(reverse('refresh_product_admin', args=[form_id]))
         # else:
             # messages.error(request, 'Failed to update product. Please ensure the form is valid.')
     else:
@@ -285,7 +283,36 @@ def update_product(request, form_id):
 
     context = {
         'form': form,
-        'product': product,
     }
 
     return render(request, 'home/index.html', context)
+
+
+@login_required
+def refresh_product_admin(request, form_id):
+    """ Return to previous item after updating """
+
+    """ reset all variables to handle errors """
+    form = ""
+
+    """ determine dataset to return """
+    if form_id[0:3] == "pro":
+        query = get_object_or_404(Product, id_no=form_id)
+        form = ProductAdminForm(instance=query)
+    elif form_id[0:3] == "opt":
+        query = get_object_or_404(Options, id_no=form_id)
+        form = OptionsAdminForm(instance=query)
+    elif form_id[0:3] == "cat":
+        query = get_object_or_404(Category, id_no=form_id)
+        form = CategoryAdminForm(instance=query)
+
+    else:
+        """ default to home in case of error """
+        return render(request, 'home/index.html')
+
+    context = {
+            'form': form,
+            'form_id': form_id,
+        }
+
+    return render(request, 'products/product_admin.html', context)

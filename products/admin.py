@@ -6,17 +6,18 @@ from .models import Product, Category, Options
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
-        'sku',
+        'id_no',
         'name',
         'category',
         'price',
     )
 
-    ordering = ('sku',)
+    ordering = ('id_no',)
 
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
+        'id_no',
         'friendly_name',
         'name',
     )
@@ -24,6 +25,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class OptionsAdmin(admin.ModelAdmin):
     list_display = (
+        'id_no',
         'category',
         'option1',
         'option2',

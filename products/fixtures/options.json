@@ -1,1 +1,1 @@
-[{"pk": 1, "model": "products.options", "fields": {"category": 1, "option1": "white", "option2": "brown", "option3": "wholemeal"}}]
+[{"pk": 1, "model": "products.options", "fields": {"id_no": "opt001", "category": 1, "option1": "white", "option2": "brown", "option3": "wholemeal"}}]
