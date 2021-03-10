@@ -299,12 +299,15 @@ def refresh_product_admin(request, form_id):
     if form_id[0:3] == "pro":
         query = get_object_or_404(Product, id_no=form_id)
         form = ProductAdminForm(instance=query)
+        dataset = 'products'
     elif form_id[0:3] == "opt":
         query = get_object_or_404(Options, id_no=form_id)
         form = OptionsAdminForm(instance=query)
+        dataset = 'options'
     elif form_id[0:3] == "cat":
         query = get_object_or_404(Category, id_no=form_id)
         form = CategoryAdminForm(instance=query)
+        dataset = 'categories'
 
     else:
         """ default to home in case of error """
@@ -313,6 +316,7 @@ def refresh_product_admin(request, form_id):
     context = {
             'form': form,
             'form_id': form_id,
+            'dataset': dataset,
         }
 
     return render(request, 'products/product_admin.html', context)
