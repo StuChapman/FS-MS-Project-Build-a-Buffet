@@ -297,6 +297,7 @@ def update_product(request, form_id):
 
     context = {
         'form': form,
+        
     }
 
     return render(request, 'home/index.html', context)
@@ -307,18 +308,28 @@ def refresh_product_admin(request, form_id):
 
     """ reset all variables to handle errors """
     form = ""
+    dataset = ""
+    return_query_length = 1
+    return_query_number = 1
 
     """ determine dataset to return """
     if form_id[0:3] == "pro":
         query = get_object_or_404(Product, id_no=form_id)
+        return_query_length = Product.objects.all().count()
+        # Credit: https://www.c-sharpcorner.com/article/how-to-get-the-last-n-characters-of-a-string-in-python/
+        return_query_number = int(form_id[-3::] * 1)
         form = ProductAdminForm(instance=query)
         dataset = 'products'
     elif form_id[0:3] == "opt":
         query = get_object_or_404(Options, id_no=form_id)
+        return_query_length = Options.objects.all().count()
+        return_query_number = int(form_id[-3::] * 1)
         form = OptionsAdminForm(instance=query)
         dataset = 'options'
     elif form_id[0:3] == "cat":
         query = get_object_or_404(Category, id_no=form_id)
+        return_query_length = Category.objects.all().count()
+        return_query_number = int(form_id[-3::] * 1)
         form = CategoryAdminForm(instance=query)
         dataset = 'categories'
 
@@ -330,6 +341,8 @@ def refresh_product_admin(request, form_id):
             'form': form,
             'form_id': form_id,
             'dataset': dataset,
+            'return_query_length': return_query_length,
+            'return_query_number': return_query_number,
         }
 
     return render(request, 'products/product_admin.html', context)
@@ -355,11 +368,53 @@ def next_product(request):
                 return_query_length = Product.objects.all().count()
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
-                return_query = Options.objects.all().first()
+                return_query = Options.objects.all()[return_query_number - 1]
                 return_query_length = Options.objects.all().count()
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
-                return_query = Category.objects.all().first()
+                return_query = Category.objects.all()[return_query_number - 1]
+                return_query_length = Category.objects.all().count()
+                form = CategoryAdminForm(instance=return_query)
+
+    else:
+        """ default to home in case of error """
+        return render(request, 'home/index.html')
+
+    context = {
+            'form': form,
+            'dataset': dataset,
+            'return_query_number': return_query_number,
+            'return_query_length': return_query_length,
+        }
+
+    return render(request, 'products/product_admin.html', context)
+
+
+@login_required
+def prev_product(request):
+
+    """ reset all variables to handle errors """
+    form = ""
+
+    """ get information from request """
+    if request.GET:
+        if 'this_product' in request.GET:
+            this_product = request.GET['this_product']
+            this_product_list = this_product.split(',')
+            dataset = this_product_list[0]
+            return_query_number = int(this_product_list[1]) - 1
+            print(return_query_number)
+            """ determine dataset to return """
+            if dataset == 'products':
+                return_query = Product.objects.all()[return_query_number - 1]
+                return_query_length = Product.objects.all().count()
+                form = ProductAdminForm(instance=return_query)
+            elif dataset == 'options':
+                return_query = Options.objects.all()[return_query_number - 1]
+                return_query_length = Options.objects.all().count()
+                form = OptionsAdminForm(instance=return_query)
+            elif dataset == 'categories':
+                return_query = Category.objects.all()[return_query_number - 1]
                 return_query_length = Category.objects.all().count()
                 form = CategoryAdminForm(instance=return_query)
 

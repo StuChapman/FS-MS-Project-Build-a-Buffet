@@ -236,6 +236,7 @@ I deployed to Github Pages by the following steps:
 18. Combining two or more querysets is from [stackoverflow.com](https://stackoverflow.com/questions/431628/how-to-combine-two-or-more-querysets-in-a-django-view)
 19. Getting the image from the Django form is from [stackoverflow.com](https://stackoverflow.com/questions/2236691/how-do-i-display-the-value-of-a-django-form-field-in-a-template)
 20. Making a form field readonly is from [stackoverflow.com](https://stackoverflow.com/questions/41271979/read-only-field-in-django-form)
+21. Get the last n chacters of a string is from [c-sharpcorner.com](https://www.c-sharpcorner.com/article/how-to-get-the-last-n-characters-of-a-string-in-python/)
 
 #### Code Institute
 

@@ -97,9 +97,17 @@
                                     <div class="col-12 col-lg-5 justify-content-center p-0">
                                         <div class="product-search-container mx-auto">
                                             <div class="d-inline">
-                                                <button class="search-button text-center" type="submit">
-                                                        <i class="fas fa-backward"></i>
-                                                </button>
+                                                {% if return_query_length != 0 %}
+                                                    {% if return_query_number == 1 %}
+                                                        <button class="search-button text-center ml-n4" type="submit">
+                                                                <i class="fas fa-step-backward"></i>
+                                                        </button>
+                                                    {% else %}
+                                                        <a class="search-button text-center ml-n4 pt-1" 
+                                                        href="{% url 'prev_product' %}?this_product={{ dataset }},{{ return_query_number }}">
+                                                        <i class="fas fa-backward"></i></a>
+                                                    {% endif %}
+                                                {% endif %}
                                             </div>
                                             <div class="d-inline">
                                                 {% if return_query_length != 0 %}
