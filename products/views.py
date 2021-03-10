@@ -190,6 +190,7 @@ def product_admin(request):
     form = ""
     dataset = ""
     return_query_length = ""
+    return_query_number = 1
 
     """ get information from form and/or request """
     if request.GET:
@@ -214,7 +215,16 @@ def product_admin(request):
         if 'product_search' in request.GET:
             query = request.GET['product_search']
             if not query:
-                return redirect(reverse('profile'))
+                """ default to products in case of blank query """
+                return_query = Product.objects.all().first()
+                dataset = 'products'
+                form = ProductAdminForm(instance=return_query)
+                context = {
+                        'form': form,
+                        'dataset': dataset,
+                        'return_query_length': return_query_length
+                    }
+                return render(request, 'products/product_admin.html', context)
 
             """ get information from request """
             if 'dataset' in request.GET:
@@ -225,30 +235,34 @@ def product_admin(request):
                     queries = Q(name__icontains=query) | Q(description__icontains=query)
                     products = Product.objects.all()
                     return_query = products.filter(queries).first()
+                    return_query_number = 1
                     return_query_length = products.filter(queries).count()
                     form = ProductAdminForm(instance=return_query)
                 elif dataset == 'options':
                     queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
                     options = Options.objects.all()
                     return_query = options.filter(queries).first()
+                    return_query_number = 1
                     return_query_length = options.filter(queries).count()
                     form = OptionsAdminForm(instance=return_query)
                 elif dataset == 'categories':
                     queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
                     categories = Category.objects.all()
                     return_query = categories.filter(queries).first()
+                    return_query_number = 1
                     return_query_length = categories.filter(queries).count()
                     form = CategoryAdminForm(instance=return_query)
 
     else:
         """ default to products in case of error """
-        return_query = Category.objects.all().first()
-        form = CategoryAdminForm(instance=return_query)
+        return_query = Product.objects.all().first()
+        form = ProductAdminForm(instance=return_query)
 
     context = {
             'form': form,
             'dataset': dataset,
-            'return_query_length': return_query_length
+            'return_query_length': return_query_length,
+            'return_query_number': return_query_number,
         }
 
     return render(request, 'products/product_admin.html', context)
@@ -290,7 +304,6 @@ def update_product(request, form_id):
 
 @login_required
 def refresh_product_admin(request, form_id):
-    """ Return to previous item after updating """
 
     """ reset all variables to handle errors """
     form = ""
@@ -317,6 +330,48 @@ def refresh_product_admin(request, form_id):
             'form': form,
             'form_id': form_id,
             'dataset': dataset,
+        }
+
+    return render(request, 'products/product_admin.html', context)
+
+
+@login_required
+def next_product(request):
+
+    """ reset all variables to handle errors """
+    form = ""
+
+    """ get information from request """
+    if request.GET:
+        if 'this_product' in request.GET:
+            this_product = request.GET['this_product']
+            this_product_list = this_product.split(',')
+            dataset = this_product_list[0]
+            return_query_number = int(this_product_list[1]) + 1
+            print(return_query_number)
+            """ determine dataset to return """
+            if dataset == 'products':
+                return_query = Product.objects.all()[return_query_number - 1]
+                return_query_length = Product.objects.all().count()
+                form = ProductAdminForm(instance=return_query)
+            elif dataset == 'options':
+                return_query = Options.objects.all().first()
+                return_query_length = Options.objects.all().count()
+                form = OptionsAdminForm(instance=return_query)
+            elif dataset == 'categories':
+                return_query = Category.objects.all().first()
+                return_query_length = Category.objects.all().count()
+                form = CategoryAdminForm(instance=return_query)
+
+    else:
+        """ default to home in case of error """
+        return render(request, 'home/index.html')
+
+    context = {
+            'form': form,
+            'dataset': dataset,
+            'return_query_number': return_query_number,
+            'return_query_length': return_query_length,
         }
 
     return render(request, 'products/product_admin.html', context)
