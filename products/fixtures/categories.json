@@ -7,4 +7,4 @@
     {"pk": 7, "model": "products.category", "fields": {"id_no": "cat007", "name": "pasta", "friendly_name": "Pasta", "image": "/assets/img/pexels-klaus-nielsen-6287555.jpg"}}, 
     {"pk": 8, "model": "products.category", "fields": {"id_no": "cat008", "name": "pastries", "friendly_name": "Pastries", "image": "/assets/img/pexels-trang-doan-952724.jpg"}}, 
     {"pk": 9, "model": "products.category", "fields": {"id_no": "cat009", "name": "fruit", "friendly_name": "Fruit", "image": "/assets/img/pexels-oleg-magni-890507.jpg"}}, 
-    {"pk": 10, "model": "products.category", "fields": {"id_no": "cat010", "name": "hot_food", "friendly_name": "Hot Food", "image": "/assets/img/pexels-jonathan-borba-2983099.jpg"}}]
+    {"pk": 10, "model": "products.category", "fields": {"id_no": "cat010", "name": "hot food", "friendly_name": "Hot Food", "image": "/assets/img/pexels-jonathan-borba-2983099.jpg"}}]
