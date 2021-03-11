@@ -189,6 +189,7 @@ def product_admin(request):
     """ reset all variables to handle errors """
     form = ""
     dataset = ""
+    query = ""
     return_query_length = ""
     return_query_number = 1
 
@@ -261,6 +262,7 @@ def product_admin(request):
     context = {
             'form': form,
             'dataset': dataset,
+            'query': query,
             'return_query_length': return_query_length,
             'return_query_number': return_query_number,
         }
@@ -297,7 +299,7 @@ def update_product(request, form_id):
 
     context = {
         'form': form,
-        
+
     }
 
     return render(request, 'home/index.html', context)
@@ -361,19 +363,23 @@ def next_product(request):
             this_product_list = this_product.split(',')
             dataset = this_product_list[0]
             return_query_number = int(this_product_list[1]) + 1
-            print(return_query_number)
+            return_query_length = this_product_list[2]
+            query = this_product_list[3]
             """ determine dataset to return """
             if dataset == 'products':
-                return_query = Product.objects.all()[return_query_number - 1]
-                return_query_length = Product.objects.all().count()
+                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                products = Product.objects.all()
+                return_query = products.filter(queries)[return_query_number - 1]
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
+                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                products = Options.objects.all()
                 return_query = Options.objects.all()[return_query_number - 1]
-                return_query_length = Options.objects.all().count()
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
+                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                products = Category.objects.all()
                 return_query = Category.objects.all()[return_query_number - 1]
-                return_query_length = Category.objects.all().count()
                 form = CategoryAdminForm(instance=return_query)
 
     else:
@@ -383,6 +389,7 @@ def next_product(request):
     context = {
             'form': form,
             'dataset': dataset,
+            'return_query': return_query,
             'return_query_number': return_query_number,
             'return_query_length': return_query_length,
         }
@@ -403,19 +410,23 @@ def prev_product(request):
             this_product_list = this_product.split(',')
             dataset = this_product_list[0]
             return_query_number = int(this_product_list[1]) - 1
-            print(return_query_number)
+            return_query_length = this_product_list[2]
+            query = this_product_list[3]
             """ determine dataset to return """
             if dataset == 'products':
+                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                products = Product.objects.all()
                 return_query = Product.objects.all()[return_query_number - 1]
-                return_query_length = Product.objects.all().count()
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
+                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                products = Options.objects.all()
                 return_query = Options.objects.all()[return_query_number - 1]
-                return_query_length = Options.objects.all().count()
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
+                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                products = Category.objects.all()
                 return_query = Category.objects.all()[return_query_number - 1]
-                return_query_length = Category.objects.all().count()
                 form = CategoryAdminForm(instance=return_query)
 
     else:
