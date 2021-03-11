@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <body onload="createCookie()"></body>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container d-flex align-items-center opaque-70">
+            <div class="mx-auto text-center">
+                <h1 class="mx-auto text-uppercase flex-margin-b">Customer Service</h1>
+                <h2 class="mx-auto flex-margin-b">If you have a question, please submit it in the form below...</h2>
+                <p class="text-muted">Question...</p>
+                        <form class="mt-3" action="{% url 'profile' %}" method="POST" id="user-question-form">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="width-50 border-solid masthead-button btn btn-primary js-scroll-trigger float-right">Submit</button>
+                        </form>
+            </div>
+        </div>
+    </header>
+    <!-- Produce-->
+    <section class="projects-section bg-light" id="projects">
+        <div class="container">
+            <!-- Produce One Row-->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-lg-6"><img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" /></div>
+                <div class="col-lg-6">
+                    <div class="text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-left">
+                                <h4 class="text-blue">Hot and cold</h4>
+                                <p class="mb-0 text-blue">Delivered, ready to eat in Ziplok<sup>TM</sup> microwaveable bags, to keep your food fresh and delicious. Simply remove the packaging and serve, or for hot food, heat in the microwave for 30 seconds before serving.</p>
+                                <hr class="d-none d-lg-block mb-0 ml-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produce Two Row-->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-lg-6"><img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5944.jpg" alt="chips-n-dips" /></div>
+                <div class="col-lg-6 order-lg-first">
+                    <div class="text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-right">
+                                <h4 class="text-blue">Options for all diets</h4>
+                                <p class="mb-0 text-blue">A full choice of vegetarian and vegan options, both hot and cold, with allergy advice* provided across the full range of allergens.
+                                    <br>
+                                    * although every care is taken in our production process, we cannot guarantee allergen free.</p>
+                                <hr class="d-none d-lg-block mb-0 mr-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact-->
+    <section class="contact-section bg-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Address</h4>
+                            <hr class="my-4" />
+                            <div class="small text-black-50">22 Acacia Avenue</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Email</h4>
+                            <hr class="my-4" />
+                            <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Phone</h4>
+                            <hr class="my-4" />
+                            <div class="small text-black-50">+1 (555) 555-5555</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block postloadjs %}
+    <script>
+        var basketCookie = '{{ cookie_key }}'; // Credit: https://stackoverflow.com/questions/8683922/how-can-i-pass-my-context-variables-to-a-javascript-file-in-django
+        console.log(basketCookie)
+         // Credit: https://www.w3schools.com/js/js_cookies.asp
+        function setCookie(cname,cvalue,exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function createCookie() {
+            var existing = getCookie(basketCookie);
+            if (existing != "" && existing != null) {
+                return;
+            } else {
+                var cookieValue = (Math.random()*100000000).toFixed(0);
+                setCookie(basketCookie, cookieValue, 365);
+            }
+        }
+    </script>
+{% endblock %}
