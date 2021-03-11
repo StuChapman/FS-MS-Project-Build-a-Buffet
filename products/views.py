@@ -223,6 +223,7 @@ def product_admin(request):
                 context = {
                         'form': form,
                         'dataset': dataset,
+                        'return_query_number': return_query_number,
                         'return_query_length': return_query_length
                     }
                 return render(request, 'products/product_admin.html', context)
@@ -230,27 +231,25 @@ def product_admin(request):
             """ get information from request """
             if 'dataset' in request.GET:
                 dataset = request.GET['dataset']
+                return_query_number = 1
 
                 """ determine dataset to return """
                 if dataset == 'products':
                     queries = Q(name__icontains=query) | Q(description__icontains=query)
                     products = Product.objects.all()
                     return_query = products.filter(queries).first()
-                    return_query_number = 1
                     return_query_length = products.filter(queries).count()
                     form = ProductAdminForm(instance=return_query)
                 elif dataset == 'options':
                     queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
                     options = Options.objects.all()
                     return_query = options.filter(queries).first()
-                    return_query_number = 1
                     return_query_length = options.filter(queries).count()
                     form = OptionsAdminForm(instance=return_query)
                 elif dataset == 'categories':
                     queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
                     categories = Category.objects.all()
                     return_query = categories.filter(queries).first()
-                    return_query_number = 1
                     return_query_length = categories.filter(queries).count()
                     form = CategoryAdminForm(instance=return_query)
 
@@ -364,7 +363,7 @@ def next_product(request):
             this_product_list = this_product.split(',')
             dataset = this_product_list[0]
             return_query_number = int(this_product_list[1]) + 1
-            return_query_length = this_product_list[2]
+            return_query_length = int(this_product_list[2])
             query = this_product_list[3]
             """ determine dataset to return """
             if dataset == 'products':
@@ -373,14 +372,14 @@ def next_product(request):
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
-                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
                 products = Options.objects.all()
-                return_query = Options.objects.all()[return_query_number - 1]
+                return_query = products.filter(queries)[return_query_number - 1]
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
-                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
                 products = Category.objects.all()
-                return_query = Category.objects.all()[return_query_number - 1]
+                return_query = products.filter(queries)[return_query_number - 1]
                 form = CategoryAdminForm(instance=return_query)
 
     else:
@@ -415,9 +414,6 @@ def prev_product(request):
             return_query_number = int(this_product_list[1]) - 1
             return_query_length = this_product_list[2]
             query = this_product_list[3]
-            print(return_query_number)
-            print(return_query_length)
-            print(query)
             """ determine dataset to return """
             if dataset == 'products':
                 queries = Q(name__icontains=query) | Q(description__icontains=query)
@@ -425,12 +421,12 @@ def prev_product(request):
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
-                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
                 products = Options.objects.all()
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
-                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
                 products = Category.objects.all()
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = CategoryAdminForm(instance=return_query)
