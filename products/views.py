@@ -183,6 +183,7 @@ def edit_product(request):
     return render(request, 'products/edit_product.html', context)
 
 
+@login_required
 def product_admin(request):
     """ A view to manage products, categories and options """
 
@@ -444,3 +445,40 @@ def prev_product(request):
         }
 
     return render(request, 'products/product_admin.html', context)
+
+
+def search_products(request):
+    """ A view to search all products """
+
+    """ reset all variables to handle errors """
+    query = ""
+
+    """ get information from form and/or request """
+    if request.GET:
+
+        """ get information from search form """
+        if 'product_search' in request.GET:
+            query = request.GET['product_search']
+            if not query:
+                """ default to all products in case of blank query """
+                product_results = Product.objects.all()
+
+                context = {
+                        'product_results': product_results,
+                    }
+                return render(request, 'products/search_products.html', context)
+
+            queries = Q(name__icontains=query) | Q(description__icontains=query)
+            products = Product.objects.all()
+            product_results = products.filter(queries)
+
+    else:
+        """ default to products in case of error """
+        return_query = Product.objects.all().first()
+        product_results = products.filter(queries).first()
+
+    context = {
+            'product_results': product_results,
+        }
+
+    return render(request, 'products/search_products.html', context)

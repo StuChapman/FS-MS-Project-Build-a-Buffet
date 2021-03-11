@@ -10,4 +10,5 @@ urlpatterns = [
     path('refresh_product_admin/<form_id>', views.refresh_product_admin, name='refresh_product_admin'),
     path('next_product/', views.next_product, name='next_product'),
     path('prev_product/', views.prev_product, name='prev_product'),
+    path('search_products/', views.search_products, name='search_products'),
 ]
