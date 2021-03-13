@@ -91,6 +91,22 @@ def create_order(request):
             'county': request.POST['county'],
         }
 
+    if request.user.is_authenticated:
+        if 'save-info' in request.POST:
+            print('save-info')
+            """ save the user info into user profile """
+            profile = UserProfile.objects.get(user=request.user)
+
+            profile.default_full_name = request.POST['full_name']
+            profile.default_phone_number = request.POST['phone_number']
+            profile.default_country = request.POST['country']
+            profile.default_postcode = request.POST['postcode']
+            profile.default_town_or_city = request.POST['town_or_city']
+            profile.default_street_address1 = request.POST['street_address1']
+            profile.default_street_address2 = request.POST['street_address2']
+            profile.default_county = request.POST['county']
+            profile.save()
+
         """ create a unique order number """
         order_number = uuid.uuid4().hex[:10]
 
