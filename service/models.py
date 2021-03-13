@@ -1,16 +1,17 @@
-# Credit: Code-Institute
 from django.db import models
-from django.contrib.auth.models import User
+
+# Create your models here.
 
 
-class UserQuestion(models.Model):
-    """
-    A model for recieving customer questions
-    """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    default_full_name = models.CharField(max_length=20, null=True, blank=True)
-    default_email = models.CharField(max_length=20, null=True, blank=True)
-    default_message = models.CharField(max_length=254, null=True, blank=True)
+class Questions(models.Model):
+    # Credit: https://www.fullstackpython.com/django-db-models-autofield-examples.html
+    question_number = models.AutoField(verbose_name='item_number',
+                                       serialize=True,
+                                       auto_created=True,
+                                       primary_key=True)
+    name = models.CharField(max_length=254, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    question = models.CharField(max_length=254)
 
     def __str__(self):
-        return self.user.username
+        return self.name

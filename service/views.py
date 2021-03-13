@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from .models import UserQuestion
-from .forms import UserQuestionForm
+# Credit: Code-Institute
+from django.shortcuts import render
+
 
 from basket.contexts import basket_context
 
@@ -15,13 +15,9 @@ def service(request):
     basket_total = context_items['basket_total']
     cookie_key = context_items['cookie_key']
 
-    profile = get_object_or_404(UserQuestion, user=request.user)
-    form = UserQuestionForm(instance=profile)
-
     context = {
-            'cookie_key': cookie_key,
-            'basket_total': basket_total,
-            'form': form,
-        }
+        'basket_total': basket_total,
+        'cookie_key': cookie_key,
+    }
 
     return render(request, 'service/service.html', context)

@@ -11,95 +11,30 @@
 
 {% block content %}
     <body onload="createCookie()"></body>
-    <!-- Masthead-->
-    <header class="masthead">
-        <div class="container d-flex align-items-center opaque-70">
-            <div class="mx-auto text-center">
-                <h1 class="mx-auto text-uppercase flex-margin-b">Customer Service</h1>
-                <h2 class="mx-auto flex-margin-b">If you have a question, please submit it in the form below...</h2>
-                <p class="text-muted">Question...</p>
-                        <form class="mt-3" action="{% url 'profile' %}" method="POST" id="user-question-form">
-                            {% csrf_token %}
-                            {{ form|crispy }}
-                            <button class="width-50 border-solid masthead-button btn btn-primary js-scroll-trigger float-right">Submit</button>
-                        </form>
-            </div>
+
+<section class="products-section">
+    <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Customer Service</h1>
+    <p class="product-text-three mx-2 text-center mb-2 text-blue">If you have a question, please submit it in the form below...</p>
+    <div class="product-container row w-100 mx-0 justify-content-center mt-0 text-xl-left">
+        <div class="col-lg-4">
+            <form class="mt-3 text-center " action="{% url 'service' %}" method="POST" id="user-question-form">
+                {% csrf_token %}
+                    {% if request.user.is_authenticated %}
+                        <div><input class="mb-2 text-blue text-xs" type="text" value="{{ request.user }}" name="current_user"></div>
+                        <div><input class="mb-2 text-blue text-xs" type="text" value="{{ request.user.email }}" name="current_user_email"></div>
+                        <div><textarea class="width-100 mb-2 text-blue text-xs" rows="2" value="" name="customer_question" placeholder = "type your question here..."></textarea></div>
+                    {% else %}
+                        <div><input class="mb-2 text-blue text-xs" type="text" value="" name="guest_user" placeholder = "name"></div>
+                        <div><input class="mb-2 text-blue text-xs" type="text" value="" name="guest_user_email" placeholder = "email"></div>
+                        <div><textarea class="width-100 mb-2 text-blue text-xs" rows="2" value="" name="customer_question" placeholder = "type your question here..."></textarea></div>
+                    {% endif %}
+                <button class="width-50 px-auto border-solid masthead-button btn btn-primary js-scroll-trigger">Submit</button>
+            </form>
         </div>
-    </header>
-    <!-- Produce-->
-    <section class="projects-section bg-light" id="projects">
-        <div class="container">
-            <!-- Produce One Row-->
-            <div class="row justify-content-center no-gutters">
-                <div class="col-lg-6"><img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" /></div>
-                <div class="col-lg-6">
-                    <div class="text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h4 class="text-blue">Hot and cold</h4>
-                                <p class="mb-0 text-blue">Delivered, ready to eat in Ziplok<sup>TM</sup> microwaveable bags, to keep your food fresh and delicious. Simply remove the packaging and serve, or for hot food, heat in the microwave for 30 seconds before serving.</p>
-                                <hr class="d-none d-lg-block mb-0 ml-0" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Produce Two Row-->
-            <div class="row justify-content-center no-gutters">
-                <div class="col-lg-6"><img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5944.jpg" alt="chips-n-dips" /></div>
-                <div class="col-lg-6 order-lg-first">
-                    <div class="text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-right">
-                                <h4 class="text-blue">Options for all diets</h4>
-                                <p class="mb-0 text-blue">A full choice of vegetarian and vegan options, both hot and cold, with allergy advice* provided across the full range of allergens.
-                                    <br>
-                                    * although every care is taken in our production process, we cannot guarantee allergen free.</p>
-                                <hr class="d-none d-lg-block mb-0 mr-0" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Contact-->
-    <section class="contact-section bg-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Address</h4>
-                            <hr class="my-4" />
-                            <div class="small text-black-50">22 Acacia Avenue</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-envelope text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Email</h4>
-                            <hr class="my-4" />
-                            <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Phone</h4>
-                            <hr class="my-4" />
-                            <div class="small text-black-50">+1 (555) 555-5555</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
+
+{% include 'products/includes/contact.html' %}
 {% endblock %}
 
 {% block postloadjs %}
