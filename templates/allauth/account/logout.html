@@ -7,15 +7,22 @@
 {% block content %}
 <h1>{% trans "Sign Out" %}</h1>
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+<section class="products-section">
+    <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Sign Out</h1>
+    <div class="product-container row w-100 mx-0 justify-content-center mt-0 text-xl-left">
+        <div class="col-lg-4">
+            <p class="product-text-three mx-2 text-center mb-5 text-blue"> {% trans 'Are you sure you want to sign out?' %}</p>
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
+            <form class="login login-text text-center text-blue" method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <button class="width-50 mx-auto border-solid masthead-button btn btn-primary js-scroll-trigger" type="submit">{% trans 'Sign Out' %}</button>
+            </form>
+        </div>
+    </div>
+</section>
 
-
+{% include 'products/includes/contact.html' %}
 {% endblock %}
