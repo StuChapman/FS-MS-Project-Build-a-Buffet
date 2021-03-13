@@ -33,6 +33,9 @@ class Product(models.Model):
 
 
 class Options(models.Model):
+    
+    class Meta:
+        verbose_name_plural = 'Options'
 
     category = models.ForeignKey('Category', null=True, blank=True,
                                  on_delete=models.SET_NULL)

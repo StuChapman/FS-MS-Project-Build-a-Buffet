@@ -72,16 +72,10 @@ def checkout(request):
 def create_order(request):
     """ A view to return the checkout page """
 
-    """ check for a basket cookie """
-    context_items = basket_context(request)
-    basket_total = context_items['basket_total']
-    cookie_key = context_items['cookie_key']
-
     baskets = ""
 
     """ fetch the datasets from the models """
     basket = Basket.objects.all()
-    order_items = Order_items.objects.all()
 
     """ check for the customer info from checkout """
     if request.POST:
