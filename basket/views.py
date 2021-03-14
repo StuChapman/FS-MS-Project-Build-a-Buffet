@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
-import urllib
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
 from django.contrib import messages
@@ -17,15 +16,12 @@ def basket(request):
     """ check for a basket cookie """
     context_items = basket_context(request)
     cookie = context_items['cookie']
-    cookie_key = context_items['cookie_key']
 
     """ set all the variables to blank """
     category = ""
     selected = ""
     options = ""
-    this_product = ""
     baskets = ""
-    basket_total = ""
     servings = ""
 
     """ fetch the datasets from the models """
@@ -51,7 +47,6 @@ def basket(request):
             selected = product_add_list[2]
 
             """ filter the datasets on the variables from product_add """
-            this_product = products.filter(name=product)
             options = options.filter(category__in=categories)
             """ Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html """
             price = products.get(name=product).price
@@ -132,8 +127,8 @@ def basket(request):
 
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
                 return redirect(reverse('basket_success', args=[cookie]))
-
-    return redirect(reverse('basket_success', args=[cookie]))
+    basket_key = cookie
+    return redirect(reverse('basket_success', args=[basket_key]))
 
 
 def edit_basket_item(request):
@@ -156,6 +151,7 @@ def edit_basket_item(request):
     servings_plusten = ""
     edit = "edit"
 
+    """ fetch the datasets from the models """
     categories = Category.objects.all()
     products = Product.objects.all()
     options = Options.objects.all()
@@ -199,14 +195,6 @@ def edit_basket_item(request):
 def delete_basket_item(request):
     """ A view to delete an item from the current basket """
 
-    """ check for a basket cookie """
-    context_items = basket_context(request)
-    basket_total = context_items['basket_total']
-    cookie = context_items['cookie']
-    cookie_key = context_items['cookie_key']
-
-    products = Product.objects.all()
-    options = Options.objects.all()
     baskets = Basket.objects.all()
 
     if request.GET:
@@ -215,12 +203,12 @@ def delete_basket_item(request):
             item_number = request.GET['delete_item']
             this_item = baskets.get(item_number=item_number)
             this_item.delete()
-            cookie = this_item.cookie
+            basket_key = this_item.cookie
 
-    return redirect(reverse('basket_success', args=[cookie]))
+    return redirect(reverse('basket_success', args=[basket_key]))
 
 
-def basket_success(request, cookie):
+def basket_success(request, basket_key):
     """
     A view to avoid resubmitting form on refresh of basket
     """
@@ -236,24 +224,28 @@ def basket_success(request, cookie):
 
     """ check for a basket cookie """
     context_items = basket_context(request)
+    cookie = context_items['cookie']
     cookie_key = context_items['cookie_key']
 
+    """ fetch the datasets from the models """
     products = Product.objects.all()
     options = Options.objects.all()
 
-    this_basket = Basket.objects.filter(cookie=cookie)
-    print(this_basket.count())
+    """ get the current basket list """
+    this_basket = Basket.objects.filter(cookie=basket_key)
+
+    """ if only one basket item, use get_object_or_404 """
     if this_basket.count() == 1:
-        this_basket = get_object_or_404(Basket, cookie=cookie)
+        this_basket = get_object_or_404(Basket, cookie=basket_key)
         this_product = products.filter(name=this_basket.name)
         selected = this_basket.option
         product = this_basket.name
         category = this_basket.category
-        cookie = this_basket.cookie
+        basket_key = this_basket.cookie
 
     # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
-    basket_total = Basket.objects.filter(cookie=cookie).aggregate(Sum('total_price'))
-    baskets = Basket.objects.filter(cookie=cookie)
+    basket_total = Basket.objects.filter(cookie=basket_key).aggregate(Sum('total_price'))
+    baskets = Basket.objects.filter(cookie=basket_key)
     # Credit: https://stackoverflow.com/questions/8786175/django-order-by-on-queryset-objects
     # Credit: https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending
     baskets = baskets.order_by('-item_number')

@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.basket, name='basket'),
     path('edit_basket_item/', views.edit_basket_item, name='edit_basket_item'),
     path('delete_basket_item/', views.delete_basket_item, name='delete_basket_item'),
-    path('basket_success/<cookie>', views.basket_success, name='basket_success'),
+    path('basket_success/<basket_key>', views.basket_success, name='basket_success'),
 ]
