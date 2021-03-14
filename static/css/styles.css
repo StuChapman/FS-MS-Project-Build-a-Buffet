@@ -10481,9 +10481,12 @@ body {
     right: 15px;
     z-index: 99999999999;
 }
-
 .custom-toast {
     overflow: visible;
+}
+.toast-header {
+    color: white;
+    background-color: #426765;
 }
 
 /* general styling */

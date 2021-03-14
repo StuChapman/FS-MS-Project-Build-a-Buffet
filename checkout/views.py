@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib import messages
 
 import uuid
 
@@ -93,7 +94,6 @@ def create_order(request):
 
     if request.user.is_authenticated:
         if 'save-info' in request.POST:
-            print('save-info')
             """ save the user info into user profile """
             profile = UserProfile.objects.get(user=request.user)
 
@@ -144,6 +144,7 @@ def create_order(request):
                                     option=option,
                                     total_price=total_price)
         order_basket.save()
+        messages.success(request, 'Thank you for your order!')
         basket.delete()
 
     return redirect(reverse('order_success', args=[order_number]))

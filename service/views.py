@@ -1,5 +1,6 @@
 # Credit: Code-Institute
 from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
 
 from basket.contexts import basket_context
 from .models import Questions
@@ -29,6 +30,7 @@ def service(request):
                                  email=email,
                                  question=question)
         new_question.save()
+        messages.success(request, 'Your question has been sent - we will reply shortly')
         return redirect(reverse('home'))
 
     context = {
