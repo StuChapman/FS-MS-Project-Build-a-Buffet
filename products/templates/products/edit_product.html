@@ -27,7 +27,7 @@
                 <div class="col-xl-6">
                     {% if category %}
                         {% for image in image %}
-                            <img class="img-fluid image-80" src="{{ image.image }}" alt="{{ category }} image" />
+                            <img class="img-fluid image-80" src="/media/{{ image.image }}" alt="{{ category }} image" />
                         {% endfor %}
                     {% else %}
                         <img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" />
@@ -53,13 +53,13 @@
                                         {% if selected == "selected-one" %}
                                             {% for option in options %}
                                                 <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-one,{{ item_number }},{{ servings }}">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-one,{{ item_number }},{{ servings }},{{total_price}}">
                                                     {{ option.option1 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
                                                 <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-one,{{ item_number }},{{ servings }}">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-one,{{ item_number }},{{ servings }},{{total_price}}">
                                                     {{ option.option1 }}</a>
                                             {% endfor %}
                                         {% endif %}
@@ -68,13 +68,13 @@
                                         {% if selected == "selected-two" %}
                                             {% for option in options %}
                                                 <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-two,{{ item_number }},{{ servings }}">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-two,{{ item_number }},{{ servings }},{{total_price}}">
                                                     {{ option.option2 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
                                                 <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-two,{{ item_number }},{{ servings }}">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-two,{{ item_number }},{{ servings }},{{total_price}}">
                                                     {{ option.option2 }}</a>
                                             {% endfor %}
                                         {% endif %}
@@ -83,13 +83,13 @@
                                         {% if selected == "selected-three" %}
                                             {% for option in options %}
                                                 <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-three,{{ item_number }},{{ servings }}">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-three,{{ item_number }},{{ servings }},{{total_price}}">
                                                     {{ option.option3 }}</a>
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
                                                 <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
-                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-three,{{ item_number }},{{ servings }}">
+                                                    href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-three,{{ item_number }},{{ servings }},{{total_price}}">
                                                     {{ option.option3 }}</a>
                                             {% endfor %}
                                         {% endif %}

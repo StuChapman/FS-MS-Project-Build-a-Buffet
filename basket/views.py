@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+import urllib
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
+from django.contrib import messages
 
 from products.models import Product, Category, Options
 from basket.models import Basket
@@ -77,6 +79,8 @@ def basket(request):
                 updated_basket.save()
                 existing_basket.delete()
 
+                messages.success(request, 'basket updated!')
+
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
 
                 """ if there is no existing basket, create a new one """
@@ -113,7 +117,6 @@ def basket(request):
                     total_price = total_price = float(price) * float(servings)
 
                 """ filter the datasets on the variables from product_add """
-                this_product = products.filter(name=product)
                 options = options.filter(category__in=categories)
                 # Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html
 
@@ -126,33 +129,71 @@ def basket(request):
                                         total_price=total_price)
                 updated_basket.save()
                 existing_basket.delete()
-                baskets = Basket.objects.filter(cookie=cookie)
-                # Credit: https://stackoverflow.com/questions/8786175/django-order-by-on-queryset-objects
-                # Credit: https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending
-                baskets = baskets.order_by('-item_number')
 
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
-                baskets = Basket.objects.filter(cookie=cookie)
-                baskets = baskets.order_by('-item_number')
-    else:
-        baskets = Basket.objects.filter(cookie=cookie)
-        baskets = baskets.order_by('-item_number')
+                return redirect(reverse('basket_success', args=[cookie]))
 
-    # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
-    basket_total = Basket.objects.filter(cookie=cookie).aggregate(Sum('total_price'))
+    return redirect(reverse('basket_success', args=[cookie]))
+
+
+def edit_basket_item(request):
+    """ A view to edit basket items """
+
+    """ check for a basket cookie """
+    context_items = basket_context(request)
+    basket_total = context_items['basket_total']
+    cookie_key = context_items['cookie_key']
+
+    category = ""
+    products = ""
+    product = ""
+    selected = ""
+    image = ""
+    options = ""
+    servings = ""
+    total_price = ""
+    item_number = ""
+    servings_plusten = ""
+    edit = "edit"
+
+    categories = Category.objects.all()
+    products = Product.objects.all()
+    options = Options.objects.all()
+    basket = Basket.objects.all()
+
+    if request.GET:
+        if 'item_number' in request.GET:
+            item_number = request.GET['item_number']
+            category = basket.get(item_number=item_number).category
+            selected = basket.get(item_number=item_number).option
+            product = basket.get(item_number=item_number).name
+            price = products.get(name=product).price
+            products = products.filter(name=product)
+            image = categories.filter(name=category)
+            options = options.filter(category__in=categories)
+            servings = basket.get(item_number=item_number).servings
+            servings_plusten = float(servings) + 10
+            total_price = float(servings) * float(price)
+            # Credit: https://tutorialdeep.com/knowhow/limit-float-to-two-decimal-places-python/
+            total_price = format(float(total_price), '.2f')
 
     context = {
             'products': products,
-            'this_product': this_product,
-            'options': options,
+            'category': category,
+            'product': product,
             'selected': selected,
-            'baskets': baskets,
+            'image': image,
+            'options': options,
+            'servings': servings,
+            'total_price': total_price,
+            'item_number': item_number,
+            'servings_plusten': servings_plusten,
+            'edit': edit,
             'cookie_key': cookie_key,
-            'cookie': cookie,
             'basket_total': basket_total,
         }
 
-    return render(request, 'basket/basket.html', context)
+    return render(request, 'products/edit_product.html', context)
 
 
 def delete_basket_item(request):
@@ -173,23 +214,57 @@ def delete_basket_item(request):
         if 'delete_item' in request.GET:
             item_number = request.GET['delete_item']
             this_item = baskets.get(item_number=item_number)
-            product = this_item.name
-            category = this_item.category
             this_item.delete()
+            cookie = this_item.cookie
 
-    baskets = Basket.objects.filter(cookie=cookie)
-    baskets = baskets.order_by('-item_number')
+    return redirect(reverse('basket_success', args=[cookie]))
+
+
+def basket_success(request, cookie):
+    """
+    A view to avoid resubmitting form on refresh of basket
+    """
+
+    """ set all the variables to blank """
+    product = ""
+    category = ""
+    this_product = ""
+    selected = ""
+    baskets = ""
+    cookie_key = ""
+    basket_total = ""
+
+    """ check for a basket cookie """
+    context_items = basket_context(request)
+    cookie_key = context_items['cookie_key']
+
+    products = Product.objects.all()
+    options = Options.objects.all()
+
+    this_basket = Basket.objects.filter(cookie=cookie)
+    print(this_basket.count())
+    if this_basket.count() == 1:
+        this_basket = get_object_or_404(Basket, cookie=cookie)
+        this_product = products.filter(name=this_basket.name)
+        selected = this_basket.option
+        product = this_basket.name
+        category = this_basket.category
+        cookie = this_basket.cookie
 
     # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
     basket_total = Basket.objects.filter(cookie=cookie).aggregate(Sum('total_price'))
-    if basket_total['total_price__sum'] is None:
-        basket_total = ""
+    baskets = Basket.objects.filter(cookie=cookie)
+    # Credit: https://stackoverflow.com/questions/8786175/django-order-by-on-queryset-objects
+    # Credit: https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending
+    baskets = baskets.order_by('-item_number')
 
     context = {
-            'category': category,
-            'product': product,
             'products': products,
+            'product': product,
+            'category': category,
+            'this_product': this_product,
             'options': options,
+            'selected': selected,
             'baskets': baskets,
             'cookie_key': cookie_key,
             'cookie': cookie,

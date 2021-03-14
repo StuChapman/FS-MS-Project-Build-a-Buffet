@@ -95,11 +95,13 @@ def product_detail(request):
         if 'product_edit' in request.GET:
             product_edit = request.GET['product_edit']
             product_edit_list = product_edit.split(',')
+            print(product_edit)
             category = product_edit_list[0]
             product = product_edit_list[1]
             selected = product_edit_list[2]
             item_number = product_edit_list[3]
             servings = product_edit_list[4]
+            total_price = product_edit_list[5]
             servings_plusten = float(servings) + 10
             products = products.filter(name=product)
             image = categories.filter(name=category)
@@ -113,6 +115,7 @@ def product_detail(request):
                     'image': image,
                     'options': options,
                     'servings': servings,
+                    'total_price': total_price,
                     'item_number': item_number,
                     'servings_plusten': servings_plusten,
                     'cookie_key': cookie_key,
@@ -121,66 +124,6 @@ def product_detail(request):
 
             return render(request, 'products/edit_product.html', context)
     return render(request, 'products/product_detail.html', context)
-
-
-def edit_product(request):
-    """ A view to edit basket items """
-
-    """ check for a basket cookie """
-    context_items = basket_context(request)
-    basket_total = context_items['basket_total']
-    cookie_key = context_items['cookie_key']
-
-    category = ""
-    products = ""
-    product = ""
-    selected = ""
-    image = ""
-    options = ""
-    servings = ""
-    total_price = ""
-    item_number = ""
-    servings_plusten = ""
-    edit = "edit"
-
-    categories = Category.objects.all()
-    products = Product.objects.all()
-    options = Options.objects.all()
-    basket = Basket.objects.all()
-
-    if request.GET:
-        if 'item_number' in request.GET:
-            item_number = request.GET['item_number']
-            category = basket.get(item_number=item_number).category
-            selected = basket.get(item_number=item_number).option
-            product = basket.get(item_number=item_number).name
-            price = products.get(name=product).price
-            products = products.filter(name=product)
-            image = categories.filter(name=category)
-            options = options.filter(category__in=categories)
-            servings = basket.get(item_number=item_number).servings
-            servings_plusten = float(servings) + 10
-            total_price = float(servings) * float(price)
-            # Credit: https://tutorialdeep.com/knowhow/limit-float-to-two-decimal-places-python/
-            total_price = format(float(total_price), '.2f')
-
-    context = {
-            'products': products,
-            'category': category,
-            'product': product,
-            'selected': selected,
-            'image': image,
-            'options': options,
-            'servings': servings,
-            'total_price': total_price,
-            'item_number': item_number,
-            'servings_plusten': servings_plusten,
-            'edit': edit,
-            'cookie_key': cookie_key,
-            'basket_total': basket_total,
-        }
-
-    return render(request, 'products/edit_product.html', context)
 
 
 @login_required

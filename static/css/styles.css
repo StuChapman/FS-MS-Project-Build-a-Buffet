@@ -10475,6 +10475,13 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
+}
+
 /* general styling */
 
 .hidden {
