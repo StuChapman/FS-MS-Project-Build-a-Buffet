@@ -72,9 +72,8 @@ def basket(request):
                                         option=selected,
                                         total_price=total_price)
                 updated_basket.save()
+                messages.success(request, 'item quantity increased!')
                 existing_basket.delete()
-
-                messages.success(request, 'basket updated!')
 
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
 
@@ -87,6 +86,7 @@ def basket(request):
                                 option=selected,
                                 total_price=total_price)
                 basket.save()
+                messages.success(request, 'items added to basket!')
             baskets = Basket.objects.filter(cookie=cookie)
             baskets = baskets.order_by('-item_number')
 
@@ -123,6 +123,7 @@ def basket(request):
                                         option=updated_selected,
                                         total_price=total_price)
                 updated_basket.save()
+                messages.success(request, 'basket updated!')
                 existing_basket.delete()
 
             except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
@@ -203,6 +204,7 @@ def delete_basket_item(request):
             item_number = request.GET['delete_item']
             this_item = baskets.get(item_number=item_number)
             this_item.delete()
+            messages.success(request, 'items removed from basket!')
             basket_key = this_item.cookie
 
     return redirect(reverse('basket_success', args=[basket_key]))

@@ -10482,6 +10482,10 @@ body {
     z-index: 99999999999;
 }
 
+.custom-toast {
+    overflow: visible;
+}
+
 /* general styling */
 
 .hidden {

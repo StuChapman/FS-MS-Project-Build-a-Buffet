@@ -169,8 +169,7 @@
     {% if messages %}
         <div class="message-container">
             {% for message in messages %}
-                {% with message.level as level %}
-                {% endwith %}
+                {% include 'includes/toasts/toast_success.html' %}
             {% endfor %}
         </div>
     {% endif %}
@@ -182,6 +181,9 @@
     {% endblock %}
 
     {% block postloadjs %}
+    <script>
+        $(".toast").toast('show');
+    </script>
     {% endblock %}
 
   </body>

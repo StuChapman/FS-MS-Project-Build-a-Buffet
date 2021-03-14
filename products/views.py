@@ -411,7 +411,7 @@ def search_products(request):
                     }
                 return render(request, 'products/search_products.html', context)
 
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
+            queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query)
             products = Product.objects.all()
             product_results = products.filter(queries)
 
