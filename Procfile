@@ -1,1 +1,1 @@
-web: gunicorn build-a-buffet.wsgi:application 
+web: gunicorn build_a_buffet.wsgi:application 
