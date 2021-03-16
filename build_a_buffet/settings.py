@@ -134,7 +134,7 @@ WSGI_APPLICATION = 'build_a_buffet.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse('postgres://cnwofgnsyejati:b3596a61f50a2a4f3b3deafd90ea49e9ed11573b0d649f85b212fe6682f2ce4e@ec2-34-252-251-16.eu-west-1.compute.amazonaws.com:5432/d43iovroi2ss3')
     }
 else:
     DATABASES = {
