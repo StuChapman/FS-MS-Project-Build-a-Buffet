@@ -33,7 +33,7 @@ class Product(models.Model):
 
 
 class Options(models.Model):
-    
+
     class Meta:
         verbose_name_plural = 'Options'
 
