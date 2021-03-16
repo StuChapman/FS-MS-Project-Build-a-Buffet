@@ -6,7 +6,7 @@ from django.db import models
 class Basket(models.Model):
     cookie = models.DecimalField(max_digits=8, decimal_places=0)
     # Credit: https://www.fullstackpython.com/django-db-models-autofield-examples.html
-    item_number = models.AutoField(primary_key=True)
+    item_number = models.DateTimeField(auto_now_add=True)
     category = models.CharField(max_length=254)
     name = models.CharField(max_length=254)
     servings = models.DecimalField(max_digits=3, decimal_places=0)
