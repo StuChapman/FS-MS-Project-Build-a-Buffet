@@ -12,8 +12,6 @@ def basket_context(request):
         cookie = request.COOKIES[cookie_key]
         # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
         basket_total = 32
-        if basket_total['total_price__sum'] is None:
-            basket_total = ""
     except KeyError:
         basket_total = ""
         cookie = 99999999
