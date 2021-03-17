@@ -54,7 +54,7 @@ def checkout(request):
         if 'basket_number' in request.GET:
             basket_number = request.GET['basket_number']
             baskets = basket.filter(cookie=basket_number)
-            baskets = baskets.order_by('-item_number')
+            baskets = baskets.order_by('-pk')
 
     context = {
             'cookie': cookie,
@@ -127,7 +127,7 @@ def create_order(request):
     baskets = Basket.objects.filter(cookie=cookie)
     for basket in baskets:
         cookie = basket.cookie
-        item_number = basket.item_number
+        item_number = basket.pk
         category = basket.category
         name = basket.name
         servings = basket.servings

@@ -88,7 +88,7 @@ def basket(request):
                 basket.save()
                 messages.success(request, 'items added to basket!')
             baskets = Basket.objects.filter(cookie=cookie)
-            baskets = baskets.order_by('-item_number')
+            baskets = baskets.order_by('-pk')
 
         """ check for a product_edit variable from the template """
         if 'product_edit' in request.GET:
@@ -101,7 +101,7 @@ def basket(request):
 
             """ check for existing basket(s) with the current cookie value """
             try:
-                existing_basket = Basket.objects.get(item_number=item_number)
+                existing_basket = Basket.objects.get(pk=item_number)
                 product = existing_basket.name
                 category = existing_basket.category
                 price = products.get(name=product).price
@@ -161,14 +161,14 @@ def edit_basket_item(request):
     if request.GET:
         if 'item_number' in request.GET:
             item_number = request.GET['item_number']
-            category = basket.get(item_number=item_number).category
-            selected = basket.get(item_number=item_number).option
-            product = basket.get(item_number=item_number).name
+            category = basket.get(pk=item_number).category
+            selected = basket.get(pk=item_number).option
+            product = basket.get(pk=item_number).name
             price = products.get(name=product).price
             products = products.filter(name=product)
             image = categories.filter(name=category)
             options = options.filter(category__in=categories)
-            servings = basket.get(item_number=item_number).servings
+            servings = basket.get(pk=item_number).servings
             servings_plusten = float(servings) + 10
             total_price = float(servings) * float(price)
             # Credit: https://tutorialdeep.com/knowhow/limit-float-to-two-decimal-places-python/
@@ -202,7 +202,7 @@ def delete_basket_item(request):
         """ check for a delete_item variable from the template """
         if 'delete_item' in request.GET:
             item_number = request.GET['delete_item']
-            this_item = baskets.get(item_number=item_number)
+            this_item = baskets.get(pk=item_number)
             this_item.delete()
             messages.success(request, 'items removed from basket!')
             basket_key = this_item.cookie
@@ -250,7 +250,7 @@ def basket_success(request, basket_key):
     baskets = Basket.objects.filter(cookie=basket_key)
     # Credit: https://stackoverflow.com/questions/8786175/django-order-by-on-queryset-objects
     # Credit: https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending
-    baskets = baskets.order_by('-item_number')
+    baskets = baskets.order_by('-pk')
 
     context = {
             'products': products,
