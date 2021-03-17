@@ -148,7 +148,6 @@ def edit_basket_item(request):
     options = ""
     servings = ""
     total_price = ""
-    item_number = ""
     servings_plusten = ""
     edit = "edit"
 

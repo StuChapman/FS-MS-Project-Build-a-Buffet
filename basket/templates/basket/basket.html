@@ -71,10 +71,10 @@
                                             </div>
                                             <div class="col-4 my-auto py-auto">
                                                 <a class="edit-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
-                                                    href="{% url 'edit_basket_item' %}?item_number={{ basket.item_number }}">
+                                                    href="{% url 'edit_basket_item' %}?item_number={{ basket.id }}">
                                                     <i class="fas fa-edit" aria-hidden="true"></i> edit</a>
                                                 <a class="delete-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
-                                                    href="{% url 'delete_basket_item' %}?delete_item={{ basket.item_number }}">
+                                                    href="{% url 'delete_basket_item' %}?delete_item={{ basket.id }}">
                                                     <i class="fas fa-trash-alt" aria-hidden="true"></i> remove</a>
                                             </div>
                                         </div>

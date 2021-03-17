@@ -7,7 +7,6 @@ from .models import Basket
 class BasketAdmin(admin.ModelAdmin):
     list_display = (
         'cookie',
-        'item_number',
         'category',
         'name',
         'servings',
