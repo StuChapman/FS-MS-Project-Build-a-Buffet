@@ -5,7 +5,7 @@ from django.db import models
 
 class Basket(models.Model):
     id = models.AutoField(primary_key=True)
-    cookie = models.CharField(max_length=254)
+    cookie = models.CharField(max_length=32, null=False, editable=False)
     category = models.CharField(max_length=254)
     name = models.CharField(max_length=254)
     servings = models.DecimalField(max_digits=3, decimal_places=0)
