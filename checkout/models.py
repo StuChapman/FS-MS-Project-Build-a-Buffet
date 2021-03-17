@@ -41,7 +41,7 @@ class Order_items(models.Model):
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
     cookie = models.CharField(max_length=32, null=False, editable=False)
-    item_number = models.DecimalField(max_digits=9999, decimal_places=0)
+    item_number = models.DecimalField(max_digits=8, decimal_places=0)
     category = models.CharField(max_length=254)
     name = models.CharField(max_length=254)
     servings = models.DecimalField(max_digits=3, decimal_places=0)
