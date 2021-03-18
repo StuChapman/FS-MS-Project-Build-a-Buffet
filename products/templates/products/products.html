@@ -60,7 +60,8 @@
                                 </div>
                                 {% for product in products %}
                                     {% if range %}
-                                        {% if product.range == range %}
+                                        <!-- Credit: https://stackoverflow.com/questions/27771000/django-template-convert-to-string -->
+                                        {% if product.range == range and product.category|slugify == category %}
                                             <div class="mx-auto flex-margin-b text-blue">
                                                 <a class="product-text-two" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-one">{{ product.name }}</a>
                                             </div>
