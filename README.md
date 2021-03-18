@@ -182,8 +182,8 @@ to ensure that I could periodically test the features and rendering in a systema
 that aren't immediately obvious 
 
 The first pass of ‘completion’ testing revealed some particular errors:
-1.	The background image was incorrectly sized on contact.html – I corrected this by adjusting the max-height
-2.  The headers on case-studies.html were the wrong colour on small media devices – I also corrected this.
+1.	Autofield on progress
+2.  AWS images on Heroku
 3.  The menu links are supposed to change to a slightly darker colour to indicate that the user is currently visiting that particular page
     - this functionality has broken and all pages were showing "home" as the active page. I realised that I had made some adjustments to the navbar in index.html, and copied the code
     into each of the other pages without adjusting the active pages.
