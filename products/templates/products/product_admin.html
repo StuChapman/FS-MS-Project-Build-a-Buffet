@@ -22,12 +22,12 @@
                     {% if dataset == "categories" %}
                         {% if form.image.value %}
                             <!-- Credit: https://stackoverflow.com/questions/2236691/how-do-i-display-the-value-of-a-django-form-field-in-a-template -->
-                            <img class="img-fluid image-80" src="/media/{{ form.image.value }}" alt="{{ form.name.value }} image" />
+                            <img class="img-fluid image-80" src="{{ MEDIA_URL }}{{ image.image }}{{ form.image.value }}" alt="{{ form.name.value }} image" />
                         {% else %}
-                            <img class="img-fluid image-80" src="/media/assets/img/noimage.png" alt="no image stored" />
+                            <img class="img-fluid image-80" src="{{ MEDIA_URL }}/assets/img/noimage.png" alt="no image stored" />
                         {% endif %}
                     {% else %}
-                        <img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" />
+                        <img class="img-fluid image-80" src="{{ MEDIA_URL }}/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" />
                     {% endif %}
                 </div>
                 <div class="col-xl-6">

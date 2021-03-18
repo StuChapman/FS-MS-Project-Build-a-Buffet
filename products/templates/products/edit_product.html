@@ -27,7 +27,7 @@
                 <div class="col-xl-6">
                     {% if category %}
                         {% for image in image %}
-                            <img class="img-fluid image-80" src="/media/{{ image.image }}" alt="{{ category }} image" />
+                            <img class="img-fluid image-80" src="{{ MEDIA_URL }}{{ image.image }}" alt="{{ category }} image" />
                         {% endfor %}
                     {% else %}
                         <img class="img-fluid image-80" src="/media/assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" />
