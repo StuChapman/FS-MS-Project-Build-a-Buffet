@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.core.mail import EmailMessage
+from django.utils.safestring import mark_safe
 
 import uuid
 
@@ -147,9 +148,8 @@ def create_order(request):
         order_basket.save()
         basket.delete()
 
-    messages.success(request, f"Thank you for your order! \r\n" \
-                              f"Your order number is {order_number}. \r\n" \
-                              f"A confirmation email will be sent to {order.email}.")
+    # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
+    messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
     return redirect(reverse('order_success', args=[order_number]))
 
 
@@ -169,8 +169,8 @@ def order_success(request, order_number):
                  f"Ordered on {order_date}. \r\n\n" \
                  f"Order Total: £{ order.order_total }"
 
-    email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
-    email.send()
+    # email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
+    # email.send()
 
     context = {
         'order': order,

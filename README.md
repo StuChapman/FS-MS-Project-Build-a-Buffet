@@ -238,6 +238,7 @@ I deployed to Github Pages by the following steps:
 20. Making a form field readonly is from [stackoverflow.com](https://stackoverflow.com/questions/41271979/read-only-field-in-django-form)
 21. Get the last n chacters of a string is from [c-sharpcorner.com](https://www.c-sharpcorner.com/article/how-to-get-the-last-n-characters-of-a-string-in-python/)
 22. Converting to string in templete is from [stackoverflow.com](https://stackoverflow.com/questions/27771000/django-template-convert-to-string)
+23. Adding linebreaks to messages is from [stackoverflow.com](https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message)
 
 #### Code Institute
 
