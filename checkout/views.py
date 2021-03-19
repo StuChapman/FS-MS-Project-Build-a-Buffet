@@ -169,8 +169,8 @@ def order_success(request, order_number):
                  f"Ordered on {order_date}. \r\n\n" \
                  f"Order Total: £{ order.order_total }"
 
-    # email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
-    # email.send()
+    email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
+    email.send()
 
     context = {
         'order': order,
