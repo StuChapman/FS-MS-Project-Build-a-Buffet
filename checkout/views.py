@@ -145,8 +145,8 @@ def create_order(request):
                                     option=option,
                                     total_price=total_price)
         order_basket.save()
-        messages.success(request, f'Thank you for your order! \
-            Your order number is {order_number}. A confirmation \
+        messages.success(request, f'Thank you for your order! \r\n \
+            Your order number is {order_number}. \r\n A confirmation \
             email will be sent to {order.email}.')
         basket.delete()
 
@@ -163,7 +163,12 @@ def order_success(request, order_number):
     products = Product.objects.all()
     options = Options.objects.all()
 
-    email = EmailMessage('Hello', 'World', 'no-reply@build-a-buffet.com', to=['chapman.stuart@sky.com'])
+    email_body = f'Thank you for your order! \r\n \
+            Your order number is {order_number}. \r\n \
+            Ordered on {order.date}. \r\n \
+            Order Total: ${ order.order_total }'
+
+    email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
     email.send()
 
     context = {
