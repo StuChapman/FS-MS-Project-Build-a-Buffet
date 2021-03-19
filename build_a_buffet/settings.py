@@ -107,7 +107,14 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# For email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'noreplybuildabuffet@gmail.com'
+EMAIL_HOST_PASSWORD = 'nsygsjiznskiibtl'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'noreplybuildabuffet@gmail.com'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True

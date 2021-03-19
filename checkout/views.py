@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.core.mail import EmailMessage
 
 import uuid
 
@@ -144,7 +145,9 @@ def create_order(request):
                                     option=option,
                                     total_price=total_price)
         order_basket.save()
-        messages.success(request, 'Thank you for your order!')
+        messages.success(request, f'Thank you for your order! \
+            Your order number is {order_number}. A confirmation \
+            email will be sent to {order.email}.')
         basket.delete()
 
     return redirect(reverse('order_success', args=[order_number]))
@@ -159,6 +162,9 @@ def order_success(request, order_number):
     order_items = Order_items.objects.filter(order_number=order_number)
     products = Product.objects.all()
     options = Options.objects.all()
+
+    email = EmailMessage('Hello', 'World', 'no-reply@build-a-buffet.com', to=['chapman.stuart@sky.com'])
+    email.send()
 
     context = {
         'order': order,
