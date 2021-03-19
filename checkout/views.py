@@ -145,11 +145,11 @@ def create_order(request):
                                     option=option,
                                     total_price=total_price)
         order_basket.save()
-        messages.success(request, f'Thank you for your order! \r\n \
-            Your order number is {order_number}. \r\n A confirmation \
-            email will be sent to {order.email}.')
         basket.delete()
 
+    messages.success(request, f"Thank you for your order! \r\n" \
+                              f"Your order number is {order_number}. \r\n" \
+                              f"A confirmation email will be sent to {order.email}.")
     return redirect(reverse('order_success', args=[order_number]))
 
 
@@ -162,11 +162,12 @@ def order_success(request, order_number):
     order_items = Order_items.objects.filter(order_number=order_number)
     products = Product.objects.all()
     options = Options.objects.all()
+    order_date = order.date.strftime("%d/%m/%Y %H:%M:%S")
 
-    email_body = f'Thank you for your order! \r\n \
-            Your order number is {order_number}. \r\n \
-            Ordered on {order.date}. \r\n \
-            Order Total: ${ order.order_total }'
+    email_body = f"Thank you for your order! \r\n\n" \
+                 f"Your order number is {order_number}. \r\n\n" \
+                 f"Ordered on {order_date}. \r\n\n" \
+                 f"Order Total: £{ order.order_total }"
 
     email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
     email.send()
