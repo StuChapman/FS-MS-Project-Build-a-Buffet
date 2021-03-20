@@ -10532,6 +10532,12 @@ body {
 .bg-blue:hover {
   opacity: 0.7;
 }
+.bg-dark {
+  background-color: black;
+}
+.bg-dark:hover {
+  opacity: 0.7;
+}
 
 .align-vertically { /* credit to https://webdevblog.com/css-vertical-align/ */
     display: flex;

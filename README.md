@@ -244,9 +244,9 @@ I deployed to Github Pages by the following steps:
 #### Code Institute
 
 The code for:
-1.  checkout: admin.py, forms.py, models.py and views.py 
+1.  checkout: admin.py, forms.py, models.py, views.py, checkout.css and stripe_elements.js
 2.  profiles: forms.py, models.py and views.py
-are all based on code from the [Code Institute](https://codeinstitute.net/) tutorial project 'boutique-ado'
+are all built on code from the [Code Institute](https://codeinstitute.net/) tutorial project 'boutique-ado'
 
 ### Media
 

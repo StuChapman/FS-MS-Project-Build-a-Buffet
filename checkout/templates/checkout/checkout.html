@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
 {% block page_header %}
     <div class="container header-container">
         <div class="row">
@@ -156,7 +160,7 @@
                         </fieldset>
 
                         <div class="submit-button text-right mt-5 mb-2">                    
-                            <a href="{% url 'basket' %}" class="btn bg-blue text-white rounded-0">
+                            <a href="{% url 'basket' %}" class="bg-blue border-solid masthead-button btn btn-primary">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
@@ -164,7 +168,7 @@
                                     <i class="fa fa-shopping-basket"></i>
                                 </span>
                             </a>
-                            <button id="submit-button" class="btn btn-black rounded-0">
+                            <button id="submit-button" class="bg-dark order-button border-solid masthead-button btn btn-primary">
                                 <span class="font-weight-bold">Complete Order</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>
