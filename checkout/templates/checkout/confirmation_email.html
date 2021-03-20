@@ -1,0 +1,14 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://build-a-buffet.herokuapp.com/">build-a-buffet.com</a>
+    <h2>Thank you for your order!</h2>
+    <p>Your order number is <a href="https://build-a-buffet.herokuapp.com/checkout/order_success/{{ order_number }}">{{ order_number }}</a>.</p>
+    <p>Ordered on {{ order_date }}.</p>
+    <p>Order Total: £{{ order_total }}</p>
+</body>
+</html>

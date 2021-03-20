@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+
+from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 
 import uuid
 
@@ -164,13 +167,31 @@ def order_success(request, order_number):
     options = Options.objects.all()
     order_date = order.date.strftime("%d/%m/%Y %H:%M:%S")
 
-    email_body = f"Thank you for your order! \r\n\n" \
-                 f"Your order number is {order_number}. \r\n\n" \
-                 f"Ordered on {order_date}. \r\n\n" \
-                 f"Order Total: £{ order.order_total }"
+    # email_body = f"Thank you for your order! \r\n\n" \
+    #              f"Your order number is {order_number}. \r\n\n" \
+    #              f"Ordered on {order_date}. \r\n\n" \
+    #              f"Order Total: £{ order.order_total }"
 
-    email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
-    email.send()
+    # email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
+    # email.send()
+
+    parameters = {
+        'order_number': order_number,
+        'order_date': order_date,
+        'order_total': order.order_total,
+    }
+
+    # Credit: https://stackoverflow.com/questions/2809547/creating-email-templates-with-django
+    msg_html = render_to_string('checkout/confirmation_email.html',
+                                parameters)
+
+    send_mail(
+        'Order Confirmation',
+        msg_html,
+        'no-reply@build-a-buffet.com',
+        [order.email],
+        html_message=msg_html,
+    )
 
     context = {
         'order': order,
