@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.conf import settings
 
 from django.core.mail import send_mail
-from django.core.mail import EmailMessage
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 
@@ -20,6 +20,9 @@ from .forms import OrderForm
 
 def checkout(request):
     """ A view to return the checkout page """
+
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     # Attempt to prefill the form with any info the user maintains in their profile
     if request.user.is_authenticated:
@@ -70,6 +73,8 @@ def checkout(request):
             'categories': categories,
             'options': options,
             'order_form': order_form,
+            'stripe_public_key': stripe_public_key,
+            'client_secret': 6,
         }
 
     return render(request, 'checkout/checkout.html', context)
@@ -166,14 +171,6 @@ def order_success(request, order_number):
     products = Product.objects.all()
     options = Options.objects.all()
     order_date = order.date.strftime("%d/%m/%Y %H:%M:%S")
-
-    # email_body = f"Thank you for your order! \r\n\n" \
-    #              f"Your order number is {order_number}. \r\n\n" \
-    #              f"Ordered on {order_date}. \r\n\n" \
-    #              f"Order Total: £{ order.order_total }"
-
-    # email = EmailMessage('Order Confirmation', email_body, 'no-reply@build-a-buffet.com', to=[order.email])
-    # email.send()
 
     parameters = {
         'order_number': order_number,
