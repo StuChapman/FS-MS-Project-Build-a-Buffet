@@ -13,11 +13,12 @@
 <section class="products-section">
     <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Oops!</h1>
     <div class="product-container row w-100 mx-0 justify-content-center mt-0 text-xl-left">
-        <div class="col-lg-4">
-            <p class="product-text-three mx-2 text-center mb-5 text-blue">Something went wrong - we couldn't find the page you were looking for</p>
+        <div class="col-lg-4 text-center ">
+            <img class="img-fluid image-80 mb-4" src="{{ MEDIA_URL }}assets/img/bartholemew-oops.jpg" alt="robochef image" />
             <a class="masthead-button opaque-100 btn btn-primary js-scroll-trigger flex-margin-b" href="{% url 'home' %}">Home</a>
         </div>
     </div>
 </section>
 
+{% include 'includes/contact.html' %}
 {% endblock %}
