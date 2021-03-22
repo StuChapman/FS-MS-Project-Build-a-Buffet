@@ -10471,7 +10471,6 @@ body {
 }
 
 .submit-button .btn {
-    max-width: 70vw;
     margin-bottom: 0.5rem;
 }
 
@@ -10528,6 +10527,7 @@ body {
 
 .bg-blue {
   background-color: #426765;
+  width: 100%;
 }
 .bg-blue:hover {
   opacity: 0.7;
