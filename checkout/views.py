@@ -37,10 +37,6 @@ def checkout(request):
     products = Product.objects.all()
     options = Options.objects.all()
 
-    """ fetch the Stripe keys """
-    stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
-
     # Attempt to prefill the form with any info the user maintains in their profile
     if request.user.is_authenticated:
         try:
@@ -61,6 +57,10 @@ def checkout(request):
     else:
         order_form = OrderForm()
 
+    """ fetch the Stripe keys """
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+
     """ create the Stripe payment intent """
     stripe_total = round(float(basket_total['total_price__sum']) * 100)
     stripe.api_key = stripe_secret_key
@@ -68,8 +68,6 @@ def checkout(request):
         amount=stripe_total,
         currency=settings.STRIPE_CURRENCY,
     )
-    print('intent')
-    print(intent)
 
     if request.GET:
         if 'basket_number' in request.GET:
