@@ -128,48 +128,58 @@ def create_order(request):
             profile.default_county = request.POST['county']
             profile.save()
 
-    """ create a unique order number """
-    order_number = uuid.uuid4().hex[:10]
+    if request.method == 'POST':
+        print(request.POST)
+        if 'paymentSuccess' in request.POST:
+            print('paymentSuccess')
+            payment_success = request.POST['paymentSuccess']
+            if payment_success == "succeeded":
+                print('SUCCEEDED')
+                """ create a unique order number """
+                order_number = uuid.uuid4().hex[:10]
 
-    """ populate the order form """
-    order_form = OrderForm(form_data)
-    if order_form.is_valid():
-        order = order_form.save(commit=False)
-        order.order_number = order_number
-        cookie = request.POST.get('basket_number')
-        order.cookie = cookie
-        order_total = request.POST.get('total_price')
-        order.order_total = order_total
-        customer_name = request.user
-        order.customer_name = customer_name
-        order.save()
+                """ populate the order form """
+                order_form = OrderForm(form_data)
+                if order_form.is_valid():
+                    order = order_form.save(commit=False)
+                    order.order_number = order_number
+                    cookie = request.POST.get('basket_number')
+                    order.cookie = cookie
+                    order_total = request.POST.get('total_price')
+                    order.order_total = order_total
+                    customer_name = request.user
+                    order.customer_name = customer_name
+                    order.save()
 
-    """ fetch the basket items to save into order_items """
-    baskets = Basket.objects.filter(cookie=cookie)
-    for basket in baskets:
-        cookie = basket.cookie
-        item_number = basket.pk
-        category = basket.category
-        name = basket.name
-        servings = basket.servings
-        option = basket.option
-        total_price = basket.total_price
+                """ fetch the basket items to save into order_items """
+                baskets = Basket.objects.filter(cookie=cookie)
+                for basket in baskets:
+                    cookie = basket.cookie
+                    item_number = basket.pk
+                    category = basket.category
+                    name = basket.name
+                    servings = basket.servings
+                    option = basket.option
+                    total_price = basket.total_price
 
-        """ save the basket items into order_items """
-        order_basket = Order_items(cookie=cookie,
-                                   order_number=order_number,
-                                   item_number=item_number,
-                                   category=category,
-                                   name=name,
-                                   servings=servings,
-                                   option=option,
-                                   total_price=total_price)
-        order_basket.save()
-        basket.delete()
+                    """ save the basket items into order_items """
+                    order_basket = Order_items(cookie=cookie,
+                                            order_number=order_number,
+                                            item_number=item_number,
+                                            category=category,
+                                            name=name,
+                                            servings=servings,
+                                            option=option,
+                                            total_price=total_price)
+                    order_basket.save()
+                    basket.delete()
 
-    # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
-    messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
-    return redirect(reverse('order_success', args=[order_number]))
+                # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
+                messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
+                return redirect(reverse('order_success', args=[order_number]))
+
+        messages.success(request, mark_safe('There was a problem with your card details!'))
+        return redirect(reverse('checkout'))
 
 
 def order_success(request, order_number):

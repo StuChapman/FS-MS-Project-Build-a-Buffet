@@ -10607,7 +10607,11 @@ body {
     .text-xs {
         font-size: calc(12px + (28 - 12) * ((100vw - 300px) / 1620));
     }
+    .bg-blue, .bg-dark {
+        width: 90%;
+    }
 }
+
 @media screen and (orientation: landscape){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .masthead {
         padding: 35vh 0 15vh;
@@ -10649,6 +10653,9 @@ body {
     }
     .text-xs {
         font-size: calc(14px + (16 - 14) * ((100vw - 300px) / 1620));
+    }
+    .bg-blue, .bg-dark {
+        width: 50%;
     }
 }
 

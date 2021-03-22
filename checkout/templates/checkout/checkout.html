@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
+
+<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
@@ -168,7 +171,7 @@
                                     <i class="fa fa-shopping-basket"></i>
                                 </span>
                             </a>
-                            <button id="submit-button" class="bg-dark order-button border-solid masthead-button btn btn-primary">
+                            <button id="submit-button" class="bg-dark border-solid masthead-button btn btn-primary">
                                 <span class="font-weight-bold">Complete Order</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>

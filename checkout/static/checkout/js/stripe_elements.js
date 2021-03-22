@@ -47,7 +47,7 @@ card.addEventListener('change', function (event) {
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
-    // ev.preventDefault();
+    ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
     stripe.confirmCardPayment(clientSecret, {
@@ -67,6 +67,10 @@ form.addEventListener('submit', function(ev) {
             $('#submit-button').attr('disabled', false);
         } else {
             if (result.paymentIntent.status === 'succeeded') {
+                // Credit: https://stackoverflow.com/questions/24152420/pass-dynamic-javascript-variable-to-django-python
+                var URL = '/checkout/create_order/';
+                var postData = {'paymentSuccess': 'succeeded'};
+                $.post(URL, postData);
                 form.submit();
             }
         }
