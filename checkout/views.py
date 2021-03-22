@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 
@@ -167,21 +167,6 @@ def create_order(request):
         order_basket.save()
         basket.delete()
 
-    try:
-        pid = request.POST.get('client_secret').split('_secret')[0]
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.PaymentIntent.modify(pid, metadata={
-            'order': order,
-            'save_info': request.POST.get('save_info'),
-            'username': request.user,
-        })
-        return HttpResponse(status=200)
-    except Exception as e:
-        messages.success(request, 'Sorry, your payment cannot be \
-            processed right now. Please try again later.')
-        return HttpResponse(content=e, status=400)
-    print(stripe.PaymentIntent)
-
     # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
     messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
     return redirect(reverse('order_success', args=[order_number]))
@@ -208,13 +193,13 @@ def order_success(request, order_number):
     msg_html = render_to_string('checkout/confirmation_email.html',
                                 parameters)
 
-    # send_mail(
-    #     'Order Confirmation',
-    #     msg_html,
-    #     'no-reply@build-a-buffet.com',
-    #     [order.email],
-    #     html_message=msg_html,
-    # )
+    send_mail(
+        'Order Confirmation',
+        msg_html,
+        'no-reply@build-a-buffet.com',
+        [order.email],
+        html_message=msg_html,
+    )
 
     context = {
         'order': order,
