@@ -105,7 +105,6 @@ def create_order(request):
 
     """ check for the customer info from checkout """
     if request.POST:
-        print(request.POST)
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -138,7 +137,6 @@ def create_order(request):
 
         try:
             payment_success = request.POST.get('paymentSuccess')
-            print(payment_success)
             try:
                 payment_success = "succeeded"
                 order_form = OrderForm(form_data)
@@ -182,8 +180,7 @@ def create_order(request):
                     messages.success(request, ('Form was not valid'))
                     return redirect(reverse('checkout'))
             except Exception as e:
-                messages.success(request, ('paymentSuccess was not succeeded'))
-                return HttpResponse(content=e, status=400)
+                return HttpResponse(content=e, status=200)
         except Exception as e:
             messages.success(request, ('No paymentSuccess in request.POST:'))
             return HttpResponse(content=e, status=400)
