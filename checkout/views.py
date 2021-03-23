@@ -175,6 +175,25 @@ def create_order(request):
                     basket.delete()
                     # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
                     messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
+
+                    """ compose and send confirmation email """
+                    order_date = order.date.strftime("%d/%m/%Y %H:%M:%S")
+                    parameters = {
+                        'order_number': order_number,
+                        'order_date': order_date,
+                        'order_total': order.order_total,
+                    }
+                    # Credit: https://stackoverflow.com/questions/2809547/creating-email-templates-with-django
+                    msg_html = render_to_string('checkout/confirmation_email.html',
+                                                parameters)
+                    send_mail(
+                        'Order Confirmation',
+                        msg_html,
+                        'no-reply@build-a-buffet.com',
+                        [order.email],
+                        html_message=msg_html,
+                    )
+
                     return redirect(reverse('order_success', args=[order_number]))
                 else:
                     messages.success(request, ('Form was not valid'))
@@ -187,40 +206,28 @@ def create_order(request):
 
 
 def order_success(request, order_number):
-    """
-    Handle successful checkouts
-    """
+    """ Handle successful checkouts and show individual orders """
+
     order = get_object_or_404(Order, order_number=order_number)
     orders = Order.objects.filter(order_number=order_number)
     order_items = Order_items.objects.filter(order_number=order_number)
     products = Product.objects.all()
     options = Options.objects.all()
-    order_date = order.date.strftime("%d/%m/%Y %H:%M:%S")
 
-    parameters = {
-        'order_number': order_number,
-        'order_date': order_date,
-        'order_total': order.order_total,
-    }
+    """ Check current user is purchaser """
+    current_user = str(request.user)
+    print(type(current_user))
+    purchaser = str(order.customer_name)
+    print(type(purchaser))
+    if current_user != purchaser:
+        return render(request, 'allauth/account/login.html')
+    else:
+        context = {
+            'order': order,
+            'orders': orders,
+            'order_items': order_items,
+            'products': products,
+            'options': options,
+        }
 
-    # Credit: https://stackoverflow.com/questions/2809547/creating-email-templates-with-django
-    msg_html = render_to_string('checkout/confirmation_email.html',
-                                parameters)
-
-    send_mail(
-        'Order Confirmation',
-        msg_html,
-        'no-reply@build-a-buffet.com',
-        [order.email],
-        html_message=msg_html,
-    )
-
-    context = {
-        'order': order,
-        'orders': orders,
-        'order_items': order_items,
-        'products': products,
-        'options': options,
-    }
-
-    return render(request, 'checkout/order_success.html', context)
+        return render(request, 'checkout/order_success.html', context)
