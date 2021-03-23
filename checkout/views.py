@@ -216,9 +216,7 @@ def order_success(request, order_number):
 
     """ Check current user is purchaser """
     current_user = str(request.user)
-    print(type(current_user))
     purchaser = str(order.customer_name)
-    print(type(purchaser))
     if current_user != purchaser:
         return render(request, 'allauth/account/login.html')
     else:
