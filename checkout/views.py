@@ -143,9 +143,11 @@ def create_order(request):
                 if order_form.is_valid():
                     order = order_form.save(commit=False)
                     order.order_number = order_number
-                    cookie = request.POST.get('basket_number')
+                    cookie = request.POST.get('cookie')
+                    print('cookie:')
+                    print(cookie)
                     order.cookie = cookie
-                    order_total = request.POST.get('total_price')
+                    order_total = request.POST.get('order_total')
                     order.order_total = order_total
                     customer_name = request.user
                     order.customer_name = customer_name

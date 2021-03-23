@@ -88,7 +88,7 @@ form.addEventListener('submit', function(ev) {
                 };
                 $.post(URL, postData);
                 console.log('success')
-                // form.submit();
+                form.submit();
             }
         }
     });
