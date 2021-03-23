@@ -35,7 +35,7 @@ card.addEventListener('change', function (event) {
             <span class="icon" role="alert">
                 <i class="fas fa-times"></i>
             </span>
-            <span>Error: ${event.error.message}</span>
+            <span>${event.error.message}</span>
         `;
         $(errorDiv).html(html);
         console.log(event.error.message);
@@ -70,7 +70,12 @@ form.addEventListener('submit', function(ev) {
             if (result.paymentIntent.status === 'succeeded') {
                 // Credit: https://stackoverflow.com/questions/24152420/pass-dynamic-javascript-variable-to-django-python
                 var URL = '/checkout/create_order/';
-                var postData = {'paymentSuccess': 'succeeded'};
+                // From using {% csrf_token %} in the form
+                var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                var postData = {
+                    'csrfmiddlewaretoken': csrfToken,
+                    'paymentSuccess': 'succeeded',
+                };
                 $.post(URL, postData);
                 form.submit();
             }
