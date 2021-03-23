@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.contrib import messages
 from django.conf import settings
 
@@ -61,13 +61,17 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    """ create the Stripe payment intent """
-    stripe_total = round(float(basket_total['total_price__sum']) * 100)
-    stripe.api_key = stripe_secret_key
-    intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
-    )
+    if basket_total:
+        """ create the Stripe payment intent """
+        stripe_total = round(float(basket_total['total_price__sum']) * 100)
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
+        client_secret = intent.client_secret
+    else:
+        client_secret = ""
 
     if request.GET:
         if 'basket_number' in request.GET:
@@ -85,7 +89,7 @@ def checkout(request):
             'options': options,
             'order_form': order_form,
             'stripe_public_key': stripe_public_key,
-            'client_secret': intent.client_secret,
+            'client_secret': client_secret,
         }
 
     return render(request, 'checkout/checkout.html', context)
@@ -101,6 +105,7 @@ def create_order(request):
 
     """ check for the customer info from checkout """
     if request.POST:
+        print(request.POST)
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -113,75 +118,75 @@ def create_order(request):
             'county': request.POST['county'],
         }
 
-    if request.user.is_authenticated:
-        if 'save-info' in request.POST:
-            """ save the user info into user profile """
-            profile = UserProfile.objects.get(user=request.user)
+        if request.user.is_authenticated:
+            if 'save-info' in request.POST:
+                """ save the user info into user profile """
+                profile = UserProfile.objects.get(user=request.user)
 
-            profile.default_full_name = request.POST['full_name']
-            profile.default_phone_number = request.POST['phone_number']
-            profile.default_country = request.POST['country']
-            profile.default_postcode = request.POST['postcode']
-            profile.default_town_or_city = request.POST['town_or_city']
-            profile.default_street_address1 = request.POST['street_address1']
-            profile.default_street_address2 = request.POST['street_address2']
-            profile.default_county = request.POST['county']
-            profile.save()
+                profile.default_full_name = request.POST['full_name']
+                profile.default_phone_number = request.POST['phone_number']
+                profile.default_country = request.POST['country']
+                profile.default_postcode = request.POST['postcode']
+                profile.default_town_or_city = request.POST['town_or_city']
+                profile.default_street_address1 = request.POST['street_address1']
+                profile.default_street_address2 = request.POST['street_address2']
+                profile.default_county = request.POST['county']
+                profile.save()
 
-    if request.method == 'POST':
-        print(request.POST)
-        if 'paymentSuccess' in request.POST:
-            print('paymentSuccess')
-            payment_success = request.POST['paymentSuccess']
-            if payment_success == "succeeded":
-                print('SUCCEEDED')
-                """ create a unique order number """
-                order_number = uuid.uuid4().hex[:10]
+        """ create a unique order number """
+        order_number = uuid.uuid4().hex[:10]
 
-                """ populate the order form """
+        try:
+            payment_success = request.POST.get('paymentSuccess')
+            print(payment_success)
+            try:
+                payment_success = "succeeded"
                 order_form = OrderForm(form_data)
                 if order_form.is_valid():
                     order = order_form.save(commit=False)
                     order.order_number = order_number
-                    cookie = request.POST.get('cookie')
-                    print('cookie:')
-                    print(cookie)
+                    cookie = request.POST.get('basket_number')
                     order.cookie = cookie
-                    order_total = request.POST.get('order_total')
+                    order_total = request.POST.get('total_price')
                     order.order_total = order_total
                     customer_name = request.user
                     order.customer_name = customer_name
                     order.save()
 
-                """ fetch the basket items to save into order_items """
-                baskets = Basket.objects.filter(cookie=cookie)
-                for basket in baskets:
-                    cookie = basket.cookie
-                    item_number = basket.pk
-                    category = basket.category
-                    name = basket.name
-                    servings = basket.servings
-                    option = basket.option
-                    total_price = basket.total_price
+                    """ fetch the basket items to save into order_items """
+                    baskets = Basket.objects.filter(cookie=cookie)
+                    for basket in baskets:
+                        cookie = basket.cookie
+                        item_number = basket.pk
+                        category = basket.category
+                        name = basket.name
+                        servings = basket.servings
+                        option = basket.option
+                        total_price = basket.total_price
 
                     """ save the basket items into order_items """
                     order_basket = Order_items(cookie=cookie,
-                                            order_number=order_number,
-                                            item_number=item_number,
-                                            category=category,
-                                            name=name,
-                                            servings=servings,
-                                            option=option,
-                                            total_price=total_price)
+                                               order_number=order_number,
+                                               item_number=item_number,
+                                               category=category,
+                                               name=name,
+                                               servings=servings,
+                                               option=option,
+                                               total_price=total_price)
                     order_basket.save()
                     basket.delete()
-
-                # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
-                messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
-                return redirect(reverse('order_success', args=[order_number]))
-
-        messages.success(request, mark_safe('There was a problem with your card details!'))
-        return redirect(reverse('checkout'))
+                    # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
+                    messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
+                    return redirect(reverse('order_success', args=[order_number]))
+                else:
+                    messages.success(request, ('Form was not valid'))
+                    return redirect(reverse('checkout'))
+            except Exception as e:
+                messages.success(request, ('paymentSuccess was not succeeded'))
+                return HttpResponse(content=e, status=400)
+        except Exception as e:
+            messages.success(request, ('No paymentSuccess in request.POST:'))
+            return HttpResponse(content=e, status=400)
 
 
 def order_success(request, order_number):
@@ -205,18 +210,18 @@ def order_success(request, order_number):
     msg_html = render_to_string('checkout/confirmation_email.html',
                                 parameters)
 
-    send_mail(
-        'Order Confirmation',
-        msg_html,
-        'no-reply@build-a-buffet.com',
-        [order.email],
-        html_message=msg_html,
-    )
+    # send_mail(
+    #     'Order Confirmation',
+    #     msg_html,
+    #     'no-reply@build-a-buffet.com',
+    #     [order.email],
+    #     html_message=msg_html,
+    # )
 
     context = {
         'order': order,
-        'order_items': order_items,
         'orders': orders,
+        'order_items': order_items,
         'products': products,
         'options': options,
     }
