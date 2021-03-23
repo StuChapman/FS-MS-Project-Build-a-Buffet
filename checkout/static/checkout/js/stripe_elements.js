@@ -78,7 +78,7 @@ form.addEventListener('submit', function(ev) {
                     'email': $.trim(form.email.value),
                     'phone_number': $.trim(form.phone_number.value),
                     'country': $.trim(form.country.value),
-                    'post_code': $.trim(form.postcode.value),
+                    'postcode': $.trim(form.postcode.value),
                     'town_or_city': $.trim(form.town_or_city.value),
                     'street_address1': $.trim(form.street_address1.value),
                     'street_address2': $.trim(form.street_address2.value),
