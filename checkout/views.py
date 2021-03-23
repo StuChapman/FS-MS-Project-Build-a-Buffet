@@ -99,6 +99,7 @@ def create_order(request):
     """ A view to create an order and make a Stripe payment """
 
     baskets = ""
+    item_number = ""
 
     """ fetch the datasets from the models """
     basket = Basket.objects.all()
