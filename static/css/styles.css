@@ -10607,7 +10607,7 @@ body {
     .text-xs {
         font-size: calc(12px + (28 - 12) * ((100vw - 300px) / 1620));
     }
-    .bg-blue, .bg-dark {
+    .submit-button .bg-blue, .submit-button .bg-dark {
         width: 90%;
     }
 }
@@ -10654,7 +10654,7 @@ body {
     .text-xs {
         font-size: calc(14px + (16 - 14) * ((100vw - 300px) / 1620));
     }
-    .bg-blue, .bg-dark {
+    .submit-button .bg-blue, .submit-button .bg-dark {
         width: 50%;
     }
 }

@@ -38,7 +38,6 @@ card.addEventListener('change', function (event) {
             <span>${event.error.message}</span>
         `;
         $(errorDiv).html(html);
-        console.log(event.error.message);
     } else {
         errorDiv.textContent = '';
     }
@@ -77,7 +76,7 @@ form.addEventListener('submit', function(ev) {
                     'paymentSuccess': 'succeeded',
                 };
                 $.post(URL, postData);
-                form.submit();
+                // form.submit();
             }
         }
     });

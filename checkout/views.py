@@ -220,15 +220,3 @@ def order_success(request, order_number):
     }
 
     return render(request, 'checkout/order_success.html', context)
-
-
-def recieve_post(request, order_number):
-    print('recieve_post')
-    if request.method == 'POST':
-        print('POST')
-        print(request.POST)
-        if 'paymentSuccess' in request.POST:
-            print('paymentSuccess')
-            payment_success = request.POST['paymentSuccess']
-            if payment_success == "succeeded":
-                print('SUCCEEDED')
