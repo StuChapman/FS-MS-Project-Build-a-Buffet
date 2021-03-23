@@ -207,13 +207,13 @@ def order_success(request, order_number):
     msg_html = render_to_string('checkout/confirmation_email.html',
                                 parameters)
 
-    # send_mail(
-    #     'Order Confirmation',
-    #     msg_html,
-    #     'no-reply@build-a-buffet.com',
-    #     [order.email],
-    #     html_message=msg_html,
-    # )
+    send_mail(
+        'Order Confirmation',
+        msg_html,
+        'no-reply@build-a-buffet.com',
+        [order.email],
+        html_message=msg_html,
+    )
 
     context = {
         'order': order,
