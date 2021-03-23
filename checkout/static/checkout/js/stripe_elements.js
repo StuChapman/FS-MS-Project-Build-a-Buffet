@@ -83,6 +83,8 @@ form.addEventListener('submit', function(ev) {
                     'street_address1': $.trim(form.street_address1.value),
                     'street_address2': $.trim(form.street_address2.value),
                     'county': $.trim(form.county.value),
+                    'cookie': $.trim(form.basket_number.value),
+                    'order_total': $.trim(form.total_price.value),
                 };
                 $.post(URL, postData);
                 console.log('success')
