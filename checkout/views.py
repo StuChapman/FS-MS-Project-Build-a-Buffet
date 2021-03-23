@@ -100,6 +100,11 @@ def create_order(request):
 
     baskets = ""
     item_number = ""
+    category = ""
+    name = ""
+    servings = ""
+    option = ""
+    total_price = ""
 
     """ fetch the datasets from the models """
     basket = Basket.objects.all()
