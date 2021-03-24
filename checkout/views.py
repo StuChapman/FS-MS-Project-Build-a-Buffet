@@ -202,13 +202,10 @@ def create_order(request):
                 )
                 return redirect(reverse('order_success', args=[order_number]))
             else:
-                messages.success(request, ('Form was not valid'))
                 return HttpResponse(status=200)
         except Exception as e:
-            messages.success(request, ('No paymentSuccess in request.POST:'))
             return HttpResponse(content=e, status=200)
     else:
-        messages.success(request, ('request was not POST'))
         return HttpResponse(status=200)
 
 
