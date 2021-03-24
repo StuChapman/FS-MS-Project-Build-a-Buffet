@@ -153,6 +153,8 @@ def create_order(request):
                 order.order_total = order_total
                 customer_name = request.user
                 order.customer_name = customer_name
+                order.stripe_pid = request.POST.get('client_secret').split('_secret')[0]
+                order.user_profile = request.POST.get('current_user')
                 order.save()
 
                 """ fetch the basket items to save into order_items """
@@ -178,8 +180,7 @@ def create_order(request):
                     order_basket.save()
                     basket.delete()
                 baskets = Basket.objects.filter(cookie=cookie)
-                print('third')
-                print(baskets)
+
                 # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
                 messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
 
