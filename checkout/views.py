@@ -146,10 +146,10 @@ def create_order(request):
             try:
                 payment_success = "succeeded"
                 success_count = success_count + 1
-                """ create a unique order number """
-                order_number = uuid.uuid4().hex[:10]
                 order_form = OrderForm(form_data)
                 if order_form.is_valid() and success_count < 2:
+                    """ create a unique order number """
+                    order_number = uuid.uuid4().hex[:10]
                     order = order_form.save(commit=False)
                     order.order_number = order_number
                     cookie = request.POST.get('basket_number')
