@@ -106,6 +106,9 @@ def create_order(request):
     option = ""
     total_price = ""
 
+    """ create a unique order number """
+    order_number = uuid.uuid4().hex[:10]
+
     """ fetch the datasets from the models """
     basket = Basket.objects.all()
 
@@ -138,81 +141,75 @@ def create_order(request):
                 profile.default_county = request.POST['county']
                 profile.save()
 
-        """ create a count to ensure only one attempt is made for payment_success """
-        success_count = 0
-
         try:
-            payment_success = request.POST.get('paymentSuccess')
-            try:
-                payment_success = "succeeded"
-                success_count = success_count + 1
-                order_form = OrderForm(form_data)
-                if order_form.is_valid() and success_count < 2:
-                    """ create a unique order number """
-                    order_number = uuid.uuid4().hex[:10]
-                    order = order_form.save(commit=False)
-                    order.order_number = order_number
-                    cookie = request.POST.get('basket_number')
-                    order.cookie = cookie
-                    order_total = request.POST.get('total_price')
-                    order.order_total = order_total
-                    customer_name = request.user
-                    order.customer_name = customer_name
-                    order.save()
+            payment_success = request.POST.get('paymentSuccess') and payment_success == "succeeded"
+            order_form = OrderForm(form_data)
+            if order_form.is_valid():
+                order = order_form.save(commit=False)
+                order.order_number = order_number
+                cookie = request.POST.get('basket_number')
+                order.cookie = cookie
+                order_total = request.POST.get('total_price')
+                order.order_total = order_total
+                customer_name = request.user
+                order.customer_name = customer_name
+                order.save()
 
-                    """ fetch the basket items to save into order_items """
-                    baskets = Basket.objects.filter(cookie=cookie)
-                    for basket in baskets:
-                        cookie = basket.cookie
-                        item_number = basket.pk
-                        category = basket.category
-                        name = basket.name
-                        servings = basket.servings
-                        option = basket.option
-                        total_price = basket.total_price
+                """ fetch the basket items to save into order_items """
+                baskets = Basket.objects.filter(cookie=cookie)
+                for basket in baskets:
+                    cookie = basket.cookie
+                    item_number = basket.pk
+                    category = basket.category
+                    name = basket.name
+                    servings = basket.servings
+                    option = basket.option
+                    total_price = basket.total_price
 
-                        """ save the basket items into order_items """
-                        order_basket = Order_items(cookie=cookie,
-                                                order_number=order_number,
-                                                item_number=item_number,
-                                                category=category,
-                                                name=name,
-                                                servings=servings,
-                                                option=option,
-                                                total_price=total_price)
-                        print(order_number)
-                        order_basket.save()
-                        basket.delete()
-                    # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
-                    messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
+                    """ save the basket items into order_items """
+                    order_basket = Order_items(cookie=cookie,
+                                            order_number=order_number,
+                                            item_number=item_number,
+                                            category=category,
+                                            name=name,
+                                            servings=servings,
+                                            option=option,
+                                            total_price=total_price)
+                    order_basket.save()
+                    basket.delete()
+                baskets = Basket.objects.filter(cookie=cookie)
+                print('third')
+                print(baskets)
+                # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
+                messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
 
-                    """ compose and send confirmation email """
-                    order_date = order.date.strftime("%d/%m/%Y %H:%M:%S")
-                    parameters = {
-                        'order_number': order_number,
-                        'order_date': order_date,
-                        'order_total': order.order_total,
-                    }
-                    # Credit: https://stackoverflow.com/questions/2809547/creating-email-templates-with-django
-                    msg_html = render_to_string('checkout/confirmation_email.html',
-                                                parameters)
-                    send_mail(
-                        'Order Confirmation',
-                        msg_html,
-                        'no-reply@build-a-buffet.com',
-                        [order.email],
-                        html_message=msg_html,
-                    )
-
-                    return redirect(reverse('order_success', args=[order_number]))
-                else:
-                    messages.success(request, ('Form was not valid'))
-                    return redirect(reverse('checkout'))
-            except Exception as e:
-                return HttpResponse(content=e, status=200)
+                """ compose and send confirmation email """
+                order_date = order.date.strftime("%d/%m/%Y %H:%M:%S")
+                parameters = {
+                    'order_number': order_number,
+                    'order_date': order_date,
+                    'order_total': order.order_total,
+                }
+                # Credit: https://stackoverflow.com/questions/2809547/creating-email-templates-with-django
+                msg_html = render_to_string('checkout/confirmation_email.html',
+                                            parameters)
+                send_mail(
+                    'Order Confirmation',
+                    msg_html,
+                    'no-reply@build-a-buffet.com',
+                    [order.email],
+                    html_message=msg_html,
+                )
+                return redirect(reverse('order_success', args=[order_number]))
+            else:
+                messages.success(request, ('Form was not valid'))
+                return HttpResponse(status=200)
         except Exception as e:
             messages.success(request, ('No paymentSuccess in request.POST:'))
-            return HttpResponse(content=e, status=400)
+            return HttpResponse(content=e, status=200)
+    else:
+        messages.success(request, ('request was not POST'))
+        return HttpResponse(status=200)
 
 
 def order_success(request, order_number):
