@@ -154,8 +154,6 @@ def create_order(request):
                 customer_name = request.user
                 order.customer_name = customer_name
                 order.stripe_pid = request.POST.get('client_secret').split('_secret')[0]
-                user = request.POST.get('current_user')
-                print(user)
                 order.save()
 
                 """ fetch the basket items to save into order_items """
