@@ -138,9 +138,6 @@ def create_order(request):
                 profile.default_county = request.POST['county']
                 profile.save()
 
-        """ create a unique order number """
-        order_number = uuid.uuid4().hex[:10]
-
         """ create a count to ensure only one attempt is made for payment_success """
         success_count = 0
 
@@ -149,6 +146,8 @@ def create_order(request):
             try:
                 payment_success = "succeeded"
                 success_count = success_count + 1
+                """ create a unique order number """
+                order_number = uuid.uuid4().hex[:10]
                 order_form = OrderForm(form_data)
                 if order_form.is_valid() and success_count < 2:
                     order = order_form.save(commit=False)
@@ -172,17 +171,18 @@ def create_order(request):
                         option = basket.option
                         total_price = basket.total_price
 
-                    """ save the basket items into order_items """
-                    order_basket = Order_items(cookie=cookie,
-                                               order_number=order_number,
-                                               item_number=item_number,
-                                               category=category,
-                                               name=name,
-                                               servings=servings,
-                                               option=option,
-                                               total_price=total_price)
-                    order_basket.save()
-                    basket.delete()
+                        """ save the basket items into order_items """
+                        order_basket = Order_items(cookie=cookie,
+                                                order_number=order_number,
+                                                item_number=item_number,
+                                                category=category,
+                                                name=name,
+                                                servings=servings,
+                                                option=option,
+                                                total_price=total_price)
+                        print(order_number)
+                        order_basket.save()
+                        basket.delete()
                     # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
                     messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
 
