@@ -155,7 +155,7 @@ def create_order(request):
                 order.customer_name = customer_name
                 order.stripe_pid = request.POST.get('client_secret').split('_secret')[0]
                 user = request.POST.get('current_user')
-                user_profile = UserProfile.objects.get(name=user)
+                user_profile = UserProfile.objects.get(default_full_name=user)
                 order.user_profile = user_profile
                 order.save()
 
