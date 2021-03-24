@@ -44,7 +44,7 @@ class StripeWH_Handler:
         """ create_webhook_order """
 
         """ create a unique order number """
-        order_number = uuid.uuid4().hex[:10]
+        order_number = "wh" + uuid.uuid4().hex[:8]
 
         """ check for any unordered baskets """
         cookie = billing_details.phone
