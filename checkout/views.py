@@ -155,8 +155,12 @@ def create_order(request):
                 order.customer_name = customer_name
                 order.stripe_pid = request.POST.get('client_secret').split('_secret')[0]
                 user = request.POST.get('current_user')
-                user_profile = UserProfile.objects.get(default_full_name=user)
-                order.user_profile = user_profile
+                try:
+                    user_profile = UserProfile.objects.get(default_full_name=user)
+                    order.user_profile = user_profile
+                except Exception as e:
+                    order.user_profile = ""
+                    return HttpResponse(content=e, status=200)
                 order.save()
 
                 """ fetch the basket items to save into order_items """
