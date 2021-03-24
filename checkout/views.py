@@ -141,12 +141,16 @@ def create_order(request):
         """ create a unique order number """
         order_number = uuid.uuid4().hex[:10]
 
+        """ create a count to ensure only one attempt is made for payment_success """
+        success_count = 0
+
         try:
             payment_success = request.POST.get('paymentSuccess')
             try:
                 payment_success = "succeeded"
+                success_count = success_count + 1
                 order_form = OrderForm(form_data)
-                if order_form.is_valid():
+                if order_form.is_valid() and success_count < 2:
                     order = order_form.save(commit=False)
                     order.order_number = order_number
                     cookie = request.POST.get('basket_number')
