@@ -55,6 +55,7 @@ class StripeWH_Handler:
             order_total = round(intent.charges.data[0].amount / 100, 2)
             full_name = shipping_details.name
             customer_name = billing_details.name
+            customer_email = billing_details.email
 
             webhook_order = Order(order_number=order_number,
                                 cookie=cookie,
@@ -88,6 +89,25 @@ class StripeWH_Handler:
                 order_basket.save()
                 basket.delete()
             baskets = Basket.objects.filter(cookie=cookie)
+
+
+            """ compose and send confirmation email """
+            order_date = webhook_order.date.strftime("%d/%m/%Y %H:%M:%S")
+            parameters = {
+                'order_number': order_number,
+                'order_date': order_date,
+                'order_total': webhook_order.order_total,
+            }
+            # Credit: https://stackoverflow.com/questions/2809547/creating-email-templates-with-django
+            msg_html = render_to_string('checkout/confirmation_email.html',
+                                        parameters)
+            send_mail(
+                'Order Confirmation',
+                msg_html,
+                'no-reply@build-a-buffet.com',
+                [customer_email],
+                html_message=msg_html,
+            )
 
         """ webhook order created """
 
