@@ -154,7 +154,9 @@ def create_order(request):
                 customer_name = request.user
                 order.customer_name = customer_name
                 order.stripe_pid = request.POST.get('client_secret').split('_secret')[0]
-                order.user_profile = request.POST.get('current_user')
+                user = request.POST.get('current_user')
+                user_profile = UserProfile.objects.get(name=user)
+                order.user_profile = user_profile
                 order.save()
 
                 """ fetch the basket items to save into order_items """
@@ -170,13 +172,13 @@ def create_order(request):
 
                     """ save the basket items into order_items """
                     order_basket = Order_items(cookie=cookie,
-                                            order_number=order_number,
-                                            item_number=item_number,
-                                            category=category,
-                                            name=name,
-                                            servings=servings,
-                                            option=option,
-                                            total_price=total_price)
+                                               order_number=order_number,
+                                               item_number=item_number,
+                                               category=category,
+                                               name=name,
+                                               servings=servings,
+                                               option=option,
+                                               total_price=total_price)
                     order_basket.save()
                     basket.delete()
                 baskets = Basket.objects.filter(cookie=cookie)
