@@ -255,7 +255,38 @@ def add_product(request):
         # messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
-    return render(request, 'home/index.html')
+    categories = Category.objects.all()
+    products = Product.objects.all()
+    options = Options.objects.all()
+
+    last_product = Product.objects.all().last()
+    last_product_id = int(float(last_product.id_no[3:6]))
+    next_product_id = last_product_id + 1
+    if next_product_id < 100:
+        next_product_id = "pro" + "0" + str(next_product_id)
+    else:
+        next_product_id = "pro" + str(next_product_id)
+
+    if request.method == 'POST':
+        category = Category.objects.get(name=request.POST['new_category'])
+        name = request.POST['new_name']
+        description = request.POST['new_description']
+        price = request.POST['new_price']
+        range = request.POST['new_range']
+        new_product = Product(category=category,
+                              id_no=next_product_id,
+                              name=name,
+                              description=description,
+                              price=price,
+                              range=range)
+        new_product.save()
+        return redirect(reverse('refresh_product_admin', args=[next_product_id]))
+
+    context = {
+        'categories': categories,
+    }
+
+    return render(request, 'products/add_product.html', context)
 
 
 @login_required

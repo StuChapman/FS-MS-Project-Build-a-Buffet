@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <!-- Produce-->
+    <section class="products-section bg-light" id="products">
+        <div class="container">
+            <!-- Produce One Row-->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-xl-12">
+                    <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Add a Product</h1>
+                </div>
+                <div class="col-xl-6">
+                    {% if dataset == "categories" %}
+                        {% if category.image.value %}
+                            <!-- Credit: https://stackoverflow.com/questions/2236691/how-do-i-display-the-value-of-a-django-form-field-in-a-template -->
+                            <img class="img-fluid image-80" src="{{ MEDIA_URL }}{{ image.image }}{{ form.image.value }}" alt="{{ form.name.value }} image" />
+                        {% else %}
+                            <img class="img-fluid image-80" src="{{ MEDIA_URL }}assets/img/noimage.png" alt="no image stored" />
+                        {% endif %}
+                    {% else %}
+                        <img class="img-fluid image-80" src="{{ MEDIA_URL }}assets/img/pexels-kaboompics-com-5928.jpg" alt="salad bowl" />
+                    {% endif %}
+                </div>
+                <div class="col-xl-6">
+                    <div class="text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="product-container w-100 mt-0 text-center text-xl-left">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form class="mt-3" action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data" id="new-product-form">
+                                            {% csrf_token %}
+                                                <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_category" id="new_category" placeholder="category">
+                                                    {% for category in categories %}
+                                                        <option value="{{ category.name }}">{{ category.friendly_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_name" id="new_name" placeholder="name">
+                                                <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_description" id="new_description" placeholder="description">
+                                                <input class="numberinput form-control mb-3 text-blue text-xs" type="text" name="new_price" id="new_price" placeholder="price">
+                                                <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_range" id="new_range" placeholder="range">
+                                                    <option value="standard">Standard</option>
+                                                    <option value="premium">Premium</option>
+                                                    <option value="luxury">Luxury</option>
+                                                </select>
+                                            <button class="bg-grey border-solid px-3 masthead-button btn btn-primary js-scroll-trigger float-right">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <hr class="d-none d-xl-block mb-0 ml-0">
+            </div>
+        </div>
+    </section>
+
+{{ block.super }}
+{% include 'includes/contact.html' %}
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $('#new-image').change(function() {
+            var file = $('#new-image')[0].files[0];
+            $('#filename').text(`Image will be set to: ${file.name}`);
+        });
+    </script>
+{% endblock %}
