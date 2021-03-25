@@ -249,6 +249,16 @@ def update_product(request, form_id):
 
 
 @login_required
+def add_product(request):
+    """ update a product on the menu """
+    if not request.user.is_superuser:
+        # messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    return render(request, 'home/index.html')
+
+
+@login_required
 def refresh_product_admin(request, form_id):
 
     """ reset all variables to handle errors """

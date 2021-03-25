@@ -10544,9 +10544,6 @@ body {
 .bg-blue:hover, .bg-dark:hover, .bg-red:hover, .bg-green:hover, .bg-grey:hover {
   opacity: 0.7;
 }
-.bg-red, .bg-green, .bg-grey {
-  width: 8rem;
-}
 
 .align-vertically { /* credit to https://webdevblog.com/css-vertical-align/ */
     display: flex;
@@ -10619,6 +10616,11 @@ body {
     .submit-button .bg-blue, .submit-button .bg-dark {
         width: 90%;
     }
+    .bg-red, .bg-green, .bg-grey {
+    width: 27.5vw;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    }
 }
 
 @media screen and (orientation: landscape){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
@@ -10665,6 +10667,9 @@ body {
     }
     .submit-button .bg-blue, .submit-button .bg-dark {
         width: 50%;
+    }
+    .bg-red, .bg-green, .bg-grey {
+    width: 8rem;
     }
 }
 
