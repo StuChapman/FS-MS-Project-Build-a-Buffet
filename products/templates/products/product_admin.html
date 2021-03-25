@@ -145,13 +145,15 @@
                                                     {{ field }}
                                                 {% endif %}
                                             {% endfor %}
-                                            <button class="bg-grey border-solid px-3 masthead-button btn btn-primary js-scroll-trigger float-right">Update</button>
-                                            <a class="bg-green border-solid px-3 masthead-button btn btn-primary js-scroll-trigger float-left" 
-                                                href="{% url 'add_product' %}">
-                                                Add</a>
-                                            <a class="bg-red border-solid ml-lg-3 px-3 masthead-button btn btn-primary js-scroll-trigger " 
-                                                href="{% url 'update_product' form.id_no.value %}">
-                                                Delete</a>
+                                            <div class="mt-3">
+                                                <button class="bg-grey border-solid px-3 masthead-button btn btn-primary js-scroll-trigger float-right">Update</button>
+                                                <a class="bg-green border-solid px-3 masthead-button btn btn-primary js-scroll-trigger float-left" 
+                                                    href="{% url 'add_product' %}?dataset={{ dataset }}">
+                                                    Add</a>
+                                                <a class="bg-red border-solid ml-lg-3 px-3 masthead-button btn btn-primary js-scroll-trigger " 
+                                                    href="{% url 'update_product' form.id_no.value %}">
+                                                    Delete</a>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
