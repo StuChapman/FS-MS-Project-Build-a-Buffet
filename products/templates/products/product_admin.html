@@ -145,7 +145,13 @@
                                                     {{ field }}
                                                 {% endif %}
                                             {% endfor %}
-                                            <button class="border-solid masthead-button btn btn-primary js-scroll-trigger float-right">Update</button>
+                                            <button class="border-solid px-3 masthead-button btn btn-primary js-scroll-trigger float-right">Update</button>
+                                            <a class="edit-button border-solid px-3 masthead-button btn btn-primary js-scroll-trigger " 
+                                                href="{% url 'update_product' form.id_no.value %}">
+                                                Add</a>
+                                            <a class="delete-button border-solid px-3 masthead-button btn btn-primary js-scroll-trigger " 
+                                                href="{% url 'update_product' form.id_no.value %}">
+                                                Delete</a>
                                         </form>
                                     </div>
                                 </div>

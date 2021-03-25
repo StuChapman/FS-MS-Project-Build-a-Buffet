@@ -10529,14 +10529,23 @@ body {
   background-color: #426765;
   width: 100%;
 }
-.bg-blue:hover {
-  opacity: 0.7;
-}
 .bg-dark {
   background-color: black;
 }
-.bg-dark:hover {
+.bg-red {
+  background-color: #EA7276;
+}
+.bg-green {
+  background-color: #9DBA83;
+}
+.bg-grey {
+  background-color: #426765;
+}
+.bg-blue:hover, .bg-dark:hover, .bg-red:hover, .bg-green:hover, .bg-grey:hover {
   opacity: 0.7;
+}
+.bg-red, .bg-green, .bg-grey {
+  width: 4rem;
 }
 
 .align-vertically { /* credit to https://webdevblog.com/css-vertical-align/ */
