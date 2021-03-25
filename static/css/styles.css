@@ -10533,10 +10533,10 @@ body {
   background-color: black;
 }
 .bg-red {
-  background-color: #EA7276;
+  background-color: #EA7276 !important;
 }
 .bg-green {
-  background-color: #9DBA83;
+  background-color: #9DBA83 !important;
 }
 .bg-grey {
   background-color: #426765;
@@ -10545,7 +10545,7 @@ body {
   opacity: 0.7;
 }
 .bg-red, .bg-green, .bg-grey {
-  width: 4rem;
+  width: 8rem;
 }
 
 .align-vertically { /* credit to https://webdevblog.com/css-vertical-align/ */
