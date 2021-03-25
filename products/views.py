@@ -268,12 +268,15 @@ def add_product(request):
 
     if request.method == 'POST':
         dataset = request.POST['dataset']
+
         if dataset == 'products':
             """ get the last product.id_no and incriment by 1 """
             last_product = Product.objects.all().last()
             last_product_id = int(float(last_product.id_no[3:6]))
             next_product_id = last_product_id + 1
-            if next_product_id < 100:
+            if next_product_id < 10:
+                next_product_id = "pro" + "00" + str(next_product_id)
+            elif next_product_id < 100:
                 next_product_id = "pro" + "0" + str(next_product_id)
             else:
                 next_product_id = "pro" + str(next_product_id)
@@ -284,30 +287,57 @@ def add_product(request):
             price = request.POST['new_price']
             range = request.POST['new_range']
             new_product = Product(category=category,
-                                id_no=next_product_id,
-                                name=name,
-                                description=description,
-                                price=price,
-                                range=range)
+                                  id_no=next_product_id,
+                                  name=name,
+                                  description=description,
+                                  price=price,
+                                  range=range)
             new_product.save()
             return redirect(reverse('refresh_product_admin', args=[next_product_id]))
+
         if dataset == 'categories':
             """ get the last product.id_no and incriment by 1 """
             last_category = Category.objects.all().last()
             last_category_id = int(float(last_category.id_no[3:6]))
             next_category_id = last_category_id + 1
-            if next_category_id < 100:
+            if next_category_id < 10:
+                next_category_id = "cat" + "00" + str(next_category_id)
+            elif next_category_id < 100:
                 next_category_id = "cat" + "0" + str(next_category_id)
             else:
                 next_category_id = "cat" + str(next_category_id)
 
-            name = request.POST['new_name']
+            name = request.POST['new_category_name']
             friendly_name = request.POST['new_friendly_name']
             new_category = Category(name=name,
                                     id_no=next_category_id,
                                     friendly_name=friendly_name)
             new_category.save()
             return redirect(reverse('refresh_product_admin', args=[next_category_id]))
+
+        if dataset == 'options':
+            """ get the last option.id_no and incriment by 1 """
+            last_option = Options.objects.all().last()
+            last_option_id = int(float(last_option.id_no[3:6]))
+            next_option_id = last_option_id + 1
+            if next_option_id < 10:
+                next_option_id = "opt" + "00" + str(next_option_id)
+            elif next_option_id < 100:
+                next_option_id = "opt" + "0" + str(next_option_id)
+            else:
+                next_option_id = "opt" + str(next_option_id)
+
+            category = Category.objects.get(name=request.POST['new_option_category'])
+            option1 = request.POST['new_option_one']
+            option2 = request.POST['new_option_two']
+            option3 = request.POST['new_option_three']
+            new_option = Options(category=category,
+                                 id_no=next_option_id,
+                                 option1=option1,
+                                 option2=option2,
+                                 option3=option3)
+            new_option.save()
+            return redirect(reverse('refresh_product_admin', args=[next_option_id]))
 
     context = {
         'categories': categories,
