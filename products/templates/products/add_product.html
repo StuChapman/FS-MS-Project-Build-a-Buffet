@@ -52,8 +52,13 @@
                                                         <option value="premium">Premium</option>
                                                         <option value="luxury">Luxury</option>
                                                     </select>
-                                                    <input class="unhidden" type="text" name="dataset" id="dataset" value="{{ dataset }}">
                                                 {% endif %}
+                                                {% if dataset == 'categories' %}
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_name" id="new_name" placeholder="* name">
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_friendly_name" id="new_friendly_name" placeholder="* friendly name">
+                                                    <span>Add image on update view</span>
+                                                {% endif %}
+                                                    <input class="hidden" type="text" name="dataset" id="dataset" value="{{ dataset }}">
                                             <button class="bg-grey border-solid px-3 masthead-button btn btn-primary js-scroll-trigger float-right">Save</button>
                                         </form>
                                     </div>

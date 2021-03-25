@@ -293,27 +293,21 @@ def add_product(request):
             return redirect(reverse('refresh_product_admin', args=[next_product_id]))
         if dataset == 'categories':
             """ get the last product.id_no and incriment by 1 """
-            last_product = Product.objects.all().last()
-            last_product_id = int(float(last_product.id_no[3:6]))
-            next_product_id = last_product_id + 1
-            if next_product_id < 100:
-                next_product_id = "pro" + "0" + str(next_product_id)
+            last_category = Category.objects.all().last()
+            last_category_id = int(float(last_category.id_no[3:6]))
+            next_category_id = last_category_id + 1
+            if next_category_id < 100:
+                next_category_id = "cat" + "0" + str(next_category_id)
             else:
-                next_product_id = "pro" + str(next_product_id)
+                next_category_id = "cat" + str(next_category_id)
 
-            category = Category.objects.get(name=request.POST['new_category'])
             name = request.POST['new_name']
-            description = request.POST['new_description']
-            price = request.POST['new_price']
-            range = request.POST['new_range']
-            new_product = Product(category=category,
-                                id_no=next_product_id,
-                                name=name,
-                                description=description,
-                                price=price,
-                                range=range)
-            new_product.save()
-            return redirect(reverse('refresh_product_admin', args=[next_product_id]))
+            friendly_name = request.POST['new_friendly_name']
+            new_category = Category(name=name,
+                                    id_no=next_category_id,
+                                    friendly_name=friendly_name)
+            new_category.save()
+            return redirect(reverse('refresh_product_admin', args=[next_category_id]))
 
     context = {
         'categories': categories,
