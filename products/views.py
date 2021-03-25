@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib import messages
 
 from .models import Product, Category, Options
 from basket.models import Basket
@@ -217,7 +218,7 @@ def product_admin(request):
 def update_product(request, form_id):
     """ update a product on the menu """
     if not request.user.is_superuser:
-        # messages.error(request, 'Sorry, only store owners can do that.')
+        messages.success(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
@@ -232,13 +233,13 @@ def update_product(request, form_id):
             form = CategoryAdminForm(request.POST, request.FILES, instance=category)
         if form.is_valid():
             form.save()
-            # messages.success(request, 'Successfully updated product!')
+            messages.success(request, 'Successfully updated product!')
             return redirect(reverse('refresh_product_admin', args=[form_id]))
-        # else:
-            # messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+        else:
+            messages.success(request, 'Failed to update product. Please ensure the form is valid.')
     else:
         form = ProductAdminForm(instance=product)
-        # messages.info(request, f'You are editing {product.name}')
+        messages.success(request, f'You are editing {product.name}')
 
     context = {
         'form': form,
@@ -252,12 +253,10 @@ def update_product(request, form_id):
 def add_product(request):
     """ update a product on the menu """
     if not request.user.is_superuser:
-        # messages.error(request, 'Sorry, only store owners can do that.')
+        messages.success(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
     categories = Category.objects.all()
-    products = Product.objects.all()
-    options = Options.objects.all()
 
     dataset = ""
 
@@ -293,6 +292,7 @@ def add_product(request):
                                   price=price,
                                   range=range)
             new_product.save()
+            messages.success(request, f'Succesfully added {new_product.name}')
             return redirect(reverse('refresh_product_admin', args=[next_product_id]))
 
         if dataset == 'categories':
@@ -313,6 +313,7 @@ def add_product(request):
                                     id_no=next_category_id,
                                     friendly_name=friendly_name)
             new_category.save()
+            messages.success(request, f'Succesfully added {new_category.name}')
             return redirect(reverse('refresh_product_admin', args=[next_category_id]))
 
         if dataset == 'options':
@@ -337,6 +338,7 @@ def add_product(request):
                                  option2=option2,
                                  option3=option3)
             new_option.save()
+            messages.success(request, f'Succesfully added {new_option.name}')
             return redirect(reverse('refresh_product_admin', args=[next_option_id]))
 
     context = {
@@ -345,6 +347,56 @@ def add_product(request):
     }
 
     return render(request, 'products/add_product.html', context)
+
+
+@login_required
+def delete_product(request, form_id):
+    """ update a product on the menu """
+    if not request.user.is_superuser:
+        messages.success(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    form = ""
+    dataset = ""
+    return_query_length = ""
+    return_query_number = ""
+
+    if form_id[0:3] == 'pro':
+        product = Product.objects.get(id_no=form_id)
+        product.delete()
+        return_query = Product.objects.all().last()
+        return_query_length = Product.objects.all().count()
+        return_query_number = return_query_length
+        form = ProductAdminForm(instance=return_query)
+        dataset = "products"
+        messages.success(request, f'You have deleted {product}')
+    if form_id[0:3] == 'opt':
+        option = Options.objects.get(id_no=form_id)
+        option.delete()
+        return_query = Options.objects.all().last()
+        return_query_length = Options.objects.all().count()
+        return_query_number = return_query_length
+        form = OptionsAdminForm(instance=return_query)
+        dataset = "options"
+        messages.success(request, f'You have deleted {option}')
+    if form_id[0:3] == 'cat':
+        category = Category.objects.get(id_no=form_id)
+        category.delete()
+        return_query = Category.objects.all().last()
+        return_query_length = Category.objects.all().count()
+        return_query_number = return_query_length
+        form = CategoryAdminForm(instance=return_query)
+        dataset = "categories"
+        messages.success(request, f'You have deleted {category}')
+
+    context = {
+            'form': form,
+            'dataset': dataset,
+            'return_query_length': return_query_length,
+            'return_query_number': return_query_number,
+        }
+
+    return render(request, 'products/product_admin.html', context)
 
 
 @login_required
