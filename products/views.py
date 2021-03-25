@@ -221,6 +221,10 @@ def update_product(request, form_id):
         messages.success(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
+    product = ""
+    option = ""
+    category = ""
+
     if request.method == 'POST':
         if form_id[0:3] == 'pro':
             product = get_object_or_404(Product, id_no=form_id)
