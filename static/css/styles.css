@@ -2023,15 +2023,27 @@ pre code {
   box-shadow: 0 0 0 0.2rem rgba(100, 161, 157, 0.25);
 }
 .form-control::-moz-placeholder {
-  color: #6c757d;
+  color: silver;
   opacity: 1;
 }
 .form-control:-ms-input-placeholder {
-  color: #6c757d;
+  color: silver;
   opacity: 1;
 }
 .form-control::placeholder {
-  color: #6c757d;
+  color: silver;
+  opacity: 1;
+}
+::-moz-placeholder {
+  color: silver;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  color: silver;
+  opacity: 1;
+}
+::placeholder {
+  color: silver;
   opacity: 1;
 }
 .form-control:disabled, .form-control[readonly] {
@@ -10417,6 +10429,10 @@ body {
     vertical-align: middle;
     z-index: -1;
 }
+.question-input {
+    border: 1px solid #303F3F;
+    border-radius: 5px;
+}
 .search-button {
     border: 1px solid #303F3F;
     border-radius: 5px;
@@ -10425,7 +10441,7 @@ body {
     width: 40px;
     height: 30px;
     padding: 0;
-    margin: 0 0 0 -15px;
+    margin: 0 0 0 -20px;
     vertical-align: middle;
     position: absolute; 
 }
