@@ -8,7 +8,7 @@ var productSearchEl = document.getElementById('product_search');
 
 const isSearchRequired = value => value === '' ? false : true;
 const isSearchText = (string) => {
-    const re = new RegExp("[a-zA-Z]");
+    const re = new RegExp(/^[a-zA-Z ]+$/);
     return re.test(string);
 };
 
@@ -58,7 +58,7 @@ var userQuestionQuestion = document.getElementById('user-question-question');
 
 const isQuestionRequired = value => value === '' ? false : true;
 const isQuestionText = (string) => {
-    const re = new RegExp("[a-zA-Z_0-9@/./+/-/_]");
+    const re = new RegExp(/^[a-zA-Z ]+$/);
     return re.test(string);
 };
 const isQuestionEmailValid = (email) => {
