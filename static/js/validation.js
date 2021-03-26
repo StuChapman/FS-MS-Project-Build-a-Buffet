@@ -1,16 +1,29 @@
 // Validation for all forms at client end to prevent user errors or malicious behavior
 // Credit: https://www.javascripttutorial.net/javascript-dom/javascript-form-validation/
 
+const isRequired = value => value === '' ? false : true;
+
+const isText = (string) => {
+    const re = new RegExp(/^[a-zA-Z ]+$/);
+    return re.test(string);
+};
+const isAlphaNumeric = (string) => {
+    const re = new RegExp(/^[a-zA-Z_0-9 ]+$/);
+    return re.test(string);
+};
+const isNumerals = (number) => {
+    const re = new RegExp("[0-9]");
+    return re.test(number);
+};
+const isEmailValid = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+};
+
 // Handle product_search_form submit
 
 var productSearchForm = document.getElementById('product_search_form');
 var productSearchEl = document.getElementById('product_search');
-
-const isSearchRequired = value => value === '' ? false : true;
-const isSearchText = (string) => {
-    const re = new RegExp(/^[a-zA-Z ]+$/);
-    return re.test(string);
-};
 
 const checkProductSearchForm = () => {
 
@@ -19,12 +32,12 @@ const checkProductSearchForm = () => {
         max = 25;
     const productSearch = productSearchEl.value.trim();
 
-    if (!isSearchRequired(productSearch)) {
+    if (!isRequired(productSearch)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search cannot be blank.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isSearchText(productSearch)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search must be text only.');
+    } else if (!isAlphaNumeric(productSearch)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search must be text or numerals only.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
     } else {
@@ -56,16 +69,6 @@ var userQuestionName = document.getElementById('user-question-name');
 var userQuestionEmail = document.getElementById('user-question-email');
 var userQuestionQuestion = document.getElementById('user-question-question');
 
-const isQuestionRequired = value => value === '' ? false : true;
-const isQuestionText = (string) => {
-    const re = new RegExp(/^[a-zA-Z ]+$/);
-    return re.test(string);
-};
-const isQuestionEmailValid = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-};
-
 const checkUserQuestionForm = () => {
 
     let questionValid = false;
@@ -75,23 +78,23 @@ const checkUserQuestionForm = () => {
     const questionEmail = userQuestionEmail.value.trim();
     const questionQuestion = userQuestionQuestion.value.trim();
 
-    if (!isQuestionRequired(questionName)) {
+    if (!isRequired(questionName)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name cannot be blank.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isQuestionText(questionName)) {
+    } else if (!isText(questionName)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @/./+/-/_ characters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isQuestionEmailValid(questionEmail)) {
+    } else if (!isEmailValid(questionEmail)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isQuestionRequired(questionQuestion)) {
+    } else if (!isRequired(questionQuestion)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question cannot be blank.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isQuestionText(questionQuestion)) {
+    } else if (!isText(questionQuestion)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question must contain only letters, numbers, and @/./+/-/_ characters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
@@ -112,6 +115,64 @@ userQuestionForm.addEventListener('submit', function(ev) {
     // submit to the server if the form is valid
     if (isFormValid) {
         userQuestionForm.submit();
+    }
+
+});
+
+
+// Handle product-update-form submit
+
+var productSearchFormAdmin = document.getElementById('product_search_form_admin');
+var productSearchAdmin = document.getElementById('product_search_admin');
+
+var productUpdateForm = document.getElementById('product-update-form');
+
+const checkUserProductForm = () => {
+
+    let productValid = false;
+    const min = 2,
+        max = 25;
+    const productName = userProductName.value.trim();
+    const productEmail = userProductEmail.value.trim();
+    const productProduct = userProductProduct.value.trim();
+
+    if (!isRequired(productName)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name cannot be blank.');
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    } else if (!isText(productName)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @/./+/-/_ characters.');
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    } else if (!isEmailValid(productEmail)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.');
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    } else if (!isRequired(productProduct)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Product cannot be blank.');
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    } else if (!isText(productProduct)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Product must contain only letters, numbers, and @/./+/-/_ characters.');
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    } else {
+        questionValid = true;
+    }
+    return questionValid;
+}
+
+userProductForm.addEventListener('submit', function(ev) {
+    ev.preventDefault();
+
+    // validate forms
+    let isUserProductFormValid = checkUserProductForm();
+
+    let isFormValid = isUserProductFormValid;
+
+    // submit to the server if the form is valid
+    if (isFormValid) {
+        userProductForm.submit();
     }
 
 });
