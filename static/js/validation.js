@@ -62,7 +62,7 @@ const isQuestionText = (string) => {
     return re.test(string);
 };
 const isQuestionEmailValid = (email) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 };
 
@@ -72,17 +72,27 @@ const checkUserQuestionForm = () => {
     const min = 2,
         max = 25;
     const questionName = userQuestionName.value.trim();
+    const questionEmail = userQuestionEmail.value.trim();
+    const questionQuestion = userQuestionQuestion.value.trim();
 
     if (!isQuestionRequired(questionName)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @/./+/-/_ characters.');
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name cannot be blank.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
     } else if (!isQuestionText(questionName)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must be text only.');
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @/./+/-/_ characters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isQuestionEmailValid(userQuestionEmail)) {
+    } else if (!isQuestionEmailValid(questionEmail)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.');
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    } else if (!isQuestionRequired(questionQuestion)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question cannot be blank.');
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    } else if (!isQuestionText(questionQuestion)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question must contain only letters, numbers, and @/./+/-/_ characters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
     } else {
