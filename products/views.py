@@ -237,7 +237,7 @@ def update_product(request, form_id):
             form = CategoryAdminForm(request.POST, request.FILES, instance=category)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Successfully updated product!')
+            messages.success(request, 'Successfully updated product')
             return redirect(reverse('refresh_product_admin', args=[form_id]))
         else:
             messages.success(request, 'Failed to update product. Please ensure the form is valid.')

@@ -37,7 +37,7 @@ class Options(models.Model):
     class Meta:
         verbose_name_plural = 'Options'
 
-    category = models.ForeignKey('Category', null=True, blank=True,
+    category = models.ForeignKey('Category', null=True,
                                  on_delete=models.SET_NULL)
     id_no = models.CharField(max_length=254, null=True)
     option1 = models.CharField(max_length=24)
@@ -45,4 +45,4 @@ class Options(models.Model):
     option3 = models.CharField(max_length=24)
 
     def __str__(self):
-        return self.category
+        return self.id_no

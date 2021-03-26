@@ -240,6 +240,7 @@ I deployed to Github Pages by the following steps:
 22. Converting to string in templete is from [stackoverflow.com](https://stackoverflow.com/questions/27771000/django-template-convert-to-string)
 23. Adding linebreaks to messages is from [stackoverflow.com](https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message)
 24. Sending html email is from [stackoverflow.com](https://stackoverflow.com/questions/2809547/creating-email-templates-with-django)
+25. Making a div appear for 2 seconds is from [stackoverflow.com](https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide)
 
 #### Code Institute
 

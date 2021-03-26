@@ -10573,6 +10573,14 @@ body {
     margin-top: 1rem;
 }
 
+#validation_alerts {
+    padding: 5rem 0 1rem;
+    background-color: #EA7276;
+    color: white;
+    text-align: center;
+    display: none;
+}
+
 @media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .masthead {
         padding: 25vh 0;
