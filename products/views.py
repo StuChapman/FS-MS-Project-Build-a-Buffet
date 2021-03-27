@@ -228,18 +228,18 @@ def update_product(request, form_id):
         if form_id[0:3] == 'pro':
             product = get_object_or_404(Product, id_no=form_id)
             form = ProductAdminForm(request.POST, request.FILES, instance=product)
-            messages.success(request, 'Successfully updated product')
+            item = 'product'
         if form_id[0:3] == 'opt':
             option = get_object_or_404(Options, id_no=form_id)
             form = OptionsAdminForm(request.POST, request.FILES, instance=option)
-            messages.success(request, 'Successfully updated option')
+            item = 'option'
         if form_id[0:3] == 'cat':
             category = get_object_or_404(Category, id_no=form_id)
             form = CategoryAdminForm(request.POST, request.FILES, instance=category)
-            messages.success(request, 'Successfully updated category')
+            item = 'category'
         if form.is_valid():
             form.save()
-            messages.success(request, 'Successfully updated product')
+            messages.success(request, f'Successfully updated {item}')
             return redirect(reverse('refresh_product_admin', args=[form_id]))
         else:
             messages.success(request, 'Failed to update product. Please ensure the form is valid.')
