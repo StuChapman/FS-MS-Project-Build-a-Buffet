@@ -344,7 +344,7 @@ def add_product(request):
                                  option2=option2,
                                  option3=option3)
             new_option.save()
-            messages.success(request, f'Succesfully added {new_option.name}')
+            messages.success(request, f'Succesfully added {new_option.category}')
             return redirect(reverse('refresh_product_admin', args=[next_option_id]))
 
     context = {
@@ -375,7 +375,7 @@ def delete_product(request, form_id):
         return_query_number = return_query_length
         form = ProductAdminForm(instance=return_query)
         dataset = "products"
-        messages.success(request, f'You have deleted {product}')
+        messages.success(request, f'You have deleted {product.name}')
     if form_id[0:3] == 'opt':
         option = Options.objects.get(id_no=form_id)
         option.delete()
@@ -384,7 +384,7 @@ def delete_product(request, form_id):
         return_query_number = return_query_length
         form = OptionsAdminForm(instance=return_query)
         dataset = "options"
-        messages.success(request, f'You have deleted {option}')
+        messages.success(request, f'You have deleted {option.category}')
     if form_id[0:3] == 'cat':
         category = Category.objects.get(id_no=form_id)
         category.delete()
@@ -393,7 +393,7 @@ def delete_product(request, form_id):
         return_query_number = return_query_length
         form = CategoryAdminForm(instance=return_query)
         dataset = "categories"
-        messages.success(request, f'You have deleted {category}')
+        messages.success(request, f'You have deleted {category.name}')
 
     context = {
             'form': form,

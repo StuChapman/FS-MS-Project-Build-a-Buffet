@@ -230,9 +230,11 @@ if (deleteProduct !== null) {
 
         if (document.getElementById("delete-product").innerHTML != "SURE???") {
             document.getElementById("delete-product").innerHTML = "SURE???";
+            $('#delete-product').css('color', 'black');
             allowClick = true;
         } else if (document.getElementById("delete-product").innerHTML == "SURE???") {
             document.getElementById("delete-product").innerHTML = "delete";
+            $('#delete-product').css('color', 'white');
         }
 
     });
@@ -241,26 +243,61 @@ if (deleteProduct !== null) {
 // Handle new-product-form submit
 
 var newProductForm = document.getElementById('new-product-form');
+var newDataset = document.getElementById('dataset');
 
 var newProductName = document.getElementById('new_name');
 var newProductDescription = document.getElementById('new_description');
 var newProductPrice = document.getElementById('new_price');
+var newOptionOne = document.getElementById('new_option_one');
+var newOptionTwo = document.getElementById('new_option_two');
+var newOptionThree = document.getElementById('new_option_three');
+var newCategoryName = document.getElementById('new_category_name');
+var newFriendlyName = document.getElementById('new_friendly_name');
+
+const dataSet = newDataset.value.trim();
 
 const checkNewProductForm = () => {
 
     let newValid = false;
-    const productName = newProductName.value.trim();
-    const productDescription = newProductDescription.value.trim();
-    const productPrice = newProductPrice.value.trim();
 
-    if (!isText(productName)) {
-        var alert = '<i class="fas fa-exclamation-triangle"></i> Name must contain only letters.';
-    } else if (!isAlphaNumeric(productDescription)) {
-        var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
-    } else if (!isDecimal(productPrice)) {
-        var alert = '<i class="fas fa-exclamation-triangle"></i> Price must be a number to 2 decimal places.';
-    } else {
-        newValid = true;
+    if (dataSet == 'products') {
+        const productName = newProductName.value.trim();
+        const productDescription = newProductDescription.value.trim();
+        const productPrice = newProductPrice.value.trim();
+        if (!isText(productName)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Name must contain only letters.';
+        } else if (!isAlphaNumeric(productDescription)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else if (!isDecimal(productPrice)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Price must be a number to 2 decimal places.';
+        } else {
+            newValid = true;
+        }
+    }
+    if (dataSet == 'options') {
+        const optionOne = newOptionOne.value.trim();
+        const optionTwo = newOptionTwo.value.trim();
+        const optionThree = newOptionThree.value.trim();
+        if (!isAlphaNumeric(optionOne)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else if (!isAlphaNumeric(optionTwo)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else if (!isAlphaNumeric(optionThree)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else {
+            newValid = true;
+        }
+    }
+    if (dataSet == 'categories') {
+        const categoryName = newCategoryName.value.trim();
+        const friendlyName = newFriendlyName.value.trim();
+        if (!isAlphaNumeric(categoryName)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else if (!isAlphaNumeric(friendlyName)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else {
+            newValid = true;
+        }
     }
     if (alert) {
         $('#validation_alerts').html(alert);

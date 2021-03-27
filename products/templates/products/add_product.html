@@ -54,8 +54,8 @@
                                                     </select>
                                                 {% endif %}
                                                 {% if dataset == 'categories' %}
-                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_category_name" id="new_category_name" placeholder="* name">
-                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_friendly_name" id="new_friendly_name" placeholder="* friendly name">
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_category_name" id="new_category_name" placeholder="* name">
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_friendly_name" id="new_friendly_name" placeholder="* friendly name">
                                                     <span>Add image on update view</span>
                                                 {% endif %}
                                                 {% if dataset == 'options' %}
@@ -64,9 +64,9 @@
                                                             <option value="{{ category.name }}">{{ category.friendly_name }}</option>
                                                         {% endfor %}
                                                     </select>
-                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_option_one" id="new_option_one" placeholder="* option 1">
-                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_option_two" id="new_option_two" placeholder="* option 2">
-                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_option_three" id="new_option_three" placeholder="* option 3">
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_option_one" id="new_option_one" placeholder="* option 1">
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_option_two" id="new_option_two" placeholder="* option 2">
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_option_three" id="new_option_three" placeholder="* option 3">
                                                 {% endif %}
                                                     <input class="hidden" type="text" name="dataset" id="dataset" value="{{ dataset }}">
                                             <button class="bg-grey border-solid px-3 masthead-button btn btn-primary js-scroll-trigger float-right">Save</button>
