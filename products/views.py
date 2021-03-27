@@ -574,7 +574,6 @@ def search_products(request):
 
     else:
         """ default to products in case of error """
-        return_query = Product.objects.all().first()
         product_results = products.filter(queries).first()
 
     context = {

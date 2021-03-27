@@ -212,3 +212,24 @@ if (productUpdateForm !== null) {
 
     });
 };
+
+// Handle delete-product event
+
+var deleteProduct = document.getElementById('delete-product');
+var allowClick = false
+
+if (deleteProduct !== null) {
+    deleteProduct.addEventListener('click', function(ev) {
+        if (allowClick == false) {
+            ev.preventDefault();
+        }
+
+        if (document.getElementById("delete-product").innerHTML != "SURE???") {
+            document.getElementById("delete-product").innerHTML = "SURE???";
+            allowClick = true;
+        } else if (document.getElementById("delete-product").innerHTML == "SURE???") {
+            document.getElementById("delete-product").innerHTML = "delete";
+        }
+
+    });
+};
