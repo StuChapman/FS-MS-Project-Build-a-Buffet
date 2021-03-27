@@ -4,7 +4,6 @@ from django.db.models import Q
 from django.contrib import messages
 
 from .models import Product, Category, Options
-from basket.models import Basket
 from basket.contexts import basket_context
 from .forms import ProductAdminForm, OptionsAdminForm, CategoryAdminForm
 
@@ -243,6 +242,7 @@ def update_product(request, form_id):
             return redirect(reverse('refresh_product_admin', args=[form_id]))
         else:
             messages.success(request, 'Failed to update product. Please ensure the form is valid.')
+            return redirect(reverse('refresh_product_admin', args=[form_id]))
     else:
         form = ProductAdminForm(instance=product)
         messages.success(request, f'You are editing {product.name}')

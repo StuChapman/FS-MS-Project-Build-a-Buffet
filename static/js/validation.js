@@ -120,19 +120,26 @@ if (userQuestionForm !== null) {
 var productSearchAdminForm = document.getElementById('product_search_admin_form');
 var productSearchAdminEl = document.getElementById('product_search_admin');
 
-var productAdminName = document.getElementById('id_name');
-var productAdminDescription = document.getElementById('id_description');
-var productAdminPrice = document.getElementById('id_price');
+var productAdminNameEl = document.getElementById('id_name');
+var productAdminDescriptionEl = document.getElementById('id_description');
 
-const checkproductSearchAdminForm = () => {
+const checkProductSearchAdminForm = () => {
 
     let adminValid = false;
     const productSearchAdmin = productSearchAdminEl.value.trim();
+    const productAdminName = productAdminNameEl.value.trim();
+    console.log('productAdminName');
+    console.log(productAdminName);
+    const productAdminDescription = productAdminDescriptionEl.value.trim();
 
     if (!isRequired(productSearchAdmin)) {
         var alert = '<i class="fas fa-exclamation-triangle"></i> Search cannot be blank.';
     } else if (!isAlphaNumeric(productSearchAdmin)) {
         var alert = '<i class="fas fa-exclamation-triangle"></i> Search must be text or numerals only.';
+    } else if (!isText(productAdminName)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Name must contain only letters.';
+    } else if (!isAlphaNumeric(productAdminDescription)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
     } else {
         adminValid = true;
     }
@@ -149,13 +156,58 @@ if (productSearchAdminForm !== null) {
         ev.preventDefault();
 
         // validate forms
-        let isproductSearchAdminFormValid = checkproductSearchAdminForm();
+        let isProductSearchAdminFormValid = checkProductSearchAdminForm();
 
-        let isFormValid = isproductSearchAdminFormValid;
+        let isFormValid = isProductSearchAdminFormValid;
 
         // submit to the server if the form is valid
         if (isFormValid) {
             productSearchAdminForm.submit();
+        }
+
+    });
+};
+
+// Handle product-update-form submit
+
+var productUpdateForm = document.getElementById('product-update-form');
+
+var productAdminNameEl = document.getElementById('id_name');
+var productAdminDescriptionEl = document.getElementById('id_description');
+
+const checkProductUpdateForm = () => {
+
+    let adminValid = false;
+    const productAdminName = productAdminNameEl.value.trim();
+    const productAdminDescription = productAdminDescriptionEl.value.trim();
+
+    if (!isText(productAdminName)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Name must contain only letters.';
+    } else if (!isAlphaNumeric(productAdminDescription)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+    } else {
+        adminValid = true;
+    }
+    if (alert) {
+        $('#validation_alerts').html(alert);
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    }
+    return adminValid;
+}
+
+if (productUpdateForm !== null) {
+    productUpdateForm.addEventListener('submit', function(ev) {
+        ev.preventDefault();
+
+        // validate forms
+        let isCheckProductUpdateFormValid = checkProductUpdateForm();
+
+        let isFormValid = isCheckProductUpdateFormValid;
+
+        // submit to the server if the form is valid
+        if (isFormValid) {
+            productUpdateForm.submit();
         }
 
     });

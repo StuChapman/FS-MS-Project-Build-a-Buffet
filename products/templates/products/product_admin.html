@@ -140,7 +140,37 @@
                                             {% csrf_token %}
                                             {% for field in form %}
                                                 {% if field.name != 'image' %}
-                                                    {{ field | as_crispy_field }}
+                                                    {% if field.name != 'range' %}
+                                                        {{ field | as_crispy_field }}
+                                                    {% else %}
+                                                        <div id="div_id_category" class="form-group">
+                                                            <label for="id_category" class=" requiredField">
+                                                                Range<span class="asteriskField">*</span>
+                                                            </label>
+                                                            <div class="">
+                                                                <select name="range" class="select form-control" required id="id_range">
+                                                                    {% if form.range.value == '' %}
+                                                                        <option value="">---------</option>
+                                                                    {% endif %}
+                                                                    {% if form.range.value == 'standard' %}
+                                                                        <option value="standard" selected>{{ form.range.value }}</option>
+                                                                    {% else %}
+                                                                        <option value="standard" >standard</option>
+                                                                    {% endif %}
+                                                                    {% if form.range.value == 'premium' %}
+                                                                        <option value="premium" selected>{{ form.range.value }}</option>
+                                                                    {% else %}
+                                                                        <option value="premium">premium</option>
+                                                                    {% endif %}
+                                                                    {% if form.range.value == 'luxury' %}
+                                                                        <option value="luxury" selected>{{ form.range.value }}</option>
+                                                                    {% else %}
+                                                                        <option value="luxury">luxury</option>
+                                                                    {% endif %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
                                                 {% else %}
                                                     {{ field }}
                                                 {% endif %}
