@@ -15,6 +15,10 @@ const isNumerals = (number) => {
     const re = new RegExp('^[0-9]+$');
     return re.test(number);
 };
+const isDecimal = (number) => {
+    const re = new RegExp(/^\d+(?:\.\d\d?)?$/);
+    return re.test(number);
+};
 const isEmailValid = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -229,6 +233,55 @@ if (deleteProduct !== null) {
             allowClick = true;
         } else if (document.getElementById("delete-product").innerHTML == "SURE???") {
             document.getElementById("delete-product").innerHTML = "delete";
+        }
+
+    });
+};
+
+// Handle new-product-form submit
+
+var newProductForm = document.getElementById('new-product-form');
+
+var newProductName = document.getElementById('new_name');
+var newProductDescription = document.getElementById('new_description');
+var newProductPrice = document.getElementById('new_price');
+
+const checkNewProductForm = () => {
+
+    let newValid = false;
+    const productName = newProductName.value.trim();
+    const productDescription = newProductDescription.value.trim();
+    const productPrice = newProductPrice.value.trim();
+
+    if (!isText(productName)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Name must contain only letters.';
+    } else if (!isAlphaNumeric(productDescription)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+    } else if (!isDecimal(productPrice)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Price must be a number to 2 decimal places.';
+    } else {
+        newValid = true;
+    }
+    if (alert) {
+        $('#validation_alerts').html(alert);
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    }
+    return newValid;
+}
+
+if (newProductForm !== null) {
+    newProductForm.addEventListener('submit', function(ev) {
+        ev.preventDefault();
+
+        // validate forms
+        let isCheckNewProductFormValid = checkNewProductForm();
+
+        let isFormValid = isCheckNewProductFormValid;
+
+        // submit to the server if the form is valid
+        if (isFormValid) {
+            newProductForm.submit();
         }
 
     });

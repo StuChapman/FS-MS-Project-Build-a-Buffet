@@ -44,9 +44,9 @@
                                                             <option value="{{ category.name }}">{{ category.friendly_name }}</option>
                                                         {% endfor %}
                                                     </select>
-                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_name" id="new_name" placeholder="* name">
-                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_description" id="new_description" placeholder="* description">
-                                                    <input class="numberinput form-control mb-3 text-blue text-xs" type="text" name="new_price" id="new_price" placeholder="* price">
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_name" id="new_name" placeholder="* name" maxlength="24">
+                                                    <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_description" id="new_description" placeholder="* description" maxlength="250">
+                                                    <input class="numberinput form-control mb-3 text-blue text-xs" type="text" required name="new_price" id="new_price" placeholder="* price" maxlength="5">
                                                     <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_range" id="new_range" placeholder="range">
                                                         <option value="standard">Standard</option>
                                                         <option value="premium">Premium</option>
