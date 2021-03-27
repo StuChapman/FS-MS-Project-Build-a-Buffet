@@ -12,7 +12,7 @@ const isAlphaNumeric = (string) => {
     return re.test(string);
 };
 const isNumerals = (number) => {
-    const re = new RegExp("[0-9]");
+    const re = new RegExp('^[0-9]+$');
     return re.test(number);
 };
 const isEmailValid = (email) => {

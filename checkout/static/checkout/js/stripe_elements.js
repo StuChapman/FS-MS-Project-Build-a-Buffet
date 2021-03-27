@@ -17,24 +17,24 @@ var userIdTownOrCity = document.getElementById('id_town_or_city');
 var userIdCounty = document.getElementById('id_county');
 var userIdPostcode = document.getElementById('id_postcode');
 
-const isText = (string) => {
+const isPaymentText = (string) => {
     const re = new RegExp(/^[a-zA-Z ]+$/);
     return re.test(string);
 };
-const isAlphaNumeric = (string) => {
+const isPaymentAlphaNumeric = (string) => {
     const re = new RegExp(/^[a-zA-Z_0-9 ]+$/);
     return re.test(string);
 };
-const isNumerals = (number) => {
-    const re = new RegExp("[0-9]");
+const isPaymentNumerals = (number) => {
+    const re = new RegExp('^[0-9]+$');
     return re.test(number);
 };
-const isEmailValid = (email) => {
+const isPaymentEmailValid = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 };
 
-const checkUserIdForm = () => {
+const checkPaymentUserIdForm = () => {
 
     let idValid = false;
     const idFullName = userIdFullName.value.trim();
@@ -47,40 +47,29 @@ const checkUserIdForm = () => {
     const idPostCode = userIdPostcode.value.trim();
 
     // Test text fields
-    if (!isText(idFullName)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Full Name must contain only letters.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isAlphaNumeric(idStreetAddress1)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Address Line 1 must contain only letters and numbers.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isAlphaNumeric(idStreetAddress2) && idStreetAddress2 !== "") {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Address Line 2 must contain only letters and numbers.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isText(idTownOrCity)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Town or City must contain only letters.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isText(idCounty) && idCounty !== "") {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> County must contain only letters.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isAlphaNumeric(idPostCode)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Postcode must contain only letters and numbers.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isNumerals(idPhoneNumber)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Phone Number must contain only numbers.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isEmailValid(idEmail)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    if (!isPaymentText(idFullName)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Full Name must contain only letters.';
+    } else if (!isPaymentAlphaNumeric(idStreetAddress1)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Address Line 1 must contain only letters and numbers.';
+    } else if (!isPaymentAlphaNumeric(idStreetAddress2) && idStreetAddress2 !== "") {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Address Line 2 must contain only letters and numbers.';
+    } else if (!isPaymentText(idTownOrCity)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Town or City must contain only letters.';
+    } else if (!isPaymentText(idCounty) && idCounty !== "") {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> County must contain only letters.';
+    } else if (!isPaymentAlphaNumeric(idPostCode)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Postcode must contain only letters and numbers.';
+    } else if (!isPaymentNumerals(idPhoneNumber)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Phone Number must contain only numbers.';
+    } else if (!isPaymentEmailValid(idEmail)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.';
     } else {
         idValid = true;
+    }
+    if (alert) {
+        $('#validation_alerts').html(alert);
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
     }
     return idValid;
 }
@@ -106,6 +95,7 @@ var style = {
         iconColor: '#dc3545'
     }
 };
+
 var card = elements.create('card', {style: style});
 card.mount('#card-element');
 
@@ -132,12 +122,12 @@ form.addEventListener('submit', function(ev) {
     ev.preventDefault();
 
     // validate forms
-    let isUserIdFormValid = checkUserIdForm();
+    let isPaymentUserIdFormValid = checkPaymentUserIdForm();
 
-    let isFormValid = isUserIdFormValid;
+    let isPaymentFormValid = isPaymentUserIdFormValid;
 
     // submit to the server if the form is valid
-    if (isFormValid) {
+    if (isPaymentFormValid) {
         card.update({ 'disabled': true});
         $('#submit-button').attr('disabled', true);
         $('#payment-form').fadeToggle(100);
@@ -220,92 +210,3 @@ form.addEventListener('submit', function(ev) {
         })
     }
 });
-
-
-// // Handle form submit
-// var form = document.getElementById('payment-form');
-
-// form.addEventListener('submit', function(ev) {
-//     ev.preventDefault();
-//     card.update({ 'disabled': true});
-//     $('#submit-button').attr('disabled', true);
-//     $('#payment-form').fadeToggle(100);
-//     $('#loading-overlay').fadeToggle(100);
-
-//     var saveInfo = Boolean($('#id-save-info').attr('checked'));
-//     // From using {% csrf_token %} in the form
-//     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-//     var postData = {
-//         'csrfmiddlewaretoken': csrfToken,
-//         'client_secret': clientSecret,
-//         'save_info': saveInfo,
-//         'paymentSuccess': 'succeeded',
-//         'current_user': $.trim(form.current_user.value),
-//         'full_name': $.trim(form.full_name.value),
-//         'email': $.trim(form.email.value),
-//         'phone_number': $.trim(form.phone_number.value),
-//         'country': $.trim(form.country.value),
-//         'postcode': $.trim(form.postcode.value),
-//         'town_or_city': $.trim(form.town_or_city.value),
-//         'street_address1': $.trim(form.street_address1.value),
-//         'street_address2': $.trim(form.street_address2.value),
-//         'county': $.trim(form.county.value),
-//         'basket_number': $.trim(form.basket_number.value),
-//         'total_price': $.trim(form.total_price.value),
-//     };
-
-//     var url = '/checkout/create_order/';
-
-//     $.post(url, postData).done(function () {
-//         stripe.confirmCardPayment(clientSecret, {
-//             payment_method: {
-//                 card: card,
-//                 billing_details: {
-//                     name: $.trim(form.current_user.value),
-//                     phone: $.trim(form.basket_number.value),
-//                     email: $.trim(form.email.value),
-//                     address:{
-//                         line1: $.trim(form.street_address1.value),
-//                         line2: $.trim(form.street_address2.value),
-//                         city: $.trim(form.town_or_city.value),
-//                         country: $.trim(form.country.value),
-//                         state: $.trim(form.county.value),
-//                     }
-//                 }
-//             },
-//             shipping: {
-//                 name: $.trim(form.full_name.value),
-//                 phone: $.trim(form.phone_number.value),
-//                 address: {
-//                     line1: $.trim(form.street_address1.value),
-//                     line2: $.trim(form.street_address2.value),
-//                     city: $.trim(form.town_or_city.value),
-//                     country: $.trim(form.country.value),
-//                     postal_code: $.trim(form.postcode.value),
-//                     state: $.trim(form.county.value),
-//                 }
-//             },
-//         }).then(function(result) {
-//             if (result.error) {
-//                 var errorDiv = document.getElementById('card-errors');
-//                 var html = `
-//                     <span class="icon" role="alert">
-//                     <i class="fas fa-times"></i>
-//                     </span>
-//                     <span>${result.error.message}</span>`;
-//                 $(errorDiv).html(html);
-//                 $('#payment-form').fadeToggle(100);
-//                 $('#loading-overlay').fadeToggle(100);
-//                 card.update({ 'disabled': false});
-//                 $('#submit-button').attr('disabled', false);
-//             } else {
-//                 if (result.paymentIntent.status === 'succeeded') {
-//                     form.submit();
-//                 }
-//             }
-//         });
-//     }).fail(function () {
-//         // just reload the page, the error will be in django messages
-//         location.reload();
-//     })
-// });
