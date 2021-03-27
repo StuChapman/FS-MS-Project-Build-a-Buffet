@@ -176,28 +176,64 @@ if (productSearchAdminForm !== null) {
 
 var productUpdateForm = document.getElementById('product-update-form');
 
-var productAdminNameEl = document.getElementById('id_name');
-var productAdminDescriptionEl = document.getElementById('id_description');
+var productUpdateNameEl = document.getElementById('id_name');
+var productUpdateDescriptionEl = document.getElementById('id_description');
+var productUpdatePriceEl = document.getElementById('id_price');
+var productUpdateOptionOne = document.getElementById('id_option1');
+var productUpdateOptionTwo = document.getElementById('id_option2');
+var productUpdateOptionThree = document.getElementById('id_option3');
+var productUpdateCategoryName = document.getElementById('id_name');
+var productUpdateFriendlyName = document.getElementById('id_friendly_name');
 
 const checkProductUpdateForm = () => {
 
-    let adminValid = false;
-    const productAdminName = productAdminNameEl.value.trim();
-    const productAdminDescription = productAdminDescriptionEl.value.trim();
+    let UpdateValid = false;
 
-    if (!isText(productAdminName)) {
+    if (dataSet == 'products') {
+        const productUpdateName = productUpdateNameEl.value.trim();
+        const productUpdateDescription = productUpdateDescriptionEl.value.trim();
+        const productUpdatePrice = productUpdatePriceEl.value.trim();
+         if (!isText(productUpdateName)) {
         var alert = '<i class="fas fa-exclamation-triangle"></i> Name must contain only letters.';
-    } else if (!isAlphaNumeric(productAdminDescription)) {
+        } else if (!isAlphaNumeric(productUpdateDescription)) {
         var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
-    } else {
-        adminValid = true;
+        } else if (!isDecimal(productUpdatePrice)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Price must be a number to 2 decimal places.';
+        } else {
+            UpdateValid = true;
+        }
+    }
+    if (dataSet == 'options') {
+        const optionOne = productUpdateOptionOne.value.trim();
+        const optionTwo = productUpdateOptionTwo.value.trim();
+        const optionThree = productUpdateOptionThree.value.trim();
+        if (!isAlphaNumeric(optionOne)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else if (!isAlphaNumeric(optionTwo)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else if (!isAlphaNumeric(optionThree)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else {
+            UpdateValid = true;
+        }
+    }
+    if (dataSet == 'categories') {
+        const categoryName = productUpdateCategoryName.value.trim();
+        const friendlyName = productUpdateFriendlyName.value.trim();
+        if (!isAlphaNumeric(categoryName)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else if (!isAlphaNumeric(friendlyName)) {
+            var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
+        } else {
+            UpdateValid = true;
+        }
     }
     if (alert) {
         $('#validation_alerts').html(alert);
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
     }
-    return adminValid;
+    return UpdateValid;
 }
 
 if (productUpdateForm !== null) {
