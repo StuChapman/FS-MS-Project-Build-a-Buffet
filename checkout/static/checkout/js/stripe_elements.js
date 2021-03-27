@@ -17,19 +17,19 @@ var userIdTownOrCity = document.getElementById('id_town_or_city');
 var userIdCounty = document.getElementById('id_county');
 var userIdPostcode = document.getElementById('id_postcode');
 
-const isIdText = (string) => {
+const isText = (string) => {
     const re = new RegExp(/^[a-zA-Z ]+$/);
     return re.test(string);
 };
-const isIdAlphaNumeric = (string) => {
+const isAlphaNumeric = (string) => {
     const re = new RegExp(/^[a-zA-Z_0-9 ]+$/);
     return re.test(string);
 };
-const isIdNumerals = (number) => {
+const isNumerals = (number) => {
     const re = new RegExp("[0-9]");
     return re.test(number);
 };
-const isIdEmailValid = (email) => {
+const isEmailValid = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 };
@@ -47,35 +47,35 @@ const checkUserIdForm = () => {
     const idPostCode = userIdPostcode.value.trim();
 
     // Test text fields
-    if (!isIdText(idFullName)) {
+    if (!isText(idFullName)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Full Name must contain only letters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isIdAlphaNumeric(idStreetAddress1)) {
+    } else if (!isAlphaNumeric(idStreetAddress1)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Address Line 1 must contain only letters and numbers.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isIdAlphaNumeric(idStreetAddress2) && idStreetAddress2 !== "") {
+    } else if (!isAlphaNumeric(idStreetAddress2) && idStreetAddress2 !== "") {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Address Line 2 must contain only letters and numbers.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isIdText(idTownOrCity)) {
+    } else if (!isText(idTownOrCity)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Town or City must contain only letters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isIdText(idCounty) && idCounty !== "") {
+    } else if (!isText(idCounty) && idCounty !== "") {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> County must contain only letters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isIdAlphaNumeric(idPostCode)) {
+    } else if (!isAlphaNumeric(idPostCode)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Postcode must contain only letters and numbers.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isIdNumerals(idPhoneNumber)) {
+    } else if (!isNumerals(idPhoneNumber)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Phone Number must contain only numbers.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isIdEmailValid(idEmail)) {
+    } else if (!isEmailValid(idEmail)) {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");

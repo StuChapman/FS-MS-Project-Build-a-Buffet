@@ -8,7 +8,7 @@ const isText = (string) => {
     return re.test(string);
 };
 const isAlphaNumeric = (string) => {
-    const re = new RegExp(/^[a-zA-Z_0-9 ]+$/);
+    const re = new RegExp(/^[a-zA-Z _0-9?\@\.\+\-\_]+$/);
     return re.test(string);
 };
 const isNumerals = (number) => {
@@ -28,8 +28,6 @@ var productSearchEl = document.getElementById('product_search');
 const checkProductSearchForm = () => {
 
     let searchValid = false;
-    const min = 2,
-        max = 25;
     const productSearch = productSearchEl.value.trim();
 
     if (!isRequired(productSearch)) {
@@ -46,21 +44,23 @@ const checkProductSearchForm = () => {
     return searchValid;
 }
 
-productSearchForm.addEventListener('submit', function(ev) {
-    ev.preventDefault();
-    // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
 
-    // validate forms
-    let isProductSearchFormValid = checkProductSearchForm();
+if (productSearchForm !== null) {
+    productSearchForm.addEventListener('submit', function(ev) {
+        ev.preventDefault();
 
-    let isFormValid = isProductSearchFormValid;
+        // validate forms
+        let isProductSearchFormValid = checkProductSearchForm();
 
-    // submit to the server if the form is valid
-    if (isFormValid) {
-        productSearchForm.submit();
-    }
+        let isFormValid = isProductSearchFormValid;
 
-});
+        // submit to the server if the form is valid
+        if (isFormValid) {
+            productSearchForm.submit();
+        }
+
+    });
+};
 
 // Handle user-question-form submit
 
@@ -72,8 +72,6 @@ var userQuestionQuestion = document.getElementById('user-question-question');
 const checkUserQuestionForm = () => {
 
     let questionValid = false;
-    const min = 2,
-        max = 25;
     const questionName = userQuestionName.value.trim();
     const questionEmail = userQuestionEmail.value.trim();
     const questionQuestion = userQuestionQuestion.value.trim();
@@ -82,8 +80,8 @@ const checkUserQuestionForm = () => {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name cannot be blank.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isText(questionName)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @/./+/-/_ characters.');
+    } else if (!isAlphaNumeric(questionName)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @.+-_ characters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
     } else if (!isEmailValid(questionEmail)) {
@@ -94,8 +92,8 @@ const checkUserQuestionForm = () => {
         $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question cannot be blank.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isText(questionQuestion)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question must contain only letters, numbers, and @/./+/-/_ characters.');
+    } else if (!isAlphaNumeric(questionQuestion)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question must contain only letters, numbers, and @.+-_ characters.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
     } else {
@@ -104,75 +102,60 @@ const checkUserQuestionForm = () => {
     return questionValid;
 }
 
-userQuestionForm.addEventListener('submit', function(ev) {
-    ev.preventDefault();
+if (userQuestionForm !== null) {
+    userQuestionForm.addEventListener('submit', function(ev) {
+        ev.preventDefault();
 
-    // validate forms
-    let isUserQuestionFormValid = checkUserQuestionForm();
+        // validate forms
+        let isUserQuestionFormValid = checkUserQuestionForm();
 
-    let isFormValid = isUserQuestionFormValid;
+        let isFormValid = isUserQuestionFormValid;
 
-    // submit to the server if the form is valid
-    if (isFormValid) {
-        userQuestionForm.submit();
-    }
+        // submit to the server if the form is valid
+        if (isFormValid) {
+            userQuestionForm.submit();
+        }
 
-});
+    });
+};
 
+// Handle product_search_admin_form submit
 
-// Handle product-update-form submit
+var productSearchAdminForm = document.getElementById('product_search_admin_form');
+var productSearchAdminEl = document.getElementById('product_search_admin');
 
-var productSearchFormAdmin = document.getElementById('product_search_form_admin');
-var productSearchAdmin = document.getElementById('product_search_admin');
+const checkproductSearchAdminForm = () => {
 
-var productUpdateForm = document.getElementById('product-update-form');
+    let adminValid = false;
+    const productSearchAdmin = productSearchAdminEl.value.trim();
 
-const checkUserProductForm = () => {
-
-    let productValid = false;
-    const min = 2,
-        max = 25;
-    const productName = userProductName.value.trim();
-    const productEmail = userProductEmail.value.trim();
-    const productProduct = userProductProduct.value.trim();
-
-    if (!isRequired(productName)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name cannot be blank.');
+    if (!isRequired(productSearchAdmin)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search cannot be blank.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isText(productName)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @/./+/-/_ characters.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isEmailValid(productEmail)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isRequired(productProduct)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Product cannot be blank.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
-    } else if (!isText(productProduct)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Product must contain only letters, numbers, and @/./+/-/_ characters.');
+    } else if (!isAlphaNumeric(productSearchAdmin)) {
+        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search must be text or numerals only.');
         // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
         $("#validation_alerts").show("slow").delay(2000).hide("slow");
     } else {
-        questionValid = true;
+        adminValid = true;
     }
-    return questionValid;
+    return adminValid;
 }
 
-userProductForm.addEventListener('submit', function(ev) {
-    ev.preventDefault();
+if (productSearchAdminForm !== null) {
+    productSearchAdminForm.addEventListener('submit', function(ev) {
+        ev.preventDefault();
 
-    // validate forms
-    let isUserProductFormValid = checkUserProductForm();
+        // validate forms
+        let isproductSearchAdminFormValid = checkproductSearchAdminForm();
 
-    let isFormValid = isUserProductFormValid;
+        let isFormValid = isproductSearchAdminFormValid;
 
-    // submit to the server if the form is valid
-    if (isFormValid) {
-        userProductForm.submit();
-    }
+        // submit to the server if the form is valid
+        if (isFormValid) {
+            productSearchAdminForm.submit();
+        }
 
-});
+    });
+};

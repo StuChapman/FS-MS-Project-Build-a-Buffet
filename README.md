@@ -242,6 +242,7 @@ I deployed to Github Pages by the following steps:
 24. Sending html email is from [stackoverflow.com](https://stackoverflow.com/questions/2809547/creating-email-templates-with-django)
 25. Making a div appear for 2 seconds is from [stackoverflow.com](https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide)
 26. Form validation is from [javascripttutorial.net](https://www.javascripttutorial.net/javascript-dom/javascript-form-validation/)
+27. Fixing the uncaught error in the navbar is from [stackoverflow.com](https://stackoverflow.com/questions/20175094/uncaught-typeerror-cannot-read-property-top-of-undefined)
 
 #### Code Institute
 
