@@ -140,7 +140,27 @@
                                             {% csrf_token %}
                                             {% for field in form %}
                                                 {% if field.name != 'image' %}
-                                                    {{ field | as_crispy_field }}
+                                                    {% if field.name != 'range' %}
+                                                        {{ field | as_crispy_field }}
+                                                    {% else %}
+                                                        <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="id_range" id="id_range" placeholder="range">
+                                                            {% if form.range.value.title != 'Standard' %}
+                                                                <option value="standard">Standard</option>
+                                                            {% else %}
+                                                                <option value="{{ form.range.value.title }}" selected>{{ form.range.value.title }}</option>
+                                                            {% endif %}
+                                                            {% if form.range.value.title != 'Premium' %}
+                                                                <option value="premium">Premium</option>
+                                                            {% else %}
+                                                                <option value="{{ form.range.value.title }}" selected>{{ form.range.value.title }}</option>
+                                                            {% endif %}
+                                                            {% if form.range.value.title != 'Luxury' %}
+                                                                <option value="luxury">Luxury</option>
+                                                            {% else %}
+                                                                <option value="{{ form.range.value.title }}" selected>{{ form.range.value.title }}</option>
+                                                            {% endif %}
+                                                        </select>
+                                                    {% endif %}
                                                 {% else %}
                                                     {{ field }}
                                                 {% endif %}

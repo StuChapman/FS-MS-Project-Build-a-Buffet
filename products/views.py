@@ -96,7 +96,6 @@ def product_detail(request):
         if 'product_edit' in request.GET:
             product_edit = request.GET['product_edit']
             product_edit_list = product_edit.split(',')
-            print(product_edit)
             category = product_edit_list[0]
             product = product_edit_list[1]
             selected = product_edit_list[2]
@@ -158,8 +157,8 @@ def product_admin(request):
                 form = CategoryAdminForm(instance=return_query)
 
         """ get information from search form """
-        if 'product_search' in request.GET:
-            query = request.GET['product_search']
+        if 'product_search_admin' in request.GET:
+            query = request.GET['product_search_admin']
             if not query:
                 """ default to products in case of blank query """
                 return_query = Product.objects.all().first()
@@ -229,12 +228,15 @@ def update_product(request, form_id):
         if form_id[0:3] == 'pro':
             product = get_object_or_404(Product, id_no=form_id)
             form = ProductAdminForm(request.POST, request.FILES, instance=product)
+            messages.success(request, 'Successfully updated product')
         if form_id[0:3] == 'opt':
             option = get_object_or_404(Options, id_no=form_id)
             form = OptionsAdminForm(request.POST, request.FILES, instance=option)
+            messages.success(request, 'Successfully updated option')
         if form_id[0:3] == 'cat':
             category = get_object_or_404(Category, id_no=form_id)
             form = CategoryAdminForm(request.POST, request.FILES, instance=category)
+            messages.success(request, 'Successfully updated category')
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully updated product')

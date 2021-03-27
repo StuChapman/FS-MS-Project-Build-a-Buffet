@@ -31,15 +31,16 @@ const checkProductSearchForm = () => {
     const productSearch = productSearchEl.value.trim();
 
     if (!isRequired(productSearch)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search cannot be blank.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Search cannot be blank.';
     } else if (!isAlphaNumeric(productSearch)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search must be text or numerals only.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Search must be text or numerals only.';
     } else {
         searchValid = true;
+    }
+    if (alert) {
+        $('#validation_alerts').html(alert);
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
     }
     return searchValid;
 }
@@ -77,27 +78,22 @@ const checkUserQuestionForm = () => {
     const questionQuestion = userQuestionQuestion.value.trim();
 
     if (!isRequired(questionName)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name cannot be blank.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Name cannot be blank.';
     } else if (!isAlphaNumeric(questionName)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @.+-_ characters.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Name must contain only letters, numbers, and @.+-_ characters.';
     } else if (!isEmailValid(questionEmail)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Email must be in a valid format.';
     } else if (!isRequired(questionQuestion)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question cannot be blank.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Question cannot be blank.';
     } else if (!isAlphaNumeric(questionQuestion)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Question must contain only letters, numbers, and @.+-_ characters.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Question must contain only letters, numbers, and @.+-_ characters.';
     } else {
         questionValid = true;
+    }
+    if (alert) {
+        $('#validation_alerts').html(alert);
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
     }
     return questionValid;
 }
@@ -124,21 +120,26 @@ if (userQuestionForm !== null) {
 var productSearchAdminForm = document.getElementById('product_search_admin_form');
 var productSearchAdminEl = document.getElementById('product_search_admin');
 
+var productAdminName = document.getElementById('id_name');
+var productAdminDescription = document.getElementById('id_description');
+var productAdminPrice = document.getElementById('id_price');
+
 const checkproductSearchAdminForm = () => {
 
     let adminValid = false;
     const productSearchAdmin = productSearchAdminEl.value.trim();
 
     if (!isRequired(productSearchAdmin)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search cannot be blank.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Search cannot be blank.';
     } else if (!isAlphaNumeric(productSearchAdmin)) {
-        $('#validation_alerts').html('<i class="fas fa-exclamation-triangle"></i> Search must be text or numerals only.');
-        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
-        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Search must be text or numerals only.';
     } else {
         adminValid = true;
+    }
+    if (alert) {
+        $('#validation_alerts').html(alert);
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
     }
     return adminValid;
 }
