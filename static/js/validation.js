@@ -49,7 +49,6 @@ const checkProductSearchForm = () => {
     return searchValid;
 }
 
-
 if (productSearchForm !== null) {
     productSearchForm.addEventListener('submit', function(ev) {
         ev.preventDefault();

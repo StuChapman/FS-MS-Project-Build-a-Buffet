@@ -3,6 +3,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
 from django.contrib import messages
 
+from django.utils.safestring import mark_safe
+import re
+
 from products.models import Product, Category, Options
 from basket.models import Basket
 from basket.contexts import basket_context
@@ -33,6 +36,9 @@ def basket(request):
     if request.POST:
         if 'servings' in request.POST:
             servings = request.POST["servings"]
+            if not re.match("^[0-9]+$", servings):
+                messages.success(request, mark_safe('There was a problem! <br> Please reselect a product and try again.'))
+                return redirect(reverse('home'))
 
     if request.GET:
 
