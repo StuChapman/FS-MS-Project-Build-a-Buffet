@@ -264,11 +264,11 @@ if (deleteProduct !== null) {
             ev.preventDefault();
         }
 
-        if (document.getElementById("delete-product").innerHTML != "SURE???") {
-            document.getElementById("delete-product").innerHTML = "SURE???";
+        if (document.getElementById("delete-product").innerHTML != "CONFIRM?") {
+            document.getElementById("delete-product").innerHTML = "CONFIRM?";
             $('#delete-product').css('color', 'black');
             allowClick = true;
-        } else if (document.getElementById("delete-product").innerHTML == "SURE???") {
+        } else if (document.getElementById("delete-product").innerHTML == "CONFIRM?") {
             document.getElementById("delete-product").innerHTML = "delete";
             $('#delete-product').css('color', 'white');
         }
@@ -290,7 +290,9 @@ var newOptionThree = document.getElementById('new_option_three');
 var newCategoryName = document.getElementById('new_category_name');
 var newFriendlyName = document.getElementById('new_friendly_name');
 
-const dataSet = newDataset.value.trim();
+if (newDataset !== null) {
+    var dataSet = newDataset.value.trim();
+}
 
 const checkNewProductForm = () => {
 

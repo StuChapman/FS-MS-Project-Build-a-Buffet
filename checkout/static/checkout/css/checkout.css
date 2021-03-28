@@ -65,13 +65,18 @@ select option[value=""] {
     margin: 0;
     height: 100%;
 }
+.loading-img {
+    opacity: 0.75;
+}
 
 @media screen and (orientation: landscape){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .loading-img {
-        height: 90vh;
+        height: 70vh;
     }
+}
 
 @media screen and (orientation: portrait){ /* Credit: https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree */
     .loading-img {
-        width: 90vw;
+        width: 70vw;
     }
+}

@@ -58,17 +58,23 @@
                                                             <li class="small">
                                                                 {% if item.option == "selected-one" %}
                                                                     {% for option in options %}
-                                                                        <b>{{ item.category.title }}:</b> {{ item.name }}, {{ option.option1 }}. <b>Qty: {{ item.servings }}</b>
+                                                                        {% if option.category|slugify == item.category %}
+                                                                            <b >{{ item.category.title }}:</b> {{ item.name }}, {{ option.option1.title }}. <b>Qty: {{ item.servings }}</b>
+                                                                        {% endif %}
                                                                     {% endfor %}
                                                                 {% endif %}
                                                                 {% if item.option == "selected-two" %}
                                                                     {% for option in options %}
-                                                                        <b>{{ item.category.title }}:</b> {{ item.name }}, {{ option.option2 }}. <b>Qty: {{ item.servings }}</b>
+                                                                        {% if option.category|slugify == item.category %}
+                                                                            <b>{{ item.category.title }}:</b> {{ item.name }}, {{ option.option2.title }}. <b>Qty: {{ item.servings }}</b>
+                                                                        {% endif %}
                                                                     {% endfor %}
                                                                 {% endif %}
                                                                 {% if item.option == "selected-three" %}
                                                                     {% for option in options %}
-                                                                        <b>{{ item.category.title }}:</b> {{ item.name }}, {{ option.option3 }}. <b>Qty: {{ item.servings }}</b>
+                                                                        {% if option.category|slugify == item.category %}
+                                                                            <b>{{ item.category.title }}:</b> {{ item.name }}, {{ option.option3.title }}. <b>Qty: {{ item.servings }}</b>
+                                                                        {% endif %}
                                                                     {% endfor %}
                                                                 {% endif %}
                                                             </li>

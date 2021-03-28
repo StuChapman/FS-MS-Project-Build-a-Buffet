@@ -42,14 +42,11 @@
     });
 
     // Collapse Navbar
-    // Credit: https://stackoverflow.com/questions/20175094/uncaught-typeerror-cannot-read-property-top-of-undefined
     var navbarCollapse = function () {
-        if ($("#mainNav").length) {
-            if ($("#mainNav").offset().top > 100) {
-                $("#mainNav").addClass("navbar-shrink");
-            } else {
-                $("#mainNav").removeClass("navbar-shrink");
-            }
+        if ($("#mainNav").offset().top > 100) {
+            $("#mainNav").addClass("navbar-shrink");
+        } else {
+            $("#mainNav").removeClass("navbar-shrink");
         }
     };
     // Collapse now if page is not at top
