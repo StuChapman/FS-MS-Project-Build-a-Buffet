@@ -361,3 +361,70 @@ if (newProductForm !== null) {
 
     });
 };
+
+// Handle profile-update-form submit
+
+var ProfileUpdateForm = document.getElementById('profile-update-form');
+
+var userIdDefaultFullName = document.getElementById('id_default_full_name');
+var userIdDefaultEmail = document.getElementById('id_default_email');
+var userIdDefaultPhoneNumber = document.getElementById('id_default_phone_number');
+var userIdDefaultStreetAddress1 = document.getElementById('id_default_street_address1');
+var userIdDefaultStreetAddress2 = document.getElementById('id_default_street_address2');
+var userIdDefaultTownOrCity = document.getElementById('id_default_town_or_city');
+var userIdDefaultCounty = document.getElementById('id_default_county');
+var userIdDefaultPostcode = document.getElementById('id_default_postcode');
+
+const checkProfileUpdateForm = () => {
+
+    let idProfileValid = false;
+    const idFullName = userIdDefaultFullName.value.trim();
+    const idPhoneNumber = userIdDefaultPhoneNumber.value.trim();
+    const idStreetAddress1 = userIdDefaultStreetAddress1.value.trim();
+    const idStreetAddress2 = userIdDefaultStreetAddress2.value.trim();
+    const idTownOrCity = userIdDefaultTownOrCity.value.trim();
+    const idCounty = userIdDefaultCounty.value.trim();
+    const idPostCode = userIdDefaultPostcode.value.trim();
+
+    // Test text fields
+    if (!isText(idFullName)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Full Name must contain only letters.';
+    } else if (!isAlphaNumeric(idStreetAddress1)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Address Line 1 must contain only letters and numbers.';
+    } else if (!isAlphaNumeric(idStreetAddress2) && idStreetAddress2 !== "") {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Address Line 2 must contain only letters and numbers.';
+    } else if (!isText(idTownOrCity)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Town or City must contain only letters.';
+    } else if (!isText(idCounty) && idCounty !== "") {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> County must contain only letters.';
+    } else if (!isAlphaNumeric(idPostCode)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Postcode must contain only letters and numbers.';
+    } else if (!isNumerals(idPhoneNumber)) {
+        var alert = '<i class="fas fa-exclamation-triangle"></i> Phone Number must contain only numbers.';
+    } else {
+        idProfileValid = true;
+    }
+    if (alert) {
+        $('#validation_alerts').html(alert);
+        // Credit: https://stackoverflow.com/questions/3428766/jquery-show-for-5-seconds-then-hide
+        $("#validation_alerts").show("slow").delay(2000).hide("slow");
+    }
+    return idProfileValid;
+}
+
+if (ProfileUpdateForm !== null) {
+    ProfileUpdateForm.addEventListener('submit', function(ev) {
+        ev.preventDefault();
+
+        // validate forms
+        let ischeckProfileUpdateFormValid = checkProfileUpdateForm();
+
+        let isFormValid = ischeckProfileUpdateFormValid;
+
+        // submit to the server if the form is valid
+        if (isFormValid) {
+            ProfileUpdateForm.submit();
+        }
+
+    });
+};

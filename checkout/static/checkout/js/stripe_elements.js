@@ -22,7 +22,7 @@ const isPaymentText = (string) => {
     return re.test(string);
 };
 const isPaymentAlphaNumeric = (string) => {
-    const re = new RegExp(/^[a-zA-Z_0-9 ]+$/);
+    const re = new RegExp(/^[a-zA-Z _0-9?\@\.\+\-\_]+$/);
     return re.test(string);
 };
 const isPaymentNumerals = (number) => {

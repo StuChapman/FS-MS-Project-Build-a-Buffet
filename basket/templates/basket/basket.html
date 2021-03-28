@@ -39,17 +39,23 @@
                                         <div class="text-blue text-xs mb-2">With this option ...
                                             {% if basket.option == "selected-one" %}
                                                 {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option1.title }}</span>
+                                                    {% if option.category|slugify == basket.category %}
+                                                        <span class="text-blue product-text-two mb-2 bold">{{ option.option1.title }}</span>
+                                                    {% endif %}
                                                 {% endfor %}
                                             {% endif %}
                                             {% if basket.option == "selected-two" %}
                                                 {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option2.title }}</span>
+                                                    {% if option.category|slugify == basket.category %}
+                                                        <span class="text-blue product-text-two mb-2 bold">{{ option.option2.title }}</span>
+                                                    {% endif %}
                                                 {% endfor %}
                                             {% endif %}
                                             {% if basket.option == "selected-three" %}
                                                 {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">{{ option.option3.title }}</span>
+                                                    {% if option.category|slugify == basket.category %}
+                                                        <span class="text-blue product-text-two mb-2 bold">{{ option.option3.title }}</span>
+                                                    {% endif %}
                                                 {% endfor %}
                                             {% endif %}
                                         </div>
