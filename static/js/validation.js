@@ -131,8 +131,6 @@ const checkProductSearchAdminForm = () => {
     let adminValid = false;
     const productSearchAdmin = productSearchAdminEl.value.trim();
     const productAdminName = productAdminNameEl.value.trim();
-    console.log('productAdminName');
-    console.log(productAdminName);
     const productAdminDescription = productAdminDescriptionEl.value.trim();
 
     if (!isRequired(productSearchAdmin)) {
@@ -174,6 +172,7 @@ if (productSearchAdminForm !== null) {
 // Handle product-update-form submit
 
 var productUpdateForm = document.getElementById('product-update-form');
+var newDataset = document.getElementById('dataset');
 
 var productUpdateNameEl = document.getElementById('id_name');
 var productUpdateDescriptionEl = document.getElementById('id_description');
@@ -183,6 +182,10 @@ var productUpdateOptionTwo = document.getElementById('id_option2');
 var productUpdateOptionThree = document.getElementById('id_option3');
 var productUpdateCategoryName = document.getElementById('id_name');
 var productUpdateFriendlyName = document.getElementById('id_friendly_name');
+
+if (newDataset !== null) {
+    var dataSet = newDataset.value.trim();
+}
 
 const checkProductUpdateForm = () => {
 
