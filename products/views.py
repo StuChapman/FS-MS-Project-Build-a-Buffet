@@ -44,7 +44,7 @@ def products(request):
             'range': range,
             'image': image,
             'cookie_key': cookie_key,
-            'basket_total': basket_total
+            'basket_total': basket_total,
         }
 
     return render(request, 'products/products.html', context)
