@@ -10429,9 +10429,17 @@ body {
     vertical-align: middle;
     z-index: -1;
 }
+.question-input, .question-input-text {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 6px 12px;
+    color: #495057;
+}
 .question-input {
-    border: 1px solid #303F3F;
-    border-radius: 5px;
+    height: 38px;
+}
+.question-input-text {
+    height: 76px;
 }
 .search-button {
     border: 1px solid #303F3F;
