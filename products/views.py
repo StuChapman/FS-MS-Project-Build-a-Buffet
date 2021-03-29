@@ -143,15 +143,15 @@ def product_admin(request):
             dataset = request.GET['dataset']
             """ determine dataset to return """
             if dataset == 'products':
-                return_query = Product.objects.all().first()
+                return_query = Product.objects.all().order_by('id_no').first()
                 return_query_length = Product.objects.all().count()
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
-                return_query = Options.objects.all().first()
+                return_query = Options.objects.all().order_by('id_no').first()
                 return_query_length = Options.objects.all().count()
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
-                return_query = Category.objects.all().first()
+                return_query = Category.objects.all().order_by('id_no').first()
                 return_query_length = Category.objects.all().count()
                 form = CategoryAdminForm(instance=return_query)
 
@@ -160,7 +160,7 @@ def product_admin(request):
             query = request.GET['product_search_admin']
             if not query:
                 """ default to products in case of blank query """
-                return_query = Product.objects.all().first()
+                return_query = Product.objects.all().order_by('id_no').first()
                 dataset = 'products'
                 form = ProductAdminForm(instance=return_query)
                 context = {
@@ -180,25 +180,25 @@ def product_admin(request):
                 if dataset == 'products':
                     queries = Q(name__icontains=query) | Q(description__icontains=query)
                     products = Product.objects.all()
-                    return_query = products.filter(queries).first()
+                    return_query = products.filter(queries).order_by('id_no').first()
                     return_query_length = products.filter(queries).count()
                     form = ProductAdminForm(instance=return_query)
                 elif dataset == 'options':
                     queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
                     options = Options.objects.all()
-                    return_query = options.filter(queries).first()
+                    return_query = options.filter(queries).order_by('id_no').first()
                     return_query_length = options.filter(queries).count()
                     form = OptionsAdminForm(instance=return_query)
                 elif dataset == 'categories':
                     queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
                     categories = Category.objects.all()
-                    return_query = categories.filter(queries).first()
+                    return_query = categories.filter(queries).order_by('id_no').first()
                     return_query_length = categories.filter(queries).count()
                     form = CategoryAdminForm(instance=return_query)
 
     else:
         """ default to products in case of error """
-        return_query = Product.objects.all().first()
+        return_query = Product.objects.all().order_by('id_no').first()
         form = ProductAdminForm(instance=return_query)
 
     context = {
