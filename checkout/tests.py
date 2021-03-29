@@ -123,7 +123,7 @@ class TestViews(TestCase):
     def test_email_one(self):
 
         userVal = "user@provider.com"
-        if re.match("^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
+        if re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
             Result = True
         else:
             Result = False
@@ -133,7 +133,7 @@ class TestViews(TestCase):
     def test_email_two(self):
 
         userVal = "user@provider.co.uk"
-        if re.match("^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
+        if re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
             Result = True
         else:
             Result = False
@@ -143,7 +143,7 @@ class TestViews(TestCase):
     def test_email_three(self):
 
         userVal = "user.user@provider.co.uk"
-        if re.match("^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
+        if re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
             Result = True
         else:
             Result = False
@@ -153,7 +153,7 @@ class TestViews(TestCase):
     def test_email_four(self):
 
         userVal = "user"
-        if re.match("^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
+        if re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
             Result = True
         else:
             Result = False
@@ -163,7 +163,7 @@ class TestViews(TestCase):
     def test_email_five(self):
 
         userVal = "user.com"
-        if re.match("^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
+        if re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", userVal):
             Result = True
         else:
             Result = False

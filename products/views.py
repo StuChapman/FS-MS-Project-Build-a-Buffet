@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
 
+from django.utils.safestring import mark_safe
+
+import re
+
 from .models import Product, Category, Options
 from basket.contexts import basket_context
 from .forms import ProductAdminForm, OptionsAdminForm, CategoryAdminForm
@@ -225,14 +229,55 @@ def update_product(request, form_id):
 
     if request.method == 'POST':
         if form_id[0:3] == 'pro':
+
+            """ validate the form data """
+            validate_name = request.POST['name']
+            validate_description = request.POST['description']
+            validate_price = request.POST['price']
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_name)):
+                messages.success(request, mark_safe('There was a problem with name <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_description)):
+                messages.success(request, mark_safe('There was a problem with description <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match(r"^[0-9]+(\.[0-9]{2}$)?", ''.join(validate_price)):
+                messages.success(request, mark_safe('There was a problem with price <br> Please try again.'))
+                return redirect(reverse('home'))
+
             product = get_object_or_404(Product, id_no=form_id)
             form = ProductAdminForm(request.POST, request.FILES, instance=product)
             item = 'product'
         if form_id[0:3] == 'opt':
+
+            """ validate the form data """
+            validate_option1 = request.POST['option1']
+            validate_option2 = request.POST['option2']
+            validate_option3 = request.POST['option3']
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_option1)):
+                messages.success(request, mark_safe('There was a problem with option1 <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_option2)):
+                messages.success(request, mark_safe('There was a problem with option2 <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_option3)):
+                messages.success(request, mark_safe('There was a problem with option3 <br> Please try again.'))
+                return redirect(reverse('home'))
+
             option = get_object_or_404(Options, id_no=form_id)
             form = OptionsAdminForm(request.POST, request.FILES, instance=option)
             item = 'option'
         if form_id[0:3] == 'cat':
+
+            """ validate the form data """
+            validate_name = request.POST['name']
+            validate_friendly_name = request.POST['friendly_name']
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_name)):
+                messages.success(request, mark_safe('There was a problem with name <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_friendly_name)):
+                messages.success(request, mark_safe('There was a problem with friendly_name <br> Please try again.'))
+                return redirect(reverse('home'))
+
             category = get_object_or_404(Category, id_no=form_id)
             form = CategoryAdminForm(request.POST, request.FILES, instance=category)
             item = 'category'

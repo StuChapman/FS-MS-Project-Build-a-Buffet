@@ -117,19 +117,19 @@ def create_order(request):
     if request.POST:
 
         """ validate the form data """
-        validate_full_name = request.POST['full_name'],
-        validate_email = request.POST['email'],
-        validate_phone_number = request.POST['phone_number'],
-        validate_country = request.POST['country'],
-        validate_postcode = request.POST['postcode'],
-        validate_town_or_city = request.POST['town_or_city'],
-        validate_street_address1 = request.POST['street_address1'],
-        validate_street_address2 = request.POST['street_address2'],
-        validate_county = request.POST['county'],
+        validate_full_name = request.POST['full_name']
+        validate_email = request.POST['email']
+        validate_phone_number = request.POST['phone_number']
+        validate_country = request.POST['country']
+        validate_postcode = request.POST['postcode']
+        validate_town_or_city = request.POST['town_or_city']
+        validate_street_address1 = request.POST['street_address1']
+        validate_street_address2 = request.POST['street_address2']
+        validate_county = request.POST['county']
         if not re.match("^[a-zA-Z ]+$", ''.join(validate_full_name)):
             messages.success(request, mark_safe('There was a problem with full_name <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match("^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", ''.join(validate_email)):
+        if not re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", ''.join(validate_email)):
             messages.success(request, mark_safe('There was a problem with email <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[0-9]+$", ''.join(validate_phone_number)):

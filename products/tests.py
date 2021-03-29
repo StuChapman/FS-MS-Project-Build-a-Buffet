@@ -40,17 +40,17 @@ class TestViews(TestCase):
     def test_product_search_validation_number(self):
 
         userVal = "9"
-        if re.match("/^[a-zA-Z ]+$/", userVal):
+        if re.match("^[a-zA-Z0-9*]+$", userVal):
             Result = True
         else:
             Result = False
 
-        self.assertEqual(Result, False)
+        self.assertEqual(Result, True)
 
     def test_product_search_validation_special(self):
 
         userVal = "<"
-        if re.match("/^[a-zA-Z ]+$/", userVal):
+        if re.match("^[a-zA-Z0-9*]+$", userVal):
             Result = True
         else:
             Result = False
@@ -59,8 +59,8 @@ class TestViews(TestCase):
 
     def test_product_search_validation_space(self):
 
-        userVal = "and a"
-        if re.match("/^[a-zA-Z ]+$/", userVal):
+        userVal = " "
+        if re.match("^[a-zA-Z0-9* ]+$", userVal):
             Result = True
         else:
             Result = False
@@ -71,6 +71,56 @@ class TestViews(TestCase):
 
         userVal = "*"
         if re.match("/^[a-zA-Z ]+$/", userVal):
+            Result = True
+        else:
+            Result = False
+
+        self.assertEqual(Result, False)
+
+    def test_update_product_price_integer(self):
+
+        userVal = "2"
+        if re.match(r"^[0-9]+(\.[0-9]{2}$)?", userVal):
+            Result = True
+        else:
+            Result = False
+
+        self.assertEqual(Result, True)
+
+    def test_update_product_price_decimal(self):
+
+        userVal = "2.5"
+        if re.match(r"^[0-9]+\.[0-9]{2}", userVal):
+            Result = True
+        else:
+            Result = False
+
+        self.assertEqual(Result, True)
+
+    def test_update_product_price_decimal(self):
+
+        userVal = "2.55"
+        if re.match(r"^[0-9]+\.[0-9]{2}", userVal):
+            Result = True
+        else:
+            Result = False
+
+        self.assertEqual(Result, True)
+
+    def test_update_product_price_decimal(self):
+
+        userVal = "2.555"
+        if re.match(r"^[0-9]+\.[0-9]{2}", userVal):
+            Result = True
+        else:
+            Result = False
+
+        self.assertEqual(Result, True)
+
+    def test_update_product_price_decimal(self):
+
+        userVal = ".55"
+        if re.match(r"^[0-9]+\.[0-9]{2}", userVal):
             Result = True
         else:
             Result = False
