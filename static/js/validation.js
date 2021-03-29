@@ -123,24 +123,13 @@ if (userQuestionForm !== null) {
 var productSearchAdminForm = document.getElementById('product_search_admin_form');
 var productSearchAdminEl = document.getElementById('product_search_admin');
 
-var productAdminNameEl = document.getElementById('id_name');
-var productAdminDescriptionEl = document.getElementById('id_description');
-
 const checkProductSearchAdminForm = () => {
 
     let adminValid = false;
     const productSearchAdmin = productSearchAdminEl.value.trim();
-    const productAdminName = productAdminNameEl.value.trim();
-    const productAdminDescription = productAdminDescriptionEl.value.trim();
 
-    if (!isRequired(productSearchAdmin)) {
-        var alert = '<i class="fas fa-exclamation-triangle"></i> Search cannot be blank.';
-    } else if (!isAlphaNumeric(productSearchAdmin)) {
+    if (!isAlphaNumeric(productSearchAdmin)) {
         var alert = '<i class="fas fa-exclamation-triangle"></i> Search must be text or numerals only.';
-    } else if (!isText(productAdminName)) {
-        var alert = '<i class="fas fa-exclamation-triangle"></i> Name must contain only letters.';
-    } else if (!isAlphaNumeric(productAdminDescription)) {
-        var alert = '<i class="fas fa-exclamation-triangle"></i> Description must contain only letters, numbers, and @.+-_ characters.';
     } else {
         adminValid = true;
     }
