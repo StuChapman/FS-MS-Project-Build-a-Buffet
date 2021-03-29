@@ -1,9 +1,13 @@
 # Credit: Code-Institute
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserProfileForm
+
+from django.utils.safestring import mark_safe
+
+import re
 
 from checkout.models import Order, Order_items
 from products.models import Options
@@ -15,6 +19,41 @@ def profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
+
+        """ validate the form data """
+        validate_default_full_name = request.POST['default_full_name']
+        validate_default_phone_number = request.POST['default_phone_number']
+        validate_default_country = request.POST['default_country']
+        validate_default_postcode = request.POST['default_postcode']
+        validate_default_town_or_city = request.POST['default_town_or_city']
+        validate_default_street_address1 = request.POST['default_street_address1']
+        validate_default_street_address2 = request.POST['default_street_address2']
+        validate_default_county = request.POST['default_county']
+        if not re.match("^[a-zA-Z ]+$", ''.join(validate_default_full_name)):
+            messages.success(request, mark_safe('There was a problem with  default_full_name <br> Please try again.'))
+            return redirect(reverse('home'))
+        if not re.match("^[0-9]+$", ''.join(validate_default_phone_number)):
+            messages.success(request, mark_safe('There was a problem with  default_phone_number <br> Please try again.'))
+            return redirect(reverse('home'))
+        if not re.match("^[a-zA-Z ]+$", ''.join(validate_default_country) + "a"):
+            messages.success(request, mark_safe('There was a problem with  default_country <br> Please try again.'))
+            return redirect(reverse('home'))
+        if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_default_postcode)):
+            messages.success(request, mark_safe('There was a problem with  default_postcode <br> Please try again.'))
+            return redirect(reverse('home'))
+        if not re.match("^[a-zA-Z ]+$",  ''.join(validate_default_town_or_city)):
+            messages.success(request, mark_safe('There was a problem with  default_town_or_city<br> Please try again.'))
+            return redirect(reverse('home'))
+        if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_default_street_address1)):
+            messages.success(request, mark_safe('There was a problem with  default_street_address1 <br> Please try again.'))
+            return redirect(reverse('home'))
+        if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_default_street_address2) + "a"):
+            messages.success(request, mark_safe('There was a problem with  default_street_address2 <br> Please try again.'))
+            return redirect(reverse('home'))
+        if not re.match("^[a-zA-Z ]+$", ''.join(validate_default_county) + "a"):
+            messages.success(request, mark_safe('There was a problem with  default_county <br> Please try again.'))
+            return redirect(reverse('home'))
+
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()

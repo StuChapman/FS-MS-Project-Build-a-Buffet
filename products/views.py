@@ -320,6 +320,21 @@ def add_product(request):
         dataset = request.POST['dataset']
 
         if dataset == 'products':
+
+            """ validate the form data """
+            validate_new_name = request.POST['new_name']
+            validate_new_description = request.POST['new_description']
+            validate_new_price = request.POST['new_price']
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_name)):
+                messages.success(request, mark_safe('There was a problem with new_name <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_description)):
+                messages.success(request, mark_safe('There was a problem with new_description <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match(r"^[0-9]+(\.[0-9]{2}$)?", ''.join(validate_new_price)):
+                messages.success(request, mark_safe('There was a problem with new_price <br> Please try again.'))
+                return redirect(reverse('home'))
+
             """ get the last product.id_no and incriment by 1 """
             last_product = Product.objects.all().last()
             last_product_id = int(float(last_product.id_no[3:6]))
@@ -347,8 +362,19 @@ def add_product(request):
             return redirect(reverse('refresh_product_admin', args=[next_product_id]))
 
         if dataset == 'categories':
+
+            """ validate the form data """
+            validate_new_category_name = request.POST['new_category_name']
+            validate_new_friendly_name = request.POST['new_friendly_name']
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_category_name)):
+                messages.success(request, mark_safe('There was a problem with new_category_name <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_friendly_name)):
+                messages.success(request, mark_safe('There was a problem with new_friendly_name <br> Please try again.'))
+                return redirect(reverse('home'))
+
             """ get the last product.id_no and incriment by 1 """
-            last_category = Category.objects.all().last()
+            last_category = Category.objects.all().order_by('id_no').last()
             last_category_id = int(float(last_category.id_no[3:6]))
             next_category_id = last_category_id + 1
             if next_category_id < 10:
@@ -368,6 +394,21 @@ def add_product(request):
             return redirect(reverse('refresh_product_admin', args=[next_category_id]))
 
         if dataset == 'options':
+
+            """ validate the form data """
+            validate_new_option_one = request.POST['new_option_one']
+            validate_new_option_two = request.POST['new_option_two']
+            validate_new_option_three = request.POST['new_option_three']
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_option_one)):
+                messages.success(request, mark_safe('There was a problem with option_one <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_option_two)):
+                messages.success(request, mark_safe('There was a problem with option_two <br> Please try again.'))
+                return redirect(reverse('home'))
+            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_option_three)):
+                messages.success(request, mark_safe('There was a problem with option_three <br> Please try again.'))
+                return redirect(reverse('home'))
+
             """ get the last option.id_no and incriment by 1 """
             last_option = Options.objects.all().last()
             last_option_id = int(float(last_option.id_no[3:6]))
