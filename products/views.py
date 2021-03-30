@@ -373,6 +373,18 @@ def add_product(request):
                 messages.success(request, mark_safe('There was a problem with new_friendly_name <br> Please try again.'))
                 return redirect(reverse('home'))
 
+            """ check if the category exists """
+            category_exists = categories.filter(name=validate_new_category_name)
+            print(category_exists)
+            if category_exists:
+                messages.success(request, f'Category: {validate_new_category_name} already exists')
+                context = {
+                    'categories': categories,
+                    'dataset': dataset,
+                }
+
+                return render(request, 'products/add_product.html', context)
+
             """ get the last product.id_no and incriment by 1 """
             last_category = Category.objects.all().order_by('id_no').last()
             last_category_id = int(float(last_category.id_no[3:6]))
@@ -555,17 +567,17 @@ def next_product(request):
             """ determine dataset to return """
             if dataset == 'products':
                 queries = Q(name__icontains=query) | Q(description__icontains=query)
-                products = Product.objects.all()
+                products = Product.objects.all().order_by('id_no')
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
                 queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
-                products = Options.objects.all()
+                products = Options.objects.all().order_by('id_no')
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
                 queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
-                products = Category.objects.all()
+                products = Category.objects.all().order_by('id_no')
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = CategoryAdminForm(instance=return_query)
 
@@ -604,17 +616,17 @@ def prev_product(request):
             """ determine dataset to return """
             if dataset == 'products':
                 queries = Q(name__icontains=query) | Q(description__icontains=query)
-                products = Product.objects.all()
+                products = Product.objects.all().order_by('id_no')
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
                 queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
-                products = Options.objects.all()
+                products = Options.objects.all().order_by('id_no')
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
                 queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
-                products = Category.objects.all()
+                products = Category.objects.all().order_by('id_no')
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = CategoryAdminForm(instance=return_query)
 
