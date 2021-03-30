@@ -374,10 +374,9 @@ def add_product(request):
                 return redirect(reverse('home'))
 
             """ check if the category exists """
-            category_exists = categories.filter(name=validate_new_category_name)
-            print(category_exists)
+            category_exists = categories.filter(name=validate_new_category_name.lower())
             if category_exists:
-                messages.success(request, f'Category: {validate_new_category_name} already exists')
+                messages.success(request, f'Category: {validate_new_category_name.lower()} already exists')
                 context = {
                     'categories': categories,
                     'dataset': dataset,
