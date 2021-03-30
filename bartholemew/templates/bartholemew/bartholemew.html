@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- bartholemew CSS -->
+    <link href="{% static 'css/bartholemew.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <body onload="createCookie()"></body>
+    <section class="products-section">
+        <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Build-a-Buffet</h1>
+        <div class="chatbox-container row px-3 mx-auto">
+            <div class="col-12 col-lg-6">
+                <div class="chatbox float-left px-3">
+                    Hi! I’m Bartholemew, Build-A-Buffet’s resident robo-chef.
+                    Let me help you Build-A-Buffet that your guests will love.
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="chatimgbox float-right">
+                    <img class="chatbox-image" src="{{ MEDIA_URL }}assets/img/bartholemew.jpg" alt="robochef image" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% include 'includes/contact.html' %}
+{% endblock %}
+
+{% block postloadjs %}
+<!-- Bartholemew -->
+<script src="{% static 'js/bartholemew.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,31 @@
+.chatbox-container {
+    width: 95vw;
+}
+.chatbox {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 175px;
+    font-size: calc(14px + (22 - 14) * ((100vw - 300px) / 1620));
+    border: 1px solid;
+    border-radius: 50%;
+}
+.chatbox-image {
+    width: 100%;
+}
+
+@media screen and (orientation: landscape){
+    .chatbox, .chatimgbox {
+        width: 50%;
+    }
+}
+@media (min-width: 767px) {
+    .chatbox, .chatimgbox {
+        width: 50%;
+    }
+}
+@media (min-width:1024px) {
+    .chatbox, .chatimgbox {
+        width: 100%;
+    }
+}

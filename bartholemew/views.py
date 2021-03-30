@@ -5,8 +5,8 @@ from basket.contexts import basket_context
 # Create your views here.
 
 
-def index(request):
-    """ A view to return the index page """
+def bartholemew(request):
+    """ A view to return the bartholemew page """
 
     """ check for a basket cookie """
     context_items = basket_context(request)
@@ -18,4 +18,4 @@ def index(request):
             'basket_total': basket_total,
         }
 
-    return render(request, 'home/index.html', context)
+    return render(request, 'bartholemew/bartholemew.html', context)
