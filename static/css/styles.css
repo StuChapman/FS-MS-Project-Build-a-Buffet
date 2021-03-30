@@ -10434,6 +10434,7 @@ body {
     border-radius: 0.25rem;
     padding: 6px 12px;
     color: #495057;
+    font-size: 1rem;
 }
 .question-input {
     height: 38px;
