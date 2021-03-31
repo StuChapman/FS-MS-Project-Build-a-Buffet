@@ -1,31 +1,67 @@
-.chatbox-container {
-    width: 95vw;
-}
+
 .chatbox {
     display: flex;
     align-items: center;
     text-align: center;
-    height: 175px;
-    font-size: calc(14px + (22 - 14) * ((100vw - 300px) / 1620));
+    font-size: calc(10px + (22 - 10) * ((100vw - 300px) / 1620));
     border: 1px solid;
-    border-radius: 50%;
+    border-radius: 35%;
+    background-color: #f8f9fa;
 }
-.chatbox-image {
-    width: 100%;
+.chatresponsebox {
+    background-color: #eff4fa;
+    margin-top: 1rem;
+}
+.chat-button {
+    height: 2rem;
+    padding: 0 0.5rem;
+    margin: 0.15rem 0;
 }
 
 @media screen and (orientation: landscape){
-    .chatbox, .chatimgbox {
-        width: 50%;
+    .chatboxdiv {
+        padding-top: 5vh;
+    }
+    .chatbox {
+        float: right;
+    }
+    .chatbox-image {
+        width: 90%;
+    }
+    .chatboxdiv, .chatimgdiv {
+        flex: 0 0 100%;
+        max-width: 50%
+    }
+    .chatresponsebox {
+        padding: 1rem 0 1rem 15vw;
+    }
+    .chatbox-container {
+        width: 75vw;
+    }
+}
+@media screen and (orientation: portrait){
+    .chatbox {
+        float: left;
+    }
+    .chatbox-image {
+        width: 75%;
+    }
+    .chatboxdiv, .chatimgdiv {
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+    .chatresponsebox {
+        padding: 1rem 0 1rem 10vw;
+    }
+    .chatbox-container {
+        width: 95vw;
     }
 }
 @media (min-width: 767px) {
     .chatbox, .chatimgbox {
-        width: 50%;
+        max-width: 50vw;
     }
-}
-@media (min-width:1024px) {
-    .chatbox, .chatimgbox {
-        width: 100%;
+    .chatbox-image {
+        width: 75%;
     }
 }

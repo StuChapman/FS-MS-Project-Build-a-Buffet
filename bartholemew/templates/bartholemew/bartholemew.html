@@ -19,17 +19,30 @@
     <section class="products-section">
         <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Build-a-Buffet</h1>
         <div class="chatbox-container row px-3 mx-auto">
-            <div class="col-12 col-lg-6">
-                <div class="chatbox float-left px-3">
+            <div class="chatboxdiv">
+                <div class="chatbox px-4 py-4" id="chatbox">
                     Hi! I’m Bartholemew, Build-A-Buffet’s resident robo-chef.
                     Let me help you Build-A-Buffet that your guests will love.
                 </div>
             </div>
-            <div class="col-12 col-lg-6">
-                <div class="chatimgbox float-right">
-                    <img class="chatbox-image" src="{{ MEDIA_URL }}assets/img/bartholemew.jpg" alt="robochef image" />
+            <div class="chatimgdiv">
+                <div class="chatimgbox float-right mb-1">
+                    <img class="chatbox-image float-right" src="{{ MEDIA_URL }}assets/img/bartholemew.jpg" alt="robochef image" />
                 </div>
             </div>
+        </div>
+        <div class="chatresponsebox">
+            <button class="chat-button btn btn-primary px-3" id="startbart" onclick="return startBart();" >Start</button>
+            <button class="chat-button btn btn-primary hidden px-3" id="partybart" onclick="return eventBart('party');" >Party</button>
+            <button class="chat-button btn btn-primary hidden px-3" id="weddingbart" onclick="return eventBart('wedding');" >Wedding</button>
+            <button class="chat-button btn btn-primary hidden px-3" id="functionbart" onclick="return eventBart('funct');" >Function</button>
+            <button class="chat-button btn btn-primary hidden px-3" id="corporatebart" onclick="return eventBart('corporate');" >Corporate</button>
+            <form class="chat-form hidden" id="guests">
+                <label for="minGuests">Min:</label>
+                <input type="number" id="minGuests" name="minGuests" min="1" max="1000">
+                <label for="maxGuests">Max:</label>
+                <input type="number" id="maxGuests" name="maxGuests" min="1" max="1000">
+            </form>
         </div>
     </section>
 

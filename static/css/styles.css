@@ -10320,7 +10320,7 @@ body {
 }
 
 .contact-section {
-  padding-top: 5rem;
+  padding: 5rem 0;
 }
 .contact-section .card {
   border: 0;
