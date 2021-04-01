@@ -4,53 +4,39 @@ var eventParty = "A party? Woohoo! <br> How many guests will be there?";
 var eventWedding = "A wedding? Congratulations!<br>How many guests will be there?";
 var eventFunct = "I can sort that out for you!<br>How many guests will be there?";
 var eventCorporate = "Let's impress the boss!<br>How many delegates will be there?";
+var guestType
 
 function startBart() {
     $('#chatbox').html(bartOne);
     $('#startbart').hide();
-    $('#partybart').show();
-    $('#weddingbart').show();
-    $('#functionbart').show();
-    $('#corporatebart').show();
+    $('#event').show();
 }
 
 function eventBart(event) {
     switch(event) {
         case 'party':
-            $('#chatbox').html(eventParty);
-            $('#partybart').hide();
-            $('#weddingbart').hide();
-            $('#functionbart').hide();
-            $('#corporatebart').hide();
+            $('#event').hide();
             $('#guests').show();
-            $('#guestsbart').show();
+            $('#chatbox').html(eventParty);
+            guestType = "guests"
             break;
         case 'wedding':
-            $('#chatbox').html(eventWedding);
-            $('#partybart').hide();
-            $('#weddingbart').hide();
-            $('#functionbart').hide();
-            $('#corporatebart').hide();
+            $('#event').hide();
             $('#guests').show();
-            $('#guestsbart').show();
+            $('#chatbox').html(eventWedding);
+            guestType = "guests"
             break;
         case 'funct':
-            $('#chatbox').html(eventFunct);
-            $('#partybart').hide();
-            $('#weddingbart').hide();
-            $('#functionbart').hide();
-            $('#corporatebart').hide();
+            $('#event').hide();
             $('#guests').show();
-            $('#guestsbart').show();
+            $('#chatbox').html(eventFunct);
+            guestType = "guests"
             break;
         case 'corporate':
-            $('#chatbox').html(eventCorporate);
-            $('#partybart').hide();
-            $('#weddingbart').hide();
-            $('#functionbart').hide();
-            $('#corporatebart').hide();
+            $('#event').hide();
             $('#guests').show();
-            $('#guestsbart').show();
+            $('#chatbox').html(eventCorporate);
+            guestType = "delegates"
             break;
         default:
             break;
@@ -58,11 +44,21 @@ function eventBart(event) {
 }
 
 function guestsBart() {
-    $('#guests').hide();
-    $('#guestsbart').hide();
     minGuests = $('#minguests').val();
     maxGuests = $('#maxguests').val();
-    var eventGuests = "Right, so between " + minGuests + " and " + maxGuests + " guests will be attending.<br>" +
+    if (parseInt(maxGuests) < parseInt(minGuests) || parseInt(minGuests) == 0 || minGuests == "") {
+        var guestError = "Oops! Can you check those numbers and try again please?"
+        $('#chatbox').html(guestError);
+        return;
+    } 
+    if (parseInt(maxGuests) == parseInt(minGuests) || maxGuests == "") {
+        var eventGuests = "Right, so " + minGuests + " " + guestType + " will be attending.<br>" +
+            "Are any of them: vegan, vegetarian or pescatarian?"
+    } else {
+         var eventGuests = "Right, so between " + minGuests + " and " + maxGuests + " " + guestType + " will be attending.<br>" +
         "Are any of them: vegan, vegetarian or pescatarian?"
+    }
+    $('#guests').hide();
+    $('#diet').show();
     $('#chatbox').html(eventGuests);
 }

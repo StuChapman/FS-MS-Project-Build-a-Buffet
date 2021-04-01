@@ -32,18 +32,41 @@
             </div>
         </div>
         <div class="chatresponsebox">
-            <button class="chat-button btn btn-primary px-3" id="startbart" onclick="return startBart();" >Start</button>
-            <button class="chat-button btn btn-primary hidden px-3" id="partybart" onclick="return eventBart('party');" >Party</button>
-            <button class="chat-button btn btn-primary hidden px-3" id="weddingbart" onclick="return eventBart('wedding');" >Wedding</button>
-            <button class="chat-button btn btn-primary hidden px-3" id="functionbart" onclick="return eventBart('funct');" >Function</button>
-            <button class="chat-button btn btn-primary hidden px-3" id="corporatebart" onclick="return eventBart('corporate');" >Corporate</button>
-            <form class="chat-form hidden" id="guests">
+            <button class="chat-button btn btn-primary px-3 ml-3" id="startbart" onclick="return startBart();" >Start</button>
+            <div class="hidden" id="event">
+                <div class="pl-3">
+                    <button class="chat-button btn btn-primary px-3" onclick="return eventBart('party');" >Party</button>
+                    <button class="chat-button btn btn-primary px-3" onclick="return eventBart('wedding');" >Wedding</button>
+                    <button class="chat-button btn btn-primary px-3" onclick="return eventBart('funct');" >Function</button>
+                    <button class="chat-button btn btn-primary px-3" onclick="return eventBart('corporate');" >Corporate</button>
+                </div>
+            </div>
+            <div class="hidden pl-3" id="guests">
                 <label for="minGuests">Min:</label>
                 <input type="number" id="minguests" name="minguests" min="1" max="1000">
                 <label for="maxGuests">Max:</label>
                 <input type="number" id="maxguests" name="maxguests" min="1" max="1000">
-            </form>
-            <button type="submit" onclick="return guestsBart();" class="chat-button btn btn-primary hidden px-3" id="guestsbart" >Go</button>
+                <button onclick="return guestsBart();" class="chat-button btn btn-primary px-3 ml-2" id="guestsbart" >Go</button>
+            </div>
+            <div class="hidden pl-3" id="diet">
+                <div class="row align-vertically text-center">
+                    <div class="col-3">
+                        <label for="veganGuests">Vegan:</label>
+                        <input type="number" id="veganGuests" name="veganGuests" min="1" max="999">
+                    </div>
+                    <div class="col-3">
+                        <label for="veggieGuests">Veggie:</label>
+                        <input type="number" id="veggieGuests" name="veggieGuests" min="1" max="999">
+                    </div>
+                    <div class="col-3">
+                        <label for="pescGuests">Pesc:</label>
+                        <input type="number" id="pescGuests" name="pescGuests" min="1" max="999">
+                    </div>
+                    <div class="col-3">
+                        <button onclick="return dietBart();" class="chat-button btn btn-primary px-3 ml-2" id="dietbart" >Go</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
