@@ -39,10 +39,11 @@
             <button class="chat-button btn btn-primary hidden px-3" id="corporatebart" onclick="return eventBart('corporate');" >Corporate</button>
             <form class="chat-form hidden" id="guests">
                 <label for="minGuests">Min:</label>
-                <input type="number" id="minGuests" name="minGuests" min="1" max="1000">
+                <input type="number" id="minguests" name="minguests" min="1" max="1000">
                 <label for="maxGuests">Max:</label>
-                <input type="number" id="maxGuests" name="maxGuests" min="1" max="1000">
+                <input type="number" id="maxguests" name="maxguests" min="1" max="1000">
             </form>
+            <button type="submit" onclick="return guestsBart();" class="chat-button btn btn-primary hidden px-3" id="guestsbart" >Go</button>
         </div>
     </section>
 
