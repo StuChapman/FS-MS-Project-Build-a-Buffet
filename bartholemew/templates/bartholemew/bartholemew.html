@@ -33,9 +33,13 @@
                     <img class="chatbox-image float-right" src="{{ MEDIA_URL }}assets/img/bartholemew.jpg" alt="robochef image" />
                 </div>
                 <div class="hidden" id="chatsummary">
-                    <div class="chatsummary mx-4 text-blue px-4 py-4">
-                        Summary
+                    <div class="chatsummaryhead text-center mx-4 text-blue px-4">
+                        <h2>Summary:</h2>
                     </div>
+                    <hr class="my-0 mx-4">
+                    <div class="chatsummary mx-4 mt-0 text-blue px-4 py-4" id="chatsummarybox">
+                    </div>
+                    <hr class="my-0 mx-4">
                 </div>
             </div>
         </div>
@@ -93,7 +97,7 @@
             </div>
             <div class="hidden" id="allergy">
                 <div class="pl-3">
-                    <button class="chat-button btn btn-primary px-3" onclick="return allergyBart('none');" >None</button>
+                    <button class="chat-button btn btn-primary px-3" onclick="return allergyBart('normal');" >Normal</button>
                     <button class="chat-button btn btn-primary px-3" onclick="return allergyBart('medium');" >Medium</button>
                     <button class="chat-button btn btn-primary px-3" onclick="return allergyBart('high');" >High</button>
                     <div class="tiptext pr-2 pt-2 pt-md-0">
