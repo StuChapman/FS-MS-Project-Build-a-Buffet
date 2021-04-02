@@ -1,27 +1,39 @@
 
-.chatbox {
+.chatbox, .chatsummary {
     display: flex;
     align-items: center;
     text-align: center;
     font-size: calc(10px + (22 - 10) * ((100vw - 300px) / 1620));
-    border: 1px solid;
-    border-radius: 35%;
+    border: 1px solid #426765;
     background-color: #f8f9fa;
+}
+.chatbox {
+    border-radius: 25%;
+}
+.chatsummary {
+    border-radius: 0.25rem;
 }
 .chatresponsebox {
     background-color: #eff4fa;
     margin-top: 1rem;
     padding: 1rem 0;
+    width: 100%;
 }
 .chat-button {
     height: 2rem;
     padding: 0 0.5rem;
     margin-bottom: 0.15rem;
+    background-color: #426765;
 }
-
+.tiptext {
+    font-size: calc(8px + (18 - 8) * ((100vw - 300px) / 1620));
+}
 @media screen and (orientation: landscape){
     .chatboxdiv {
         padding-top: 5vh;
+    }
+    .chatsummary {
+        margin-top: 5vh;
     }
     .chatbox {
         float: right;
@@ -58,5 +70,11 @@
     }
     .chatbox-image {
         width: 75%;
+    }
+}
+@media (min-width: 1200px) {
+    .chatbox-image {
+        width: 50%;
+        float: left !important;
     }
 }
