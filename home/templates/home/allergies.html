@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <body onload="createCookie()"></body>
+
+<section class="products-section bg-light">
+    <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Allergies</h1>
+    <p class="product-text-three mx-2 text-center mb-2 text-blue">Athough we can't guarantee allergy free, we label our food clearly give you all the information you need.</p>
+    <p class="product-text-three mx-2 text-center mb-2 text-blue">As well as identifying: vegan <i class="fas fa-carrot"></i>, vegetarian <i class="fas fa-leaf"></i> and pescetarian <i class="fas fa-fish"></i> dishes;<br>each of the individually Ziplok<sup>TM</sup> packaged items will have stickers showing the following...</p>
+    <p class="product-text-two text-center text-blue">
+        Celery <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/celery.jpg" alt="celery" /><br>
+        Cereals containing gluten <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/gluten.jpg" alt="gluten" /><br>
+        Crustaceans <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/crustacean.jpg" alt="crustaceans" /><br>
+        Eggs <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/eggs.jpg" alt="eggs" /><br>
+        Fish <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/fish.jpg" alt="fish" /><br>
+        Lupin <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/lupins.jpg" alt="lupin" /><br>
+        Milk <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/milk.jpg" alt="milk" /><br>
+        Molluscs <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/shellfish.jpg" alt="molluscs" /><br>
+        Mustard <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/mustard.jpg" alt="mustard" /><br>
+        Nuts <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/nuts.jpg" alt="nuts" /><br>
+        Peanuts <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/peanuts.jpg" alt="peanuts" /><br>
+        Sesame seeds <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/sesame.jpg" alt="sesame seeds" /><br>
+        Sulphur dioxide <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/sulphite.jpg" alt="sulphur dioxide" /><br>
+        Soya <img class="img-allergy" src="{{ MEDIA_URL }}assets/img/soya.jpg" alt="soya" />
+        <hr class="d-none d-lg-block mb-0 ml-0" />
+    </p>
+    <div class="product-container row w-100 mx-0 justify-content-center mt-0 text-xl-left">
+        <div class="col-lg-4">
+        </div>
+    </div>
+</section>
+
+{% include 'includes/contact.html' %}
+{% endblock %}

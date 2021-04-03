@@ -23,3 +23,22 @@ def index(request):
         }
 
     return render(request, 'home/index.html', context)
+
+
+def allergies(request):
+    """ A view to return the allergies info page """
+
+    """ check for a basket cookie """
+    context_items = basket_context(request)
+    basket_total = context_items['basket_total']
+    cookie_key = context_items['cookie_key']
+
+    menu = Category.objects.all().order_by('id_no')
+
+    context = {
+            'cookie_key': cookie_key,
+            'basket_total': basket_total,
+            'menu': menu,
+        }
+
+    return render(request, 'home/allergies.html', context)
