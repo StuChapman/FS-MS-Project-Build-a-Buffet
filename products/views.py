@@ -343,7 +343,7 @@ def add_product(request):
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_name)):
                 messages.success(request, mark_safe('There was a problem with new_name <br> Please try again.'))
                 return redirect(reverse('home'))
-            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_description)):
+            if not re.match("^[a-zA-Z, ]+$", ''.join(validate_new_description)):
                 messages.success(request, mark_safe('There was a problem with new_description <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match(r"^[0-9]+(\.[0-9]{2}$)?", ''.join(validate_new_price)):

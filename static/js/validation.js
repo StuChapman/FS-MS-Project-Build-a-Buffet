@@ -8,7 +8,7 @@ const isText = (string) => {
     return re.test(string);
 };
 const isAlphaNumeric = (string) => {
-    const re = new RegExp(/^[a-zA-Z _0-9?\@\.\+\-\_]+$/);
+    const re = new RegExp(/^[a-zA-Z _0-9?\@\.\+\,\-\_]+$/);
     return re.test(string);
 };
 const isNumerals = (number) => {
