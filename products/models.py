@@ -27,6 +27,7 @@ class Product(models.Model):
     description = models.CharField(max_length=254)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     range = models.CharField(max_length=254, null=True)
+    allergies = models.CharField(max_length=4, null=True)
 
     def __str__(self):
         return self.name

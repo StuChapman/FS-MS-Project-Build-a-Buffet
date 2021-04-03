@@ -10,6 +10,8 @@ class ProductAdmin(admin.ModelAdmin):
         'name',
         'category',
         'price',
+        'range',
+        'allergies',
     )
 
     ordering = ('id_no',)
