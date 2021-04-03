@@ -38,11 +38,11 @@ function eventBart(event) {
             $('#chatbox').html(eventWedding);
             guestType = "guests";
             break;
-        case 'funct':
+        case 'function':
             $('#chatbox').html(eventFunct);
             guestType = "guests";
             break;
-        case 'corporate':
+        case 'corporate event':
             $('#chatbox').html(eventCorporate);
             guestType = "delegates";
             break;
