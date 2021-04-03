@@ -250,7 +250,7 @@ def update_product(request, form_id):
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_name)):
                 messages.success(request, mark_safe('There was a problem with name <br> Please try again.'))
                 return redirect(reverse('home'))
-            if not re.match("^[a-zA-Z ]+$", ''.join(validate_description)):
+            if not re.match("^[a-zA-Z, ]+$", ''.join(validate_description)):
                 messages.success(request, mark_safe('There was a problem with description <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match(r"^[0-9]+(\.[0-9]{2}$)?", ''.join(validate_price)):
@@ -473,7 +473,7 @@ def add_product(request):
 
 @login_required
 def delete_product(request, form_id):
-    """ update a product on the menu """
+    """ delete a product on the menu """
     if not request.user.is_superuser:
         messages.success(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
