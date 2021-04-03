@@ -316,12 +316,12 @@ def update_product(request, form_id):
 
 @login_required
 def add_product(request):
-    """ update a product on the menu """
+    """ add a product to the menu """
     if not request.user.is_superuser:
         messages.success(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('id_no')
     menu = Category.objects.all().order_by('id_no')
 
     dataset = ""
@@ -366,12 +366,14 @@ def add_product(request):
             description = request.POST['new_description']
             price = request.POST['new_price']
             range = request.POST['new_range']
+            allergies = request.POST['new_allergies']
             new_product = Product(category=category,
                                   id_no=next_product_id,
                                   name=name,
                                   description=description,
                                   price=price,
-                                  range=range)
+                                  range=range,
+                                  allergies=allergies)
             new_product.save()
             messages.success(request, f'Succesfully added {new_product.name}')
             return redirect(reverse('refresh_product_admin', args=[next_product_id]))
