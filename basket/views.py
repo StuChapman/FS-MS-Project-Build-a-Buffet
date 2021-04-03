@@ -146,6 +146,8 @@ def edit_basket_item(request):
     basket_total = context_items['basket_total']
     cookie_key = context_items['cookie_key']
 
+    menu = Category.objects.all().order_by('id_no')
+
     category = ""
     products = ""
     product = ""
@@ -193,6 +195,7 @@ def edit_basket_item(request):
             'edit': edit,
             'cookie_key': cookie_key,
             'basket_total': basket_total,
+            'menu': menu,
         }
 
     return render(request, 'products/edit_product.html', context)
@@ -228,6 +231,8 @@ def basket_success(request, basket_key):
     baskets = ""
     cookie_key = ""
     basket_total = ""
+
+    menu = Category.objects.all().order_by('id_no')
 
     """ check for a basket cookie """
     context_items = basket_context(request)
@@ -268,6 +273,7 @@ def basket_success(request, basket_key):
             'cookie_key': cookie_key,
             'cookie': cookie,
             'basket_total': basket_total,
+            'menu': menu,
         }
 
     return render(request, 'basket/basket.html', context)

@@ -122,16 +122,9 @@
                                 menu
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="all-menus-link">
-                                <a href="{% url 'products' %}?category=sandwiches" class="dropdown-item">sandwiches</a>
-                                <a href="{% url 'products' %}?category=salads" class="dropdown-item">salads</a>
-                                <a href="{% url 'products' %}?category=dips" class="dropdown-item">dips</a>
-                                <a href="{% url 'products' %}?category=meat" class="dropdown-item">meat</a>
-                                <a href="{% url 'products' %}?category=cheeses" class="dropdown-item">cheeses</a>
-                                <a href="{% url 'products' %}?category=fish" class="dropdown-item">fish</a>
-                                <a href="{% url 'products' %}?category=pasta" class="dropdown-item">pasta</a>
-                                <a href="{% url 'products' %}?category=pastries" class="dropdown-item">pastries</a>
-                                <a href="{% url 'products' %}?category=fruit" class="dropdown-item">fruit</a>
-                                <a href="{% url 'products' %}?category=hot food" class="dropdown-item">hot food</a>
+                                {% for category in menu %}
+                                    <a href="{% url 'products' %}?category={{ category.name }}" class="dropdown-item">{{ category.name }}</a>
+                                {% endfor %}
                             </div>
                         </li>
                         <li class="nav-item dropdown">

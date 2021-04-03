@@ -22,6 +22,8 @@ def products(request):
     basket_total = context_items['basket_total']
     cookie_key = context_items['cookie_key']
 
+    menu = Category.objects.all().order_by('id_no')
+
     category = ""
     range = ""
     image = ""
@@ -49,6 +51,7 @@ def products(request):
             'image': image,
             'cookie_key': cookie_key,
             'basket_total': basket_total,
+            'menu': menu,
         }
 
     return render(request, 'products/products.html', context)
@@ -61,6 +64,8 @@ def product_detail(request):
     context_items = basket_context(request)
     basket_total = context_items['basket_total']
     cookie_key = context_items['cookie_key']
+
+    menu = Category.objects.all().order_by('id_no')
 
     category = ""
     products = ""
@@ -92,6 +97,7 @@ def product_detail(request):
                     'options': options,
                     'cookie_key': cookie_key,
                     'basket_total': basket_total,
+                    'menu': menu,
                 }
 
             return render(request, 'products/product_detail.html', context)
@@ -123,6 +129,7 @@ def product_detail(request):
                     'servings_plusten': servings_plusten,
                     'cookie_key': cookie_key,
                     'basket_total': basket_total,
+                    'menu': menu,
                 }
 
             return render(request, 'products/edit_product.html', context)
@@ -132,6 +139,8 @@ def product_detail(request):
 @login_required
 def product_admin(request):
     """ A view to manage products, categories and options """
+
+    menu = Category.objects.all().order_by('id_no')
 
     """ reset all variables to handle errors """
     form = ""
@@ -171,7 +180,8 @@ def product_admin(request):
                         'form': form,
                         'dataset': dataset,
                         'return_query_number': return_query_number,
-                        'return_query_length': return_query_length
+                        'return_query_length': return_query_length,
+                        'menu': menu,
                     }
                 return render(request, 'products/product_admin.html', context)
 
@@ -211,6 +221,7 @@ def product_admin(request):
             'query': query,
             'return_query_length': return_query_length,
             'return_query_number': return_query_number,
+            'menu': menu,
         }
 
     return render(request, 'products/product_admin.html', context)
@@ -226,6 +237,8 @@ def update_product(request, form_id):
     product = ""
     option = ""
     category = ""
+
+    menu = Category.objects.all().order_by('id_no')
 
     if request.method == 'POST':
         if form_id[0:3] == 'pro':
@@ -294,6 +307,7 @@ def update_product(request, form_id):
 
     context = {
         'form': form,
+        'menu': menu,
 
     }
 
@@ -308,6 +322,7 @@ def add_product(request):
         return redirect(reverse('home'))
 
     categories = Category.objects.all()
+    menu = Category.objects.all().order_by('id_no')
 
     dataset = ""
 
@@ -380,6 +395,7 @@ def add_product(request):
                 context = {
                     'categories': categories,
                     'dataset': dataset,
+                    'menu': menu,
                 }
 
                 return render(request, 'products/add_product.html', context)
@@ -447,6 +463,7 @@ def add_product(request):
     context = {
         'categories': categories,
         'dataset': dataset,
+        'menu': menu,
     }
 
     return render(request, 'products/add_product.html', context)
@@ -463,6 +480,8 @@ def delete_product(request, form_id):
     dataset = ""
     return_query_length = ""
     return_query_number = ""
+
+    menu = Category.objects.all().order_by('id_no')
 
     if form_id[0:3] == 'pro':
         product = Product.objects.get(id_no=form_id)
@@ -497,6 +516,7 @@ def delete_product(request, form_id):
             'dataset': dataset,
             'return_query_length': return_query_length,
             'return_query_number': return_query_number,
+            'menu': menu,
         }
 
     return render(request, 'products/product_admin.html', context)
@@ -510,6 +530,8 @@ def refresh_product_admin(request, form_id):
     dataset = ""
     return_query_length = 1
     return_query_number = 1
+
+    menu = Category.objects.all().order_by('id_no')
 
     """ determine dataset to return """
     if form_id[0:3] == "pro":
@@ -542,6 +564,7 @@ def refresh_product_admin(request, form_id):
             'dataset': dataset,
             'return_query_length': return_query_length,
             'return_query_number': return_query_number,
+            'menu': menu,
         }
 
     return render(request, 'products/product_admin.html', context)
@@ -553,6 +576,8 @@ def next_product(request):
     """ reset all variables to handle errors """
     form = ""
     query = ""
+
+    menu = Category.objects.all().order_by('id_no')
 
     """ get information from request """
     if request.GET:
@@ -591,6 +616,7 @@ def next_product(request):
             'return_query': return_query,
             'return_query_number': return_query_number,
             'return_query_length': return_query_length,
+            'menu': menu,
         }
 
     return render(request, 'products/product_admin.html', context)
@@ -598,6 +624,8 @@ def next_product(request):
 
 @login_required
 def prev_product(request):
+
+    menu = Category.objects.all().order_by('id_no')
 
     """ reset all variables to handle errors """
     form = ""
@@ -639,6 +667,7 @@ def prev_product(request):
             'query': query,
             'return_query_number': return_query_number,
             'return_query_length': return_query_length,
+            'menu': menu,
         }
 
     return render(request, 'products/product_admin.html', context)
@@ -646,6 +675,8 @@ def prev_product(request):
 
 def search_products(request):
     """ A view to search all products """
+
+    menu = Category.objects.all().order_by('id_no')
 
     """ reset all variables to handle errors """
     query = ""
@@ -662,6 +693,7 @@ def search_products(request):
 
                 context = {
                         'product_results': product_results,
+                        'menu': menu,
                     }
                 return render(request, 'products/search_products.html', context)
 
@@ -675,6 +707,7 @@ def search_products(request):
 
     context = {
             'product_results': product_results,
+            'menu': menu,
         }
 
     return render(request, 'products/search_products.html', context)

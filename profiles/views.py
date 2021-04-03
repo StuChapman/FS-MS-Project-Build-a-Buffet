@@ -11,10 +11,14 @@ import re
 
 from checkout.models import Order, Order_items
 from products.models import Options
+from products.models import Category
 
 
 @login_required
 def profile(request):
+
+    menu = Category.objects.all().order_by('id_no')
+
     """ Display the user's profile. """
     profile = get_object_or_404(UserProfile, user=request.user)
 
@@ -81,6 +85,7 @@ def profile(request):
         'orders': orders,
         'items': items,
         'options': options,
+        'menu': menu,
         'on_profile_page': True
     }
 
@@ -88,6 +93,9 @@ def profile(request):
 
 
 def order_history(request, order_number):
+
+    menu = Category.objects.all().order_by('id_no')
+
     profile = get_object_or_404(UserProfile, user=request.user)
     order = get_object_or_404(Order, customer_name=profile)
 
@@ -98,6 +106,7 @@ def order_history(request, order_number):
 
     context = {
         'order': order,
+        'menu': menu,
         'from_profile': True,
     }
 

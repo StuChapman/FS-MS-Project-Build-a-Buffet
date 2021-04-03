@@ -8,6 +8,7 @@ import re
 
 from basket.contexts import basket_context
 from .models import Questions
+from products.models import Category
 
 # Create your views here.
 
@@ -19,6 +20,8 @@ def service(request):
     context_items = basket_context(request)
     basket_total = context_items['basket_total']
     cookie_key = context_items['cookie_key']
+
+    menu = Category.objects.all().order_by('id_no')
 
     """ check for a servings variable from the form """
     if request.POST:
@@ -55,6 +58,7 @@ def service(request):
     context = {
         'basket_total': basket_total,
         'cookie_key': cookie_key,
+        'menu': menu,
     }
 
     return render(request, 'service/service.html', context)

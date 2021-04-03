@@ -31,6 +31,7 @@ def checkout(request):
     cookie_key = context_items['cookie_key']
 
     baskets = ""
+    menu = Category.objects.all().order_by('id_no')
 
     """ fetch the datasets from the models """
     basket = Basket.objects.all()
@@ -91,6 +92,7 @@ def checkout(request):
             'order_form': order_form,
             'stripe_public_key': stripe_public_key,
             'client_secret': client_secret,
+            'menu': menu,
         }
 
     return render(request, 'checkout/checkout.html', context)
@@ -258,6 +260,8 @@ def order_success(request, order_number):
     products = Product.objects.all()
     options = Options.objects.all()
 
+    menu = Category.objects.all().order_by('id_no')
+
     """ Check current user is purchaser """
     current_user = str(request.user)
     purchaser = str(order.customer_name)
@@ -270,6 +274,7 @@ def order_success(request, order_number):
             'order_items': order_items,
             'products': products,
             'options': options,
+            'menu': menu,
         }
 
         return render(request, 'checkout/order_success.html', context)
