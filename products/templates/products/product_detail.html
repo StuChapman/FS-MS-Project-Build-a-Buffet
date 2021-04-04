@@ -38,26 +38,28 @@
                         <div class="d-flex h-100">
                             <div class="product-container w-100 mt-0 text-center text-xl-left">
                                 {% for product in products %}
-                                    <div class="product-text-header mx-auto flex-margin-b text-blue">
-                                        {{ product.name }}
-                                    </div>
-                                    <div class="product-text-two mx-auto flex-margin-b text-blue">
-                                        {{ product.description }}
-                                    </div>
-                                    <div class="allergy-text text-lightblue">
-                                        {% if product.allergies|slice:"0:1" == '1' %}
-                                            <i class="fas fa-carrot"></i> vegan 
-                                        {% endif %}
-                                        {% if product.allergies|slice:"1:2" == '1' %}
-                                            <i class="fas fa-leaf"></i> vegetarian 
-                                        {% endif %}
-                                        {% if product.allergies|slice:"2:3" == '1' %}
-                                            <i class="fas fa-fish"></i> pescetarian 
-                                        {% endif %}
-                                        {% if product.allergies|slice:"3:4" == '1' %}
-                                            <i class="fas fa-allergies"></i> allergy advice 
-                                        {% endif %}
-                                    </div>
+                                    {% if product.category|slugify == category %}
+                                        <div class="product-text-header mx-auto flex-margin-b text-blue">
+                                            {{ product.name }}
+                                        </div>
+                                        <div class="product-text-two mx-auto flex-margin-b text-blue">
+                                            {{ product.description }}
+                                        </div>
+                                        <div class="allergy-text text-lightblue">
+                                            {% if product.allergies|slice:"0:1" == '1' %}
+                                                <i class="fas fa-carrot"></i> vegan 
+                                            {% endif %}
+                                            {% if product.allergies|slice:"1:2" == '1' %}
+                                                <i class="fas fa-leaf"></i> vegetarian 
+                                            {% endif %}
+                                            {% if product.allergies|slice:"2:3" == '1' %}
+                                                <i class="fas fa-fish"></i> pescetarian 
+                                            {% endif %}
+                                            {% if product.allergies|slice:"3:4" == '1' %}
+                                                <i class="fas fa-allergies"></i> allergy advice 
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
                                 {% endfor %}
                                 <br>
                                 <div class="text-blue text-xs mb-2">
