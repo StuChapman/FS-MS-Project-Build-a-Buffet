@@ -244,6 +244,7 @@ I deployed to Github Pages by the following steps:
 26. Form validation is from [javascripttutorial.net](https://www.javascripttutorial.net/javascript-dom/javascript-form-validation/)
 27. Fixing the uncaught error in the navbar is from [stackoverflow.com](https://stackoverflow.com/questions/20175094/uncaught-typeerror-cannot-read-property-top-of-undefined)
 
+
 #### Code Institute
 
 The code for:

@@ -36,9 +36,9 @@
                     {% endif %}
                 </div>
                 <div class="col-xl-6">
-                    <div class="text-center h-100 project">
+                    <div class="h-100 project">
                         <div class="d-flex h-100">
-                            <div class="product-container w-100 mt-0 text-center text-xl-left">
+                            <div class="product-container w-100 mt-0 text-xl-left">
                                 <div class="row">
                                     <div class="col-4">
                                         {% if range == "standard" %}
@@ -66,8 +66,23 @@
                                     {% if range %}
                                         <!-- Credit: https://stackoverflow.com/questions/27771000/django-template-convert-to-string -->
                                         {% if product.range == range and product.category|slugify == category %}
-                                            <div class="mx-auto flex-margin-b text-blue">
+                                            <div class="px-3 flex-margin-b text-lightblue">
                                                 <a class="product-text-two" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-one">{{ product.name }}</a>
+                                                <span class="allergy-text">
+                                                    {% if product.allergies|slice:"0:1" == '1' %}
+                                                        <i class="fas fa-carrot"></i>
+                                                    {% endif %}
+                                                    {% if product.allergies|slice:"1:2" == '1' %}
+                                                        <i class="fas fa-leaf"></i>
+                                                    {% endif %}
+                                                    {% if product.allergies|slice:"2:3" == '1' %}
+                                                        <i class="fas fa-fish"></i>
+                                                    {% endif %}
+                                                    {% if product.allergies|slice:"3:4" == '1' %}
+                                                        <i class="fas fa-allergies"></i>
+                                                    {% endif %}
+                                                </span>
+                                                <span class="product-text-two float-right">£{{ product.price }}</span>
                                             </div>
                                         {% endif %}
                                     {% else %}
@@ -79,6 +94,7 @@
                                     {% endif %}
                                 {% endfor %}
                                 <hr class="d-none d-xl-block mb-0 ml-0" />
+                                <span class="allergy-text text-lightblue">* vegan <i class="fas fa-carrot"></i>, vegetarian <i class="fas fa-leaf"></i>, pescetarian <i class="fas fa-fish"></i> and allergy-advice <i class="fas fa-allergies"></i></span>
                             </div>
                         </div>
                     </div>

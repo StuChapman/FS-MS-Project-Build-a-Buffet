@@ -10546,6 +10546,9 @@ body {
 .text-blue {
     color: #426765;
 }
+.text-lightblue {
+    color: #64a19d;
+}
 .text-white {
     color: white;
 }
@@ -10639,6 +10642,9 @@ body {
     }
     .signup-text, .login-text {
         font-size: calc(12px + (38 - 12) * ((100vw - 300px) / 1620));
+    }
+    .allergy-text {
+        font-size: calc(10px + (32 - 10) * ((100vw - 300px) / 1620)) !important;
     }
     .flex-margin-b {
         margin-bottom: 3.5vh;
