@@ -47,8 +47,23 @@
                                                 <div class="product-text-three mx-auto mb-2 text-blue">
                                                     {{ product.description }}
                                                 </div>
+                                                <div class="allergy-text text-lightblue">
+                                                    {% if product.allergies|slice:"0:1" == '1' %}
+                                                        <i class="fas fa-carrot"></i> vegan 
+                                                    {% endif %}
+                                                    {% if product.allergies|slice:"1:2" == '1' %}
+                                                        <i class="fas fa-leaf"></i> vegetarian 
+                                                    {% endif %}
+                                                    {% if product.allergies|slice:"2:3" == '1' %}
+                                                        <i class="fas fa-fish"></i> pescetarian 
+                                                    {% endif %}
+                                                    {% if product.allergies|slice:"3:4" == '1' %}
+                                                        <i class="fas fa-allergies"></i> allergy advice 
+                                                    {% endif %}
+                                                </div>
                                             {% endif %}
                                         {% endfor %}
+                                        <br>
                                         <div class="text-blue text-xs mb-2">With the option:
                                             {% if basket.option == "selected-one" %}
                                                 {% for option in options %}
