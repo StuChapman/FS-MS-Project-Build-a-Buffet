@@ -56,7 +56,12 @@
                                         {% endif %}
                                     {% endfor %}
                                     <br>
-                                    <div class="text-blue text-xs mb-2">With the option:
+                                    <div class="text-blue text-xs mb-2">
+                                            {% for option in options %}
+                                                {% if option.category|slugify == item.category %}
+                                                    With the option:
+                                                {% endif %}
+                                            {% endfor %}
                                         {% if item.option == "selected-one" %}
                                             {% for option in options %}
                                                 {% if option.category|slugify == item.category %}

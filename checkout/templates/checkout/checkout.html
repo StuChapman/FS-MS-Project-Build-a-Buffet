@@ -64,28 +64,33 @@
                                             {% endif %}
                                         {% endfor %}
                                         <br>
-                                        <div class="text-blue text-xs mb-2">With the option:
-                                            {% if basket.option == "selected-one" %}
-                                                {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">
-                                                        {{ option.option1.title }}
-                                                    </span>
-                                                {% endfor %}
-                                            {% endif %}
-                                            {% if basket.option == "selected-two" %}
-                                                {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">
-                                                        {{ option.option2.title }}
-                                                    </span>
-                                                {% endfor %}
-                                            {% endif %}
-                                            {% if basket.option == "selected-three" %}
-                                                {% for option in options %}
-                                                    <span class="text-blue product-text-two mb-2 bold">
-                                                        {{ option.option3.title }}
-                                                    </span>
-                                                {% endfor %}
-                                            {% endif %}
+                                        <div class="text-blue text-xs mb-2">
+                                            {% for option in options %}
+                                                {% if option.category|slugify == basket.category %}
+                                                    With the option:
+                                                {% endif %}
+                                                {% if basket.option == "selected-one" and option.category|slugify == basket.category %}
+                                                    {% for option in options %}
+                                                        <span class="text-blue product-text-two mb-2 bold">
+                                                            {{ option.option1.title }}
+                                                        </span>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% if basket.option == "selected-two" and option.category|slugify == basket.category %}
+                                                    {% for option in options %}
+                                                        <span class="text-blue product-text-two mb-2 bold">
+                                                            {{ option.option2.title }}
+                                                        </span>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% if basket.option == "selected-three" and option.category|slugify == basket.category %}
+                                                    {% for option in options %}
+                                                        <span class="text-blue product-text-two mb-2 bold">
+                                                            {{ option.option3.title }}
+                                                        </span>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
                                         </div>
                                         <div class="text-blue text-xs mb-4">Number of servings:
                                             <span id="servings" class="text-blue product-text-two mb-2 bold">
