@@ -51,11 +51,12 @@ def basket(request):
             category = product_add_list[0]
             product = product_add_list[1]
             selected = product_add_list[2]
+            productid = product_add_list[3]
 
             """ filter the datasets on the variables from product_add """
             options = options.filter(category__in=categories)
             """ Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html """
-            price = products.get(name=product).price
+            price = products.get(id_no=productid).price
 
             """ check for existing basket(s) with the current cookie value """
             try:

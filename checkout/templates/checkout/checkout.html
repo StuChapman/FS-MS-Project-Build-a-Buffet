@@ -43,7 +43,7 @@
                                             {{ basket.category.title }}: {{ basket.name }}
                                         </div>
                                         {% for product in products %}
-                                            {% if product.name == basket.name %}
+                                            {% if product.name == basket.name and product.category|slugify == basket.category %}
                                                 <div class="product-text-three mx-auto mb-2 text-blue">
                                                     {{ product.description }}
                                                 </div>
