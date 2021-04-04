@@ -105,13 +105,14 @@ def basket(request):
             product_edit_list = product_edit.split(',')
             updated_selected = product_edit_list[2]
             item_number = product_edit_list[3]
+            productid = product_edit_list[4]
 
             """ check for existing basket(s) with the current cookie value """
             try:
                 existing_basket = Basket.objects.get(pk=item_number)
                 product = existing_basket.name
                 category = existing_basket.category
-                price = products.get(name=product).price
+                price = products.get(id_no=productid).price
                 if servings == "":
                     servings = existing_basket.servings
                     total_price = total_price = float(price) * float(servings)
@@ -169,10 +170,13 @@ def edit_basket_item(request):
     if request.GET:
         if 'item_number' in request.GET:
             item_number = request.GET['item_number']
+            item_number_list = item_number.split(',')
+            item_number = item_number_list[0]
+            productid = item_number_list[1]
             category = basket.get(pk=item_number).category
             selected = basket.get(pk=item_number).option
             product = basket.get(pk=item_number).name
-            price = products.get(name=product).price
+            price = products.get(id_no=productid).price
             products = products.filter(name=product)
             image = categories.filter(name=category)
             options = options.filter(category__in=categories)
@@ -211,6 +215,9 @@ def delete_basket_item(request):
         """ check for a delete_item variable from the template """
         if 'delete_item' in request.GET:
             item_number = request.GET['delete_item']
+            item_number_list = item_number.split(',')
+            item_number = item_number_list[0]
+            productid = item_number_list[1]
             this_item = baskets.get(pk=item_number)
             this_item.delete()
             messages.success(request, 'items removed from basket!')
