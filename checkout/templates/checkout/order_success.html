@@ -98,7 +98,7 @@
                                     <div class="row">
                                         <div class="col-6 my-auto">
                                             {% for product in products %}
-                                                {% if product.name == item.name %}
+                                                {% if product.name == item.name  and product.category|slugify == item.category %}
                                                     <div class="text-blue text-xs">
                                                         per serving
                                                     </div>
