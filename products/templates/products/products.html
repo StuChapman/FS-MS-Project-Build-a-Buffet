@@ -66,7 +66,7 @@
                                     {% if range %}
                                         <!-- Credit: https://stackoverflow.com/questions/27771000/django-template-convert-to-string -->
                                         {% if product.range == range and product.category|slugify == category %}
-                                            <div class="px-3 flex-margin-b text-lightblue">
+                                            <div class="px-3 flex-margin-b text-blue">
                                                 <a class="product-text-two" href="{% url 'product_detail' %}?category_product={{ category }},{{ product.name }},selected-one">{{ product.name }}</a>
                                                 <span class="allergy-text">
                                                     {% if product.allergies|slice:"0:1" == '1' %}
@@ -93,7 +93,8 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-                                <hr class="d-none d-xl-block mb-0 ml-0" />
+                                <hr class="mb-0 ml-0" />
+                                <br class="d-none d-xl-block">
                                 <span class="allergy-text text-lightblue">* vegan <i class="fas fa-carrot"></i>, vegetarian <i class="fas fa-leaf"></i>, pescetarian <i class="fas fa-fish"></i> and allergy-advice <i class="fas fa-allergies"></i></span>
                             </div>
                         </div>
