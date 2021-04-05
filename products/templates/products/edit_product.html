@@ -38,7 +38,7 @@
                         <div class="d-flex h-100">
                             <div class="product-container w-100 mt-0 text-center text-xl-left">
                                 {% for product in products %}
-                                    {% if product.category|slugify == category %}
+                                    {% if product.category|slugify == category|slugify|slugify %}
                                         <div class="product-text-header mx-auto flex-margin-b text-blue">
                                             {{ product.name }}
                                         </div>
@@ -58,12 +58,15 @@
                                             {% if product.allergies|slice:"3:4" == '1' %}
                                                 <i class="fas fa-allergies"></i> allergy advice 
                                             {% endif %}
+                                            {% if product.allergies|slice:"4:5" == '1' %}
+                                                <i class="fas fa-mitten"></i> can be served hot
+                                            {% endif %}
                                         </div>
                                     {% endif %}
                                 {% endfor %}
                                 <br>
                                 <div class="text-blue text-xs mb-2">
-                                    {% if option.category|slugify == category %}
+                                    {% if option.category|slugify == category|slugify %}
                                         Choose from the options below...
                                     {% endif %}
                                 </div>
@@ -71,7 +74,7 @@
                                     <div class="col-4">
                                         {% if selected == "selected-one" %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == category %}
+                                                {% if option.category|slugify == category|slugify %}
                                                     <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
                                                         href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-one,{{ item_number }},{{ servings }},{{total_price}}">
                                                         {{ option.option1 }}</a>
@@ -79,7 +82,7 @@
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == category %}
+                                                {% if option.category|slugify == category|slugify %}
                                                     <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
                                                         href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-one,{{ item_number }},{{ servings }},{{total_price}}">
                                                         {{ option.option1 }}</a>
@@ -90,7 +93,7 @@
                                     <div class="col-4">
                                         {% if selected == "selected-two" %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == category %}
+                                                {% if option.category|slugify == category|slugify %}
                                                     <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
                                                         href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-two,{{ item_number }},{{ servings }},{{total_price}}">
                                                         {{ option.option2 }}</a>
@@ -98,7 +101,7 @@
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == category %}
+                                                {% if option.category|slugify == category|slugify %}
                                                     <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
                                                         href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-two,{{ item_number }},{{ servings }},{{total_price}}">
                                                         {{ option.option2 }}</a>
@@ -109,7 +112,7 @@
                                     <div class="col-4">
                                         {% if selected == "selected-three" %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == category %}
+                                                {% if option.category|slugify == category|slugify %}
                                                     <a class="product-selected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
                                                         href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-three,{{ item_number }},{{ servings }},{{total_price}}">
                                                         {{ option.option3 }}</a>
@@ -117,7 +120,7 @@
                                             {% endfor %}
                                         {% else %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == category %}
+                                                {% if option.category|slugify == category|slugify %}
                                                     <a class="product-unselected masthead-button btn btn-primary js-scroll-trigger flex-margin-b" 
                                                         href="{% url 'product_detail' %}?product_edit={{ category }},{{ product }},selected-three,{{ item_number }},{{ servings }},{{total_price}}">
                                                         {{ option.option3 }}</a>
@@ -136,7 +139,7 @@
                                     </div>
                                     <div class="col-4 flex-margin-t">
                                         {% for product in products %}
-                                            {% if product.category|slugify == category %}
+                                            {% if product.category|slugify == category|slugify %}
                                                 <div class="text-blue text-xs">
                                                     per serving
                                                 </div>
@@ -148,7 +151,7 @@
                                     </div>
                                     <div class="col-4 flex-margin-t">
                                         {% for product in products %}
-                                            {% if product.category|slugify == category %}
+                                            {% if product.category|slugify == category|slugify %}
                                                 <div class="text-blue text-xs">
                                                     Total price
                                                 </div>
@@ -163,7 +166,7 @@
                                             Update
                                         </div>
                                         {% for product in products %}
-                                            {% if product.category|slugify == category %}
+                                            {% if product.category|slugify == category|slugify %}
                                                 <form action="{% url 'basket' %}?product_edit={{ category }},{{ product }},{{ selected }},{{ item_number }},{{ product.id_no }}" method="post">
                                                     {% csrf_token %}
                                                     <div>

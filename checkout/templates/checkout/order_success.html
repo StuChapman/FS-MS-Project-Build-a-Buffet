@@ -35,7 +35,7 @@
                                         {{ item.category.title }}: {{ item.name }}
                                     </div>
                                     {% for product in products %}
-                                        {% if product.name == item.name and product.category|slugify == item.category %}
+                                        {% if product.name == item.name and product.category|slugify == item.category|slugify %}
                                             <div class="product-text-three mx-auto mb-2 text-blue">
                                                 {{ product.description }}
                                             </div>
@@ -52,19 +52,22 @@
                                                 {% if product.allergies|slice:"3:4" == '1' %}
                                                     <i class="fas fa-allergies"></i> allergy advice 
                                                 {% endif %}
+                                                {% if product.allergies|slice:"4:5" == '1' %}
+                                                    <i class="fas fa-mitten"></i> can be served hot
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
                                     <br>
                                     <div class="text-blue text-xs mb-2">
                                             {% for option in options %}
-                                                {% if option.category|slugify == item.category %}
+                                                {% if option.category|slugify == item.category|slugify %}
                                                     With the option:
                                                 {% endif %}
                                             {% endfor %}
                                         {% if item.option == "selected-one" %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == item.category %}
+                                                {% if option.category|slugify == item.category|slugify %}
                                                     <span class="text-blue product-text-two mb-2 bold">
                                                         {{ option.option1.title }}
                                                     </span>
@@ -73,7 +76,7 @@
                                         {% endif %}
                                         {% if item.option == "selected-two" %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == item.category %}
+                                                {% if option.category|slugify == item.category|slugify %}
                                                     <span class="text-blue product-text-two mb-2 bold">
                                                         {{ option.option2.title }}
                                                     </span>
@@ -82,7 +85,7 @@
                                         {% endif %}
                                         {% if item.option == "selected-three" %}
                                             {% for option in options %}
-                                                {% if option.category|slugify == item.category %}
+                                                {% if option.category|slugify == item.category|slugify %}
                                                     <span class="text-blue product-text-two mb-2 bold">
                                                         {{ option.option3.title }}
                                                     </span>
@@ -98,7 +101,7 @@
                                     <div class="row">
                                         <div class="col-6 my-auto">
                                             {% for product in products %}
-                                                {% if product.name == item.name  and product.category|slugify == item.category %}
+                                                {% if product.name == item.name  and product.category|slugify == item.category|slugify %}
                                                     <div class="text-blue text-xs">
                                                         per serving
                                                     </div>

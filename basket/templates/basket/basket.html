@@ -32,7 +32,7 @@
                                     {% for basket in baskets %}
                                         <div class="product-text-two mx-auto mb-2 text-blue bold">{{ basket.category.title }}: {{ basket.name }}</div>
                                         {% for product in products %}
-                                            {% if product.name == basket.name and product.category|slugify == basket.category %}
+                                            {% if product.name == basket.name and product.category|slugify == basket.category|slugify %}
                                                 <div class="product-text-three mx-auto mb-2 text-blue">{{ product.description }}</div>
                                                 <div class="allergy-text text-lightblue">
                                                     {% if product.allergies|slice:"0:1" == '1' %}
@@ -47,33 +47,36 @@
                                                     {% if product.allergies|slice:"3:4" == '1' %}
                                                         <i class="fas fa-allergies"></i> allergy advice 
                                                     {% endif %}
+                                                    {% if product.allergies|slice:"4:5" == '1' %}
+                                                        <i class="fas fa-mitten"></i> can be served hot
+                                                    {% endif %}
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
                                         <br>
                                         <div class="text-blue text-xs mb-2">
                                             {% for option in options %}
-                                                {% if option.category|slugify == basket.category %}
+                                                {% if option.category|slugify == basket.category|slugify %}
                                                     With the option:
                                                 {% endif %}
                                             {% endfor %}
                                             {% if basket.option == "selected-one" %}
                                                 {% for option in options %}
-                                                    {% if option.category|slugify == basket.category %}
+                                                    {% if option.category|slugify == basket.category|slugify %}
                                                         <span class="text-blue product-text-two mb-2 bold">{{ option.option1.title }}</span>
                                                     {% endif %}
                                                 {% endfor %}
                                             {% endif %}
                                             {% if basket.option == "selected-two" %}
                                                 {% for option in options %}
-                                                    {% if option.category|slugify == basket.category %}
+                                                    {% if option.category|slugify == basket.category|slugify %}
                                                         <span class="text-blue product-text-two mb-2 bold">{{ option.option2.title }}</span>
                                                     {% endif %}
                                                 {% endfor %}
                                             {% endif %}
                                             {% if basket.option == "selected-three" %}
                                                 {% for option in options %}
-                                                    {% if option.category|slugify == basket.category %}
+                                                    {% if option.category|slugify == basket.category|slugify %}
                                                         <span class="text-blue product-text-two mb-2 bold">{{ option.option3.title }}</span>
                                                     {% endif %}
                                                 {% endfor %}
@@ -85,7 +88,7 @@
                                         <div class="row">
                                             <div class="col-4 my-auto">
                                                 {% for product in products %}
-                                                    {% if product.name == basket.name and product.category|slugify == basket.category %}
+                                                    {% if product.name == basket.name and product.category|slugify == basket.category|slugify %}
                                                         <div class="text-blue text-xs">per serving</div>
                                                         <div class="product-text-two mt-1">£{{ product.price }}</div>
                                                     {% endif %}
@@ -97,7 +100,7 @@
                                             </div>
                                             <div class="col-4 my-auto py-auto">
                                                 {% for product in products %}
-                                                    {% if product.name == basket.name and product.category|slugify == basket.category %}
+                                                    {% if product.name == basket.name and product.category|slugify == basket.category|slugify %}
                                                         <a class="edit-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
                                                             href="{% url 'edit_basket_item' %}?item_number={{ basket.id }},{{ product.id_no }}">
                                                             <i class="fas fa-edit" aria-hidden="true"></i> edit</a>

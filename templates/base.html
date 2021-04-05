@@ -123,7 +123,7 @@
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="all-menus-link">
                                 {% for category in menu %}
-                                    <a href="{% url 'products' %}?category={{ category.name }}" class="dropdown-item">{{ category.name }}</a>
+                                    <a href="{% url 'products' %}?category={{ category.name }}" class="dropdown-item">{{ category.friendly_name }}</a>
                                 {% endfor %}
                             </div>
                         </li>

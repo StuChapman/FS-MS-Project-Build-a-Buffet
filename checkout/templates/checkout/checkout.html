@@ -43,7 +43,7 @@
                                             {{ basket.category.title }}: {{ basket.name }}
                                         </div>
                                         {% for product in products %}
-                                            {% if product.name == basket.name and product.category|slugify == basket.category %}
+                                            {% if product.name == basket.name and product.category|slugify == basket.category|slugify %}
                                                 <div class="product-text-three mx-auto mb-2 text-blue">
                                                     {{ product.description }}
                                                 </div>
@@ -60,30 +60,33 @@
                                                     {% if product.allergies|slice:"3:4" == '1' %}
                                                         <i class="fas fa-allergies"></i> allergy advice 
                                                     {% endif %}
+                                                    {% if product.allergies|slice:"4:5" == '1' %}
+                                                        <i class="fas fa-mitten"></i> can be served hot
+                                                    {% endif %}
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
                                         <br>
                                         <div class="text-blue text-xs mb-2">
                                             {% for option in options %}
-                                                {% if option.category|slugify == basket.category %}
+                                                {% if option.category|slugify == basket.category|slugify %}
                                                     With the option:
                                                 {% endif %}
-                                                {% if basket.option == "selected-one" and option.category|slugify == basket.category %}
+                                                {% if basket.option == "selected-one" and option.category|slugify == basket.category|slugify %}
                                                     {% for option in options %}
                                                         <span class="text-blue product-text-two mb-2 bold">
                                                             {{ option.option1.title }}
                                                         </span>
                                                     {% endfor %}
                                                 {% endif %}
-                                                {% if basket.option == "selected-two" and option.category|slugify == basket.category %}
+                                                {% if basket.option == "selected-two" and option.category|slugify == basket.category|slugify %}
                                                     {% for option in options %}
                                                         <span class="text-blue product-text-two mb-2 bold">
                                                             {{ option.option2.title }}
                                                         </span>
                                                     {% endfor %}
                                                 {% endif %}
-                                                {% if basket.option == "selected-three" and option.category|slugify == basket.category %}
+                                                {% if basket.option == "selected-three" and option.category|slugify == basket.category|slugify %}
                                                     {% for option in options %}
                                                         <span class="text-blue product-text-two mb-2 bold">
                                                             {{ option.option3.title }}
@@ -100,7 +103,7 @@
                                         <div class="row">
                                             <div class="col-6 my-auto">
                                                 {% for product in products %}
-                                                    {% if product.name == basket.name and product.category|slugify == basket.category %}
+                                                    {% if product.name == basket.name and product.category|slugify == basket.category|slugify %}
                                                         <div class="text-blue text-xs">
                                                             per serving
                                                         </div>
