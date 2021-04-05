@@ -93,7 +93,7 @@ def basket(request):
                                 option=selected,
                                 total_price=total_price)
                 basket.save()
-                messages.success(request, 'items added to basket!')
+                messages.success(request, 'item added to basket!')
             baskets = Basket.objects.filter(cookie=cookie)
             baskets = baskets.order_by('-pk')
 
@@ -220,7 +220,7 @@ def delete_basket_item(request):
             productid = item_number_list[1]
             this_item = baskets.get(pk=item_number)
             this_item.delete()
-            messages.success(request, 'items removed from basket!')
+            messages.success(request, 'item removed from basket!')
             basket_key = this_item.cookie
 
     return redirect(reverse('basket_success', args=[basket_key]))
