@@ -19,7 +19,7 @@ var pescGuests;
 var betweenGuests = "";
 var andGuests = "";
 var hotProportion;
-var allegryProportion;
+var allergyProportion;
 
 function startBart() {
     $('#chatbox').html(bartOne);
@@ -106,7 +106,7 @@ function allergyBart(proportion) {
     $('#finishbart').show();
     $('#chatsummary').show();
     $('#finalimgbox').show();
-    allegryProportion = proportion;
+    allergyProportion = proportion;
     $('#chatbox').html(finishBart);
 
     var bartSummary = "A " + eventType + "<br><br>" +
@@ -117,7 +117,15 @@ function allergyBart(proportion) {
                        "Vegetarian: " + parseInt(veggieGuests*1) + "<br>" +
                        "Pescaterian: " + parseInt(pescGuests*1) + "<br><br>" +
                        hotProportion + " hot food in this buffet." + "<br><br>" +
-                       "A " + allegryProportion + " proportion of allergy free food";
+                       "A " + allergyProportion + " proportion of allergy free food";
     console.log(bartSummary)
     $('#chatsummarybox').html(bartSummary);
+    $('#bartholemew_eventType').val(eventType);
+    $('#bartholemew_minGuests').val(minGuests);
+    $('#bartholemew_maxGuests').val(maxGuests);
+    $('#bartholemew_veganGuests').val(veganGuests);
+    $('#bartholemew_veggieGuests').val(veggieGuests);
+    $('#bartholemew_pescGuests').val(pescGuests);
+    $('#bartholemew_hotProportion').val(hotProportion);
+    $('#bartholemew_allergyProportion').val(allergyProportion);
 }

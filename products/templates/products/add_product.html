@@ -57,6 +57,11 @@
                                                 {% if dataset == 'categories' %}
                                                     <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_category_name" id="new_category_name" placeholder="* name">
                                                     <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_friendly_name" id="new_friendly_name" placeholder="* friendly name">
+                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_course" id="new_course" placeholder="range">
+                                                        <option value="standard">main</option>
+                                                        <option value="premium">side</option>
+                                                        <option value="luxury">dessert</option>
+                                                    </select>
                                                     <span>Add image on update view</span>
                                                 {% endif %}
                                                 {% if dataset == 'options' %}

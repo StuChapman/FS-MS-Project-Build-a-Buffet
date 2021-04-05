@@ -105,7 +105,20 @@
                     </div>
                 </div>
             </div>
-            <button class="hidden chat-button btn btn-primary px-3 ml-3" id="finishbart" onclick="return finishbart();" >Finish</button>
+            <div class="unhidden">
+                <form action="{% url 'bartholemew_basket' %}" method="POST" enctype="multipart/form-data" id="bartholemew_form">
+                    {% csrf_token %}
+                    <input type="text" required name="bartholemew_eventType" id="bartholemew_eventType">
+                    <input type="text" required name="bartholemew_minGuests" id="bartholemew_minGuests">
+                    <input type="text" required name="bartholemew_maxGuests" id="bartholemew_maxGuests">
+                    <input type="text" required name="bartholemew_veganGuests" id="bartholemew_veganGuests">
+                    <input type="text" required name="bartholemew_veggieGuests" id="bartholemew_veggieGuests">
+                    <input type="text" required name="bartholemew_pescGuests" id="bartholemew_pescGuests">
+                    <input type="text" required name="bartholemew_hotProportion" id="bartholemew_hotProportion">
+                    <input type="text" required name="bartholemew_allergyProportion" id="bartholemew_allergyProportion">
+                    <button class="chat-button btn btn-primary px-3 ml-3" id="finishbart" onclick="return finishbart();" >Finish</button>
+                </form>
+            </div>
         </div>
     </section>
 

@@ -383,6 +383,7 @@ def add_product(request):
             """ validate the form data """
             validate_new_category_name = request.POST['new_category_name']
             validate_new_friendly_name = request.POST['new_friendly_name']
+            validate_new_course = request.POST['new_course']
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_category_name)):
                 messages.success(request, mark_safe('There was a problem with new_category_name <br> Please try again.'))
                 return redirect(reverse('home'))
@@ -415,9 +416,11 @@ def add_product(request):
 
             name = request.POST['new_category_name']
             friendly_name = request.POST['new_friendly_name']
+            course = request.POST['new_course']
             new_category = Category(name=name,
                                     id_no=next_category_id,
-                                    friendly_name=friendly_name)
+                                    friendly_name=friendly_name,
+                                    course=course)
             new_category.save()
             messages.success(request, f'Succesfully added {new_category.name}')
             return redirect(reverse('refresh_product_admin', args=[next_category_id]))
