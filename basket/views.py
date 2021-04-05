@@ -285,3 +285,25 @@ def basket_success(request, basket_key):
         }
 
     return render(request, 'basket/basket.html', context)
+
+
+def empty_basket(request):
+    """
+    A view to empty the  basket
+    """
+
+    """ check for a basket cookie """
+    context_items = basket_context(request)
+    cookie = context_items['cookie']
+
+    menu = Category.objects.all().order_by('id_no')
+
+    baskets = Basket.objects.filter(cookie=cookie)
+    for basket in baskets:
+        basket.delete()
+
+    context = {
+            'menu': menu,
+        }
+
+    return render(request, 'basket/basket.html', context)

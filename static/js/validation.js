@@ -267,6 +267,26 @@ if (deleteProduct !== null) {
     });
 };
 
+// Handle empty_basket event
+
+var deleteProduct = document.getElementById('empty-basket');
+var allowClick = false
+
+if (deleteProduct !== null) {
+    deleteProduct.addEventListener('click', function(ev) {
+        if (allowClick == false) {
+            ev.preventDefault();
+        }
+
+        if (document.getElementById("empty-basket").text != "ARE YOU SURE?") {
+            document.getElementById("empty-basket").text = "ARE YOU SURE?";
+            $('#empty-basket').css('color', 'black');
+            allowClick = true;
+        }
+
+    });
+};
+
 // Handle new-product-form submit
 
 var newProductForm = document.getElementById('new-product-form');

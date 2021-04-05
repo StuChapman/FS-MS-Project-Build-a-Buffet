@@ -55,9 +55,9 @@
             </div>
             <div class="hidden pl-3" id="guests">
                 <label for="minGuests">Min:</label>
-                <input type="number" id="minguests" name="minguests" min="1" max="1000">
+                <input type="number" id="minguests" name="minguests" min="1" max="1000" value="0">
                 <label for="maxGuests">Max:</label>
-                <input type="number" id="maxguests" name="maxguests" min="1" max="1000">
+                <input type="number" id="maxguests" name="maxguests" min="1" max="1000" value="0">
                 <button onclick="return guestsBart();" class="chat-button btn btn-primary px-3 ml-2" id="guestsbart" >Go</button>
                 <div class="tiptext pr-2">
                     * if you're not sure of the exact number, just put a range, otherwise you can leave the Max box empty.
@@ -67,15 +67,15 @@
                 <div class="row align-vertically text-center w-100">
                     <div class="col-3">
                         <label for="veganGuests">Vegan:</label>
-                        <input type="number" id="veganGuests" name="veganGuests" min="1" max="999">
+                        <input type="number" id="veganGuests" name="veganGuests" min="1" max="999" value="0">
                     </div>
                     <div class="col-3">
                         <label for="veggieGuests">Veggie:</label>
-                        <input type="number" id="veggieGuests" name="veggieGuests" min="1" max="999">
+                        <input type="number" id="veggieGuests" name="veggieGuests" min="1" max="999" value="0">
                     </div>
                     <div class="col-3">
                         <label for="pescGuests">Pesc:</label>
-                        <input type="number" id="pescGuests" name="pescGuests" min="1" max="999">
+                        <input type="number" id="pescGuests" name="pescGuests" min="1" max="999" value="0">
                     </div>
                     <div class="col-3">
                         <button onclick="return dietBart();" class="chat-button btn btn-primary px-3 mr-2" id="dietbart" >Go</button>
@@ -105,18 +105,20 @@
                     </div>
                 </div>
             </div>
-            <div class="unhidden">
+            <div>
                 <form action="{% url 'bartholemew_basket' %}" method="POST" enctype="multipart/form-data" id="bartholemew_form">
                     {% csrf_token %}
-                    <input type="text" required name="bartholemew_eventType" id="bartholemew_eventType">
-                    <input type="text" required name="bartholemew_minGuests" id="bartholemew_minGuests">
-                    <input type="text" required name="bartholemew_maxGuests" id="bartholemew_maxGuests">
-                    <input type="text" required name="bartholemew_veganGuests" id="bartholemew_veganGuests">
-                    <input type="text" required name="bartholemew_veggieGuests" id="bartholemew_veggieGuests">
-                    <input type="text" required name="bartholemew_pescGuests" id="bartholemew_pescGuests">
-                    <input type="text" required name="bartholemew_hotProportion" id="bartholemew_hotProportion">
-                    <input type="text" required name="bartholemew_allergyProportion" id="bartholemew_allergyProportion">
-                    <button class="chat-button btn btn-primary px-3 ml-3" id="finishbart" onclick="return finishbart();" >Finish</button>
+                    <div class="hidden">
+                        <input type="text" required name="bartholemew_eventType" id="bartholemew_eventType">
+                        <input type="text" required name="bartholemew_minGuests" id="bartholemew_minGuests">
+                        <input type="text" required name="bartholemew_maxGuests" id="bartholemew_maxGuests">
+                        <input type="text" required name="bartholemew_veganGuests" id="bartholemew_veganGuests">
+                        <input type="text" required name="bartholemew_veggieGuests" id="bartholemew_veggieGuests">
+                        <input type="text" required name="bartholemew_pescGuests" id="bartholemew_pescGuests">
+                        <input type="text" required name="bartholemew_hotProportion" id="bartholemew_hotProportion">
+                        <input type="text" required name="bartholemew_allergyProportion" id="bartholemew_allergyProportion">
+                    </div>
+                    <button class="hidden chat-button btn btn-primary px-3 ml-3" id="finishbart" onclick="return finishbart();" >Finish</button>
                 </form>
             </div>
         </div>

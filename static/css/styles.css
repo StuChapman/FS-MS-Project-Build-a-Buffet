@@ -10380,7 +10380,7 @@ body {
     opacity: 0.5;
 }
 .delete-button, .edit-button, .checkout-button  {
-    height: 50%;
+    height: 100%;
     width: 90% !important;
     margin: 2px 0;
 }
@@ -10553,7 +10553,7 @@ body {
     color: white;
 }
 
-.bg-blue {
+.bg-blue, .bg-contact {
   background-color: #426765;
   width: 100%;
 }
