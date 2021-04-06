@@ -109,9 +109,15 @@ function allergyBart(proportion) {
     allergyProportion = proportion;
     $('#chatbox').html(finishBart);
 
+    if (minGuests == maxGuests) {
+        maxGuestsText = ""
+    } else {
+        maxGuestsText = maxGuests
+    }
+
     var bartSummary = "A " + eventType + "<br><br>" +
                        "With " + betweenGuests + " " + minGuests + " " + andGuests + 
-                       " " + maxGuests + " guests." + "<br><br>" +
+                       " " + maxGuestsText + " guests." + "<br><br>" +
                        "Dietary requirements are:" + "<br>" +
                        "Vegan: " + parseInt(veganGuests*1) + "<br>" +
                        "Vegetarian: " + parseInt(veggieGuests*1) + "<br>" +

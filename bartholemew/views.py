@@ -91,7 +91,10 @@ def bartholemew_basket(request):
         products_main = [i.id for i in Product.objects.filter(category__course="main")]
         random.shuffle(products_main)
         products_main_shuffled = [Product.objects.get(id=i) for i in products_main]
-        products_main_unspecified = products_main_shuffled[0:bartholemew_unspecified * 3]
+        products_main_unspecified = products_main_shuffled[0: 3]
+        for i in range(bartholemew_unspecified - 1):
+            products_main_unspecified = (products_main_unspecified +
+                                         products_main_shuffled[0: 3])
 
         """ Generate 3 random main courses for vegan guests """
         products_main_vegan = [i.id for i in Product.objects.filter(category__course="main",
@@ -139,9 +142,10 @@ def bartholemew_basket(request):
         products_list_vegan = (products_main_vegan +
                                products_side_vegan +
                                products_dessert_vegan)
-        products_list_full = (products_list_unspecified +
-                              products_list_vegan +
-                              products_hot_food)
+        # products_list_full = (products_list_unspecified +
+        #                       products_list_vegan +
+        #                       products_hot_food)
+        products_list_full = products_main_unspecified
 
         for product in products_list_full:
             category = product.category
@@ -181,17 +185,16 @@ def bartholemew_basket(request):
                 updated_basket.save()
                 existing_basket.delete()
             except ObjectDoesNotExist:
-
                 """ if there is no existing basket, create a new one """
-            total_price = float(price) * float(servings)
+                total_price = float(price) * float(servings)
 
-            basket = Basket(cookie=cookie,
-                            category=category,
-                            name=name,
-                            servings=servings,
-                            option=option,
-                            total_price=total_price)
-            basket.save()
+                basket = Basket(cookie=cookie,
+                                category=category,
+                                name=name,
+                                servings=servings,
+                                option=option,
+                                total_price=total_price)
+                basket.save()
 
     context = {
             'bartholemew_event_type': bartholemew_event_type,
