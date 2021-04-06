@@ -10373,18 +10373,23 @@ body {
     background-color: #426765;
 }
 
-.product-selected, .product-unselected, .delete-button, .edit-button, .checkout-button {
+.product-selected, .product-unselected, .delete-button, .edit-button, .checkout-button, .empty-button {
     text-align: center;
 }
 .product-unselected {
     opacity: 0.5;
 }
-.delete-button, .edit-button, .checkout-button  {
+.delete-button, .edit-button {
     height: 100%;
     width: 90% !important;
     margin: 2px 0;
 }
-.delete-button {
+.checkout-button, .empty-button {
+    height: 100%;
+    width: 90% !important;
+    margin: 2px 0;
+}
+.delete-button, .empty-button {
     background-color: #EA7276 !important;
 }
 .edit-button {
@@ -10467,13 +10472,13 @@ body {
   color: #303F3F;
 }
 
-.product-selected, .product-unselected, .price-button, .delete-button, .edit-button, .checkout-button {
+.product-selected, .product-unselected, .price-button, .delete-button, .edit-button, .checkout-button, .empty-button {
     width: 100%;
 }
 .product-selected:hover, .product-unselected:hover {
     background-color: #639692;
 }
-.delete-button:hover, .edit-button:hover, .checkout-button:hover {
+.delete-button:hover, .edit-button:hover, .checkout-button:hover, .empty-button:hover {
     opacity: 0.7;
 }
 .price-button {
@@ -10486,9 +10491,8 @@ body {
     padding-top: 0.5rem !important;
     padding-bottom: 0.5rem !important;
 }
-.checkout-button {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
+.checkout-button, .empty-button {
+    padding: 1rem !important;
 }
 
 .btn-black:hover {
@@ -10625,7 +10629,7 @@ body {
     .navbar-brand-vis {
         display: none;
     }
-    .product-selected, .product-unselected, .price-button, .delete-button, .edit-button, .checkout-button {
+    .product-selected, .product-unselected, .price-button, .delete-button, .edit-button, .checkout-button, .empty-button {
         font-size: calc(7px + (42 - 7) * ((100vw - 300px) / 1620));
     }
     .product-container {
@@ -10683,7 +10687,7 @@ body {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
     }
-    .delete-button, .edit-button, .checkout-button {
+    .delete-button, .edit-button, .checkout-button, .empty-button {
         font-size: calc(8px + (20 - 8) * ((100vw - 300px) / 1620));
     }
     .projects-section .project-container hr, .products-section .product-container {
@@ -10721,11 +10725,11 @@ body {
     }
 }
 @media (max-width: 443px) {
-    .delete-button, .edit-button, .checkout-button  {
+    .delete-button, .edit-button, .checkout-button, .empty-button  {
         width: 100% !important;
     }
-    .checkout-button {
-        padding: 0.75rem 0 !important;
+    .checkout-button, .empty-button {
+        padding: 0.75rem 0.75rem !important;
     }
 }
 @media (max-width: 990px) {

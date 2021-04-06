@@ -140,36 +140,67 @@
                                             {% csrf_token %}
                                             {% for field in form %}
                                                 {% if field.name != 'image' %}
-                                                    {% if field.name != 'range' %}
+                                                    {% if field.name != 'range' and field.name != 'course' %}
                                                         {{ field | as_crispy_field }}
                                                     {% else %}
-                                                        <div id="div_id_category" class="form-group">
-                                                            <label for="id_category" class=" requiredField">
-                                                                Range<span class="asteriskField">*</span>
-                                                            </label>
-                                                            <div class="">
-                                                                <select name="range" class="select form-control" required id="id_range">
-                                                                    {% if form.range.value == '' %}
-                                                                        <option value="">---------</option>
-                                                                    {% endif %}
-                                                                    {% if form.range.value == 'standard' %}
-                                                                        <option value="standard" selected>{{ form.range.value }}</option>
-                                                                    {% else %}
-                                                                        <option value="standard" >standard</option>
-                                                                    {% endif %}
-                                                                    {% if form.range.value == 'premium' %}
-                                                                        <option value="premium" selected>{{ form.range.value }}</option>
-                                                                    {% else %}
-                                                                        <option value="premium">premium</option>
-                                                                    {% endif %}
-                                                                    {% if form.range.value == 'luxury' %}
-                                                                        <option value="luxury" selected>{{ form.range.value }}</option>
-                                                                    {% else %}
-                                                                        <option value="luxury">luxury</option>
-                                                                    {% endif %}
-                                                                </select>
+                                                        {% if field.name == 'range' %}
+                                                            <div id="div_id_range" class="form-group">
+                                                                <label for="id_range" class=" requiredField">
+                                                                    Range<span class="asteriskField">*</span>
+                                                                </label>
+                                                                <div>
+                                                                    <select name="range" class="select form-control" required id="id_range">
+                                                                        {% if form.range.value == '' %}
+                                                                            <option value="">---------</option>
+                                                                        {% endif %}
+                                                                        {% if form.range.value == 'standard' %}
+                                                                            <option value="standard" selected>{{ form.range.value }}</option>
+                                                                        {% else %}
+                                                                            <option value="standard" >standard</option>
+                                                                        {% endif %}
+                                                                        {% if form.range.value == 'premium' %}
+                                                                            <option value="premium" selected>{{ form.range.value }}</option>
+                                                                        {% else %}
+                                                                            <option value="premium">premium</option>
+                                                                        {% endif %}
+                                                                        {% if form.range.value == 'luxury' %}
+                                                                            <option value="luxury" selected>{{ form.range.value }}</option>
+                                                                        {% else %}
+                                                                            <option value="luxury">luxury</option>
+                                                                        {% endif %}
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        {% endif %}
+                                                        {% if field.name == 'course' %}
+                                                            <div id="div_id_course" class="form-group">
+                                                                <label for="id_course" class=" requiredField">
+                                                                    Course<span class="asteriskField">*</span>
+                                                                </label>
+                                                                <div>
+                                                                    <select name="course" class="select form-control" required id="id_course">
+                                                                        {% if form.course.value == '' %}
+                                                                            <option value="">---------</option>
+                                                                        {% endif %}
+                                                                        {% if form.course.value == 'main' %}
+                                                                            <option value="main" selected>{{ form.course.value }}</option>
+                                                                        {% else %}
+                                                                            <option value="main" >main</option>
+                                                                        {% endif %}
+                                                                        {% if form.course.value == 'side' %}
+                                                                            <option value="side" selected>{{ form.course.value }}</option>
+                                                                        {% else %}
+                                                                            <option value="side">side</option>
+                                                                        {% endif %}
+                                                                        {% if form.course.value == 'dessert' %}
+                                                                            <option value="dessert" selected>{{ form.course.value }}</option>
+                                                                        {% else %}
+                                                                            <option value="dessert">dessert</option>
+                                                                        {% endif %}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
                                                     {% endif %}
                                                 {% else %}
                                                     {{ field }}
