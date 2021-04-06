@@ -135,3 +135,13 @@ function allergyBart(proportion) {
     $('#bartholemew_hotProportion').val(hotProportion);
     $('#bartholemew_allergyProportion').val(allergyProportion);
 }
+
+// Handle form submit
+var form = document.getElementById('bartholemew_form');
+
+form.addEventListener('submit', function(ev) {
+    ev.preventDefault();
+    console.log('finish bart');
+    $('#loading-overlay').fadeToggle(100);
+    form.submit();
+});

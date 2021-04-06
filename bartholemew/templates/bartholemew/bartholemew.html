@@ -118,12 +118,16 @@
                         <input type="text" required name="bartholemew_hotProportion" id="bartholemew_hotProportion">
                         <input type="text" required name="bartholemew_allergyProportion" id="bartholemew_allergyProportion">
                     </div>
-                    <button class="hidden chat-button btn btn-primary px-3 ml-3" id="finishbart">Finish</button>
+                    <button class="hidden chat-button btn btn-primary px-3 ml-3" id="finishbart" >Finish</button>
                 </form>
             </div>
         </div>
     </section>
-
+    <div id="loading-overlay">
+        <div class="loading-image-div">
+            <img class="loading-img" src="{{ MEDIA_URL }}assets/img/bartholemew-build.jpg" alt="bartholemew">
+        </div>
+    </div>
 {% include 'includes/contact.html' %}
 {% endblock %}
 
