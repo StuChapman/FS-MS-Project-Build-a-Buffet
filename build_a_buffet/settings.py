@@ -27,7 +27,7 @@ COOKIE_KEY = 'bartb%031k52t09x4isk#'
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = "DEVELOPMENT"
 
 ALLOWED_HOSTS = ['build-a-buffet.herokuapp.com', 'localhost']
 
@@ -140,17 +140,17 @@ WSGI_APPLICATION = 'build_a_buffet.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+# if 'DATABASE_URL' in os.environ:
+DATABASES = {
+    'default': dj_database_url.parse('postgres://srugacafwgrtfs:4da75ec41adc19570a9e1ab9113ac37073aa1dc453de2bd6bc64afeedeb6c32e@ec2-54-73-68-39.eu-west-1.compute.amazonaws.com:5432/dbbg1e71isq0r7')
+}
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
 
 
 # Password validation

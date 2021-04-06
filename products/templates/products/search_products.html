@@ -34,19 +34,19 @@
                                         <div class ="col-9">
                                             <a class="product-text-two" href="{% url 'product_detail' %}?category_product={{ product.category }},{{ product.name }},selected-one">{{ product.category.friendly_name }}: {{ product.name }}</a>
                                             <span class="allergy-text">
-                                                {% if product.allergies|slice:"0:1" == '1' %}
+                                                {% if product.allergies|slice:"0:1" == 'v' %}
                                                     <i class="fas fa-carrot"></i>
                                                 {% endif %}
-                                                {% if product.allergies|slice:"1:2" == '1' %}
+                                                {% if product.allergies|slice:"1:2" == 'g' %}
                                                     <i class="fas fa-leaf"></i>
                                                 {% endif %}
-                                                {% if product.allergies|slice:"2:3" == '1' %}
+                                                {% if product.allergies|slice:"2:3" == 'p' %}
                                                     <i class="fas fa-fish"></i>
                                                 {% endif %}
-                                                {% if product.allergies|slice:"3:4" == '1' %}
+                                                {% if product.allergies|slice:"3:4" == 'a' %}
                                                     <i class="fas fa-allergies"></i>
                                                 {% endif %}
-                                                {% if product.allergies|slice:"4:5" == '1' %}
+                                                {% if product.allergies|slice:"4:5" == 'h' %}
                                                     <i class="fas fa-mitten"></i>
                                                 {% endif %}
                                             </span>

@@ -35,19 +35,19 @@
                                             {% if product.name == basket.name and product.category|slugify == basket.category|slugify %}
                                                 <div class="product-text-three mx-auto mb-2 text-blue">{{ product.description }}</div>
                                                 <div class="allergy-text text-lightblue">
-                                                    {% if product.allergies|slice:"0:1" == '1' %}
+                                                    {% if product.allergies|slice:"0:1" == 'v' %}
                                                         <i class="fas fa-carrot"></i> vegan 
                                                     {% endif %}
-                                                    {% if product.allergies|slice:"1:2" == '1' %}
+                                                    {% if product.allergies|slice:"1:2" == 'g' %}
                                                         <i class="fas fa-leaf"></i> vegetarian 
                                                     {% endif %}
-                                                    {% if product.allergies|slice:"2:3" == '1' %}
+                                                    {% if product.allergies|slice:"2:3" == 'p' %}
                                                         <i class="fas fa-fish"></i> pescetarian 
                                                     {% endif %}
-                                                    {% if product.allergies|slice:"3:4" == '1' %}
+                                                    {% if product.allergies|slice:"3:4" == 'a' %}
                                                         <i class="fas fa-allergies"></i> allergy advice 
                                                     {% endif %}
-                                                    {% if product.allergies|slice:"4:5" == '1' %}
+                                                    {% if product.allergies|slice:"4:5" == 'h' %}
                                                         <i class="fas fa-mitten"></i> can be served hot
                                                     {% endif %}
                                                 </div>

@@ -112,7 +112,7 @@ def bartholemew_basket(request):
 
         """ Generate 2 random side courses for vegan guests """
         products_side_vegan = [i.id for i in Product.objects.filter(category__course="side",
-                                                                    allergies__startswith="1")]
+                                                                    allergies__startswith="v")]
         random.shuffle(products_side_vegan)
         products_side_vegan_shuffled = [Product.objects.get(id=i) for i in products_side_vegan]
         products_side_vegan = products_side_vegan_shuffled[0:bartholemew_vegan_guests * 2]
@@ -125,7 +125,7 @@ def bartholemew_basket(request):
 
         """ Generate 1 random dessert courses for vegan guests """
         products_dessert_vegan = [i.id for i in Product.objects.filter(category__course="dessert",
-                                                                    allergies__startswith="1")]
+                                                                    allergies__startswith="v")]
         random.shuffle(products_dessert_vegan)
         products_dessert_vegan_shuffled = [Product.objects.get(id=i) for i in products_dessert_vegan]
         products_dessert_vegan = products_dessert_vegan_shuffled[0:bartholemew_vegan_guests * 2]
