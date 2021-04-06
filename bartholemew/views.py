@@ -41,17 +41,20 @@ def bartholemew_basket(request):
 
     if request.POST:
         bartholemew_event_type = request.POST['bartholemew_eventType']
-        bartholemew_min_guests = int(request.POST['bartholemew_minGuests'])
-        bartholemew_max_guests = int(request.POST['bartholemew_maxGuests'])
-        bartholemew_vegan_guests = int(request.POST['bartholemew_veganGuests'])
-        bartholemew_veggie_guests = int(request.POST['bartholemew_veggieGuests'])
-        bartholemew_pesc_guests = int(request.POST['bartholemew_pescGuests'])
+        bartholemew_min_guests = int(float(request.POST['bartholemew_minGuests']))
+        bartholemew_max_guests = int(float(request.POST['bartholemew_maxGuests']))
+        bartholemew_vegan_guests = int(float(request.POST['bartholemew_veganGuests']))
+        bartholemew_veggie_guests = int(float(request.POST['bartholemew_veggieGuests']))
+        bartholemew_pesc_guests = int(float(request.POST['bartholemew_pescGuests']))
         bartholemew_hotProportion = request.POST['bartholemew_hotProportion']
         bartholemew_allergyProportion = request.POST['bartholemew_allergyProportion']
 
         """ Calculate the average number of guests """
-        bartholemew_ave_guests = int((bartholemew_min_guests +
-                                      bartholemew_max_guests) / 2)
+        if bartholemew_max_guests == "":
+            bartholemew_ave_guests = bartholemew_min_guests
+        else:
+            bartholemew_ave_guests = int((bartholemew_min_guests +
+                                        bartholemew_max_guests) / 2)
         bartholemew_nonspec_guests = int(bartholemew_ave_guests -
                                          bartholemew_vegan_guests -
                                          bartholemew_veggie_guests -

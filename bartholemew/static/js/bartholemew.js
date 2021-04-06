@@ -63,7 +63,7 @@ function guestsBart() {
     if (parseInt(maxGuests) == parseInt(minGuests) || maxGuests == "") {
         var eventGuests = "Right, so " + minGuests + " " + guestType + " will be attending.<br>" +
             "Are any of them: vegan, vegetarian or pescatarian?";
-            maxGuests = "";
+            maxGuests = minGuests;
     } else {
          var eventGuests = "Right, so between " + minGuests + " and " + maxGuests + " " + guestType + " will be attending.<br>" +
         "Are any of them: vegan, vegetarian or pescatarian?";
@@ -118,7 +118,7 @@ function allergyBart(proportion) {
                        "Pescaterian: " + parseInt(pescGuests*1) + "<br><br>" +
                        hotProportion + " hot food in this buffet." + "<br><br>" +
                        "A " + allergyProportion + " proportion of allergy free food";
-    console.log(bartSummary)
+
     $('#chatsummarybox').html(bartSummary);
     $('#bartholemew_eventType').val(eventType);
     $('#bartholemew_minGuests').val(minGuests);
