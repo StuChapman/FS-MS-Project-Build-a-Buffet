@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 
 from basket.contexts import basket_context
-from products.models import Product, Category
+from products.models import Product, Category, Options
 from basket.models import Basket
 
 import random
@@ -154,13 +154,17 @@ def bartholemew_basket(request):
             servings = 1
 
             """ Randomise the available option """
-            rnd = random.randint(1, 3)
-            if rnd == 1:
-                option = "selected-one"
-            elif rnd == 2:
-                option = "selected-two"
-            elif rnd == 3:
-                option = "selected-three"
+            try:
+                category_option = Options.objects.get(category=category)
+                rnd = random.randint(1, 3)
+                if rnd == 1:
+                    option = "selected-one"
+                elif rnd == 2:
+                    option = "selected-two"
+                elif rnd == 3:
+                    option = "selected-three"
+            except ObjectDoesNotExist:
+                option = "none"
 
             """ check for existing basket(s) with the current cookie value """
             try:
