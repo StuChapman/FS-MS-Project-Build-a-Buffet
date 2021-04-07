@@ -56,7 +56,7 @@ function eventBart(event) {
 function guestsBart() {
     minGuests = $('#minguests').val();
     maxGuests = $('#maxguests').val();
-    if (parseInt(maxGuests) < parseInt(minGuests) || parseInt(minGuests) == 0 || minGuests == "") {
+    if (parseInt(maxGuests) < parseInt(minGuests) || parseInt(minGuests) == 0 || minGuests == "" || minGuests > 999 || maxGuests > 999) {
         $('#chatbox').html(guestError);
         return;
     } 
@@ -79,6 +79,12 @@ function dietBart() {
     veganGuests = $('#veganGuests').val();
     veggieGuests = $('#veggieGuests').val();
     pescGuests = $('#pescGuests').val();
+
+    if (!isNumerals(veganGuests) || !isNumerals(veggieGuests) || !isNumerals(pescGuests)) {
+        $('#chatbox').html(guestError);
+        return;
+    }
+
     if ((parseInt(veganGuests*1) + parseInt(veggieGuests*1) + parseInt(pescGuests*1)) > parseInt(minGuests*1)) {
         $('#chatbox').html(guestError);
         return;
