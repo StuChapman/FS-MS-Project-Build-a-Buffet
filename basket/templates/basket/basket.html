@@ -128,12 +128,12 @@
                                                     <div class="col-6">
                                                         <a class="empty-button border-solid masthead-button btn btn-primary js-scroll-trigger" id="empty-basket"
                                                             href="{% url 'empty_basket' %}">
-                                                            <i class="fas fa-trash-alt" aria-hidden="true"></i> empty basket</a>
+                                                            <i class="fas fa-trash-alt" aria-hidden="true"></i> empty<br>basket</a>
                                                     </div>
                                                     <div class="col-6">
                                                         <a class="checkout-button border-solid masthead-button btn btn-primary js-scroll-trigger" 
                                                             href="{% url 'checkout' %}?basket_number={{ cookie }}">
-                                                            <i class="fa fa-shopping-basket" aria-hidden="true"></i> checkout</a>
+                                                            <i class="fa fa-shopping-basket" aria-hidden="true"></i><br> checkout</a>
                                                     </div>
                                                 </div>
                                             {% endif %}

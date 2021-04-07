@@ -278,8 +278,8 @@ if (deleteProduct !== null) {
             ev.preventDefault();
         }
 
-        if (document.getElementById("empty-basket").text != "ARE YOU SURE?") {
-            document.getElementById("empty-basket").text = "ARE YOU SURE?";
+        if (document.getElementById("empty-basket").text != "CONFIRM DELETE") {
+            document.getElementById("empty-basket").text = "CONFIRM DELETE";
             $('#empty-basket').css('color', 'black');
             allowClick = true;
         }

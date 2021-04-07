@@ -10492,7 +10492,7 @@ body {
     padding-bottom: 0.5rem !important;
 }
 .checkout-button, .empty-button {
-    padding: 0.25rem 1.25rem !important;
+    padding: 2vh 2vw !important;
 }
 
 .btn-black:hover {
@@ -10717,6 +10717,9 @@ body {
     .bg-red, .bg-green, .bg-grey {
     width: 8rem;
     }
+    .checkout-button, .empty-button {
+        padding: 2vh 5vw !important;
+    }
 }
 
 @media (min-width: 1199px) {
@@ -10728,9 +10731,6 @@ body {
     .delete-button, .edit-button, .checkout-button, .empty-button  {
         width: 100% !important;
     }
-    .checkout-button, .empty-button {
-        padding: 0.75rem 0.75rem !important;
-    }
 }
 @media (max-width: 990px) {
     .product-search-container {
@@ -10740,13 +10740,5 @@ body {
 @media (min-width: 991px) {
     .product-search-input {
         width:90%;
-    }
-}
-@media (min-width: 1024px) {
-    .checkout-button, .empty-button {
-        padding: 0.75rem 2rem !important;
-    }
-    .checkout-button, .empty-button {
-        min-height: 5rem;
     }
 }
