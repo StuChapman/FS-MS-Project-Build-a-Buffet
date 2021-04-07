@@ -220,25 +220,127 @@ def bartholemew_basket(request):
             products_dessert_pesc = (products_dessert_pesc +
                                     products_dessert_shuffled[0: 1])
 
-        products_list_unspecified = (products_main_unspecified +
-                                     products_side_unspecified +
-                                     products_dessert_unspecified)
-        products_list_vegan = (products_main_vegan +
-                               products_side_vegan +
-                               products_dessert_vegan)
-        products_list_veggie = (products_main_veggie +
-                                products_side_veggie +
-                                products_dessert_veggie)
-        products_list_pesc = (products_main_pesc +
-                              products_side_pesc +
-                              products_dessert_pesc)
-        products_list_full = (products_list_unspecified +
-                              products_list_vegan +
-                              products_list_veggie +
-                              products_list_pesc +
-                              products_hot_food)
+        products_list_main = (products_main_unspecified +
+                                     products_main_vegan +
+                                     products_main_veggie +
+                                     products_main_pesc +
+                                     products_hot_food)
+        products_list_side = (products_side_unspecified +
+                                     products_side_vegan +
+                                     products_side_veggie +
+                                     products_side_pesc)
+        products_list_dessert = (products_dessert_unspecified +
+                                     products_dessert_vegan +
+                                     products_dessert_veggie +
+                                     products_dessert_pesc)
 
-        for product in products_list_full:
+        for product in products_list_dessert:
+            category = product.category
+            name = product.name
+            price = product.price
+            servings = 1
+
+            """ Randomise the available option """
+            try:
+                category_option = Options.objects.get(category=category)
+                rnd = random.randint(1, 3)
+                if rnd == 1:
+                    option = "selected-one"
+                elif rnd == 2:
+                    option = "selected-two"
+                elif rnd == 3:
+                    option = "selected-three"
+            except ObjectDoesNotExist:
+                option = "none"
+
+            """ check for existing basket(s) with the current cookie value """
+            try:
+                existing_basket = Basket.objects.get(cookie=cookie,
+                                                     category=category,
+                                                     name=product,
+                                                     option=option)
+                existing_servings = existing_basket.servings
+
+                """ add the new servings variable to the existing """
+                updated_servings = existing_servings + int(servings)
+
+                total_price = float(price) * float(updated_servings)
+
+                """ save the updated basket and delete the existing """
+                updated_basket = Basket(cookie=cookie,
+                                        category=category,
+                                        name=name,
+                                        servings=updated_servings,
+                                        option=option,
+                                        total_price=total_price)
+                updated_basket.save()
+                existing_basket.delete()
+            except ObjectDoesNotExist:
+                """ if there is no existing basket, create a new one """
+                total_price = float(price) * float(servings)
+
+                basket = Basket(cookie=cookie,
+                                category=category,
+                                name=name,
+                                servings=servings,
+                                option=option,
+                                total_price=total_price)
+                basket.save()
+
+        for product in products_list_side:
+            category = product.category
+            name = product.name
+            price = product.price
+            servings = 1
+
+            """ Randomise the available option """
+            try:
+                category_option = Options.objects.get(category=category)
+                rnd = random.randint(1, 3)
+                if rnd == 1:
+                    option = "selected-one"
+                elif rnd == 2:
+                    option = "selected-two"
+                elif rnd == 3:
+                    option = "selected-three"
+            except ObjectDoesNotExist:
+                option = "none"
+
+            """ check for existing basket(s) with the current cookie value """
+            try:
+                existing_basket = Basket.objects.get(cookie=cookie,
+                                                     category=category,
+                                                     name=product,
+                                                     option=option)
+                existing_servings = existing_basket.servings
+
+                """ add the new servings variable to the existing """
+                updated_servings = existing_servings + int(servings)
+
+                total_price = float(price) * float(updated_servings)
+
+                """ save the updated basket and delete the existing """
+                updated_basket = Basket(cookie=cookie,
+                                        category=category,
+                                        name=name,
+                                        servings=updated_servings,
+                                        option=option,
+                                        total_price=total_price)
+                updated_basket.save()
+                existing_basket.delete()
+            except ObjectDoesNotExist:
+                """ if there is no existing basket, create a new one """
+                total_price = float(price) * float(servings)
+
+                basket = Basket(cookie=cookie,
+                                category=category,
+                                name=name,
+                                servings=servings,
+                                option=option,
+                                total_price=total_price)
+                basket.save()
+
+        for product in products_list_main:
             category = product.category
             name = product.name
             price = product.price
@@ -293,7 +395,9 @@ def bartholemew_basket(request):
 
     context = {
             'bartholemew_event_type': bartholemew_event_type,
-            'products_list_full': products_list_full,
+            'products_list_main': products_list_main,
+            'products_list_side': products_list_side,
+            'products_list_dessert': products_list_dessert,
             'menu': menu,
         }
 

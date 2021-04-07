@@ -27,7 +27,64 @@
                     <div class="h-100 project">
                         <div class="d-flex h-100">
                             <div class="product-container w-100 mt-3 text-xl-left">
-                                {% for product in products_list_full %}
+                                <p class="product-text-two mt-2 mb-1 mx-auto text-center text-blue">Mains</p>
+                                {% for product in products_list_main %}
+                                    <div class="mx-auto flex-margin-b text-blue row">
+                                        <div class ="col-9">
+                                            <a class="product-text-two" href="{% url 'product_detail' %}?category_product={{ product.category }},{{ product.name }},selected-one">{{ product.category.friendly_name }}: {{ product.name }}</a>
+                                            <span class="allergy-text">
+                                                {% if product.allergies|slice:"0:1" == 'v' %}
+                                                    <i class="fas fa-carrot"></i>
+                                                {% endif %}
+                                                {% if product.allergies|slice:"1:2" == 'g' %}
+                                                    <i class="fas fa-leaf"></i>
+                                                {% endif %}
+                                                {% if product.allergies|slice:"2:3" == 'p' %}
+                                                    <i class="fas fa-fish"></i>
+                                                {% endif %}
+                                                {% if product.allergies|slice:"3:4" == 'a' %}
+                                                    <i class="fas fa-allergies"></i>
+                                                {% endif %}
+                                                {% if product.allergies|slice:"4:5" == 'h' %}
+                                                    <i class="fas fa-mitten"></i>
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                        <div class ="col-3">
+                                            <span class="product-text-two float-right">£{{ product.price }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <p class="product-text-two mt-2 mb-1 mx-auto text-center text-blue">Sides</p>
+                                {% for product in products_list_side %}
+                                    <div class="mx-auto flex-margin-b text-blue row">
+                                        <div class ="col-9">
+                                            <a class="product-text-two" href="{% url 'product_detail' %}?category_product={{ product.category }},{{ product.name }},selected-one">{{ product.category.friendly_name }}: {{ product.name }}</a>
+                                            <span class="allergy-text">
+                                                {% if product.allergies|slice:"0:1" == 'v' %}
+                                                    <i class="fas fa-carrot"></i>
+                                                {% endif %}
+                                                {% if product.allergies|slice:"1:2" == 'g' %}
+                                                    <i class="fas fa-leaf"></i>
+                                                {% endif %}
+                                                {% if product.allergies|slice:"2:3" == 'p' %}
+                                                    <i class="fas fa-fish"></i>
+                                                {% endif %}
+                                                {% if product.allergies|slice:"3:4" == 'a' %}
+                                                    <i class="fas fa-allergies"></i>
+                                                {% endif %}
+                                                {% if product.allergies|slice:"4:5" == 'h' %}
+                                                    <i class="fas fa-mitten"></i>
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                        <div class ="col-3">
+                                            <span class="product-text-two float-right">£{{ product.price }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <p class="product-text-two mt-2 mb-1 mx-auto text-center text-blue">Desserts</p>
+                                {% for product in products_list_dessert %}
                                     <div class="mx-auto flex-margin-b text-blue row">
                                         <div class ="col-9">
                                             <a class="product-text-two" href="{% url 'product_detail' %}?category_product={{ product.category }},{{ product.name }},selected-one">{{ product.category.friendly_name }}: {{ product.name }}</a>
