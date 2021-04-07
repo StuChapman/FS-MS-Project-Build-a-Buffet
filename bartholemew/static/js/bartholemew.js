@@ -147,7 +147,8 @@ var form = document.getElementById('bartholemew_form');
 
 form.addEventListener('submit', function(ev) {
     ev.preventDefault();
-    console.log('finish bart');
-    $('#loading-overlay').fadeToggle(100);
+    $('#chatboxcont').hide();
+    $('#chatresponsebox').hide();
+    $('#buildimgbox').show();
     form.submit();
 });

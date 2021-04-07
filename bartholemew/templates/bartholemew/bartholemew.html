@@ -18,7 +18,10 @@
     <body onload="createCookie()"></body>
     <section class="products-section">
         <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Build-a-Buffet</h1>
-        <div class="chatbox-container row px-3 mx-auto">
+        <div class="hidden buildimgbox mb-1 px-0 mx-lg-5 px-lg-5 row align-center" id="buildimgbox">
+            <img class="build-image mx-auto col-12" src="{{ MEDIA_URL }}assets/img/bartholemew-build.jpg" alt="robochef image" />
+        </div>
+        <div class="chatbox-container row px-3 mx-auto" id="chatboxcont">
             <div class="chatboxdiv">
                 <div class="chatbox text-blue px-4 py-4" id="chatbox">
                     Hi! I’m Bartholemew, Build-A-Buffet’s resident robo-chef.
@@ -43,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="chatresponsebox">
+        <div class="chatresponsebox" id="chatresponsebox">
             <button class="chat-button btn btn-primary px-3 ml-3" id="startbart" onclick="return startBart();" >Start</button>
             <div class="hidden" id="event">
                 <div class="pl-3">
@@ -123,11 +126,6 @@
             </div>
         </div>
     </section>
-    <div id="loading-overlay">
-        <div class="loading-image-div">
-            <img class="loading-img" src="{{ MEDIA_URL }}assets/img/bartholemew-build.jpg" alt="bartholemew">
-        </div>
-    </div>
 {% include 'includes/contact.html' %}
 {% endblock %}
 
