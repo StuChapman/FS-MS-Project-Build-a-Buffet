@@ -21,7 +21,10 @@
     <section class="products-section bg-light" id="products">
         <div class="container">
             <!-- Checkout One Row-->
-            <div class="row justify-content-center no-gutters">
+            <div class="hidden mb-1 px-0 mx-lg-5 px-lg-5 row" id="imagepay">
+                <img class="loading-img mx-auto col-12" src="{{ MEDIA_URL }}assets/img/bartholemew-pay.jpg" alt="bartholemew">
+            </div>
+            <div class="row justify-content-center no-gutters" id ="boxcheckout">
                 <div class="col-xl-12">
                     <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Checkout</h1>
                 </div>
@@ -212,11 +215,6 @@
             </div>
         </div>
     </section>
-    <div id="loading-overlay">
-        <div class="loading-image-div">
-            <img class="loading-img" src="{{ MEDIA_URL }}assets/img/bartholemew-pay.jpg" alt="bartholemew">
-        </div>
-    </div>
 {% include 'includes/contact.html' %}
 {% endblock %}
 

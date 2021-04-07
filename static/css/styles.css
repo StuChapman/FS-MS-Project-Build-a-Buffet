@@ -10492,7 +10492,7 @@ body {
     padding-bottom: 0.5rem !important;
 }
 .checkout-button, .empty-button {
-    padding: 1rem !important;
+    padding: 0.25rem 1.25rem !important;
 }
 
 .btn-black:hover {
@@ -10740,5 +10740,13 @@ body {
 @media (min-width: 991px) {
     .product-search-input {
         width:90%;
+    }
+}
+@media (min-width: 1024px) {
+    .checkout-button, .empty-button {
+        padding: 0.75rem 2rem !important;
+    }
+    .checkout-button, .empty-button {
+        min-height: 5rem;
     }
 }
