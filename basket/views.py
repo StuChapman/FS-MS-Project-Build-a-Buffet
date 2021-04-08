@@ -55,7 +55,8 @@ def basket(request):
 
             """ filter the datasets on the variables from product_add """
             options = options.filter(category__in=categories)
-            """ Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html """
+            # Credit: http://morozov.ca/
+            # tip-how-to-get-a-single-objects-value-with-django-orm.html """
             price = products.get(id_no=productid).price
 
             """ check for existing basket(s) with the current cookie value """
@@ -82,7 +83,9 @@ def basket(request):
                 messages.success(request, 'item quantity increased!')
                 existing_basket.delete()
 
-            except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
+            except ObjectDoesNotExist:
+                # Credit: https://stackoverflow.com/questions/
+                # 12572741/get-single-record-from-database-django
 
                 """ if there is no existing basket, create a new one """
                 total_price = float(price) * float(servings)
@@ -121,7 +124,8 @@ def basket(request):
 
                 """ filter the datasets on the variables from product_add """
                 options = options.filter(category__in=categories)
-                # Credit: http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html
+                # Credit: http://morozov.ca/
+                # tip-how-to-get-a-single-objects-value-with-django-orm.html
 
                 """ save the updated basket and delete the existing """
                 updated_basket = Basket(cookie=cookie,
@@ -134,7 +138,9 @@ def basket(request):
                 messages.success(request, 'basket updated!')
                 existing_basket.delete()
 
-            except ObjectDoesNotExist:  # Credit: https://stackoverflow.com/questions/12572741/get-single-record-from-database-django
+            except ObjectDoesNotExist:
+                # Credit: https://stackoverflow.com/questions/
+                # 12572741/get-single-record-from-database-django
                 return redirect(reverse('basket_success', args=[cookie]))
     basket_key = cookie
     return redirect(reverse('basket_success', args=[basket_key]))
@@ -183,7 +189,8 @@ def edit_basket_item(request):
             servings = basket.get(pk=item_number).servings
             servings_plusten = float(servings) + 10
             total_price = float(servings) * float(price)
-            # Credit: https://tutorialdeep.com/knowhow/limit-float-to-two-decimal-places-python/
+            # Credit: https://tutorialdeep.com/knowhow/
+            # limit-float-to-two-decimal-places-python/
             total_price = format(float(total_price), '.2f')
 
     context = {
@@ -217,7 +224,6 @@ def delete_basket_item(request):
             item_number = request.GET['delete_item']
             item_number_list = item_number.split(',')
             item_number = item_number_list[0]
-            productid = item_number_list[1]
             this_item = baskets.get(pk=item_number)
             this_item.delete()
             messages.success(request, 'item removed from basket!')
@@ -263,11 +269,14 @@ def basket_success(request, basket_key):
         category = this_basket.category
         basket_key = this_basket.cookie
 
-    # Credit: https://stackoverflow.com/questions/42132091/using-aggregation-api-django
+    # Credit: https://stackoverflow.com/questions/
+    # 42132091/using-aggregation-api-django
     basket_total = Basket.objects.filter(cookie=basket_key).aggregate(Sum('total_price'))
     baskets = Basket.objects.filter(cookie=basket_key)
-    # Credit: https://stackoverflow.com/questions/8786175/django-order-by-on-queryset-objects
-    # Credit: https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending
+    # Credit: https://stackoverflow.com/questions/8786175/
+    # django-order-by-on-queryset-objects
+    # Credit: https://stackoverflow.com/questions/9834038
+    # /django-order-by-query-set-ascending-and-descending
     baskets = baskets.order_by('-pk')
 
     context = {
