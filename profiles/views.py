@@ -45,16 +45,20 @@ def profile(request):
         if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_default_postcode)):
             messages.success(request, mark_safe('There was a problem with  default_postcode <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match("^[a-zA-Z ]+$",  ''.join(validate_default_town_or_city)):
+        if not re.match("^[a-zA-Z ]+$",  ''
+                        .join(validate_default_town_or_city)):
             messages.success(request, mark_safe('There was a problem with  default_town_or_city<br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_default_street_address1)):
+        if not re.match("^[a-zA-Z0-9 ]+$", ''
+                        .join(validate_default_street_address1)):
             messages.success(request, mark_safe('There was a problem with  default_street_address1 <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_default_street_address2) + "a"):
+        if not re.match("^[a-zA-Z0-9 ]+$", ''
+                        .join(validate_default_street_address2) + "a"):
             messages.success(request, mark_safe('There was a problem with  default_street_address2 <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match("^[a-zA-Z ]+$", ''.join(validate_default_county) + "a"):
+        if not re.match("^[a-zA-Z ]+$", ''
+                        .join(validate_default_county) + "a"):
             messages.success(request, mark_safe('There was a problem with  default_county <br> Please try again.'))
             return redirect(reverse('home'))
 
@@ -74,8 +78,10 @@ def profile(request):
     x = -1
     for order in orders:
         x = x + 1
-        # Credit: https://stackoverflow.com/questions/5123839/fastest-way-to-get-the-first-object-from-a-queryset-in-django
-        order_number = Order.objects.filter(customer_name=profile)[x].order_number
+        # Credit: https://stackoverflow.com/questions/5123839/
+        # fastest-way-to-get-the-first-object-from-a-queryset-in-django
+        order_number = (Order.objects.filter(customer_name=profile)[x]
+                        .order_number)
         order_items = Order_items.objects.filter(order_number=order_number)
         items = items | order_items
     orders = orders.order_by('-date')
@@ -100,7 +106,7 @@ def order_history(request, order_number):
     order = get_object_or_404(Order, customer_name=profile)
 
     messages.info(request, (
-        f'This is a past confirmation for order number {order_number}. '
+        f'This is a past confirmation for order number {order_number}.'
         'A confirmation email was sent on the order date.'
     ))
 
