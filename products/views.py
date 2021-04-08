@@ -417,7 +417,7 @@ def add_product(request):
             name = request.POST['new_category_name']
             friendly_name = request.POST['new_friendly_name']
             course = request.POST['new_course']
-            new_category = Category(name=name,
+            new_category = Category(name=name.lower(),
                                     id_no=next_category_id,
                                     friendly_name=friendly_name,
                                     course=course)
