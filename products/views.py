@@ -192,21 +192,28 @@ def product_admin(request):
 
                 """ determine dataset to return """
                 if dataset == 'products':
-                    queries = Q(name__icontains=query) | Q(description__icontains=query)
+                    queries = (Q(name__icontains=query) |
+                               Q(description__icontains=query))
                     products = Product.objects.all()
-                    return_query = products.filter(queries).order_by('id_no').first()
+                    return_query = (products.filter(queries)
+                                    .order_by('id_no').first())
                     return_query_length = products.filter(queries).count()
                     form = ProductAdminForm(instance=return_query)
                 elif dataset == 'options':
-                    queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
+                    queries = (Q(category__name__icontains=query) |
+                               Q(option2__icontains=query) |
+                               Q(option3__icontains=query))
                     options = Options.objects.all()
-                    return_query = options.filter(queries).order_by('id_no').first()
+                    return_query = (options.filter(queries).
+                                    order_by('id_no').first())
                     return_query_length = options.filter(queries).count()
                     form = OptionsAdminForm(instance=return_query)
                 elif dataset == 'categories':
-                    queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
+                    queries = (Q(name__icontains=query) |
+                               Q(friendly_name__icontains=query))
                     categories = Category.objects.all()
-                    return_query = categories.filter(queries).order_by('id_no').first()
+                    return_query = (categories.filter(queries)
+                                    .order_by('id_no').first())
                     return_query_length = categories.filter(queries).count()
                     form = CategoryAdminForm(instance=return_query)
 
@@ -258,7 +265,8 @@ def update_product(request, form_id):
                 return redirect(reverse('home'))
 
             product = get_object_or_404(Product, id_no=form_id)
-            form = ProductAdminForm(request.POST, request.FILES, instance=product)
+            form = (ProductAdminForm(request.POST,
+                                     request.FILES, instance=product))
             item = 'product'
         if form_id[0:3] == 'opt':
 
@@ -277,7 +285,8 @@ def update_product(request, form_id):
                 return redirect(reverse('home'))
 
             option = get_object_or_404(Options, id_no=form_id)
-            form = OptionsAdminForm(request.POST, request.FILES, instance=option)
+            form = OptionsAdminForm(request.POST,
+                                    request.FILES, instance=option)
             item = 'option'
         if form_id[0:3] == 'cat':
 
@@ -292,7 +301,8 @@ def update_product(request, form_id):
                 return redirect(reverse('home'))
 
             category = get_object_or_404(Category, id_no=form_id)
-            form = CategoryAdminForm(request.POST, request.FILES, instance=category)
+            form = CategoryAdminForm(request.POST,
+                                     request.FILES, instance=category)
             item = 'category'
         if form.is_valid():
             form.save()
@@ -303,7 +313,7 @@ def update_product(request, form_id):
             return redirect(reverse('refresh_product_admin', args=[form_id]))
     else:
         form = ProductAdminForm(instance=product)
-        messages.success(request, f'You are editing {product.name}')
+        messages.success(request, f'You are editing {product}')
 
     context = {
         'form': form,
@@ -343,10 +353,12 @@ def add_product(request):
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_name)):
                 messages.success(request, mark_safe('There was a problem with new_name <br> Please try again.'))
                 return redirect(reverse('home'))
-            if not re.match("^[a-zA-Z, ]+$", ''.join(validate_new_description)):
+            if not re.match("^[a-zA-Z, ]+$", ''
+                            .join(validate_new_description)):
                 messages.success(request, mark_safe('There was a problem with new_description <br> Please try again.'))
                 return redirect(reverse('home'))
-            if not re.match(r"^[0-9]+(\.[0-9]{2}$)?", ''.join(validate_new_price)):
+            if not re.match(r"^[0-9]+(\.[0-9]{2}$)?", ''
+                            .join(validate_new_price)):
                 messages.success(request, mark_safe('There was a problem with new_price <br> Please try again.'))
                 return redirect(reverse('home'))
 
@@ -376,23 +388,26 @@ def add_product(request):
                                   allergies=allergies)
             new_product.save()
             messages.success(request, f'Succesfully added {new_product.name}')
-            return redirect(reverse('refresh_product_admin', args=[next_product_id]))
+            return redirect(reverse('refresh_product_admin',
+                                    args=[next_product_id]))
 
         if dataset == 'categories':
 
             """ validate the form data """
             validate_new_category_name = request.POST['new_category_name']
             validate_new_friendly_name = request.POST['new_friendly_name']
-            validate_new_course = request.POST['new_course']
-            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_category_name)):
+            if not re.match("^[a-zA-Z ]+$", ''
+                            .join(validate_new_category_name)):
                 messages.success(request, mark_safe('There was a problem with new_category_name <br> Please try again.'))
                 return redirect(reverse('home'))
-            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_friendly_name)):
+            if not re.match("^[a-zA-Z ]+$", ''
+                            .join(validate_new_friendly_name)):
                 messages.success(request, mark_safe('There was a problem with new_friendly_name <br> Please try again.'))
                 return redirect(reverse('home'))
 
             """ check if the category exists """
-            category_exists = categories.filter(name=validate_new_category_name.lower().strip())
+            category_exists = (categories.filter
+                               (name=validate_new_category_name.lower().strip()))
             if category_exists:
                 messages.success(request, f'Category: {validate_new_category_name.lower()} already exists')
                 context = {
@@ -423,7 +438,8 @@ def add_product(request):
                                     course=course)
             new_category.save()
             messages.success(request, f'Succesfully added {new_category.name}')
-            return redirect(reverse('refresh_product_admin', args=[next_category_id]))
+            return redirect(reverse('refresh_product_admin',
+                                    args=[next_category_id]))
 
         if dataset == 'options':
 
@@ -452,7 +468,8 @@ def add_product(request):
             else:
                 next_option_id = "opt" + str(next_option_id)
 
-            category = Category.objects.get(name=request.POST['new_option_category'])
+            category = (Category.objects.get(name=request.
+                                             POST['new_option_category']))
             option1 = request.POST['new_option_one']
             option2 = request.POST['new_option_two']
             option3 = request.POST['new_option_three']
@@ -463,7 +480,8 @@ def add_product(request):
                                  option3=option3)
             new_option.save()
             messages.success(request, f'Succesfully added {new_option.category}')
-            return redirect(reverse('refresh_product_admin', args=[next_option_id]))
+            return redirect(reverse('refresh_product_admin',
+                                    args=[next_option_id]))
 
     context = {
         'categories': categories,
@@ -542,7 +560,8 @@ def refresh_product_admin(request, form_id):
     if form_id[0:3] == "pro":
         query = get_object_or_404(Product, id_no=form_id)
         return_query_length = Product.objects.all().count()
-        # Credit: https://www.c-sharpcorner.com/article/how-to-get-the-last-n-characters-of-a-string-in-python/
+        # Credit: https://www.c-sharpcorner.com/article/
+        # how-to-get-the-last-n-characters-of-a-string-in-python/
         return_query_number = int(form_id[-3::] * 1)
         form = ProductAdminForm(instance=query)
         dataset = 'products'
@@ -595,19 +614,25 @@ def next_product(request):
             query = this_product_list[3]
             """ determine dataset to return """
             if dataset == 'products':
-                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                queries = (Q(name__icontains=query) |
+                           Q(description__icontains=query))
                 products = Product.objects.all().order_by('id_no')
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
-                queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
+                queries = (Q(category__name__icontains=query) |
+                           Q(option2__icontains=query) |
+                           Q(option3__icontains=query))
                 products = Options.objects.all().order_by('id_no')
-                return_query = products.filter(queries)[return_query_number - 1]
+                return_query = (products.filter(queries)
+                                [return_query_number - 1])
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
-                queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
+                queries = (Q(name__icontains=query) |
+                           Q(friendly_name__icontains=query))
                 products = Category.objects.all().order_by('id_no')
-                return_query = products.filter(queries)[return_query_number - 1]
+                return_query = (products.filter(queries)
+                                [return_query_number - 1])
                 form = CategoryAdminForm(instance=return_query)
 
     else:
@@ -647,17 +672,23 @@ def prev_product(request):
             query = this_product_list[3]
             """ determine dataset to return """
             if dataset == 'products':
-                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                queries = (Q(name__icontains=query) |
+                           Q(description__icontains=query))
                 products = Product.objects.all().order_by('id_no')
-                return_query = products.filter(queries)[return_query_number - 1]
+                return_query = (products.filter(queries)
+                                [return_query_number - 1])
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
-                queries = Q(category__name__icontains=query) | Q(option2__icontains=query) | Q(option3__icontains=query)
+                queries = (Q(category__name__icontains=query) |
+                           Q(option2__icontains=query) |
+                           Q(option3__icontains=query))
                 products = Options.objects.all().order_by('id_no')
-                return_query = products.filter(queries)[return_query_number - 1]
+                return_query = (products.filter(queries)
+                                [return_query_number - 1])
                 form = OptionsAdminForm(instance=return_query)
             elif dataset == 'categories':
-                queries = Q(name__icontains=query) | Q(friendly_name__icontains=query)
+                queries = (Q(name__icontains=query) |
+                           Q(friendly_name__icontains=query))
                 products = Category.objects.all().order_by('id_no')
                 return_query = products.filter(queries)[return_query_number - 1]
                 form = CategoryAdminForm(instance=return_query)
@@ -700,9 +731,12 @@ def search_products(request):
                         'product_results': product_results,
                         'menu': menu,
                     }
-                return render(request, 'products/search_products.html', context)
+                return render(request, 'products/search_products.html',
+                              context)
 
-            queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query)
+            queries = (Q(name__icontains=query) |
+                       Q(description__icontains=query) |
+                       Q(category__name__icontains=query))
             products = Product.objects.all()
             product_results = products.filter(queries)
 
