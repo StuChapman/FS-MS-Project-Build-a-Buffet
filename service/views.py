@@ -33,7 +33,8 @@ def service(request):
         if not re.match("^[a-zA-Z ]+$", ''.join(validate_name)):
             messages.success(request, mark_safe('There was a problem with name <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", ''.join(validate_email)):
+        if not re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", ''
+                        .join(validate_email)):
             messages.success(request, mark_safe('There was a problem with email <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[0-9]+$", ''.join(validate_question)):
