@@ -149,6 +149,6 @@ form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     $('#chatboxcont').hide();
     $('#chatresponsebox').hide();
-    $('#buildimgbox').show();
+    $('#imagepay').show();
     form.submit();
 });

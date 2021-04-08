@@ -28,10 +28,6 @@
     font-size: calc(8px + (18 - 8) * ((100vw - 300px) / 1620));
 }
 
-#buildimgbox {
-    width: 95vw;
-}
-
 @media screen and (orientation: landscape){
     .chatboxdiv, .chatsummaryhead {
         padding-top: 5vh;
@@ -52,17 +48,6 @@
     .chatbox-container {
         width: 75vw;
     }
-    .build-image {
-        width: 100%;
-    }
-    .buildimgdiv {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-    .buildimgdivsml {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
 }
 @media screen and (orientation: portrait){
     .chatbox {
@@ -77,13 +62,6 @@
     }
     .chatbox-container {
         width: 95vw;
-    }
-    .build-image {
-        width: 90%;
-    }
-    .buildimgdiv {
-        flex: 0 0 100%;
-        max-width: 100%;
     }
 }
 @media (min-width: 767px) {
