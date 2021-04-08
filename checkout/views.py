@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, reverse
+from django.shortcuts import get_object_or_404, HttpResponse
 from django.contrib import messages
 from django.conf import settings
 
@@ -39,7 +40,8 @@ def checkout(request):
     products = Product.objects.all()
     options = Options.objects.all()
 
-    # Attempt to prefill the form with any info the user maintains in their profile
+    # Attempt to prefill the form with any
+    # info the user maintains in their profile
     if request.user.is_authenticated:
         try:
             profile = UserProfile.objects.get(user=request.user)
@@ -131,7 +133,8 @@ def create_order(request):
         if not re.match("^[a-zA-Z ]+$", ''.join(validate_full_name)):
             messages.success(request, mark_safe('There was a problem with full_name <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", ''.join(validate_email)):
+        if not re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$",
+                        ''.join(validate_email)):
             messages.success(request, mark_safe('There was a problem with email <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[0-9]+$", ''.join(validate_phone_number)):
@@ -149,7 +152,8 @@ def create_order(request):
         if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_street_address1)):
             messages.success(request, mark_safe('There was a problem with street_address1 <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_street_address2) + "a"):
+        if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_street_address2)
+                        + "a"):
             messages.success(request, mark_safe('There was a problem with street_address2 <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[a-zA-Z ]+$", ''.join(validate_county) + "a"):
@@ -178,13 +182,16 @@ def create_order(request):
                 profile.default_country = request.POST['country']
                 profile.default_postcode = request.POST['postcode']
                 profile.default_town_or_city = request.POST['town_or_city']
-                profile.default_street_address1 = request.POST['street_address1']
-                profile.default_street_address2 = request.POST['street_address2']
+                profile.default_street_address1 = (request.
+                                                   POST['street_address1'])
+                profile.default_street_address2 = (request.
+                                                   POST['street_address2'])
                 profile.default_county = request.POST['county']
                 profile.save()
 
         try:
-            payment_success = request.POST.get('paymentSuccess') and payment_success == "succeeded"
+            payment_success = (request.POST.get('paymentSuccess')
+                               and payment_success == "succeeded")
             order_form = OrderForm(form_data)
             if order_form.is_valid():
                 order = order_form.save(commit=False)
@@ -195,7 +202,8 @@ def create_order(request):
                 order.order_total = order_total
                 customer_name = request.user
                 order.customer_name = customer_name
-                order.stripe_pid = request.POST.get('client_secret').split('_secret')[0]
+                order.stripe_pid = (request.POST.get('client_secret')
+                                    .split('_secret')[0])
                 order.save()
 
                 """ fetch the basket items to save into order_items """
@@ -222,7 +230,8 @@ def create_order(request):
                     basket.delete()
                 baskets = Basket.objects.filter(cookie=cookie)
 
-                # Credit: https://stackoverflow.com/questions/53151314/add-new-line-to-admin-action-message
+                # Credit: https://stackoverflow.com/questions/53151314/
+                # add-new-line-to-admin-action-message
                 messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
 
                 """ compose and send confirmation email """
@@ -232,7 +241,8 @@ def create_order(request):
                     'order_date': order_date,
                     'order_total': order.order_total,
                 }
-                # Credit: https://stackoverflow.com/questions/2809547/creating-email-templates-with-django
+                # Credit: https://stackoverflow.com/questions/
+                # 2809547/creating-email-templates-with-django
                 msg_html = render_to_string('checkout/confirmation_email.html',
                                             parameters)
                 send_mail(
