@@ -41,11 +41,16 @@ def bartholemew_basket(request):
 
     if request.POST:
         bartholemew_event_type = request.POST['bartholemew_eventType']
-        bartholemew_min_guests = int(float(request.POST['bartholemew_minGuests']))
-        bartholemew_max_guests = int(float(request.POST['bartholemew_maxGuests']))
-        bartholemew_vegan_guests = int(float(request.POST['bartholemew_veganGuests']))
-        bartholemew_veggie_guests = int(float(request.POST['bartholemew_veggieGuests']))
-        bartholemew_pesc_guests = int(float(request.POST['bartholemew_pescGuests']))
+        bartholemew_min_guests = int(float(
+                                     request.POST['bartholemew_minGuests']))
+        bartholemew_max_guests = int(float(
+                                     request.POST['bartholemew_maxGuests']))
+        bartholemew_vegan_guests = int(float(
+                                       request.POST['bartholemew_veganGuests']))
+        bartholemew_veggie_guests = int(float(
+                                        request.POST['bartholemew_veggieGuests']))
+        bartholemew_pesc_guests = int(float(
+                                      request.POST['bartholemew_pescGuests']))
         bartholemew_hotProportion = request.POST['bartholemew_hotProportion']
         bartholemew_allergyProportion = request.POST['bartholemew_allergyProportion']
 
@@ -54,7 +59,7 @@ def bartholemew_basket(request):
             bartholemew_ave_guests = bartholemew_min_guests
         else:
             bartholemew_ave_guests = int((bartholemew_min_guests +
-                                        bartholemew_max_guests) / 2)
+                                          bartholemew_max_guests) / 2)
         bartholemew_nonspec_guests = int(bartholemew_ave_guests -
                                          bartholemew_vegan_guests -
                                          bartholemew_veggie_guests -
@@ -85,154 +90,182 @@ def bartholemew_basket(request):
         bartholemew_unspecified = int(bartholemew_ave_guests -
                                       bartholemew_specified)
 
-        # Credit: https://stackoverflow.com/questions/32389519/django-get-10-random-instances-from-a-queryset-and-order-them-into-a-new-querys
+        # Credit: https://stackoverflow.com/questions/32389519/
+        # django-get-10-random-instances-from-a-queryset-and-
+        # order-them-into-a-new-querys
 
         """ MAIN COURSES """
 
         """ Generate 3 random main courses for each unspecified guest """
-        products_main = [i.id for i in Product.objects.filter(category__course="main")]
+        products_main = [i.id for i in Product.objects.filter(
+                                        category__course="main")]
         products_main_unspecified = []
         for i in range(bartholemew_unspecified):
             random.shuffle(products_main)
-            products_main_shuffled = [Product.objects.get(id=i) for i in products_main]
+            products_main_shuffled = ([Product.objects.get(id=i)
+                                       for i in products_main])
             products_main_unspecified = (products_main_unspecified +
                                          products_main_shuffled[0: 3])
 
         """ Generate 3 random main courses for each vegan guest """
-        products_main = [i.id for i in Product.objects.filter(category__course="main",
-                                                              allergies__contains="v")]
+        products_main = ([i.id for i in
+                          Product.objects.filter(category__course="main",
+                                                 allergies__contains="v")])
         products_main_vegan = []
         for i in range(bartholemew_vegan_guests):
             random.shuffle(products_main)
-            products_main_shuffled = [Product.objects.get(id=i) for i in products_main]
+            products_main_shuffled = ([Product.objects.get(id=i)
+                                      for i in products_main])
             products_main_vegan = (products_main_vegan +
                                    products_main_shuffled[0: 3])
 
         """ Generate 3 random main courses for each vegetarian guest """
-        products_main = [i.id for i in Product.objects.filter(category__course="main",
-                                                              allergies__contains="g")]
+        products_main = ([i.id for i in
+                          Product.objects.filter(category__course="main",
+                                                 allergies__contains="g")])
         products_main_veggie = []
         for i in range(bartholemew_veggie_guests):
             random.shuffle(products_main)
-            products_main_shuffled = [Product.objects.get(id=i) for i in products_main]
+            products_main_shuffled = ([Product.objects.get(id=i)
+                                       for i in products_main])
             products_main_veggie = (products_main_veggie +
                                     products_main_shuffled[0: 3])
 
         """ Generate 3 random main courses for each pescatarian guest """
-        products_main = [i.id for i in Product.objects.filter(category__course="main",
-                                                              allergies__contains="p")]
+        products_main = ([i.id for i in
+                          Product.objects.filter(category__course="main",
+                                                 allergies__contains="p")])
         products_main_pesc = []
         for i in range(bartholemew_pesc_guests):
             random.shuffle(products_main)
-            products_main_shuffled = [Product.objects.get(id=i) for i in products_main]
+            products_main_shuffled = ([Product.objects.get(id=i)
+                                       for i in products_main])
             products_main_pesc = (products_main_pesc +
-                                    products_main_shuffled[0: 3])
+                                  products_main_shuffled[0: 3])
 
         """ Generate 3 random main courses for hot food proportion """
-        products_main = [i.id for i in Product.objects.filter(category__course="main",
-                                                              allergies__contains="h")]
+        products_main = ([i.id for i in
+                          Product.objects.filter(category__course="main",
+                                                 allergies__contains="h")])
         products_hot_food = []
         for i in range(bartholemew_hotNumber):
             random.shuffle(products_main)
-            products_main_shuffled = [Product.objects.get(id=i) for i in products_main]
+            products_main_shuffled = ([Product.objects.get(id=i)
+                                       for i in products_main])
             products_hot_food = (products_hot_food +
                                  products_main_shuffled[0: 3])
 
         """ SIDE COURSES """
 
         """ Generate 2 random side courses for each unspecified guest """
-        products_side = [i.id for i in Product.objects.filter(category__course="side")]
+        products_side = ([i.id for i in
+                          Product.objects.filter(category__course="side")])
         products_side_unspecified = []
         for i in range(bartholemew_unspecified):
             random.shuffle(products_side)
-            products_side_shuffled = [Product.objects.get(id=i) for i in products_side]
+            products_side_shuffled = ([Product.objects.get(id=i)
+                                       for i in products_side])
             products_side_unspecified = (products_side_unspecified +
                                          products_side_shuffled[0: 2])
 
         """ Generate 2 random side courses for each vegan guest """
-        products_side = [i.id for i in Product.objects.filter(category__course="side",
-                                                              allergies__contains="v")]
+        products_side = ([i.id for i in
+                          Product.objects.filter(category__course="side",
+                                                 allergies__contains="v")])
         products_side_vegan = []
         for i in range(bartholemew_vegan_guests):
             random.shuffle(products_side)
-            products_side_shuffled = [Product.objects.get(id=i) for i in products_side]
+            products_side_shuffled = ([Product.objects.get(id=i)
+                                       for i in products_side])
             products_side_vegan = (products_side_vegan +
                                    products_side_shuffled[0: 2])
 
         """ Generate 2 random side courses for each vegetarian guest """
-        products_side = [i.id for i in Product.objects.filter(category__course="side",
-                                                              allergies__contains="g")]
+        products_side = ([i.id for i in
+                          Product.objects.filter(category__course="side",
+                                                 allergies__contains="g")])
         products_side_veggie = []
         for i in range(bartholemew_veggie_guests):
             random.shuffle(products_side)
-            products_side_shuffled = [Product.objects.get(id=i) for i in products_side]
+            products_side_shuffled = ([Product.objects.get(id=i)
+                                       for i in products_side])
             products_side_veggie = (products_side_veggie +
                                     products_side_shuffled[0: 2])
 
         """ Generate 2 random side courses for each pescatarian guest """
-        products_side = [i.id for i in Product.objects.filter(category__course="side",
-                                                              allergies__contains="p")]
+        products_side = ([i.id for i in
+                          Product.objects.filter(category__course="side",
+                                                 allergies__contains="p")])
         products_side_pesc = []
         for i in range(bartholemew_pesc_guests):
             random.shuffle(products_side)
-            products_side_shuffled = [Product.objects.get(id=i) for i in products_side]
+            products_side_shuffled = ([Product.objects.get(id=i)
+                                       for i in products_side])
             products_side_pesc = (products_side_pesc +
-                                    products_side_shuffled[0: 2])
+                                  products_side_shuffled[0: 2])
 
         """ DESSERT COURSES """
 
         """ Generate 1 random dessert courses for each unspecified guest """
-        products_dessert = [i.id for i in Product.objects.filter(category__course="dessert")]
+        products_dessert = ([i.id for i in
+                             Product.objects.filter(category__course="dessert")])
         products_dessert_unspecified = []
         for i in range(bartholemew_unspecified):
             random.shuffle(products_dessert)
-            products_dessert_shuffled = [Product.objects.get(id=i) for i in products_dessert]
+            products_dessert_shuffled = ([Product.objects.get(id=i)
+                                          for i in products_dessert])
             products_dessert_unspecified = (products_dessert_unspecified +
-                                         products_dessert_shuffled[0: 1])
+                                            products_dessert_shuffled[0: 1])
 
         """ Generate 1 random dessert courses for each vegan guest """
-        products_dessert = [i.id for i in Product.objects.filter(category__course="dessert",
-                                                              allergies__contains="v")]
+        products_dessert = ([i.id for i in
+                             Product.objects.filter(category__course="dessert",
+                                                    allergies__contains="v")])
         products_dessert_vegan = []
         for i in range(bartholemew_vegan_guests):
             random.shuffle(products_dessert)
-            products_dessert_shuffled = [Product.objects.get(id=i) for i in products_dessert]
+            products_dessert_shuffled = ([Product.objects.get(id=i)
+                                          for i in products_dessert])
             products_dessert_vegan = (products_dessert_vegan +
-                                   products_dessert_shuffled[0: 1])
+                                      products_dessert_shuffled[0: 1])
 
         """ Generate 1 random dessert courses for each vegetarian guest """
-        products_dessert = [i.id for i in Product.objects.filter(category__course="dessert",
-                                                              allergies__contains="g")]
+        products_dessert = ([i.id for i in
+                             Product.objects.filter(category__course="dessert",
+                                                    allergies__contains="g")])
         products_dessert_veggie = []
         for i in range(bartholemew_veggie_guests):
             random.shuffle(products_dessert)
-            products_dessert_shuffled = [Product.objects.get(id=i) for i in products_dessert]
+            products_dessert_shuffled = ([Product.objects.get(id=i)
+                                          for i in products_dessert])
             products_dessert_veggie = (products_dessert_veggie +
-                                    products_dessert_shuffled[0: 1])
+                                       products_dessert_shuffled[0: 1])
 
         """ Generate 1 random dessert courses for each pescatarian guest """
-        products_dessert = [i.id for i in Product.objects.filter(category__course="dessert",
-                                                              allergies__contains="p")]
+        products_dessert = ([i.id for i in
+                             Product.objects.filter(category__course="dessert",
+                                                    allergies__contains="p")])
         products_dessert_pesc = []
         for i in range(bartholemew_pesc_guests):
             random.shuffle(products_dessert)
-            products_dessert_shuffled = [Product.objects.get(id=i) for i in products_dessert]
+            products_dessert_shuffled = ([Product.objects.get(id=i)
+                                          for i in products_dessert])
             products_dessert_pesc = (products_dessert_pesc +
-                                    products_dessert_shuffled[0: 1])
+                                     products_dessert_shuffled[0: 1])
 
         products_list_main = (products_main_unspecified +
-                                     products_main_vegan +
-                                     products_main_veggie +
-                                     products_main_pesc +
-                                     products_hot_food)
+                              products_main_vegan +
+                              products_main_veggie +
+                              products_main_pesc +
+                              products_hot_food)
         products_list_side = (products_side_unspecified +
-                                     products_side_vegan +
-                                     products_side_veggie +
-                                     products_side_pesc)
+                              products_side_vegan +
+                              products_side_veggie +
+                              products_side_pesc)
         products_list_dessert = (products_dessert_unspecified +
-                                     products_dessert_vegan +
-                                     products_dessert_veggie +
-                                     products_dessert_pesc)
+                                 products_dessert_vegan +
+                                 products_dessert_veggie +
+                                 products_dessert_pesc)
 
         for product in products_list_dessert:
             category = product.category
