@@ -37,7 +37,7 @@ def service(request):
                         .join(validate_email)):
             messages.success(request, mark_safe('There was a problem with email <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match("^[0-9]+$", ''.join(validate_question)):
+        if not re.match("^[a-zA-Z0-9.?* ]+$", ''.join(validate_question)):
             messages.success(request, mark_safe('There was a problem with question <br> Please try again.'))
             return redirect(reverse('home'))
 
