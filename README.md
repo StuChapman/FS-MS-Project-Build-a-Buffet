@@ -137,12 +137,41 @@ This code, along with using vw for font sizes and certain features, such as bann
 6.	[Figma](http://www.figma.com) - to produce the mockups.
 
 ## Testing
-My approach to testing was to test each of the features for functionality (operation) and rendering (visuals) against a variety of media devices, in both portrait and landscape orientation, as well as the 4 main browsers.
-I would test ‘as-and-when’ I was building and enhancing features, then, when the site was nearing completion; I created a matrix to complete methodically to ensure all functions operated and rendered correctly.
 
-I also completed some ‘user testing’ my asking my family to look at the site on mobile devices and laptops.
+User Story id 1
 
-During the ongoing build test, I discovered an issue with the background image not rendering. It appeared fine in Gitpod, but when I first deployed to Github, the image was not visible. I tried a number of options to solve this, and found the only one that would work, was putting the **full** url from the image hosted on Github into the code. This is unsatisfactory for me, as it means the code is static and will not be portable without access to Github. I am still investigating a more satisfactory solution.
+```js
+    // Collapse Navbar
+    var navbarCollapse = function () {
+        if ($("#mainNav").offset().top > 100) {
+            $("#mainNav").addClass("navbar-shrink");
+        } else {
+            $("#mainNav").removeClass("navbar-shrink");
+        }
+    };
+    // Collapse now if page is not at top
+    navbarCollapse();
+    // Collapse the navbar when page is scrolled
+    $(window).scroll(navbarCollapse);
+```
+to...
+```js
+    var navBarEl = document.getElementById('mainNav');
+    if (navBarEl !== null) {
+        // Collapse Navbar
+        var navbarCollapse = function () {
+            if ($("#mainNav").offset().top > 100) {
+                $("#mainNav").addClass("navbar-shrink");
+            } else {
+                $("#mainNav").removeClass("navbar-shrink");
+            }
+        };
+        // Collapse now if page is not at top
+        navbarCollapse();
+        // Collapse the navbar when page is scrolled
+        $(window).scroll(navbarCollapse);
+    }
+```
 
 ### Challenges
 
