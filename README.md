@@ -244,6 +244,7 @@ I deployed to Github Pages by the following steps:
 26. Form validation is from [javascripttutorial.net](https://www.javascripttutorial.net/javascript-dom/javascript-form-validation/)
 27. Fixing the uncaught error in the navbar is from [stackoverflow.com](https://stackoverflow.com/questions/20175094/uncaught-typeerror-cannot-read-property-top-of-undefined)
 28. Getting a random sample from the dataset is from [stackoverflow.com](https://stackoverflow.com/questions/32389519/django-get-10-random-instances-from-a-queryset-and-order-them-into-a-new-querys)
+29. Formatting to 2 decimal points is from [stackoverflow.com](https://stackoverflow.com/questions/1995615/how-can-i-format-a-decimal-to-always-show-2-decimal-places)
 
 
 #### Code Institute

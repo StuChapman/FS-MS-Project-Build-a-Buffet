@@ -267,6 +267,8 @@ def bartholemew_basket(request):
                                  products_dessert_veggie +
                                  products_dessert_pesc)
 
+        total_cost = 0
+
         for product in products_list_dessert:
             category = product.category
             name = product.name
@@ -319,6 +321,7 @@ def bartholemew_basket(request):
                                 option=option,
                                 total_price=total_price)
                 basket.save()
+            total_cost = total_cost + total_price
 
         for product in products_list_side:
             category = product.category
@@ -372,6 +375,7 @@ def bartholemew_basket(request):
                                 option=option,
                                 total_price=total_price)
                 basket.save()
+            total_cost = total_cost + total_price
 
         for product in products_list_main:
             category = product.category
@@ -425,12 +429,18 @@ def bartholemew_basket(request):
                                 option=option,
                                 total_price=total_price)
                 basket.save()
+            total_cost = total_cost + total_price
+            average_cost = total_cost / bartholemew_ave_guests
 
+    # https://stackoverflow.com/questions/1995615/
+    # how-can-i-format-a-decimal-to-always-show-2-decimal-places
     context = {
             'bartholemew_event_type': bartholemew_event_type,
             'products_list_main': products_list_main,
             'products_list_side': products_list_side,
             'products_list_dessert': products_list_dessert,
+            'total_cost': f'{total_cost:.2f}',
+            'average_cost': f'{average_cost:.2f}',
             'menu': menu,
         }
 
