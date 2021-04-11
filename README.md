@@ -199,6 +199,7 @@ None
 7.  [Font Awesome](https://fontawesome.com/v4.7.0/icons/) - for icons.
 8.  [Figma](http://www.figma.com) - to produce the mockups.
 9.  [w3 validator](https://validator.w3.org/) - for html validation.
+9.  [jigsaw](https://jigsaw.w3.org/css-validator) - for css validation.
 10. [pep8online](http://pep8online.com/) - for Python validation.
 11. [Heroku](https://www.heroku.com/) - for the back end database.
 12. [Amazon Web Services](https://aws.amazon.com/) - for cloud storage to host the uploaded images.
@@ -289,6 +290,16 @@ The first pass of ‘completion’ testing revealed some particular errors:
 ### Solutions to User Stories
 
 [Screenshots](https://github.com/StuChapman/UCD-MS-Project-Continuous-Engagement/blob/195ffade32fdce65d439bf33c1f11352de30da86/screenshots) that address the different User Stories.
+
+### validation
+
+#### Html validation
+
+Screenshots from [w3 validator](https://validator.w3.org/) are in the folder [validation/html](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/2ad7e945dc01e7e1cd5024ddacec92c4723354ee/validation/html)
+
+Screenshots from [jigsaw](https://jigsaw.w3.org/css-validator) are in the folder [validation/css](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/2ad7e945dc01e7e1cd5024ddacec92c4723354ee/validation/css)
+
+Screenshots from [pep8online](http://pep8online.com/) are in the folder [validation/python](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/2ad7e945dc01e7e1cd5024ddacec92c4723354ee/validation/python)
 
 ## Deployment
 

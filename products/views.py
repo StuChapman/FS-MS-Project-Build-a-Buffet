@@ -255,13 +255,16 @@ def update_product(request, form_id):
             validate_description = request.POST['description']
             validate_price = request.POST['price']
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_name)):
-                messages.success(request, mark_safe('There was a problem with name <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    name <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match("^[a-zA-Z, ]+$", ''.join(validate_description)):
-                messages.success(request, mark_safe('There was a problem with description <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    description <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match(r"^[0-9]+(\.[0-9]{2}$)?", ''.join(validate_price)):
-                messages.success(request, mark_safe('There was a problem with price <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    price <br> Please try again.'))
                 return redirect(reverse('home'))
 
             product = get_object_or_404(Product, id_no=form_id)
@@ -275,13 +278,16 @@ def update_product(request, form_id):
             validate_option2 = request.POST['option2']
             validate_option3 = request.POST['option3']
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_option1)):
-                messages.success(request, mark_safe('There was a problem with option1 <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    option1 <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_option2)):
-                messages.success(request, mark_safe('There was a problem with option2 <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    option2 <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_option3)):
-                messages.success(request, mark_safe('There was a problem with option3 <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    option3 <br> Please try again.'))
                 return redirect(reverse('home'))
 
             option = get_object_or_404(Options, id_no=form_id)
@@ -294,10 +300,12 @@ def update_product(request, form_id):
             validate_name = request.POST['name']
             validate_friendly_name = request.POST['friendly_name']
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_name)):
-                messages.success(request, mark_safe('There was a problem with name <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    name <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_friendly_name)):
-                messages.success(request, mark_safe('There was a problem with friendly_name <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    friendly_name <br> Please try again.'))
                 return redirect(reverse('home'))
 
             category = get_object_or_404(Category, id_no=form_id)
@@ -309,7 +317,8 @@ def update_product(request, form_id):
             messages.success(request, f'Successfully updated {item}')
             return redirect(reverse('refresh_product_admin', args=[form_id]))
         else:
-            messages.success(request, 'Failed to update product. Please ensure the form is valid.')
+            messages.success(request, 'Failed to update product. Please ensure \
+                    the form is valid.')
             return redirect(reverse('refresh_product_admin', args=[form_id]))
     else:
         form = ProductAdminForm(instance=product)
@@ -351,15 +360,18 @@ def add_product(request):
             validate_new_description = request.POST['new_description']
             validate_new_price = request.POST['new_price']
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_name)):
-                messages.success(request, mark_safe('There was a problem with new_name <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    new_name <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match("^[a-zA-Z, ]+$", ''
                             .join(validate_new_description)):
-                messages.success(request, mark_safe('There was a problem with new_description <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    new_description <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match(r"^[0-9]+(\.[0-9]{2}$)?", ''
                             .join(validate_new_price)):
-                messages.success(request, mark_safe('There was a problem with new_price <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    new_price <br> Please try again.'))
                 return redirect(reverse('home'))
 
             """ get the last product.id_no and incriment by 1 """
@@ -398,18 +410,22 @@ def add_product(request):
             validate_new_friendly_name = request.POST['new_friendly_name']
             if not re.match("^[a-zA-Z ]+$", ''
                             .join(validate_new_category_name)):
-                messages.success(request, mark_safe('There was a problem with new_category_name <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    new_category_name <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match("^[a-zA-Z ]+$", ''
                             .join(validate_new_friendly_name)):
-                messages.success(request, mark_safe('There was a problem with new_friendly_name <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    new_friendly_name <br> Please try again.'))
                 return redirect(reverse('home'))
 
             """ check if the category exists """
             category_exists = (categories.filter
-                               (name=validate_new_category_name.lower().strip()))
+                               (name=validate_new_category_name
+                                .lower().strip()))
             if category_exists:
-                messages.success(request, f'Category: {validate_new_category_name.lower()} already exists')
+                messages.success(request, f'Category: \
+                    {validate_new_category_name.lower()} already exists')
                 context = {
                     'categories': categories,
                     'dataset': dataset,
@@ -448,13 +464,17 @@ def add_product(request):
             validate_new_option_two = request.POST['new_option_two']
             validate_new_option_three = request.POST['new_option_three']
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_option_one)):
-                messages.success(request, mark_safe('There was a problem with option_one <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    option_one <br> Please try again.'))
                 return redirect(reverse('home'))
             if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_option_two)):
-                messages.success(request, mark_safe('There was a problem with option_two <br> Please try again.'))
+                messages.success(request, mark_safe('There was a problem with \
+                    option_two <br> Please try again.'))
                 return redirect(reverse('home'))
-            if not re.match("^[a-zA-Z ]+$", ''.join(validate_new_option_three)):
-                messages.success(request, mark_safe('There was a problem with option_three <br> Please try again.'))
+            if not re.match("^[a-zA-Z ]+$",
+                            ''.join(validate_new_option_three)):
+                messages.success(request, mark_safe('There was a problem with \
+                    option_three <br> Please try again.'))
                 return redirect(reverse('home'))
 
             """ get the last option.id_no and incriment by 1 """
@@ -479,7 +499,8 @@ def add_product(request):
                                  option2=option2,
                                  option3=option3)
             new_option.save()
-            messages.success(request, f'Succesfully added {new_option.category}')
+            messages.success(request, f'Succesfully \
+                added {new_option.category}')
             return redirect(reverse('refresh_product_admin',
                                     args=[next_option_id]))
 
@@ -617,7 +638,8 @@ def next_product(request):
                 queries = (Q(name__icontains=query) |
                            Q(description__icontains=query))
                 products = Product.objects.all().order_by('id_no')
-                return_query = products.filter(queries)[return_query_number - 1]
+                return_query = (products.filter(queries)
+                                [return_query_number - 1])
                 form = ProductAdminForm(instance=return_query)
             elif dataset == 'options':
                 queries = (Q(category__name__icontains=query) |
@@ -689,8 +711,10 @@ def prev_product(request):
             elif dataset == 'categories':
                 queries = (Q(name__icontains=query) |
                            Q(friendly_name__icontains=query))
-                products = Category.objects.all().order_by('id_no')
-                return_query = products.filter(queries)[return_query_number - 1]
+                products = (Category.objects.all()
+                            .order_by('id_no'))
+                return_query = (products.filter(queries)
+                                [return_query_number - 1])
                 form = CategoryAdminForm(instance=return_query)
 
     else:

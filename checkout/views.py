@@ -131,33 +131,42 @@ def create_order(request):
         validate_street_address2 = request.POST['street_address2']
         validate_county = request.POST['county']
         if not re.match("^[a-zA-Z ]+$", ''.join(validate_full_name)):
-            messages.success(request, mark_safe('There was a problem with full_name <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                     full_name <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$",
                         ''.join(validate_email)):
-            messages.success(request, mark_safe('There was a problem with email <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                     email <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[0-9]+$", ''.join(validate_phone_number)):
-            messages.success(request, mark_safe('There was a problem with phone_number <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                     phone_number <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[a-zA-Z ]+$", ''.join(validate_country) + "a"):
-            messages.success(request, mark_safe('There was a problem with country <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                     country <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_postcode)):
-            messages.success(request, mark_safe('There was a problem with postcode <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                     postcode <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[a-zA-Z ]+$",  ''.join(validate_town_or_city)):
-            messages.success(request, mark_safe('There was a problem with town_or_city<br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                     town_or_city<br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_street_address1)):
-            messages.success(request, mark_safe('There was a problem with street_address1 <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                     street_address1 <br> Please try again.'))
             return redirect(reverse('home'))
-        if not re.match("^[a-zA-Z0-9 ]+$", ''.join(validate_street_address2)
-                        + "a"):
-            messages.success(request, mark_safe('There was a problem with street_address2 <br> Please try again.'))
+        if not re.match("^[a-zA-Z0-9 ]+$", ''
+                        .join(validate_street_address2) + "a"):
+            messages.success(request, mark_safe('There was a problem with \
+                     street_address2 <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[a-zA-Z ]+$", ''.join(validate_county) + "a"):
-            messages.success(request, mark_safe('There was a problem with county <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                     county <br> Please try again.'))
             return redirect(reverse('home'))
 
         form_data = {
@@ -232,7 +241,10 @@ def create_order(request):
 
                 # Credit: https://stackoverflow.com/questions/53151314/
                 # add-new-line-to-admin-action-message
-                messages.success(request, mark_safe(f'Thank you for your order! <br> Your order number is {order_number} <br> A confirmation email will be sent to {order.email}.'))
+                messages.success(request, mark_safe(f'Thank you for your order! \
+                     <br> Your order number is {order_number} \
+                     <br> A confirmation email will be sent to \
+                     {order.email}.'))
 
                 """ compose and send confirmation email """
                 order_date = order.date.strftime("%d/%m/%Y %H:%M:%S")

@@ -39,7 +39,7 @@
                                         <form class="mt-3" action="{% url 'add_product' %}?dataset={{ dataset }}" method="POST" enctype="multipart/form-data" id="new-product-form">
                                                 {% csrf_token %}
                                                 {% if dataset == 'products' %}
-                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_category" id="new_category" placeholder="category">
+                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" name="new_category" id="new_category">
                                                         {% for category in categories %}
                                                             <option value="{{ category.name }}">{{ category.friendly_name }}</option>
                                                         {% endfor %}
@@ -47,7 +47,7 @@
                                                     <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_name" id="new_name" placeholder="* name" maxlength="24">
                                                     <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_description" id="new_description" placeholder="* description" maxlength="250">
                                                     <input class="numberinput form-control mb-3 text-blue text-xs" type="text" required name="new_price" id="new_price" placeholder="* price" maxlength="5">
-                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_range" id="new_range" placeholder="range">
+                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" name="new_range" id="new_range">
                                                         <option value="standard">Standard</option>
                                                         <option value="premium">Premium</option>
                                                         <option value="luxury">Luxury</option>
@@ -57,7 +57,7 @@
                                                 {% if dataset == 'categories' %}
                                                     <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_category_name" id="new_category_name" placeholder="* name">
                                                     <input class="textinput textInput form-control mb-3 text-blue text-xs" type="text" required name="new_friendly_name" id="new_friendly_name" placeholder="* friendly name">
-                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_course" id="new_course" placeholder="range">
+                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" name="new_course" id="new_course">
                                                         <option value="standard">main</option>
                                                         <option value="premium">side</option>
                                                         <option value="luxury">dessert</option>
@@ -65,7 +65,7 @@
                                                     <span>Add image on update view</span>
                                                 {% endif %}
                                                 {% if dataset == 'options' %}
-                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" type="text" name="new_option_category" id="new_option_category" placeholder="category">
+                                                    <select class="textinput textInput form-control mb-3 text-blue text-xs" name="new_option_category" id="new_option_category">
                                                         {% for category in categories %}
                                                             <option value="{{ category.name }}">{{ category.friendly_name }}</option>
                                                         {% endfor %}

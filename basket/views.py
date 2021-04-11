@@ -37,7 +37,8 @@ def basket(request):
         if 'servings' in request.POST:
             servings = request.POST["servings"]
             if not re.match("^[0-9]+$", servings):
-                messages.success(request, mark_safe('There was a problem! <br> Please reselect a product and try again.'))
+                messages.success(request, mark_safe('There was a problem! \
+                     <br> Please reselect a product and try again.'))
                 return redirect(reverse('home'))
 
     if request.GET:
@@ -271,7 +272,8 @@ def basket_success(request, basket_key):
 
     # Credit: https://stackoverflow.com/questions/
     # 42132091/using-aggregation-api-django
-    basket_total = Basket.objects.filter(cookie=basket_key).aggregate(Sum('total_price'))
+    basket_total = (Basket.objects.filter(cookie=basket_key)
+                    .aggregate(Sum('total_price')))
     baskets = Basket.objects.filter(cookie=basket_key)
     # Credit: https://stackoverflow.com/questions/8786175/
     # django-order-by-on-queryset-objects

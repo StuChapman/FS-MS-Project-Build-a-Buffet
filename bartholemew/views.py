@@ -46,13 +46,14 @@ def bartholemew_basket(request):
         bartholemew_max_guests = int(float(
                                      request.POST['bartholemew_maxGuests']))
         bartholemew_vegan_guests = int(float(
-                                       request.POST['bartholemew_veganGuests']))
+                                   request.POST['bartholemew_veganGuests']))
         bartholemew_veggie_guests = int(float(
-                                        request.POST['bartholemew_veggieGuests']))
+                                    request.POST['bartholemew_veggieGuests']))
         bartholemew_pesc_guests = int(float(
                                       request.POST['bartholemew_pescGuests']))
         bartholemew_hotProportion = request.POST['bartholemew_hotProportion']
-        bartholemew_allergyProportion = request.POST['bartholemew_allergyProportion']
+        bartholemew_allergyProportion = (request.POST
+                                         ['bartholemew_allergyProportion'])
 
         """ Calculate the average number of guests """
         if bartholemew_max_guests == "":
@@ -208,7 +209,8 @@ def bartholemew_basket(request):
 
         """ Generate 1 random dessert courses for each unspecified guest """
         products_dessert = ([i.id for i in
-                             Product.objects.filter(category__course="dessert")])
+                             Product.objects.filter
+                             (category__course="dessert")])
         products_dessert_unspecified = []
         for i in range(bartholemew_unspecified):
             random.shuffle(products_dessert)

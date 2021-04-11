@@ -31,14 +31,17 @@ def service(request):
         validate_email = request.POST['email']
         validate_question = request.POST['question']
         if not re.match("^[a-zA-Z ]+$", ''.join(validate_name)):
-            messages.success(request, mark_safe('There was a problem with name <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                name <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", ''
                         .join(validate_email)):
-            messages.success(request, mark_safe('There was a problem with email <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                email <br> Please try again.'))
             return redirect(reverse('home'))
         if not re.match("^[a-zA-Z0-9.?* ]+$", ''.join(validate_question)):
-            messages.success(request, mark_safe('There was a problem with question <br> Please try again.'))
+            messages.success(request, mark_safe('There was a problem with \
+                question <br> Please try again.'))
             return redirect(reverse('home'))
 
         if 'name' in request.POST:
@@ -53,7 +56,8 @@ def service(request):
                                  email=email,
                                  question=question)
         new_question.save()
-        messages.success(request, 'Your question has been sent - we will reply shortly')
+        messages.success(request, 'Your question has been sent - \
+                we will reply shortly')
         return redirect(reverse('home'))
 
     context = {

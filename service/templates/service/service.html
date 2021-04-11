@@ -10,7 +10,6 @@
 {% endblock %}
 
 {% block content %}
-    <body onload="createCookie()"></body>
 
 <section class="products-section bg-light">
     <h1 class="product-text-one mx-auto text-uppercase text-center flex-margin-b text-blue">Customer Service</h1>
@@ -22,11 +21,11 @@
                     {% if request.user.is_authenticated %}
                         <div><input class="width-100 mb-3 question-input text-blue" type="text" id="user-question-name" value="{{ request.user }}" name="name" maxlength="250"></div>
                         <div><input class="width-100 mb-3 question-input text-blue" type="text" id="user-question-email" value="{{ request.user.email }}" name="email" maxlength="250"></div>
-                        <div><textarea class="width-100 mb-4 question-input-text mb-2 text-blue" rows="2" id="user-question-question" value="" name="question" placeholder = "type your question here..." maxlength="250"></textarea></div>
+                        <div><textarea class="width-100 mb-4 question-input-text mb-2 text-blue" rows="2" id="user-question-question" name="question" placeholder = "type your question here..." maxlength="250"></textarea></div>
                     {% else %}
                         <div><input class="width-100 mb-3 question-input text-blue" type="text" id="user-question-name" value="" name="name" placeholder = "name" maxlength="250"></div>
                         <div><input class="width-100 mb-3 question-input text-blue" type="text" id="user-question-email" value="" name="email" placeholder = "email" maxlength="250"></div>
-                        <div><textarea class="width-100 mb-4 question-input-text mb-2 text-blue" rows="2" id="user-question-question" value="" name="question" placeholder = "type your question here..." maxlength="250"></textarea></div>
+                        <div><textarea class="width-100 mb-4 question-input-text mb-2 text-blue" rows="2" id="user-question-question" name="question" placeholder = "type your question here..." maxlength="250"></textarea></div>
                     {% endif %}
                 <button class="width-50 px-auto border-solid masthead-button btn btn-primary js-scroll-trigger">Submit</button>
             </form>
