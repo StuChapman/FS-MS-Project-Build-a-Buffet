@@ -299,6 +299,7 @@ def bartholemew_basket(request):
                 """ add the new servings variable to the existing """
                 updated_servings = existing_servings + int(servings)
 
+                price_per_person = float(price) * float(servings)
                 total_price = float(price) * float(updated_servings)
 
                 """ save the updated basket and delete the existing """
@@ -313,6 +314,7 @@ def bartholemew_basket(request):
             except ObjectDoesNotExist:
                 """ if there is no existing basket, create a new one """
                 total_price = float(price) * float(servings)
+                price_per_person = total_price
 
                 basket = Basket(cookie=cookie,
                                 category=category,
@@ -321,7 +323,7 @@ def bartholemew_basket(request):
                                 option=option,
                                 total_price=total_price)
                 basket.save()
-            total_cost = total_cost + total_price
+            total_cost = total_cost + price_per_person
 
         for product in products_list_side:
             category = product.category
@@ -353,6 +355,7 @@ def bartholemew_basket(request):
                 """ add the new servings variable to the existing """
                 updated_servings = existing_servings + int(servings)
 
+                price_per_person = float(price) * float(servings)
                 total_price = float(price) * float(updated_servings)
 
                 """ save the updated basket and delete the existing """
@@ -367,6 +370,7 @@ def bartholemew_basket(request):
             except ObjectDoesNotExist:
                 """ if there is no existing basket, create a new one """
                 total_price = float(price) * float(servings)
+                price_per_person = total_price
 
                 basket = Basket(cookie=cookie,
                                 category=category,
@@ -375,7 +379,7 @@ def bartholemew_basket(request):
                                 option=option,
                                 total_price=total_price)
                 basket.save()
-            total_cost = total_cost + total_price
+            total_cost = total_cost + price_per_person
 
         for product in products_list_main:
             category = product.category
@@ -407,6 +411,7 @@ def bartholemew_basket(request):
                 """ add the new servings variable to the existing """
                 updated_servings = existing_servings + int(servings)
 
+                price_per_person = float(price) * float(servings)
                 total_price = float(price) * float(updated_servings)
 
                 """ save the updated basket and delete the existing """
@@ -421,6 +426,7 @@ def bartholemew_basket(request):
             except ObjectDoesNotExist:
                 """ if there is no existing basket, create a new one """
                 total_price = float(price) * float(servings)
+                price_per_person = total_price
 
                 basket = Basket(cookie=cookie,
                                 category=category,
@@ -429,8 +435,8 @@ def bartholemew_basket(request):
                                 option=option,
                                 total_price=total_price)
                 basket.save()
-            total_cost = total_cost + total_price
-            average_cost = total_cost / bartholemew_ave_guests
+            total_cost = total_cost + price_per_person
+        average_cost = total_cost / bartholemew_ave_guests
 
     # https://stackoverflow.com/questions/1995615/
     # how-can-i-format-a-decimal-to-always-show-2-decimal-places

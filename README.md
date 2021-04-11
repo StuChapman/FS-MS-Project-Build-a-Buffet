@@ -1,8 +1,8 @@
 # Build-A-Buffet
 
- Link to the deployed wesite [heroku](https://...)
+ Link to the deployed wesite [heroku](https://build-a-buffet.herokuapp.com/)
 
- Link to the GitHub repository [github](https://...)
+ Link to the GitHub repository [github](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet)
 
 Create a  build a full-stack site for Build-A-Buffet, providing an authentication
 mechanism and paid access to facilitate the purchase of a product/service.
@@ -61,9 +61,7 @@ I produced the following mockups prior to writing any code. I found that tremend
     as when I was designing the methods.html layout, I felt the best method would be to hide and reveal relevant 
     content on the page (rather than navigate to separate pages)
 
-[phone](...)
-
-[tablet](...)
+[mobile](...)
 
 [desktop](...)
 
