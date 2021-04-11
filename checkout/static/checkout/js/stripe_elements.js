@@ -121,10 +121,8 @@ var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(ev) {
     ev.preventDefault();
 
-    // validate forms
-    let isPaymentUserIdFormValid = checkPaymentUserIdForm();
-
-    let isPaymentFormValid = isPaymentUserIdFormValid;
+    // validate form
+    let isPaymentFormValid = checkPaymentUserIdForm();
 
     // submit to the server if the form is valid
     if (isPaymentFormValid) {

@@ -35,35 +35,56 @@ Navigation should be intuitive and errors handled gracefully.
 11.	… want to be able to create a user page, where my personal information and order history is stored.
 12.	… want the site to be secure and my personal and payment information kept safe.
 
+### As a Site-Owner of Build-A-Buffet, I …
+
+1.	… to be able to maintain a list of products.
+2.	… to be able to track orders.
+3.	… to be able to track payments and webhooks
+
 I designed the site around the following views:
 
 **index.html** - to introduce the user to the company and provide navigation to the other areas of the site.
 
-**register.html** - to register for account services.
+**allergies.html** - to understand how different dietary and allergy requirements are accomodated.
 
-**login.html** - to log in to the site.
+**products.html** - to list all the products based on the user's menu selection.
 
-**menus.html** - to list all the produce based on the user's search parameters.
+**search_products.html** - to return all the products based on the user's search parameters.
 
-**account.html** - to allow the Customer to store and update personal, shipping, order and payment information.
+**product_detail.html** - to provide more detail on each product including servings and options (where applicable).
 
 **basket.html** - to view all the products currently in the basket.
 
+**edit_product.html** - to edit the products currently in the basket.
+
 **checkout.html** - a secure checkout where registered and guest users can make purchases.
 
-**customer-service.html** - contact information
+**order_success.html** - to show an order has been processed succesfully and to show previous orders.
+
+**bartholemew.html** - to assist the Customer in building an appropriate buffet, based on thier requirements.
+
+**bartholemew_output.html** - to display to the the Customer Bartholemew's suggested buffet (along with cost information).
+
+**profile.html** - to allow the Customer to store and update personal information and view order history.
+
+**service.html** - to contact the Site-Owner through a question form.
+
+For the Site-Owner ...
+
+**product_admin.html** - to modify/delete: product, option or category.
+
+**add_product.html** - to add: product, option or category.
+
+Allauth libraries were used for sign up, log in and email validation
 
 ### Mockups:
 
-I produced the following mockups prior to writing any code. I found that tremendously useful as I made a lot 
-    of design and functionality decisions up front. I also researched a particular Bootstrap 
-    capability – [Accordion/Collapse](https://getbootstrap.com/docs/4.1/components/collapse/#accordion-example) 
-    as when I was designing the methods.html layout, I felt the best method would be to hide and reveal relevant 
-    content on the page (rather than navigate to separate pages)
+I produced the following mockups prior to writing any code. I had sourced the 'Grayscale' template from [start bootstrap](https://startbootstrap.com/previews/grayscale) and stock images from [pexels.com](https://www.pexels.com/)
+I used this theme and these images in the mockups.
 
-[mobile](...)
+[mobile](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9fbda7273790057f9811372369486760befb401f/mockups/Full_Stack_Frameworks_With_Django_MOBILE.pdf)
 
-[desktop](...)
+[desktop](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9fbda7273790057f9811372369486760befb401f/mockups/Full_Stack_Frameworks_With_Django_DESKTOP.pdf)
 
 ### Colour Schemes and Fonts
 
@@ -85,54 +106,103 @@ I used these fonts exclusively.
 ### Approach
 
 The approach I took for designing the site, was to start with the small media device, portrait view, design that, then make any adaptations
-for a tablet, portrait view, and finally any changes for a large size, landscape view. I did this in the mockups first, then as I built the app.
-I constructed the code in the mobile-first, portrait view, then added media queries purely for large size, landscape view.
-I didn't want to have a multuitude of media queries for different sizes, I preferred to have a completely responsive approach.
-For that, I set font sizes to be responsive, utilising some code from [css-tricks](https://css-tricks.com/books/fundamental-css-tactics/scale-typography-screen-size/) 
+for a tablet, portrait view, and finally any changes for a large size, landscape view..
+I constructed the code in the mobile-first, portrait view, then added specific media queries for portrait and lanscape views.
+I again used code from [stackoverflow.com]https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree) to enable this.
+Finally, I added bespoke media queries for screen sizes.
+I also set font sizes to be responsive, utilising some code from [css-tricks](https://css-tricks.com/books/fundamental-css-tactics/scale-typography-screen-size/) 
 and [made by Mike](https://www.madebymike.com.au/writing/fluid-type-calc-examples/)
 
 font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
 
-This code, along with using vw for font sizes and certain features, such as banners and images, allowed the site to be almost fully responsive across different portrait view sizes.
+This code, along with using vw and vh for font sizes and certain features, such as banners and images, allowed the site to be almost fully responsive across different portrait view sizes.
 
 ## Features
 
 ### Existing Features
 
-1.	A Navigation bar, that is standard across all pages. It is made up of 3 sections:
-    
-    a.	A collapsed “burger” style menu that allows the user to access every page on the site from the top left corner of any page, in all media device sizes.
-    
-    b.	A “brand image” that allows the user to hyperlink to the home page from an page, in all media device sizes.
-    
-    c.	A menu that allows the user to navigate to any page from any page and also see which page they are currently on by means of differentiated font color. The menu shrinks to icons only on smaller media devices in landscape orientation and the “contact us” icon only in portrait orientation.
+... to understand what Build-A-Buffet do; visually and quickly, without having to navigate
+1.  Navigation Menu at top of screen
+2.  Link to bartholemew.html to assist the Customer in getting started
+3.  A Search Bar at top of screen
+4.  View of current basket
+5.  Information on food
+6.  A link to allergies.html for dietary info
+7.  Contact info at foot of screen
 
-2.	A background image that gives the user a feeling of ‘business’ and ‘commerce’.
-3.	A large font mission statement for each page that succinctly gets across to the user what the company/page does (excluding the “contact us” page which is self-explanatory).
-4.	Supporting, smaller font text to supplement the mission statement.
-5.	3 infographics that repeat across the “index”, “methods (expanded)” and “contact (large size, landscape view only) that summarise the 3 main areas of expertise of the company.
-6.	A footer which shows the user the regulatory information for the company.
-7.	4 “photolinks” on the “index” page to allow quick navigation to services.html
-8.	4 banners on the “services” page that allow the user to navigate, via a Bootstrap “accordion” example, to the 4 different services the company offers, with supporting text. These are block rows on portrait screens and inline columns for landscape.
-9.	3 banners on the “methods” page that allow the user to navigate, via a Bootstrap “accordion” example on small/medium sized media devices, and a Bootstrap “carousel” for large media devices, to the 3 main areas of expertise of the company, with supporting text. These are block rows on portrait screens and inline columns for landscape.
-10.	A Bootstrap “carousel” on the “services” and/or “methods” pages to present the collapsed information in an even more UX friendly way.
-11.	4 Case Studies on the “case-studies” page to showcase examples of the success of the methods to the user. These are block rows in small/medium media devices, and 2 x 2 inline columns on large+ media devices.
-12.	An image of the company director along with contact information (name, job title email, LinkedIn and phone) to give the user options to contact the director. Email, LinkedIn and phone hyperlink to email app, LinkedIn website and phone app respectively.
+... to be able to browse the different products and services.
+1.  Menu list of products
+2.  Ability to search products
+
+... to be able to create a bespoke menu by selecting from all produce.
+1.  Add products to Basket
+2.  Edit products in Basket
+3.  Delete products from Basket
+
+... to be able to have a menu suggested to me, based on my requirements.
+1.  Input requirements and output menu based on requirements
+
+... to be able to choose from different dietary requirements (e.g. vegetarion, vegan)
+1.  Dietary requirements captured
+2.  Dietery information presented
+
+... to be aware of any allergy advice for each product.
+1.  Allergy requirements captured
+2.  Allergy information presented
+
+... to be able to see the price of each product and the total price of my basket at any point.
+1.  Price per product is presented in the Basket
+2.  Total price is presented in the Basket
+
+... to be able to see the price per person where it is applicable.
+1.  Price per person displayed only where number # of guests has been captured
+
+... to be able to make online purchases of products and services.
+1.  Full (test) payment service available
+
+... to be able to arrange delivery to a location in the UK of my choosing.
+1.  Delivery details captured
+
+... to be able to create a user page, where my personal information and order history is stored.
+1.  Personal user page available
+2.  Previous orders can be viewed
+
+... the site to be secure and my personal and payment information kept safe.
+1.  Secure user info
+2.  Secure payment info
+
+... to be able to maintain a list of products.
+1.  Ability to administer products
+2.  Update or delete products
+3.  Add products
+	
+... to be able to track orders.
+1.  Track orders in Admin view
+
+... to be able to track payments and webhooks.
+1.  Track payments through Stripe
+2.  Create Webhook orders that can be identified if used disconnects mid process
+3.  Track Webhooks through Stripe
 
 ### Features Left to Implement
 
-1.	Completing the “contact us” form functionality to enable the user to submit specific information about business need.
-2.	Interactive learning that brings the methods further to life for the user (multi choice quiz etc.)
-3.  The ability to link from the photolinks or infographics on index.html directly to the expanded section on the services.html and methods.html pages respectively (I believe this will utilise JavaScript).
+None
 
 ## Technologies Used
 
-1.	[html](https://en.wikipedia.org/wiki/HTML) - to create the structure and text of each page.
-2.	[css](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) - to style each page centrally and individually.
-3.	[Bootstrap](https://getbootstrap.com/) plugins - Responsive grid and prebuilt components to enable more responsive design; particularly “accordion” and “toggle” collapsed (hidden) content.
-4.	[Font Awesome](https://fontawesome.com/v4.7.0/icons/) - for icons on contact.html.
-5.	[Google Fonts](https://fonts.google.com/?query=cairo) - for the ‘Cairo’ font – used exclusively across the site.
-6.	[Figma](http://www.figma.com) - to produce the mockups.
+1.  [html](https://en.wikipedia.org/wiki/HTML) - to create the structure and text of each page.
+2.  [css](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) - to style each page centrally and individually.
+3.  [javascript](https://en.wikipedia.org/wiki/JavaScript) - was used to power the Bootstrap functionality.
+4.  [jquery](https://jquery.com/) - was used to power the Bootstrap functionality.
+5.  [Python](https://www.python.org/) - for interactions between the app, the MongoDB database and the Azure cloud storage.
+6.  [Bootstrap](https://getbootstrap.com/) plugins - Responsive grid and prebuilt components to enable more responsive design; particularly “accordion” and “toggle” collapsed (hidden) content.
+7.  [Font Awesome](https://fontawesome.com/v4.7.0/icons/) - for icons.
+8.  [Figma](http://www.figma.com) - to produce the mockups.
+9.  [w3 validator](https://validator.w3.org/) - for html validation.
+10. [pep8online](http://pep8online.com/) - for Python validation.
+11. [Heroku](https://www.heroku.com/) - for the back end database.
+12. [Amazon Web Services](https://aws.amazon.com/) - for cloud storage to host the uploaded images.
+13. [Django](https://www.djangoproject.com/) - to provide a web framework.
 
 ## Testing
 
@@ -222,22 +292,59 @@ The first pass of ‘completion’ testing revealed some particular errors:
 
 ## Deployment
 
-I deployed to Github Pages by the following steps:
-1.	From the UCD-MS-Project-Continuous-Engagement repository in Github, click ‘Settings’
-2.	Scroll down to ‘GitHub Pages’
-3.	From the ‘source’ drop-down, select ‘master branch’
-4.	The url was then presented to me as https://stuchapman.github.io/UCD-MS-Project-Continuous-Engagement/
+I deployed to Heroku by the following steps:
+1.  Create a new Heroku app.
+2.  Click on "Reveal Config Vars" to add any hidden environment variables.
+3.  Add the key of "SECRET_KEY" and the value of "*...App secret key...*", and click on Add, to set the secret key.
+3.  Add the key of "DATABASE_URL" and the value of "*...Postgres database...*", and click on Add, to utilise Heroku's database.
+4.  Add the key of "USE_AWS" and the value of "true", then click Add, to connect to Amazon web Services.
+4.  Add the key of "AWS_S3_REGION_NAME" and the value of "eu-west-2", then click Add, to connect to Amazon web Services.
+4.  Add the key of "AWS_ACCESS_KEY_ID" and the value of "*...AWS access key...*", then click Add, to connect to Amazon web Services.
+4.  Add the key of "AWS_SECRET_ACCESS_KEY" and the value of "*...AWS secret key...*", then click Add, to connect to Amazon web Services.
+5.  Add the key of "STRIPE_PUBLIC_KEY" and the value of "*...Stripe public key...*", then click Add, to access Stripe secure payments.
+5.  Add the key of "STRIPE_SECRET_KEY" and the value of "*...Stripe secret key...*", then click Add, to access Stripe secure payments.
+5.  Add the key of "STRIPE_WH_SECRET" and the value of "*...Stripe webhook key...*", then click Add, to access Stripe Webhooks.
+6.  Add the key of "EMAIL_HOST_USER" and the value of "noreplybuildabuffet@gmail.com", then click Add, to create an email client.
+6.  Add the key of "EMAIL_HOST_PASSWORD" and the value of "*...email password...*", then click Add, to create an email client.
+8.  Set the app to automatically deploy from GitHub by selecting GitHub on the Deploy tab.
+9.  Enter the repository name (FS-MS-Project-Build-a-Buffet ) and click Search.
+10. Click Connect next to the repository name.
+
+To push to Heroku from GitPod (from the command line...)
+1.  pip3 freeze --local > requirements.txt to create a requirements file.
+2.  echo web: python run.py > Procfile to create a Procfile.
+3.  npm install -g heroku
+4.  heroku login -i (enter Heroku credentials)
+5.  git remote add heroku https://git.heroku.com/build-a-buffet.git
+6.  heroku ps:scale web=1
+7.  git push -u heroku master
 
 #### To run the code locally;
-1.	From the UCD-MS-Project-Continuous-Engagement repository in Github, click ‘Clone or download’
-2.	Copy the URL to your clipboard
-3.	In Gitpod, open the terminal
-4.	Change the directory to that where you wish to place the files
-5.	Type ‘git clone’ then paste the URL
+
+1.  From the FS-MS-Project-Build-a-Buffet repository in Github, click ‘Clone or download’.
+2.  Copy the URL to your clipboard.
+3.  In Gitpod, open the terminal.
+4.  Change the directory to that where you wish to place the files.
+5.  Type ‘git clone’ then paste the URL.
+
+#### To run the code in Gitpod;
+
+1. Type into the command line:
+    *  pip3 install Django
+    *  pip3 install django-allauth
+    *  pip3 install pillow
+    *  pip3 install django-crispy-forms
+    *  pip3 install django-countries
+    *  pip3 install dj-database-url
+    *  pip install psycopg2-binary
+    *  pip install psycopg2
+    *  pip install gunicorn
+    *  pip3 install boto3
+    *  pip3 install django-storages
+    *  pip3 install stripe
+    *  python3 manage.py runserver
 
 ## Credits
-
-
 
 ### Content
 
@@ -248,7 +355,7 @@ I deployed to Github Pages by the following steps:
 3.  The method to adjust styling based on landscape or portrait orientation is from [stackoverflow](https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree)
 4.  The slider is from [w3schools](https://www.w3schools.com/howto/howto_js_rangeslider.asp)
 5.  Creating a cookie in javascript is from [w3schools](https://www.w3schools.com/js/js_cookies.asp)
-6.  Passing context fro Django to Javascript is from [stackoverflow](https://stackoverflow.com/questions/8683922/how-can-i-pass-my-context-variables-to-a-javascript-file-in-django)
+6.  Passing context from Django to Javascript is from [stackoverflow](https://stackoverflow.com/questions/8683922/how-can-i-pass-my-context-variables-to-a-javascript-file-in-django)
 7.  Inserting a row into a database with Django is from [stackoverflow](https://stackoverflow.com/questions/23868958/django-insert-row-into-database)
 8.  ObjectDoesNotExist: is from [stackoverflow](https://stackoverflow.com/questions/12572741/get-single-record-from-database-django)
 9.  Get a single objects value is from [http://morozov.ca](http://morozov.ca/tip-how-to-get-a-single-objects-value-with-django-orm.html)
@@ -279,16 +386,13 @@ I deployed to Github Pages by the following steps:
 The code for:
 1.  checkout: admin.py, forms.py, models.py, views.py, checkout.css and stripe_elements.js
 2.  profiles: forms.py, models.py and views.py
-are all built on code from the [Code Institute](https://codeinstitute.net/) tutorial project 'boutique-ado'
+are all built upon code from the [Code Institute](https://codeinstitute.net/) tutorial project 'boutique-ado'
 
 ### Media
 
-1.	All images were taken from www.pexels.com 
-    1. [neon-signage](https://www.pexels.com/photo/neon-signage-2681319/)
-    2. [group-of-people-watching-on-laptop](https://www.pexels.com/photo/group-of-people-watching-on-laptop-1595385/)
-    3. [books-business-computer-connection](https://www.pexels.com/photo/books-business-computer-connection-459654/)
-    4. [working-in-a-group](https://www.pexels.com/photo/working-in-a-group-6224/)
-2.	The infographics and ‘brand image’ were designed and created by me
+1.	All images were taken from [pexels.com](www.pexels.com)
+2.  The image for Bartholemew was purchased on licence from [gettyimages](https://www.gettyimages.co.uk/)
+2.  The allergy graphics were purchased on licence from [gettyimages](https://www.gettyimages.co.uk/)
 
 ### Acknowledgements
 
@@ -296,3 +400,4 @@ I would like to thank the following people for thier support and input:
 
 1. My mentor, [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/) for his knowledge and clear direction (it was he who made it very clear that a detailed set of mockups were vital - this is knowledge I will keep with me for the rest of my career!)
 2. My friends [Scott](https://www.facebook.com/scott.mckellar.399) and [Magoo](https://www.facebook.com/carlos.fandango.56232), who I consulted before I started the FSD course, and gave me the confidence to go for it!
+3. Annie for being the most supportive person ever!
