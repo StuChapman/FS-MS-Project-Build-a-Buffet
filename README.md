@@ -41,7 +41,7 @@ Navigation should be intuitive and errors handled gracefully.
 2.	… to be able to track orders.
 3.	… to be able to track payments and webhooks
 
-I designed the site around the following views:
+I designed the site around the following templates:
 
 **index.html** - to introduce the user to the company and provide navigation to the other areas of the site.
 
@@ -79,7 +79,7 @@ Allauth libraries were used for sign up, log in and email validation
 
 ### Mockups:
 
-I produced the following mockups prior to writing any code. I had sourced the 'Grayscale' template from [start bootstrap](https://startbootstrap.com/previews/grayscale) and stock images from [pexels.com](https://www.pexels.com/)
+I produced the following mockups prior to writing any code. I had sourced the 'Grayscale' template from [start bootstrap](https://startbootstrap.com/previews/grayscale) and stock images from [pexels.com](https://www.pexels.com/).
 I used this theme and these images in the mockups.
 
 [mobile](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9fbda7273790057f9811372369486760befb401f/mockups/Full_Stack_Frameworks_With_Django_MOBILE.pdf)
@@ -211,7 +211,7 @@ The schema for the relational tables can be found in [schema](https://github.com
 
 ## Testing
 
-A Testing Matrix is is [testing](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9a50842e7380fc4f2f11eafbe23eda0c34541579/testing)
+A Testing Matrix is is [testing](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/ff685b7824df92bb6b226edd256060c0874aa26e/testing/testing-matrix.pdf)
 
 This is constructed around the different User Stories and Features; tested against a number of devices and browsers.
 The findings of the testing are as follows:
@@ -264,55 +264,30 @@ I altered it to the following to only run when mainNav was not null ...
 2.  The total cost of the buffet as described by Barthgolemew does not match Basket total. This was due to a double-count in the bartholemew view when there was already an existing, identical item in the basket.
     I altered the code to include a new variable *price_per_person* which removed this double count.
 
-
 #### User Story ID-9
 
-There was an issue with the complete order button not functioning on checkout.html on the Firefox browser, but this was down to a previous version of the validation.js file cache-ing in the browser. Resetting the browser corrected this.
+There was an issue with the complete order button not functioning on checkout.html on the Microsoft Edge browser, but this was down to a previous version of the validation.js file (there was an invalid charachter in the phone number text box) cache-ing in the browser. Resetting the browser corrected this.
 
-### Challenges
+#### Automatic Testing
 
-There were a few issues that needed research before I could solve them:
-
-1. I discovered that using the accordion method of revealing hidden content on methods.html was not a great user experience, as the revealed content was off the bottom of the viewable screen. I believe the user would be unaware of this and feel that the link was broken. I initially tried adding a second set of code to allow the revealed content to appear *above* the banners, but this created duplicate ‘id’s in the code.
-    After discussion with my mentor, I decided to use the carousel method (which I had seen on the Amazon site and liked). This works much better and the user experience is much cleaner. It also inspired me to add some images to help describe the content to the user.
-
-2. The height of the iPhone X screen was a challenge as on designing index.html, there was a lot of blank space below the footer.
-    There was a similar issue on the iPad Pro. Yet, the view fitted more regular phone sizes perfectly. I decided to style and size
-    the app for the iPhone X first, and allow content to scroll off the bottom of the screen for smaller phones. I looked at other sites and this seems to be the norm for users to scroll down for more content.
-    A trick that I used to help with this was to set a minimum vh for the background image and text section. this kept things spaced out nicely, and responded to different screen heights.
-
-3. When I created the large, orange "banners" that link to further content on services.html and methods.html, I wanted the text centred both horizontally and vertically.
-    Researching found that it has often been an ongoing issue with vertical alignment. I found a little trick at [webdevblog](https://webdevblog.com/css-vertical-align) to set: **display: flex;**
-    and **align-items: center;** which solved the problem for me.
+Automatic testing was used occasionally throughout the app, predominantly for testing validation rules, and splitting POST/GET variables.
 
 ### Bugs and Errors
 
-There were many situations through the course of coding this project - mostly sizing and layout issues due to using Bootstrap plugins. These were usually padding or marging related and were overcome by using Safari Developer Tools too identify 
-which part of the css styling needed to be adjusted to suit my own application.
+There were 2 particular bugs that requred a solution.
 
-for example 
+1.  The first was where items (Options, Products etc.) were duplicating. I needed to filter further on product.category matching basket.category.
+    This wasn't working as expected, but with a little bit of research; I discovered the function of *Slugify*. This solved the problem as it converted the variable to the correct format to compare.
 
-    .col-xl-4 {
-        max-width: 33.3%;
-    }
-    
-    .col-xl-3 {
-        max-width: 25%;
-    }
+```python
+    {% if product.name == basket.name and product.category == basket.category %}
+```
 
-To ensure that there was no unwanted wraparound of cards that I wished to fit the Bootstrap grid system.
+altered to
 
-I created more formal [Testing Matrices](https://github.com/StuChapman/UCD-MS-Project-Continuous-Engagement/blob/195ffade32fdce65d439bf33c1f11352de30da86/testing) 
-to ensure that I could periodically test the features and rendering in a systematic way. This was fundamental as there are often small errors like types or missing margins
-that aren't immediately obvious 
-
-The first pass of ‘completion’ testing revealed some particular errors:
-1.	Autofield on progress
-2.  AWS images on Heroku
-3.  The menu links are supposed to change to a slightly darker colour to indicate that the user is currently visiting that particular page
-    - this functionality has broken and all pages were showing "home" as the active page. I realised that I had made some adjustments to the navbar in index.html, and copied the code
-    into each of the other pages without adjusting the active pages.
-4.  On checking the infographics; I realised that I had not creted hyperlinks to the methods.html page form the contact.html page. I added the hyperlinks.
+```python
+    {% if product.name == basket.name and product.category|slugify == basket.category|slugify %}
+```
 
 ### Solutions to User Stories
 
