@@ -188,6 +188,10 @@ This code, along with using vw and vh for font sizes and certain features, such 
 
 None
 
+### Schema
+
+The schema for the relational tables can be found in [schema](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9a50842e7380fc4f2f11eafbe23eda0c34541579/schema/schema.pdf)
+
 ## Technologies Used
 
 1.  [html](https://en.wikipedia.org/wiki/HTML) - to create the structure and text of each page.
@@ -207,7 +211,15 @@ None
 
 ## Testing
 
-User Story id 1
+A Testing Matrix is is [testing](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9a50842e7380fc4f2f11eafbe23eda0c34541579/testing)
+
+This is constructed around the different User Stories and Features; tested against a number of devices and browsers.
+The findings of the testing are as follows:
+
+#### User Story ID-1
+
+There was an error in the console relating to the Bootstrap navbar element.
+The original js code is...
 
 ```js
     // Collapse Navbar
@@ -223,7 +235,9 @@ User Story id 1
     // Collapse the navbar when page is scrolled
     $(window).scroll(navbarCollapse);
 ```
-to...
+
+I altered it to the following to only run when mainNav was not null ...
+
 ```js
     var navBarEl = document.getElementById('mainNav');
     if (navBarEl !== null) {
@@ -241,6 +255,19 @@ to...
         $(window).scroll(navbarCollapse);
     }
 ```
+
+#### User Story ID-4
+
+2 error were found when testing this User Story:
+
+1.  A typo on bartholemew_output.html that stated "*This total cost of this buffet is £100.50.*". This was corrected to "*The total cost of this buffet is £100.50.*".
+2.  The total cost of the buffet as described by Barthgolemew does not match Basket total. This was due to a double-count in the bartholemew view when there was already an existing, identical item in the basket.
+    I altered the code to include a new variable *price_per_person* which removed this double count.
+
+
+#### User Story ID-9
+
+There was an issue with the complete order button not functioning on checkout.html on the Firefox browser, but this was down to a previous version of the validation.js file cache-ing in the browser. Resetting the browser corrected this.
 
 ### Challenges
 
@@ -289,7 +316,7 @@ The first pass of ‘completion’ testing revealed some particular errors:
 
 ### Solutions to User Stories
 
-[Screenshots](https://github.com/StuChapman/UCD-MS-Project-Continuous-Engagement/blob/195ffade32fdce65d439bf33c1f11352de30da86/screenshots) that address the different User Stories.
+[Screenshots](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9a50842e7380fc4f2f11eafbe23eda0c34541579/screenshots) that address the different User Stories.
 
 ### validation
 
