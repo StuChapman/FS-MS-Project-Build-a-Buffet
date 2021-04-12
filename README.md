@@ -190,7 +190,7 @@ None
 
 ### Schema
 
-The schema for the relational tables can be found in [schema](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9a50842e7380fc4f2f11eafbe23eda0c34541579/schema/schema.pdf)
+The schema for the relational tables can be found in [schema](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/schema/schema.pdf)
 
 ## Technologies Used
 
@@ -211,7 +211,7 @@ The schema for the relational tables can be found in [schema](https://github.com
 
 ## Testing
 
-A Testing Matrix is is [testing](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/ff685b7824df92bb6b226edd256060c0874aa26e/testing/testing-matrix.pdf)
+A Testing Matrix is in [testing](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/testing/testing-matrix.pdf)
 
 This is constructed around the different User Stories and Features; tested against a number of devices and browsers.
 The findings of the testing are as follows:
@@ -274,7 +274,7 @@ Automatic testing was used occasionally throughout the app, predominantly for te
 
 ### Bugs and Errors
 
-There were 2 particular bugs that requred a solution.
+There was 1 particular bug that requred a solution.
 
 1.  The first was where items (Options, Products etc.) were duplicating. I needed to filter further on product.category matching basket.category.
     This wasn't working as expected, but with a little bit of research; I discovered the function of *Slugify*. This solved the problem as it converted the variable to the correct format to compare.
@@ -297,11 +297,11 @@ altered to
 
 #### Html validation
 
-Screenshots from [w3 validator](https://validator.w3.org/) are in the folder [validation/html](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/2ad7e945dc01e7e1cd5024ddacec92c4723354ee/validation/html)
+Screenshots from [w3 validator](https://validator.w3.org/) are in the folder [validation/html](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/validation/html)
 
-Screenshots from [jigsaw](https://jigsaw.w3.org/css-validator) are in the folder [validation/css](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/2ad7e945dc01e7e1cd5024ddacec92c4723354ee/validation/css)
+Screenshots from [jigsaw](https://jigsaw.w3.org/css-validator) are in the folder [validation/css](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/validation/css)
 
-Screenshots from [pep8online](http://pep8online.com/) are in the folder [validation/python](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/2ad7e945dc01e7e1cd5024ddacec92c4723354ee/validation/python)
+Screenshots from [pep8online](http://pep8online.com/) are in the folder [validation/python](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/validation/python)
 
 ## Deployment
 
