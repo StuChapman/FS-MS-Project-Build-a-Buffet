@@ -261,7 +261,7 @@ def create_order(request):
                 parameters = {
                     'order_number': order_number,
                     'order_date': order_date,
-                    'order_total': order.order_total,
+                    'order_total': order.grand_total,
                 }
                 # Credit: https://stackoverflow.com/questions/
                 # 2809547/creating-email-templates-with-django

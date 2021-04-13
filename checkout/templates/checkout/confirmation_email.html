@@ -9,6 +9,6 @@
     <h2>Thank you for your order!</h2>
     <p>Your order number is <a href="https://build-a-buffet.herokuapp.com/checkout/order_success/{{ order_number }}">{{ order_number }}</a>.</p>
     <p>Ordered on {{ order_date }}.</p>
-    <p>Order Total: £{{ grand_total|floatformat:"2" }}</p>
+    <p>Order Total: £{{ order_total }}</p>
 </body>
 </html>

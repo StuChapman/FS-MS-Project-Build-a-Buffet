@@ -10736,6 +10736,11 @@ body {
         width: 100% !important;
     }
 }
+@media (max-width: 568px) {
+    .masthead .container {
+        height: 60vh;
+    }
+}
 @media (max-width: 990px) {
     .product-search-container {
         width: 80%;
