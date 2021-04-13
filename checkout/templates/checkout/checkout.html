@@ -224,11 +224,11 @@
                             <input type="hidden" value="{{ client_secret }}" name="client_secret">
                             <input type="hidden" value="{{ basket_total.total_price__sum|floatformat:'2' }}" name="total_price">
                             {% if user.is_authenticated %}
-                                <input type="unhidden" value="0" name="delivery_cost">
-                                <input type="unhidden" value="{{ basket_total.total_price__sum|floatformat:'2' }}" name="grand_total">
+                                <input type="hidden" value="0" name="delivery_cost">
+                                <input type="hidden" value="{{ basket_total.total_price__sum|floatformat:'2' }}" name="grand_total">
                             {% else %}
-                                <input type="unhidden" value="{{ delivery_cost|floatformat:'2' }}" name="delivery_cost">
-                                <input type="unhidden" value="{{ grand_total|floatformat:'2' }}" name="grand_total">
+                                <input type="hidden" value="{{ delivery_cost|floatformat:'2' }}" name="delivery_cost">
+                                <input type="hidden" value="{{ grand_total|floatformat:'2' }}" name="grand_total">
                             {% endif %}
                             <input type="hidden" value="{{ cookie }}" name="basket_number">
                             <input type="hidden" value="{{ request.user }}" name="current_user">
