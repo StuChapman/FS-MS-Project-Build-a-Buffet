@@ -29,6 +29,10 @@ def checkout(request):
     context_items = basket_context(request)
     cookie = context_items['cookie']
     basket_total = context_items['basket_total']
+    delivery_cost = float(basket_total['total_price__sum']) / 10
+    if delivery_cost > 49.99:
+        delivery_cost = 49.99
+    grand_total = float(basket_total['total_price__sum']) + delivery_cost
     cookie_key = context_items['cookie_key']
 
     baskets = ""
@@ -87,6 +91,8 @@ def checkout(request):
             'cookie': cookie,
             'cookie_key': cookie_key,
             'basket_total': basket_total,
+            'delivery_cost': delivery_cost,
+            'grand_total': grand_total,
             'baskets': baskets,
             'products': products,
             'categories': categories,
@@ -209,6 +215,10 @@ def create_order(request):
                 order.cookie = cookie
                 order_total = request.POST.get('total_price')
                 order.order_total = order_total
+                delivery_cost = request.POST.get('delivery_cost')
+                order.delivery_cost = delivery_cost
+                grand_total = request.POST.get('grand_total')
+                order.grand_total = grand_total
                 customer_name = request.user
                 order.customer_name = customer_name
                 order.stripe_pid = (request.POST.get('client_secret')
