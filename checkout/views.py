@@ -29,7 +29,10 @@ def checkout(request):
     context_items = basket_context(request)
     cookie = context_items['cookie']
     basket_total = context_items['basket_total']
-    delivery_cost = float(basket_total['total_price__sum']) / 10
+    if request.user.is_authenticated:
+        delivery_cost = 0
+    else:
+        delivery_cost = float(basket_total['total_price__sum']) / 10
     if delivery_cost > 49.99:
         delivery_cost = 49.99
     grand_total = float(basket_total['total_price__sum']) + delivery_cost
