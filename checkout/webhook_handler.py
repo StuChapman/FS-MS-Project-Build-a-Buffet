@@ -39,10 +39,10 @@ class StripeWH_Handler:
 
         """ check for any unordered baskets """
         cookie = billing_details.phone
-        baskets = Basket.objects.filter(cookie=cookie)
+        pid = intent.id
+        existing = Order.objects.filter(stripe_pid=pid)
 
-        if baskets:
-            pid = intent.id
+        if not existing:
             order_total = round(intent.charges.data[0].amount / 100, 2)
             full_name = shipping_details.name
             customer_name = billing_details.name
