@@ -71,7 +71,7 @@ def checkout(request):
 
     if basket_total:
         """ create the Stripe payment intent """
-        stripe_total = round(float(basket_total['total_price__sum']) * 100)
+        stripe_total = round(float(grand_total) * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,

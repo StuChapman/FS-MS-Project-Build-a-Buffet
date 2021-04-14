@@ -1,23 +1,14 @@
 # Credit: Code-Institute
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
-from django.contrib import messages
-from django.conf import settings
 
 from django.core.mail import send_mail
-from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 
 import uuid
 
-from products.models import Product, Category, Options
 from basket.models import Basket
 from checkout.models import Order, Order_items
-from basket.contexts import basket_context
-from profiles.models import UserProfile
-from .forms import OrderForm
 
-import stripe
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -58,11 +49,11 @@ class StripeWH_Handler:
             customer_email = billing_details.email
 
             webhook_order = Order(order_number=order_number,
-                                cookie=cookie,
-                                order_total=order_total,
-                                full_name=full_name,
-                                customer_name=customer_name,
-                                stripe_pid=pid)
+                                  cookie=cookie,
+                                  order_total=order_total,
+                                  full_name=full_name,
+                                  customer_name=customer_name,
+                                  stripe_pid=pid)
             webhook_order.save()
 
             """ fetch the basket items to save into order_items """
@@ -96,7 +87,7 @@ class StripeWH_Handler:
             parameters = {
                 'order_number': order_number,
                 'order_date': order_date,
-                'order_total': webhook_order.order_total,
+                'order_total': webhook_order.grand_total,
             }
             # Credit: https://stackoverflow.com/questions/2809547/creating-email-templates-with-django
             msg_html = render_to_string('checkout/confirmation_email.html',

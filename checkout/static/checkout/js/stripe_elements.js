@@ -150,6 +150,8 @@ form.addEventListener('submit', function(ev) {
             'county': $.trim(form.county.value),
             'basket_number': $.trim(form.basket_number.value),
             'total_price': $.trim(form.total_price.value),
+            'delivery_cost': $.trim(form.delivery_cost.value),
+            'grand_total': $.trim(form.grand_total.value),
         };
 
         var url = '/checkout/create_order/';
