@@ -272,6 +272,12 @@ There was an issue with the complete order button not functioning on checkout.ht
 
 Automatic testing was used occasionally throughout the app, predominantly for testing validation rules, and splitting POST/GET variables.
 
+To run automatic testing, enter into command line:
+
+"python3 manage.py test" for all tests, or
+
+"python3 manage.py test checkout" for specific tests (checkout as an example)
+
 ### Bugs and Errors
 
 There was 1 particular bug that requred a solution.
@@ -291,17 +297,48 @@ altered to
 
 ### Solutions to User Stories
 
+[Solutions to User Stories](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/screenshots/solutions_to_user_stories.xlsx)
+
 [Screenshots](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/9a50842e7380fc4f2f11eafbe23eda0c34541579/screenshots) that address the different User Stories.
 
 ### validation
 
 #### Html validation
 
-Screenshots from [w3 validator](https://validator.w3.org/) are in the folder [validation/html](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/validation/html)
+Screenshots from [w3 validator](https://validator.w3.org/) are in the folder [validation/html](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/validation/html). All of the residual 'errors' in the html code are acceptable to me as they don't take into account Django template code.
+
+- [add_product.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/add_product.html-validation.png)
+- [allergies.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/allergies.html-validation.png)
+- [bartholemew_output.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/bartholemew_output.html-validation.png)
+- [bartholemew.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/bartholemew.html-validation.png)
+- [basket.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/basket.html-validation.png)
+- [checkout.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/checkout.html-validation.png)
+- [edit_product.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/edit_product.html-validation.png)
+- [index.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/index.html-validation.png)
+- [order_success.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/order_success.html-validation.png)
+- [product_admin.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/product_admin.html-validation.png)
+- [product_detail.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/product_detail.html-validation.png)
+- [products.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/products.html-validation.png)
+- [profile.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/profile.html-validation.png)
+- [search_products.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/search_products.html-validation.png)
+- [service.html-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/html/service.html-validation.png)
 
 Screenshots from [jigsaw](https://jigsaw.w3.org/css-validator) are in the folder [validation/css](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/validation/css)
 
+- [styles.css-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/css/styles.css-validation.png) was uploaded with the [start bootstrap](https://startbootstrap.com/previews/grayscale) theme. There are some residual errors in this off-the-shelf code.
+- [slider.css-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/css/slider.css-validation.png)
+- [checkout.css-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/css/checkout.css-validation.png)
+- [bartholemew.css-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/css/bartholemew.css-validation.png)
+
 Screenshots from [pep8online](http://pep8online.com/) are in the folder [validation/python](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/47527170b1d4e050927760f01be34b71922f7d3c/validation/python)
+
+- [bartholemew-python-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/python/bartholemew-python-validation.png)
+- [basket-python-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/python/basket-python-validation.png)
+- [checkout-python-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/python/checkout-python-validation.png). 1 warning.
+- [home-python-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/python/home-python-validation.png)
+- [products-python-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/python/products-python-validation.png)
+- [profiles-python-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/python/profiles-python-validation.png)
+- [service-python-validation](https://github.com/StuChapman/FS-MS-Project-Build-a-Buffet/blob/6198309ff671c13095555a92fb4322e21620757c/validation/python/service-python-validation.png)
 
 ## Deployment
 
@@ -332,7 +369,7 @@ To push to Heroku from GitPod (from the command line...)
 6.  heroku ps:scale web=1
 7.  git push -u heroku master
 
-#### To run the code locally;
+#### To clone the code locally;
 
 1.  From the FS-MS-Project-Build-a-Buffet repository in Github, click ‘Clone or download’.
 2.  Copy the URL to your clipboard.
@@ -356,6 +393,8 @@ To push to Heroku from GitPod (from the command line...)
     *  pip3 install django-storages
     *  pip3 install stripe
     *  python3 manage.py runserver
+
+Alternatively, type "pip install -r requirements.txt" to install all addins from requirements file, then "python3 manage.py runserver".
 
 ## Credits
 
