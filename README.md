@@ -108,7 +108,7 @@ I used these fonts exclusively.
 The approach I took for designing the site, was to start with the small media device, portrait view, design that, then make any adaptations
 for a tablet, portrait view, and finally any changes for a large size, landscape view..
 I constructed the code in the mobile-first, portrait view, then added specific media queries for portrait and lanscape views.
-I again used code from [stackoverflow.com]https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree) to enable this.
+I again used code from [stackoverflow.com](https://stackoverflow.com/questions/43589507/how-can-you-have-bootstrap-responsiveness-based-on-screen-ratio-instead-of-scree) to enable this.
 Finally, I added bespoke media queries for screen sizes.
 I also set font sizes to be responsive, utilising some code from [css-tricks](https://css-tricks.com/books/fundamental-css-tactics/scale-typography-screen-size/) 
 and [made by Mike](https://www.madebymike.com.au/writing/fluid-type-calc-examples/)

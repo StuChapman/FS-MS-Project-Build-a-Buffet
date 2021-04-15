@@ -70,13 +70,13 @@ class StripeWH_Handler:
 
                 """ save the basket items into order_items """
                 order_basket = Order_items(cookie=cookie,
-                                        order_number=order_number,
-                                        item_number=item_number,
-                                        category=category,
-                                        name=name,
-                                        servings=servings,
-                                        option=option,
-                                        total_price=total_price)
+                                           order_number=order_number,
+                                           item_number=item_number,
+                                           category=category,
+                                           name=name,
+                                           servings=servings,
+                                           option=option,
+                                           total_price=total_price)
                 order_basket.save()
                 basket.delete()
             baskets = Basket.objects.filter(cookie=cookie)

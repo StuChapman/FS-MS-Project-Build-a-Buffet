@@ -56,7 +56,7 @@ function eventBart(event) {
 function guestsBart() {
     minGuests = $('#minguests').val();
     maxGuests = $('#maxguests').val();
-    if (parseInt(maxGuests) < parseInt(minGuests) || parseInt(minGuests) == 0 || minGuests == "" || minGuests > 999 || maxGuests > 999) {
+    if (parseInt(maxGuests) < parseInt(minGuests) || parseInt(minGuests) == 0 || minGuests == "" || minGuests < 0 || maxGuests < 0 || minGuests > 999 || maxGuests > 999) {
         $('#chatbox').html(guestError);
         return;
     } 
