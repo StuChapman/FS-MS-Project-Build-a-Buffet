@@ -21,12 +21,14 @@ var andGuests = "";
 var hotProportion;
 var allergyProportion;
 
+// function to start the bartholemew data capture
 function startBart() {
     $('#chatbox').html(bartOne);
     $('#startbart').hide();
     $('#event').show();
 }
 
+// function to capture the type of event
 function eventBart(event) {
     eventType = event
     switch(event) {
@@ -53,6 +55,7 @@ function eventBart(event) {
     $('#guests').show();
 }
 
+// function to capture the number of guests
 function guestsBart() {
     minGuests = $('#minguests').val();
     maxGuests = $('#maxguests').val();
@@ -75,6 +78,7 @@ function guestsBart() {
     $('#chatbox').html(eventGuests);
 }
 
+// function to capture the number of guests with dietarry requirements
 function dietBart() {
     veganGuests = $('#veganGuests').val();
     veggieGuests = $('#veggieGuests').val();
@@ -99,6 +103,7 @@ function dietBart() {
     $('#chatbox').html(dietBart);
 }
 
+// function to capture the proportion of hot food
 function hotBart(proportion) {
     $('#hotfood').hide();
     $('#allergy').show();
@@ -106,6 +111,7 @@ function hotBart(proportion) {
     $('#chatbox').html(hotProportion + hotFood);
 }
 
+// function to capture the proportion of non-allergenic food
 function allergyBart(proportion) {
     $('#allergy').hide();
     $('#chatimgbox').hide();

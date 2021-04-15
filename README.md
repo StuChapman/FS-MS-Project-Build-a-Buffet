@@ -186,7 +186,7 @@ This code, along with using vw and vh for font sizes and certain features, such 
 
 ### Features Left to Implement
 
-None
+It would be cool to go further with Bartholemew and investigate AI and natural language.
 
 ### Schema
 
