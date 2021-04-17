@@ -51,6 +51,7 @@ class StripeWH_Handler:
             webhook_order = Order(order_number=order_number,
                                   cookie=cookie,
                                   order_total=order_total,
+                                  grand_total=order_total,
                                   full_name=full_name,
                                   customer_name=customer_name,
                                   stripe_pid=pid)
@@ -80,7 +81,6 @@ class StripeWH_Handler:
                 order_basket.save()
                 basket.delete()
             baskets = Basket.objects.filter(cookie=cookie)
-
 
             """ compose and send confirmation email """
             order_date = webhook_order.date.strftime("%d/%m/%Y %H:%M:%S")
